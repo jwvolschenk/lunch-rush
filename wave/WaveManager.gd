@@ -394,9 +394,13 @@ func on_room_selected() -> void:
 	print("[WaveManager] Room selected. Awaiting card selection to start next wave.")
 
 ## Called when a card is selected to trigger next wave start.
-func on_card_selected() -> void:
-	if _wave_start_requested:
+## Returns true if a wave was started immediately (room was already selected).
+func on_card_selected() -> bool:
+	_wave_start_requested = true
+	if GameState.current_room:
 		start_next_wave()
+		return true
+	return false
 
 ## Check if the current wave is fully spawned (no more enemies to spawn).
 func is_spawning_done() -> bool:

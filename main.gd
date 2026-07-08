@@ -118,6 +118,8 @@ func _on_state_changed(new_state: int) -> void:
 			# Show card selection first (3 card choices for the player)
 			if card_selection:
 				_show_card_selection()
+			if room_selector:
+				room_selector.hide_rooms()
 		GameState.GameState.GAME_OVER:
 			print("[Main] State: GAME_OVER")
 			if card_selection:
@@ -209,11 +211,13 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	# Discard the played card from hand
 	DeckManager.discard_card(card_data)
 	# Signal WaveManager that a card was selected (primes next wave start)
-	WaveManager.on_card_selected()
+	var wave_started = WaveManager.on_card_selected()
 	# Transition back to PLAYING after card is selected
-	GameState.state = GameState.GameState.PLAYING
-	# Show room selector overlay (player can still choose room)
-	_show_room_selector()
+	# Only if wave wasn't already started (room selector will handle it)
+	if not wave_started:
+		GameState.state = GameState.GameState.PLAYING
+		# Show room selector overlay (player can still choose room)
+		_show_room_selector()
 
 ## --- Continue handler (called after player clicks overlay to confirm) ---
 func _on_continue_requested() -> void:

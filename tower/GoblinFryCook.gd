@@ -10,6 +10,7 @@ func _on_ready_setup() -> void:
 	damage = 3.0
 	cooldown = 1.5
 	food_type = 1  # GREASE
+	projectile_scene = load("res://projectile/grease_projectile.tscn")
 
 ## Called by Tower._ready() after _on_ready_setup() to create visuals
 func _build_visual() -> void:

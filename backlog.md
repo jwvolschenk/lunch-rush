@@ -34,7 +34,7 @@
 - [x] Implement Lane system with 2 lanes: enemies spawn right, walk left; lane rendering and spawn point config
 - [x] Implement Enemy base scene (ColorRect sprite) with HP bar, lane movement, and kitchen-reach detection
 - [x] Implement Tower base scene + Tower.gd with range circle, targeting, damage, cooldown, and fire animation
-- [ ] Implement Goblin Fry Cook concrete tower: 3 tiles range, grease projectile with area splash, 1.5s cooldown
+- [x] Implement Goblin Fry Cook concrete tower: 3 tiles range, grease projectile with area splash, 1.5s cooldown
 - [ ] Implement Hungry Enemy concrete type: 40 HP, 60px/s speed, standard walk animation toward kitchen
 - [ ] Implement WaveManager autoload: spawns escalating waves (count, HP, speed), shows "Wave Complete" overlay
 - [ ] Implement card selection UI: 3-card choice panel after each wave, click-to-continue

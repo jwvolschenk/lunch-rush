@@ -152,6 +152,7 @@ func place_on_lane(lane_node: Lane, at_x: float) -> void:
 	position.x = at_x
 	position.y = lane.y + 40.0
 	global_position = position
+	start_targeting()
 
 ## Remove this tower (called by TowerManager on removal)
 func remove() -> void:

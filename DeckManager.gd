@@ -132,6 +132,8 @@ func find_card_in_hand(name: String) -> Dictionary:
 
 ## Get the starter deck: 5 cards drawn into hand at game start, rest stays in deck.
 ## The deck pool contains duplicates of common towers for replayability.
+## Get the starter deck: 5 cards drawn into hand at game start, rest stays in deck.
+## Balanced for early-game variety: one of each common tower + utility cards.
 func _get_starter_deck() -> Array[Dictionary]:
 	return [
 		{
@@ -143,30 +145,6 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"tower_scene": "res://tower/GoblinFryCook.tscn",
 		},
 		{
-			"name": "Goblin Fry Cook",
-			"description": "Fast short-range grease attack. Deals area splash damage.",
-			"cost": 25,
-			"card_type": 1,
-			"icon_color": Color(0.9, 0.8, 0.2, 1),
-			"tower_scene": "res://tower/GoblinFryCook.tscn",
-		},
-		{
-			"name": "Goblin Fry Cook",
-			"description": "Fast short-range grease attack. Deals area splash damage.",
-			"cost": 25,
-			"card_type": 1,
-			"icon_color": Color(0.9, 0.8, 0.2, 1),
-			"tower_scene": "res://tower/GoblinFryCook.tscn",
-		},
-		{
-			"name": "Pizza Trebuchet",
-			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
-			"cost": 50,
-			"card_type": 1,
-			"icon_color": Color(0.9, 0.5, 0.2, 1),
-			"tower_scene": "res://tower/PizzaTrebuchet.tscn",
-		},
-		{
 			"name": "Pizza Trebuchet",
 			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
 			"cost": 50,
@@ -183,12 +161,20 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"tower_scene": "res://tower/SoupSpill.tscn",
 		},
 		{
-			"name": "Soup Spill",
-			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
+			"name": "Spicy Sauce Cannon",
+			"description": "Applies burn damage over time. Good vs armored enemies.",
 			"cost": 35,
 			"card_type": 1,
-			"icon_color": Color(0.4, 0.7, 0.9, 1),
-			"tower_scene": "res://tower/SoupSpill.tscn",
+			"icon_color": Color(0.9, 0.2, 0.2, 1),
+			"tower_scene": "res://tower/SpicySauceCannon.tscn",
+		},
+		{
+			"name": "Health Inspector",
+			"description": "Temporarily scares enemies backward. Great for buying time.",
+			"cost": 40,
+			"card_type": 1,
+			"icon_color": Color(0.2, 0.8, 0.5, 1),
+			"tower_scene": "res://tower/HealthInspector.tscn",
 		},
 		{
 			"name": "Combo Meal",
@@ -197,4 +183,12 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"card_type": 2,
 			"icon_color": Color(0.6, 0.9, 0.4, 1),
 		},
+		{
+			"name": "Emergency Ration",
+			"description": "Restore 15 HP to all lanes. Emergency healing.",
+			"cost": 15,
+			"card_type": 3,
+			"icon_color": Color(0.9, 0.4, 0.4, 1),
+		},
 	]
+

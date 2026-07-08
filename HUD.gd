@@ -11,6 +11,7 @@ var _progress_update_interval: float = 0.25
 @onready var _health_label: Label = $Panel/HealthLabel
 @onready var _enemy_count_label: Label = $Panel/EnemyCountLabel
 @onready var _next_spawn_label: Label = $Panel/NextSpawnLabel
+@onready var _wave_countdown_label: Label = $WaveCountdownLabel
 
 func _ready() -> void:
 	GameState.gold_changed.connect(_on_gold_changed)
@@ -76,3 +77,15 @@ func _on_wave_changed(new_wave: int) -> void:
 func _on_health_changed(new_health: int) -> void:
 	if _health_label:
 		_health_label.text = "Health: %d" % new_health
+
+## --- Wave countdown display ---
+
+func show_wave_countdown(text: String) -> void:
+	if not _wave_countdown_label:
+		return
+	_wave_countdown_label.text = text
+	_wave_countdown_label.visible = true
+
+func hide_wave_countdown() -> void:
+	if _wave_countdown_label:
+		_wave_countdown_label.visible = false

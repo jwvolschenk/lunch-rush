@@ -37,6 +37,12 @@ var _spawn_queue: Array = []
 var _spawn_timer: float = 0.0
 var _spawned_count: int = 0
 
+## --- Wave countdown ---
+var _countdown_timer: float = 0.0
+var _countdown_duration: float = 3.0
+var _countdown_active: bool = false
+var _countdown_phase: int = 0  # 0=not started, 3=3s, 2=2s, 1=1s
+
 ## Active enemy tracking
 var _active_enemies: int = 0
 
@@ -104,6 +110,31 @@ func _process(delta: float) -> void:
 	if _current_wave_index < 0:
 		return
 	
+	# Handle countdown phase — block spawning while counting down
+	if _countdown_active:
+		_countdown_timer -= delta
+		if HUD and HUD.has_method("show_wave_countdown"):
+			var phase = 3
+			if _countdown_timer > 2.0:
+				phase = 3
+			elif _countdown_timer > 1.0:
+				phase = 2
+			elif _countdown_timer > 0.0:
+				phase = 1
+			else:
+				phase = 0
+			
+			if phase > 0:
+				HUD.show_wave_countdown("%d" % phase)
+			else:
+				if HUD.has_method("hide_wave_countdown"):
+					HUD.hide_wave_countdown()
+		
+		if _countdown_timer <= 0:
+			_countdown_active = false
+			_countdown_phase = 0
+		return
+	
 	if _spawn_queue.is_empty():
 		return
 	
@@ -150,7 +181,7 @@ func _generate_default_waves() -> void:
 
 ## --- Wave management ---
 
-## Start a wave by index. Loads the config and prepares the spawn queue.
+## Start a wave by index. Loads the config, runs countdown, then prepares spawns.
 ## Call this when GameState enters PLAYING state.
 func start_wave(wave_index: int) -> void:
 	if wave_index < 0:
@@ -184,6 +215,15 @@ func start_wave(wave_index: int) -> void:
 	
 	_current_wave_index = wave_index
 	_wave_start_requested = false
+	
+	# Start countdown before enemies appear
+	_countdown_timer = _countdown_duration
+	_countdown_active = true
+	_countdown_phase = 3
+	
+	# Show countdown overlay
+	if HUD and HUD.has_method("show_wave_countdown"):
+		HUD.show_wave_countdown("Wave %d incoming!" % (wave_index + 1))
 	
 	wave_started.emit(_current_wave_config, _current_wave_index)
 	GameState.wave = wave_index + 1
@@ -397,3 +437,8 @@ func reset() -> void:
 	_active_enemies = 0
 	_next_wave_index = 0
 	_wave_start_requested = false
+	_countdown_timer = 0.0
+	_countdown_active = false
+	_countdown_phase = 0
+	if HUD and HUD.has_method("hide_wave_countdown"):
+		HUD.hide_wave_countdown()

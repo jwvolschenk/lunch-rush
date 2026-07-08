@@ -17,6 +17,10 @@ extends Node2D
 ## Splash radius for area damage (0 = single target only)
 @export var splash_radius: float = 0.0
 
+## Food type this projectile represents (for craving checks).
+## 0=none, 1=grease, 2=soup, 3=spice (matches CravingType enum).
+var food_type: int = 0
+
 ## --- Internal state ---
 
 ## The target enemy (set by the firing tower)
@@ -94,12 +98,16 @@ func _hit() -> void:
 		if target.has_method("take_damage"):
 			target.take_damage(damage)
 		
+		## Apply craving effect to primary target
+		_apply_craving_effect(target)
+		
 		## Apply splash damage to nearby enemies if configured
 		if splash_radius > 0:
 			splash_enemies = _get_enemies_in_splash_area()
 			for enemy in splash_enemies:
 				if enemy != target and enemy.has_method("take_damage"):
 					enemy.take_damage(damage)
+					_apply_craving_effect(enemy)
 		
 		projectile_hit.emit(self, target, splash_enemies)
 	
@@ -120,6 +128,19 @@ func _get_enemies_in_splash_area() -> Array[Node2D]:
 			if distance <= splash_radius:
 				result.append(enemy)
 	return result
+
+## Apply craving-based debuff/buff to an enemy based on food_type vs their craving.
+func _apply_craving_effect(enemy: Node2D) -> void:
+	if food_type == 0 or not enemy.has_method("craving"):
+		return
+	if enemy.craving == food_type:
+		## Matching craving: slow for 5 seconds
+		enemy.apply_slow(0.7, 5.0)
+		print("[Projectile] Hit enemy with matching craving — slow!")
+	else:
+		## Mismatching craving: enrage for 3 seconds
+		enemy.apply_enrage(1.2, 3.0)
+		print("[Projectile] Hit enemy with wrong craving — enrage!")
 
 ## --- Destruction ---
 

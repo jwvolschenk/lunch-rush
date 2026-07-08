@@ -14,6 +14,10 @@ extends Node2D
 ## Movement speed toward the kitchen (pixels per second)
 @export var speed: float = 60.0
 
+## Food type this enemy craves (0=none, 1=grease, 2=soup, 3=spice).
+## Matching food slows the enemy; mismatching food enrages it.
+var craving: int = 0
+
 ## Gold reward on death
 @export var gold_reward: int = 10
 
@@ -60,6 +64,60 @@ var hp_bar: ColorRect
 
 var _is_dying: bool = false
 
+## --- Craving / debuff state ---
+
+## Remaining duration of the slow debuff
+var _slow_timer: float = 0.0
+
+## Current slow multiplier (starts at 1.0, reduced by slow debuff)
+var _slow_factor: float = 1.0
+
+## Remaining duration of the enrage buff
+var _enrage_timer: float = 0.0
+
+## Current enrage multiplier (starts at 1.0, increased by enrage buff)
+var _enrage_factor: float = 1.0
+
+## Effective speed (base * slow * enrage), updated each frame
+var effective_speed: float:
+	get:
+		return speed * _slow_factor * _enrage_factor
+
+## Apply a slow debuff to this enemy.
+## factor: multiplier to apply (e.g. 0.7 = 30% slow).
+## duration: how long the slow lasts in seconds.
+func apply_slow(factor: float, duration: float) -> void:
+	_slow_factor = min(_slow_factor, factor)
+	_slow_timer = duration
+	_update_hp_bar_color()
+
+## Apply an enrage buff to this enemy.
+## factor: multiplier to apply (e.g. 1.2 = 20% faster).
+## duration: how long the enrage lasts in seconds.
+func apply_enrage(factor: float, duration: float) -> void:
+	_enrage_factor = max(_enrage_factor, factor)
+	_enrage_timer = duration
+	_update_hp_bar_color()
+
+## Reset all debuffs and buffs. Called on death or manual reset.
+func clear_debuffs() -> void:
+	_slow_timer = 0.0
+	_slow_factor = 1.0
+	_enrage_timer = 0.0
+	_enrage_factor = 1.0
+	_update_hp_bar_color()
+
+## Update the HP bar color based on active debuff/buff state
+func _update_hp_bar_color() -> void:
+	if not hp_bar:
+		return
+	if _slow_timer > 0:
+		hp_bar.color = Color(0.3, 0.3, 0.9, 1.0)  # blue = slowed
+	elif _enrage_timer > 0:
+		hp_bar.color = Color(0.9, 0.2, 0.2, 1.0)  # red = enraged
+	else:
+		hp_bar.color = Color(0.2, 0.8, 0.2, 1.0)  # green = normal
+
 ## --- Lifecycle ---
 
 func _ready() -> void:
@@ -71,8 +129,23 @@ func _process(delta: float) -> void:
 	if _is_dying or not is_alive:
 		return
 
-	# Move toward the kitchen (left)
-	position.x -= speed * delta
+	# Countdown debuff timers
+	if _slow_timer > 0:
+		_slow_timer -= delta
+		if _slow_timer <= 0:
+			_slow_timer = 0.0
+			_slow_factor = 1.0
+			_update_hp_bar_color()
+
+	if _enrage_timer > 0:
+		_enrage_timer -= delta
+		if _enrage_timer <= 0:
+			_enrage_timer = 0.0
+			_enrage_factor = 1.0
+			_update_hp_bar_color()
+
+	# Move toward the kitchen (left) using effective speed
+	position.x -= effective_speed * delta
 
 	# Check if reached the kitchen threshold
 	if lane and position.x <= Lane.KITCHEN_THRESHOLD:

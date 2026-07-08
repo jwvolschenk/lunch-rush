@@ -19,6 +19,11 @@ extends Node2D
 ## The projectile scene to instantiate on attack
 @export var projectile_scene: PackedScene
 
+## Food type this tower's projectiles represent (grease, soup, spice).
+## Determines the craving effect when hitting enemies.
+## 0=none, 1=grease, 2=soup, 3=spice (matches CravingType enum).
+var food_type: int = 0
+
 ## --- Internal state ---
 
 ## The lane this tower is placed on
@@ -134,6 +139,7 @@ func _fire() -> void:
 	projectile.global_position = global_position + Vector2(0, 20)
 	projectile.target = _target
 	projectile.damage = damage
+	projectile.food_type = food_type
 	add_sibling(projectile)
 	
 	tower_fired.emit(self, projectile, _target)

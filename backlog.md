@@ -64,19 +64,3 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 # --- Cycle 29 reflect additions ---
 
 ## Theme: fill the gap between GOAL.md scope and current implementation
-
-- [x] Spicy Sauce Cannon tower — explicit GOAL.md tower (line 20). Implement as concrete tower with burn/dot damage type, 220 range, 4 dmg, 2.5s cooldown. Red-orange visual, projectile with burn effect.
-
-- [x] Dishwasher tower — referenced in CardPool.gd line 77 but no Dishwasher.tscn scene exists. Implement as fast melee tower (range=80, dmg=12, cooldown=0.8s), high risk/reward short-range attacker.
-
-- [x] Enemy variety: Ogre Brute — add OgreBrute.gd/.tscn as a high-HP tank enemy (200 HP, slow speed, high gold reward). Adds enemy diversity beyond Hungry Goblin.
-
-- [x] Enemy variety: Ghost Chef — add GhostChef.gd/.tscn as a floating enemy that partially phases through towers (50% dodge chance for 2s, medium HP 80, medium speed).
-
-- [x] Enemy variety: Slime Runner — add SlimeRunner.gd/.tscn as a fast low-HP enemy (30 HP, 150 speed, low gold). Creates speed-vs-tower tradeoff for players.
-
-- [x] Food buff cards: "Kitchen Upgrade" — add a new STATUS_EFFECT card type that buffs all placed towers (e.g., +50% attack speed for 10s or +25% damage for 15s). Extends card variety beyond tower cards.
-
-- [x] Food buff cards: "Emergency Ration" — add a new STATUS_EFFECT card that heals the kitchen for 10 HP. Adds strategic decision between offense and survival.
-
-- [x] WaveConfig data files: Add 5 hand-crafted WaveConfig resources with escalating difficulty (waves 1-5) including varied enemy compositions to replace pure random escalation.

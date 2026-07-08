@@ -117,6 +117,15 @@ enum CardCategory {
 		"rarity": "uncommon",
 		"card_script": "res://card_pool/EmergencyRationCard.gd",
 	},
+	{
+		"name": "Cheat Code",
+		"description": "Instantly kills all enemies on screen. One-time boss killer.",
+		"cost": 75,
+		"card_type": CardCategory.SPECIAL,
+		"icon_color": Color(1.0, 0.2, 1.0, 1),
+		"rarity": "rare",
+		"card_script": "res://card_pool/CheatCodeCard.gd",
+	},
 ]
 
 ## Cards that have been placed this run (to avoid duplicate tower types)

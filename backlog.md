@@ -138,7 +138,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Audio: play tower_place SFX in TowerManager.place_tower() — tower_place.wav exists but is never called
 
-- [ ] Audio: play hit SFX in Projectile._hit() — hit.wav exists but is never called on projectile impact
+- [x] Audio: play hit SFX in Projectile._hit() — hit.wav exists but is never called on projectile impact
 
 - [ ] Audio: play background music at game start — GameState.start_run() should call SoundManager.play_music("background")
 

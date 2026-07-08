@@ -108,6 +108,8 @@ func _find_new_target() -> Node2D:
 func _hit() -> void:
 	var splash_enemies: Array[Node2D] = []
 	
+	SoundManager.play_sfx("hit")
+	
 	if target and target.is_alive:
 		## Deal damage to primary target
 		if target.has_method("take_damage"):

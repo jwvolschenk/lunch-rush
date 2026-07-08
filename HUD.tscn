@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" path="res://HUD.gd" id="1_hudscript"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hud_panel"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_panel"]
+bg_color = Color(0.12, 0.12, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.3, 0.35, 1)
 
 [node name="HUD" parent="" instance=ExtResource("1_hudscript") id=1]
 visible = true
@@ -14,7 +20,7 @@ edge_top = 0.0
 edge_right = 1.0
 edge_bottom = 0.08
 layout_mode = 1
-theme_override_styles/panel = SubResource("StyleBoxEmpty_hud_panel")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud_panel")
 
 [node name="GoldLabel" parent=HUD/Panel 3]
 layout_mode = 1

@@ -168,6 +168,9 @@ func start_run() -> void:
 	# Reset room — the room selector will set it for the first wave
 	_current_room = null
 	
+	# Start background music
+	SoundManager.play_music("background")
+	
 	# Go to room selector so the player picks a room before the first wave
 	state = GameState.ROOM_SELECTING
 

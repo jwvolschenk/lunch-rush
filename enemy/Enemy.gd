@@ -294,6 +294,7 @@ func _on_death() -> void:
 	_is_dying = true
 
 	enemy_dead.emit(self)
+	SoundManager.play_sfx("enemy_death")
 	print("[Enemy] Dead (HP: 0, gold: %d, score: %d)" % [gold_reward, score_reward])
 
 	_spawn_death_labels()

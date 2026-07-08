@@ -129,3 +129,23 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 
 ## Meta-progression: unlock display between waves
+
+## --- Cycle 63 reflect additions ---
+
+## Theme: audio polish — wire up missing game sound effects
+
+- [x] Audio: play enemy_death SFX in Enemy._on_death() — enemy_death.wav exists but is never called
+
+- [ ] Audio: play tower_place SFX in TowerManager.place_tower() — tower_place.wav exists but is never called
+
+- [ ] Audio: play hit SFX in Projectile._hit() — hit.wav exists but is never called on projectile impact
+
+- [ ] Audio: play background music at game start — GameState.start_run() should call SoundManager.play_music("background")
+
+- [ ] Audio: wire tower fire SFX in Tower._fire() — sfx_name is set per-tower but never played from Tower base
+
+- [ ] Fix: GoblinFryCook missing food_type (defaults to 0 = no craving effect on grease projectiles)
+
+- [ ] Fix: undeclared `_pending_unlocks` variable in main.gd (used at lines 157, 159, 480 without `var` declaration)
+
+- [ ] Feature: wire victory overlay unlock data — victory_overlay.show_victory() doesn't receive unlocks (6th param is always default)

@@ -218,16 +218,85 @@ func _generate_dynamic_wave(index: int) -> WaveConfig:
 	wave.speed_scale = speed_scale
 	wave.spawn_interval = spawn_interval
 
-	# Use default Hungry Goblin if no custom enemy data
-	var goblin_scene_path := "res://enemy/EnemyData.gd"
-	if ResourceLoader.exists(goblin_scene_path):
-		var goblin_data = load(goblin_scene_path).new()
-		wave.enemies = [
-			{
-				"enemy_data": goblin_data,
-				"count": enemy_count,
-			}
-		]
+	# Use varied enemy types based on wave progression
+	var available_enemies: Array[Dictionary] = []
+
+	# Hungry Goblin — available from wave 0
+	var goblin_data_path := "res://enemy/EnemyData_HungryGoblin.tres"
+	if ResourceLoader.exists(goblin_data_path):
+		available_enemies.append({
+			"path": goblin_data_path,
+			"min_wave": 0,
+			"weight": 10,
+		})
+
+	# Slime Runner — available from wave 3
+	var slime_data_path := "res://enemy/EnemyData_SlimeRunner.tres"
+	if ResourceLoader.exists(slime_data_path):
+		available_enemies.append({
+			"path": slime_data_path,
+			"min_wave": 3,
+			"weight": 3,
+		})
+
+	# Ghost Chef — available from wave 5
+	var ghost_data_path := "res://enemy/EnemyData_GhostChef.tres"
+	if ResourceLoader.exists(ghost_data_path):
+		available_enemies.append({
+			"path": ghost_data_path,
+			"min_wave": 5,
+			"weight": 2,
+		})
+
+	# Ogre Brute — available from wave 7
+	var ogre_data_path := "res://enemy/EnemyData_OgreBrute.tres"
+	if ResourceLoader.exists(ogre_data_path):
+		available_enemies.append({
+			"path": ogre_data_path,
+			"min_wave": 7,
+			"weight": 1,
+		})
+
+	# Pizza Delivery — available from wave 10
+	var pizza_data_path := "res://enemy/EnemyData_PizzaDelivery.tres"
+	if ResourceLoader.exists(pizza_data_path):
+		available_enemies.append({
+			"path": pizza_data_path,
+			"min_wave": 10,
+			"weight": 1,
+		})
+
+	# Pick the primary enemy type for this wave based on index
+	var primary_idx := 0
+	for i in range(available_enemies.size() - 1, -1, -1):
+		if index >= available_enemies[i]["min_wave"]:
+			primary_idx = i
+			break
+
+	var primary_path := available_enemies[primary_idx]["path"]
+	var primary_data = load(primary_path) if ResourceLoader.exists(primary_path) else null
+
+	# Build enemy entries: primary type gets the bulk, introduce variety at higher waves
+	wave.enemies = []
+
+	if primary_data and ResourceLoader.exists(primary_path):
+		var primary_count = enemy_count
+		if index >= 3 and primary_idx + 1 < available_enemies.size():
+			# Introduce a secondary enemy type from later waves
+			var secondary_path = available_enemies[primary_idx + 1]["path"]
+			var secondary_data = load(secondary_path) if ResourceLoader.exists(secondary_path) else null
+			if secondary_data:
+				var secondary_count = max(1, enemy_count / 3)
+				primary_count -= secondary_count
+				wave.enemies.append({
+					"enemy_data": secondary_data,
+					"count": secondary_count,
+				})
+
+		wave.enemies.append({
+			"enemy_data": primary_data,
+			"count": max(1, primary_count),
+		})
 	else:
 		wave.enemies = [
 			{

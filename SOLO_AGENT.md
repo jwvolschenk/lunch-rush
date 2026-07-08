@@ -12,19 +12,23 @@ from scratch or to improve an existing one — adapt accordingly.
 
 ## The loop
 
-The orchestrator (a separate process) drives this cycle, spawning a fresh session
-for each phase. You never run the whole loop; you execute ONE phase and stop.
+The orchestrator (a separate process) drives this loop. It spawns a fresh session
+for each task or reflection. The loop is **backlog-first**:
 
-    REFLECT → PLAN → EXECUTE (per task) → VERIFY → RECORD → REFLECT ...
+    EXECUTE pending tasks → ... → when backlog is clear:
+      ARCHIVE done items → REFLECT to find new work → refill backlog → repeat
 
-- **REFLECT**: survey the project vs. the goal, propose the next concrete tasks.
-  If the project is empty, this is where scaffolding gets proposed.
-- **PLAN**: structure the backlog — small, independently completable, ordered tasks.
-- **EXECUTE**: implement ONE task per session, minimally and correctly.
+- **EXECUTE** (most cycles): the orchestrator picks the next `- [ ]` task from
+  backlog.md and asks you to implement it. Churn through ALL pending tasks first.
+- **REFLECT** (only when backlog is empty): survey the project vs. the goal and
+  propose the next round of tasks to refill the backlog. The orchestrator archives
+  completed items into `backlog-history/` before calling you.
 - **VERIFY**: run by the ORCHESTRATOR *only if a verify command is configured*.
   Otherwise YOU own verification — run whatever build/test/lint/check this project
   uses before declaring a task complete.
-- **RECORD**: orchestrator appends the outcome to reflections.md.
+
+This means you should NOT propose new enhancements while there's outstanding work.
+Finish the backlog first; new work is only sought when the slate is clear.
 
 ## Your memory (on disk)
 
@@ -54,11 +58,13 @@ Since your session is wiped each time, your only memory is these files:
 ## Rules (non-negotiable)
 
 1. **Fresh context.** Never assume state from a prior session — re-read the files.
-2. **Advance the goal.** Every task should move the project toward GOAL.md.
-3. **Directives are priority.** Address pending directives before new backlog work.
-4. **Stay in scope.** EXECUTE does ONE task. Don't refactor unrelated code.
-5. **Don't mark tasks done in backlog.md.** The orchestrator advances state.
-   You may not check off backlog items or rewrite them to look complete.
+2. **Backlog-first.** Don't propose new work while backlog items are pending.
+   Churn through the existing backlog; reflection only happens when it's clear.
+3. **Mark tasks done.** When you complete a task (or find it's already done),
+   edit its backlog.md line from `- [ ]` to `- [x]`. This is required — it's
+   how progress is tracked.
+4. **Directives are priority.** Address pending directives before other backlog work.
+5. **Stay in scope.** EXECUTE does ONE task. Don't refactor unrelated code.
 6. **Never touch `main` / run git unless told.** The orchestrator manages git.
 7. **Verify your own work.** If there's no orchestrator gate, run the project's
    build/test/lint yourself before stopping. Don't claim success you didn't check.

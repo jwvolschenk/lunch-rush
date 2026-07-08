@@ -4,7 +4,7 @@
 # phase regenerates candidates, the plan phase structures them here,
 # the execute phase picks the next unchecked item as a goal.
 
-- [ ] (sample) Add a README quickstart section
+- [x] (sample) Add a README quickstart section
 
 # --- Cycle 4 reflect additions ---
 
@@ -125,4 +125,14 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [ ] Implement tower placement preview UI: visual ghost/outline of tower following cursor on lane hover, snap-to-lane guide line, confirm with click (or keyboard shortcut), cancel with right-click/escape, integrates with TowerManager place_tower
 - [ ] Implement grease projectile scene (grease_projectile.tscn): yellow/green ColorRect projectile (16x16) with grease attack visual, used by Goblin Fry Cook Tower, speed=400px/s
 - [ ] Implement WaveConfigLoader singleton: loads wave configurations from WaveConfig resources or external files, provides get_wave(index) API for WaveManager, supports dynamic wave loading for room-modified waves
+
+# --- Cycle 11 reflect additions ---
+
+## Theme: quality-of-life systems and missing GOAL.md towers
+
+- [ ] Implement SoundManager autoload: audio bus management, play_sfx(sound, bus) and play_music(track, loop) methods, volume controls for sfx/music buses, empty placeholder sounds for all attack/effects
+- [ ] Implement SaveLoad system (SaveLoad.gd): high score persistence via FileAccess, save run stats (score, waves, gold) on game-over, load best run on menu start, JSON serialization
+- [ ] Implement Health Inspector concrete tower (HealthInspector.tscn + HealthInspector.gd): extends Tower, scares enemies backward on hit (pushback effect), cooldown=4.0, range=250, blue/white sprite, referenced in GOAL.md
+- [ ] Implement Enchanted Vending Machine tower (VendingMachine.tscn + VendingMachine.gd): extends Tower, periodically spawns random food projectiles that auto-target nearest enemy, cooldown=2.5, range=200, purple/magenta sprite, referenced in GOAL.md
+- [ ] Implement Customer Control spell card (CustomerControlCard.gd): card_type that temporarily slows all enemies on screen for 3 seconds, costs 15 gold, cooldown 1 wave, blue shimmer icon
 

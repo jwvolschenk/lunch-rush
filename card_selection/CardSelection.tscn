@@ -1,0 +1,168 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StyleBoxFlat"_id"card_style"]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.4, 0.4, 0.4, 1 )
+cornerRadius = 6
+
+[sub_resource type="StyleBoxFlat"_id"panel_style"]
+bg_color = Color( 0.08, 0.08, 0.08, 0.92 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.25, 0.25, 0.25, 1 )
+
+[sub_resource type="Theme"_id"card_theme"]
+fonts/normal_font_size = 16
+colors/font_color = Color( 0.95, 0.95, 0.95, 1 )
+
+[sub_resource type="ColorRect"_id"overlay_bg"]
+color = Color( 0, 0, 0, 0.55 )
+
+[sub_resource type="ColorRect"_id"card_icon"]
+
+[node name="CardSelection" type="Control" id=1]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_styles/normal = sub_resource("StyleBoxFlat"_id"panel_style")
+
+[node name="overlay_bg" parent=Entry 1 type="ColorRect" id=2]
+layout_mode = 1
+ anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+color = sub_resource("ColorRect"_id"overlay_bg")
+visible = false
+
+[node name="Panel" parent=Entry 1 type="PanelContainer" id=3]
+layout_mode = 1
+anchor_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 40
+theme_override_constants/contents_margin_top = 60
+theme_override_constants/contents_margin_right = 40
+theme_override_constants/contents_margin_bottom = 60
+visible = false
+
+[node name="Title" parent=Entry 3 type="Label" id=4]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 28
+text = "Select a Card"
+horizontal_alignment = 1
+
+[node name="HBox" parent=Entry 3 type="HBoxContainer" id=5]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+alignment = 1
+custom_constants/separation = 20
+theme_override_constant s/hseparation = 20
+
+[node name="Card1" parent=Entry 5 type="PanelContainer" id=6]
+layout_mode = 1
+custom_size_flags_min_height = 300
+custom_size_flags_min_width = 200
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"card_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"card_style")
+
+[node name="Card1Icon" parent=Entry 6 type="ColorRect" id=7]
+custom_size_flags_min_height = 80
+custom_size_flags_min_width = 160
+color = Color( 0.8, 0.8, 0.2, 1 )
+
+[node name="Card1Name" parent=Entry 6 type="Label" id=8]
+text = "Card Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="Card1Cost" parent=Entry 6 type="Label" id=9]
+text = "Cost: 0"
+theme_override_font_sizes/normal_font_size = 14
+horizontal_alignment = 1
+
+[node name="Card1Desc" parent=Entry 6 type="Label" id=10]
+text = "Card description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[node name="Card2" parent=Entry 5 type="PanelContainer" id=11]
+custom_size_flags_min_height = 300
+custom_size_flags_min_width = 200
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"card_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"card_style")
+
+[node name="Card2Icon" parent=Entry 11 type="ColorRect" id=12]
+custom_size_flags_min_height = 80
+custom_size_flags_min_width = 160
+color = Color( 0.2, 0.8, 0.2, 1 )
+
+[node name="Card2Name" parent=Entry 11 type="Label" id=13]
+text = "Card Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="Card2Cost" parent=Entry 11 type="Label" id=14]
+text = "Cost: 0"
+theme_override_font_sizes/normal_font_size = 14
+horizontal_alignment = 1
+
+[node name="Card2Desc" parent=Entry 11 type="Label" id=15]
+text = "Card description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[node name="Card3" parent=Entry 5 type="PanelContainer" id=16]
+custom_size_flags_min_height = 300
+custom_size_flags_min_width = 200
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"card_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"card_style")
+
+[node name="Card3Icon" parent=Entry 16 type="ColorRect" id=17]
+custom_size_flags_min_height = 80
+custom_size_flags_min_width = 160
+color = Color( 0.8, 0.2, 0.2, 1 )
+
+[node name="Card3Name" parent=Entry 16 type="Label" id=18]
+text = "Card Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="Card3Cost" parent=Entry 16 type="Label" id=19]
+text = "Cost: 0"
+theme_override_font_sizes/normal_font_size = 14
+horizontal_alignment = 1
+
+[node name="Card3Desc" parent=Entry 16 type="Label" id=20]
+text = "Card description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Entry 6" to="Entry 1"]
+method = "_on_card1_clicked"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 11" to="Entry 1"]
+method = "_on_card2_clicked"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 16" to="Entry 1"]
+method = "_on_card3_clicked"
+target = "Entry 1"

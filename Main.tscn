@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
-
-[sub_resource type="ColorRect"_id]
-
-[sub_resource type="ViewportContainer"_id]
+[ext_resource type="PackedScene" path="res://card_selection/CardSelection.tscn" id="2_card"]
 
 [node name="Main" type="Node2D" id=1]
 script = ExtResource("1_main")
+
+[node name="CardSelection" parent=Main instance=ExtResource("2_card") id=3]
+visible = false

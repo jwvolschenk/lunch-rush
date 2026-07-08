@@ -53,10 +53,11 @@ func show_cards(card_list: Array) -> void:
 		_card_names[i].text = card.get("name", "Unknown")
 		_card_costs[i].text = "Cost: %d" % card.get("cost", 0)
 		_card_descs[i].text = card.get("description", "")
-	_cards[i].visible = true
+		_cards[i].visible = true
 	# Hide any excess card slots
 	for i in range(card_list.size(), 3):
-		_cards[i].visible = false
+		if i < _cards.size():
+			_cards[i].visible = false
 	_panel.visible = true
 	_overlay.visible = true
 

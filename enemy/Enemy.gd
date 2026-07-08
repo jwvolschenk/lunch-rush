@@ -124,6 +124,7 @@ func _ready() -> void:
 	_build_hp_bar()
 	_on_ready_setup()
 	_setup_death_cleanup()
+	_assign_random_craving()
 
 func _process(delta: float) -> void:
 	if _is_dying or not is_alive:
@@ -154,6 +155,13 @@ func _process(delta: float) -> void:
 ## Override in child scenes to customize initial appearance and stats
 func _on_ready_setup() -> void:
 	pass
+
+## --- Random craving assignment ---
+
+func _assign_random_craving() -> void:
+	# Pick a random non-NONE craving type: GREASE=1, SOUP=2, SPICE=3
+	var types = [CravingType.GREASE, CravingType.SOUP, CravingType.SPICE]
+	craving = types[randi() % types.size()]
 
 ## --- HP bar ---
 

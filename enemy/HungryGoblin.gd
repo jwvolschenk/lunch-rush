@@ -7,7 +7,6 @@ func _on_ready_setup() -> void:
 	speed = 60.0
 	gold_reward = 10
 	score_reward = 10
-	craving = 1  # GREASE — goblins love grease
 
 func _process(delta: float) -> void:
 	# Standard walk bob: oscillate Y position to simulate walking steps

@@ -225,7 +225,29 @@ func _on_death() -> void:
 	enemy_dead.emit(self)
 	print("[Enemy] Dead (HP: 0, gold: %d, score: %d)" % [gold_reward, score_reward])
 
+	_spawn_death_labels()
 	queue_free()
+
+func _spawn_death_labels() -> void:
+	# Parent the labels to whatever parent the enemy has (usually a Lane)
+	var parent_node = get_parent()
+	if not parent_node:
+		return
+
+	# Use the enemy's position in the parent's coordinate space
+	var spawn_pos = position
+
+	# Gold popup — golden color
+	var gold_label = FloatingLabel.new()
+	gold_label.setup("+%d" % gold_reward, Color(1.0, 0.85, 0.1, 1.0), 1.5)
+	gold_label.position = Vector2(spawn_pos.x, spawn_pos.y - 40)
+	parent_node.add_child(gold_label)
+
+	# Score popup — slightly above and offset
+	var score_label = FloatingLabel.new()
+	score_label.setup("+%d" % score_reward, Color(1.0, 0.6, 0.1, 1.0), 1.5)
+	score_label.position = Vector2(spawn_pos.x, spawn_pos.y - 70)
+	parent_node.add_child(score_label)
 
 func _setup_death_cleanup() -> void:
 	# Remove from lane's enemy list when freed

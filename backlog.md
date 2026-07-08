@@ -105,7 +105,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Ensure first wave triggers room selector (start_run sets Pantry directly, bypasses room selector)
 
 ## Card system: dead code and disconnected hand
-- [ ] Remove dead Card.apply_effect / from_dict methods (CardPool uses dictionary dispatch, never calls them)
+- [x] Remove dead Card.apply_effect / from_dict methods (CardPool uses dictionary dispatch, never calls them)
 - [ ] Wire DeckManager hand into HUD or card selection UI (hand exists but has no visual representation)
 
 ## Polish: audio assets

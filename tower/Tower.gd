@@ -166,7 +166,9 @@ func remove() -> void:
 	stop_targeting()
 	queue_free()
 
-## Called from _process each frame
+## Called every frame to drive the fire timer and attack loop.
+## Virtual — child towers that override _process MUST call
+## `.super()` to preserve the base fire-timer behavior.
 func _process(delta: float) -> void:
 	if not is_alive:
 		return

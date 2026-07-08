@@ -93,7 +93,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Fix WaveManager.gd missing WaveConfig preload (get_wave returns WaveConfig type without preload)
 
 ## Critical: Tower base class blocks child per-frame logic
-- [ ] Make Tower._process virtual / document super._process requirement for child tower scripts
+- [x] Make Tower._process virtual / document super._process requirement for child tower scripts
 
 ## Core gameplay: wave end condition
 - [ ] Add wave 20 victory condition (game over screen with victory message instead of endless waves)

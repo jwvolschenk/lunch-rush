@@ -213,6 +213,7 @@ func _build_hp_bar() -> void:
 ## Apply damage to this enemy
 func take_damage(amount: float) -> void:
 	current_hp = max(current_hp - amount, 0.0)
+	GameState.trigger_damage_flash()
 
 ## Apply healing
 func heal(amount: float) -> void:
@@ -229,7 +230,12 @@ func _on_death() -> void:
 	print("[Enemy] Dead (HP: 0, gold: %d, score: %d)" % [gold_reward, score_reward])
 
 	_spawn_death_labels()
-	queue_free()
+	_squish_and_die()
+
+func _squish_and_die() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "scale:y", 0.0, 0.3)
+	tween.tween_callback(Callable(self, "queue_free"))
 
 func _spawn_death_labels() -> void:
 	# Parent the labels to whatever parent the enemy has (usually a Lane)

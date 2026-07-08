@@ -198,3 +198,10 @@ func start_wave(wave_index: int) -> void:
 func complete_wave() -> void:
 	wave_completed.emit(wave)
 	waves_completed += 1
+
+## --- Damage flash ---
+
+signal damage_flashed()
+
+func trigger_damage_flash() -> void:
+	damage_flashed.emit()

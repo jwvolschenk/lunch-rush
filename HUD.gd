@@ -6,6 +6,10 @@ var _progress_update_timer: float = 0.0
 var _progress_update_interval: float = 0.25
 var _wave_progress_value: float = 0.0
 
+## --- Damage flash ---
+var _damage_flash_overlay: ColorRect = null
+var _damage_flash_timer: float = 0.0
+
 @onready var _gold_label: Label = $Panel/GoldLabel
 @onready var _score_label: Label = $Panel/ScoreLabel
 @onready var _wave_label: Label = $Panel/WaveLabel
@@ -19,15 +23,26 @@ var _wave_progress_value: float = 0.0
 
 func _ready() -> void:
 	_wave_progress_panel.visible = false
+	_setup_damage_flash()
 	GameState.gold_changed.connect(_on_gold_changed)
 	GameState.score_changed.connect(_on_score_changed)
 	GameState.wave_changed.connect(_on_wave_changed)
 	GameState.health_changed.connect(_on_health_changed)
+	GameState.damage_flashed.connect(_on_damage_flashed)
 	_update_labels()
 
 func _process(delta: float) -> void:
 	if GameState.state != GameState.GameState.PLAYING:
 		return
+	if _damage_flash_timer > 0:
+		_damage_flash_timer -= delta
+		var alpha = clamp(1.0 - (_damage_flash_timer / 0.05), 0.0, 1.0)
+		if _damage_flash_overlay:
+			_damage_flash_overlay.visible = true
+			_damage_flash_overlay.color = Color(1.0, 1.0, 0.0, alpha * 0.3)
+		if _damage_flash_timer <= 0:
+			_damage_flash_overlay.visible = false
+			_damage_flash_timer = 0.0
 	_progress_update_timer += delta
 	if _progress_update_timer >= _progress_update_interval:
 		_progress_update_timer = 0.0
@@ -146,3 +161,19 @@ func _update_wave_complete(delta: float) -> void:
 			_wave_complete_label.visible = false
 			_wave_complete_visible = false
 			_wave_complete_timer = 0.0
+
+## --- Damage flash ---
+
+func _setup_damage_flash() -> void:
+	_damage_flash_overlay = ColorRect.new()
+	_damage_flash_overlay.anchor_left = 0.0
+	_damage_flash_overlay.anchor_top = 0.0
+	_damage_flash_overlay.anchor_right = 1.0
+	_damage_flash_overlay.anchor_bottom = 1.0
+	_damage_flash_overlay.color = Color(1.0, 1.0, 0.0, 0.0)
+	_damage_flash_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_damage_flash_overlay.visible = false
+	add_child(_damage_flash_overlay)
+
+func _on_damage_flashed() -> void:
+	_damage_flash_timer = 0.05

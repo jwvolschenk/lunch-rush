@@ -105,7 +105,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Core gameplay polish: enemy death feedback
 
-- [ ] Add enemy death visual feedback — spawn floating +gold and +score labels at the death position (reuse FloatingLabel), add a brief screen flash (0.05s yellow at 0.3 alpha) on damage, add enemy squish animation (scale Y 0→0.1→0 over 0.3s) before queue_free()
+- [x] Add enemy death visual feedback — spawn floating +gold and +score labels at the death position (reuse FloatingLabel), add a brief screen flash (0.05s yellow at 0.3 alpha) on damage, add enemy squish animation (scale Y 0→0.1→0 over 0.3s) before queue_free()
 
 ## Missing tower: PizzaTrebuchet projectile
 

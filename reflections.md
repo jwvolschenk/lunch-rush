@@ -89,3 +89,7 @@ Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 336 line
 ## Cycle 16  2026-07-08T17:31:02Z  outcome:passed sha:c331e8ddda
 
 Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 12 lines changed.
+
+## Cycle 17  2026-07-08T17:35:00Z  outcome:passed sha:pending
+
+Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). 3 lines changed. Agent summary: Card selection UI — ensured GameState transitions to PLAYING immediately after card selection (before room selector), closing the card overlay via _on_state_changed handler.

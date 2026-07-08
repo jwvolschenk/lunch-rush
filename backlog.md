@@ -41,7 +41,7 @@
 - [x] Implement player deck: starts with 5 cards, draws from deck each turn, discard pile
 - [x] Implement craving mechanic: random enemy craving, feeding matching food applies slow debuff
 - [x] Add gold economy: gold per kill, gold display on HUD, tower costs
-- [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement
+- [x] Build camera system: pan/zoom across lanes with smooth follow on enemy movement
 
 DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves, cards, cravings, gold economy, camera
 
@@ -59,7 +59,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [ ] Implement player deck system: starts with 5 starter cards, draw pool, discard pile, draw-from-deck each turn
 - [ ] Implement craving mechanic: each enemy has a random craving (food type enum), feeding matching food applies slow debuff, wrong food applies enrage buff
 - [x] Implement gold economy: gold per kill, gold display on HUD, tower costs deducted on placement, gold_changed signal drives UI updates
-- [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
+- [x] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
 - [ ] Implement game-over / restart flow: health reaches 0 → show summary overlay (score, waves survived, gold earned) → offer restart button
 - [ ] Add placeholder art: colored rectangles for towers (yellow), enemies (green/red), lanes (grey), UI panels (dark with borders)
 # --- Cycle 7 reflect additions ---

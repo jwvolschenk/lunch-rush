@@ -7,6 +7,9 @@ extends Node2D
 var lane_manager: LaneManager
 var hud: Control
 
+## --- Camera ---
+var camera_controller: CameraController
+
 ## --- Card selection ---
 var card_selection: CardSelection
 
@@ -43,6 +46,11 @@ func _ready() -> void:
 	if hud:
 		print("[Main] HUD loaded.")
 	
+	# Reference the camera controller
+	camera_controller = $CameraController
+	if camera_controller:
+		print("[Main] Camera controller loaded.")
+	
 	# Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
 	GameState.health_depleted.connect(_on_game_over)
@@ -78,6 +86,23 @@ func _start_first_wave() -> void:
 	WaveManager.start_wave(0)
 	_next_wave_ready = true
 	print("[Main] Wave 1 started.")
+
+## --- Per-frame updates ---
+func _process(delta: float) -> void:
+	if camera_controller and GameState.state == GameState.GameState.PLAYING:
+		_collect_all_enemies()
+
+var _all_enemies: Array[Node2D] = []
+
+func _collect_all_enemies() -> void:
+	_all_enemies.clear()
+	var all_lanes = LaneManager.get_all_lanes()
+	for lane in all_lanes:
+		for enemy in lane.get_enemies():
+			if enemy and not enemy.is_queued_for_deletion():
+				_all_enemies.append(enemy)
+	if camera_controller:
+		camera_controller.update_target(_all_enemies)
 
 ## --- State management ---
 func _on_state_changed(new_state: int) -> void:

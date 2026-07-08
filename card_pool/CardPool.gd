@@ -40,6 +40,15 @@ enum CardCategory {
 		"tower_scene": "res://tower/PizzaTrebuchet.tscn",
 	},
 	{
+		"name": "Spicy Sauce Cannon",
+		"description": "Burns enemies with spicy sauce. Applies dot burn damage with area splash.",
+		"cost": 35,
+		"card_type": CardCategory.TOWER,
+		"icon_color": Color(0.95, 0.35, 0.05, 1),
+		"rarity": "uncommon",
+		"tower_scene": "res://tower/SpicySauceCannon.tscn",
+	},
+	{
 		"name": "Soup Spill",
 		"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
 		"cost": 35,
@@ -222,6 +231,14 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"cost": 35,
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
+			"rarity": "uncommon",
+		},
+		{
+			"name": "Spicy Sauce Cannon",
+			"description": "Burns enemies with spicy sauce. Applies dot burn damage with area splash.",
+			"cost": 35,
+			"card_type": CardCategory.TOWER,
+			"icon_color": Color(0.95, 0.35, 0.05, 1),
 			"rarity": "uncommon",
 		},
 	]

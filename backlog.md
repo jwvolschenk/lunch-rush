@@ -11,7 +11,7 @@
 # Phase: scaffold the project toward the Godot game goal
 
 - [x] Remove all Python code (lunch_rush/, pyproject.toml, tests/) and replace with Godot project.godot, icon, and .gdignore skeleton
-- [ ] Create a blank "Lunch Rush" project in Godot 4 with the main scene (Main.tscn) and a root script (main.gd)
+- [x] Create a blank "Lunch Rush" project in Godot 4 with the main scene (Main.tscn) and a root script (main.gd)
 - [ ] Implement a basic 2D game loop: a GameState.gd autoload (autoload singleton) managing game state (score, waves, player health)
 - [ ] Implement a Lane system: 2-3 lanes with enemies spawning from the right and moving left toward the kitchen
 - [ ] Implement a Tower base class (Tower.tscn + Tower.gd) with placement, attack range, damage, and fire rate

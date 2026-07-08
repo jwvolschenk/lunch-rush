@@ -84,6 +84,9 @@ var active_enemy_count: int:
 ## --- Lifecycle ---
 
 func _ready() -> void:
+	# Initialize WaveConfigLoader with editor-configured waves
+	if waves.size() > 0:
+		WaveConfigLoader.initialize(waves)
 	_generate_default_waves()
 	# Listen for LaneManager's wave_complete signal (all lanes cleared)
 	LaneManager.wave_complete.connect(_on_wave_complete)
@@ -134,28 +137,9 @@ func _generate_default_waves() -> void:
 		waves.append(wave)
 	
 	print("[WaveManager] Generated %d default waves." % waves.size())
-
-## Get a dynamically generated WaveConfig for waves beyond the predefined ones.
-## Used for endless play past max_waves.
-func _get_escalated_wave(wave_index: int) -> WaveConfig:
-	var wave := WaveConfig.new()
 	
-	var hp_scale = 1.0 + (wave_index * hp_growth)
-	var speed_scale = 1.0 + (wave_index * speed_growth)
-	var enemy_count = 3 + (wave_index * 2) + count_growth
-	var spawn_interval = max(0.3, 2.0 - (wave_index * spawn_interval_reduction))
-	
-	wave.hp_scale = hp_scale
-	wave.speed_scale = speed_scale
-	wave.spawn_interval = spawn_interval
-	
-	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
-	wave.enemies = [
-		{ "enemy_data": goblin_data, "count": enemy_count }
-	]
-	wave.description = "Wave %d — Escalating threat" % (wave_index + 1)
-	
-	return wave
+	# Sync generated waves back to WaveConfigLoader
+	WaveConfigLoader.reload_with(waves)
 
 ## --- Wave management ---
 
@@ -166,16 +150,16 @@ func start_wave(wave_index: int) -> void:
 		push_warning("[WaveManager] Cannot start wave with negative index.")
 		return
 	
-	# If we have predefined waves, use them; otherwise generate dynamically
+	# If we have predefined waves, use them; otherwise delegate to WaveConfigLoader
 	if wave_index < waves.size():
 		_current_wave_config = waves[wave_index]
 	else:
-		_current_wave_config = _get_escalated_wave(wave_index)
+		_current_wave_config = WaveConfigLoader.get_wave(wave_index)
 	
 	# Apply room modifiers first (modifies hp_scale/speed_scale in place)
 	var room = GameState.current_room
 	if room:
-		_apply_modifiers(_current_wave_config, room)
+		WaveConfigLoader.apply_room_modifiers(_current_wave_config, room)
 	
 	# Then build spawn queue with modified scales
 	_spawn_queue = _build_spawn_queue()
@@ -246,32 +230,6 @@ func _build_spawn_queue() -> Array:
 	# Shuffle the queue for randomness
 	queue.shuffle()
 	return queue
-
-## Apply room modifiers to the wave config.
-func _apply_modifiers(wave: WaveConfig, modifier: Resource) -> WaveConfig:
-	if not modifier:
-		return wave
-	
-	var hp_mult = modifier.get("enemy_hp_modifier", 1.0)
-	var speed_mult = modifier.get("enemy_speed_modifier", 1.0)
-	var count_add = modifier.get("enemy_count_modifier", 0)
-	
-	# Scale existing HP and speed
-	wave.hp_scale *= hp_mult
-	wave.speed_scale *= speed_mult
-	
-	# Add extra enemies of the first type (simplified)
-	if count_add > 0 and wave.enemies.size() > 0:
-		var first_entry = wave.enemies[0]
-		var extra_scene = first_entry.get("enemy_data", null)
-		if extra_scene:
-			for i in range(count_add):
-				wave.enemies.append({
-					"enemy_data": extra_scene,
-					"count": 1,
-				})
-	
-	return wave
 
 ## Spawn the next enemy from the queue.
 ## Called automatically by _process each frame.
@@ -381,7 +339,7 @@ func start_next_wave() -> void:
 	
 	# Check if we need to generate a new dynamic wave
 	if _next_wave_index >= waves.size():
-		var dynamic_wave = _get_escalated_wave(_next_wave_index)
+		var dynamic_wave = WaveConfigLoader.get_wave(_next_wave_index)
 		waves.append(dynamic_wave)
 	
 	start_wave(_next_wave_index)

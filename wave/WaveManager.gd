@@ -159,11 +159,11 @@ func start_wave(wave_index: int) -> void:
 	
 	# If we have predefined waves, use them; otherwise delegate to WaveConfigLoader
 	if wave_index < waves.size():
-		_current_wave_config = waves[wave_index]
+		_current_wave_config = waves[wave_index].duplicate(true)
 	else:
 		_current_wave_config = WaveConfigLoader.get_wave(wave_index)
 	
-	# Apply room modifiers first (modifies hp_scale/speed_scale in place)
+	# Apply room modifiers from current room (modifies the copied WaveConfig)
 	var room = GameState.current_room
 	if room:
 		WaveConfigLoader.apply_room_modifiers(_current_wave_config, room)
@@ -176,8 +176,11 @@ func start_wave(wave_index: int) -> void:
 	# Count active enemies from current game state
 	_active_enemies = _current_wave_config.get_total_enemies()
 	
-	# Track wave gold reward (increases with wave number)
-	GameState.wave_gold_reward = 25 + (wave_index * 5)
+	# Track wave gold reward (increases with wave number, apply room gold bonus)
+	var gold_reward: float = 25 + (wave_index * 5)
+	if room and "gold_bonus" in room:
+		gold_reward *= (1.0 + room.gold_bonus * 0.01)
+	GameState.wave_gold_reward = int(gold_reward)
 	
 	_current_wave_index = wave_index
 	_wave_start_requested = false

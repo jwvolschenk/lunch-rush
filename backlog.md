@@ -76,7 +76,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: missing GOAL.md content — towers, waves, and visual polish
 
 - [x] Wire room selector flow: RoomSelector emits room_selected signal but nothing in Main.tscn calls _on_room_selected() — add the signal connection and show_rooms() call between card selection and wave start
-- [ ] Fix room modifier application: GameState._apply_room_modifier() modifies wave_enemy_count/hp/speed/gold_reward on the GameState object but WaveManager.start_wave() only reads from WaveConfig — pass room modifier from GameState.current_room into WaveManager.start_wave()
+- [x] Fix room modifier application: GameState._apply_room_modifier() modifies wave_enemy_count/hp/speed/gold_reward on the GameState object but WaveManager.start_wave() only reads from WaveConfig — pass room modifier from GameState.current_room into WaveManager.start_wave()
 - [ ] Clamp EmergencyRationCard heal to max_hp: game_state.health += heal_amount can exceed 20 (max health), breaking the game's HP cap
 - [ ] Add EnemyData resources for SlimeRunner, GhostChef, and OgreBrute (EnemyData_HungryGoblin.tres and EnemyData_PizzaDelivery.tres already exist)
 - [ ] Add Pizza Delivery tower scene: GOAL.md lists it as a core tower but only PizzaTrebuchet exists — create PizzaDelivery.tscn + PizzaDelivery.gd

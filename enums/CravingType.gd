@@ -7,4 +7,5 @@ enum CravingType {
 	GREASE,
 	SOUP,
 	SPICE,
+	PIZZA,
 }

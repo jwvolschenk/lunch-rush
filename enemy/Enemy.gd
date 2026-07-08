@@ -164,8 +164,8 @@ func _on_ready_setup() -> void:
 ## --- Random craving assignment ---
 
 func _assign_random_craving() -> void:
-	# Pick a random non-NONE craving type: GREASE=1, SOUP=2, SPICE=3
-	var types = [CravingType.GREASE, CravingType.SOUP, CravingType.SPICE]
+	# Pick a random non-NONE craving type: GREASE=1, SOUP=2, SPICE=3, PIZZA=4
+	var types = [CravingType.GREASE, CravingType.SOUP, CravingType.SPICE, CravingType.PIZZA]
 	craving = types[randi() % types.size()]
 
 ## --- HP bar ---

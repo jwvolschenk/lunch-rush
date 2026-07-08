@@ -18,7 +18,7 @@ extends Node2D
 @export var splash_radius: float = 0.0
 
 ## Food type this projectile represents (for craving checks).
-## 0=none, 1=grease, 2=soup, 3=spice (matches CravingType enum).
+## 0=none, 1=grease, 2=soup, 3=spice, 4=pizza (matches CravingType enum).
 var food_type: int = 0
 
 ## Pushback distance in pixels (0 = no pushback).

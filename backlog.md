@@ -71,6 +71,6 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Fix room selector flow: wire ROOM_SELECTING state to show between card selection and next wave
 - [x] Hook SaveLoad.save_run() into game_over overlay restart button
-- [ ] Add PizzaDelivery enemy type (GOAL.md spec) with fast speed and craving on pizza
+- [x] Add PizzaDelivery enemy type (GOAL.md spec) with fast speed and craving on pizza
 - [ ] Add lane divider walls (visual barrier between lanes that enemies cannot cross)
 - [ ] Add enemy spawn point markers on each lane (visual indicators for spawn positions)

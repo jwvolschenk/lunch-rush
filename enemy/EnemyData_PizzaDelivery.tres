@@ -1,0 +1,11 @@
+[gd_resource type = "Resource" load_steps = 1 format = 3]
+
+[resource]
+name = "Pizza Delivery"
+max_hp = 45.0
+speed = 140.0
+gold_reward = 15
+score_reward = 15
+craving = 4
+tint_color = Color( 0.9, 0.4, 0.1, 1 )
+custom_scene = "res://enemy/PizzaDelivery.tscn"

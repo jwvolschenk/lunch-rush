@@ -23,8 +23,8 @@ var _selected: bool = false
 ]
 @onready var _room_descs: Array = [
 	$Panel/Room1/RoomDesc,
-	$Panel/Room1/RoomDesc,
-	$Panel/Room1/RoomDesc,
+	$Panel/Room2/RoomDesc,
+	$Panel/Room3/RoomDesc,
 ]
 @onready var _room_modifiers: Array = [
 	$Panel/Room1/Modifier,

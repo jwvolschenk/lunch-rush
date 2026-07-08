@@ -120,6 +120,11 @@ func _on_state_changed(new_state: int) -> void:
 				_show_card_selection()
 			if room_selector:
 				room_selector.hide_rooms()
+		GameState.GameState.ROOM_SELECTING:
+			print("[Main] State: ROOM_SELECTING")
+			# Room selector is the active UI — don't hide it
+			if card_selection:
+				card_selection.hide_cards()
 		GameState.GameState.GAME_OVER:
 			print("[Main] State: GAME_OVER")
 			if card_selection:
@@ -136,44 +141,74 @@ func _on_state_changed(new_state: int) -> void:
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:
-	return [
-		{
-			"room_name": "Pantry",
-			"description": "Standard pantry. Balanced room with no modifiers.",
-			"room_type": 0,
-			"bg_color": Color(0.1, 0.1, 0.1, 1),
-			"accent_color": Color(0.6, 0.6, 0.3, 1),
-			"border_color": Color(0.3, 0.3, 0.3, 1),
-			"enemy_hp_modifier": 1.0,
-			"enemy_speed_modifier": 1.0,
-			"enemy_count_modifier": 0,
-			"gold_bonus": 0,
-		},
-		{
-			"room_name": "Freezer",
-			"description": "Enemies move slower but have more HP. Gold bonus.",
-			"room_type": 1,
-			"bg_color": Color(0.1, 0.15, 0.25, 1),
-			"accent_color": Color(0.3, 0.7, 0.9, 1),
-			"border_color": Color(0.2, 0.3, 0.5, 1),
-			"enemy_hp_modifier": 1.2,
-			"enemy_speed_modifier": 0.75,
-			"enemy_count_modifier": 0,
-			"gold_bonus": 20,
-		},
-		{
-			"room_name": "Lava Kitchen",
-			"description": "Enemies are tougher and faster. Higher gold reward.",
-			"room_type": 2,
-			"bg_color": Color(0.25, 0.05, 0.05, 1),
-			"accent_color": Color(0.9, 0.3, 0.1, 1),
-			"border_color": Color(0.5, 0.1, 0.05, 1),
-			"enemy_hp_modifier": 1.5,
-			"enemy_speed_modifier": 1.2,
-			"enemy_count_modifier": 1,
-			"gold_bonus": 50,
-		},
-	]
+	var rooms: Array[RoomData] = []
+	
+	var pantry := RoomData.new()
+	pantry.room_name = "Pantry"
+	pantry.description = "Standard pantry. Balanced room with no modifiers."
+	pantry.room_type = RoomData.RoomType.PANTRY
+	pantry.bg_color = Color(0.1, 0.1, 0.1, 1)
+	pantry.accent_color = Color(0.6, 0.6, 0.3, 1)
+	pantry.border_color = Color(0.3, 0.3, 0.3, 1)
+	pantry.enemy_hp_modifier = 1.0
+	pantry.enemy_speed_modifier = 1.0
+	pantry.enemy_count_modifier = 0
+	pantry.gold_bonus = 0
+	rooms.append(pantry)
+	
+	var freezer := RoomData.new()
+	freezer.room_name = "Freezer"
+	freezer.description = "Enemies move slower but have more HP. Gold bonus."
+	freezer.room_type = RoomData.RoomType.FREEZER
+	freezer.bg_color = Color(0.1, 0.15, 0.25, 1)
+	freezer.accent_color = Color(0.3, 0.7, 0.9, 1)
+	freezer.border_color = Color(0.2, 0.3, 0.5, 1)
+	freezer.enemy_hp_modifier = 1.2
+	freezer.enemy_speed_modifier = 0.75
+	freezer.enemy_count_modifier = 0
+	freezer.gold_bonus = 20
+	rooms.append(freezer)
+	
+	var lava := RoomData.new()
+	lava.room_name = "Lava Kitchen"
+	lava.description = "Enemies are tougher and faster. Higher gold reward."
+	lava.room_type = RoomData.RoomType.LAVA_KITCHEN
+	lava.bg_color = Color(0.25, 0.05, 0.05, 1)
+	lava.accent_color = Color(0.9, 0.3, 0.1, 1)
+	lava.border_color = Color(0.5, 0.1, 0.05, 1)
+	lava.enemy_hp_modifier = 1.5
+	lava.enemy_speed_modifier = 1.2
+	lava.enemy_count_modifier = 1
+	lava.gold_bonus = 50
+	rooms.append(lava)
+	
+	var vip := RoomData.new()
+	vip.room_name = "VIP Table"
+	vip.description = "Premium dining experience. Fast enemies but lots of gold."
+	vip.room_type = RoomData.RoomType.VIP_TABLE
+	vip.bg_color = Color(0.2, 0.15, 0.3, 1)
+	vip.accent_color = Color(0.8, 0.5, 0.9, 1)
+	vip.border_color = Color(0.4, 0.3, 0.6, 1)
+	vip.enemy_hp_modifier = 1.1
+	vip.enemy_speed_modifier = 1.3
+	vip.enemy_count_modifier = 0
+	vip.gold_bonus = 100
+	rooms.append(vip)
+	
+	var cursed := RoomData.new()
+	cursed.room_name = "Cursed Buffet"
+	cursed.description = "A haunted feast. Enemies are wild but gold is plentiful."
+	cursed.room_type = RoomData.RoomType.CURSED_BUFFET
+	cursed.bg_color = Color(0.15, 0.05, 0.15, 1)
+	cursed.accent_color = Color(0.5, 0.2, 0.7, 1)
+	cursed.border_color = Color(0.3, 0.15, 0.35, 1)
+	cursed.enemy_hp_modifier = 1.3
+	cursed.enemy_speed_modifier = 1.1
+	cursed.enemy_count_modifier = 2
+	cursed.gold_bonus = 75
+	rooms.append(cursed)
+	
+	return rooms
 
 ## --- Starter card definitions ---
 func _get_starter_cards() -> Array:
@@ -215,12 +250,13 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	# Transition back to PLAYING after card is selected
 	# Only if wave wasn't already started (room selector will handle it)
 	if not wave_started:
-		GameState.state = GameState.GameState.PLAYING
+		GameState.state = GameState.GameState.ROOM_SELECTING
 		# Show room selector overlay (player can still choose room)
 		_show_room_selector()
 
 ## --- Continue handler (called after player clicks overlay to confirm) ---
 func _on_continue_requested() -> void:
+	GameState.state = GameState.GameState.ROOM_SELECTING
 	_show_room_selector()
 
 ## --- Apply a card effect ---

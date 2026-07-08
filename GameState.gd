@@ -58,7 +58,8 @@ signal gold_changed(new_gold: int)
 enum GameState {
 	PLAYING,
 	WAVE_COMPLETE,
-	GAME_OVER
+	GAME_OVER,
+	ROOM_SELECTING,
 }
 
 var state: GameState = GameState.PLAYING:

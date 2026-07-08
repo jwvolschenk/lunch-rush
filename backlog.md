@@ -68,7 +68,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 
 ## Theme: TowerManager, projectiles, and visual polish
 
-- [ ] Implement TowerManager autoload: manages tower placement on lanes (click-to-place), tracks all placed towers, removes towers when tower cards are played, emits tower_placed/tower_removed signals
+- [x] Implement TowerManager autoload: manages tower placement on lanes (click-to-place), tracks all placed towers, removes towers when tower cards are played, emits tower_placed/tower_removed signals
 - [ ] Implement Projectile base class (Projectile.tscn + Projectile.gd): configurable damage, speed, and splash radius; moves toward target; deals damage on collision and self-destructs
 
 DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base class (tower attacks)

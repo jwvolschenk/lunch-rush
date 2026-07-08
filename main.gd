@@ -261,6 +261,10 @@ func _on_continue_requested() -> void:
 
 ## --- Apply a card effect ---
 func _apply_card_effect(card_data: Dictionary) -> void:
+	# Combo Meal: replay the last placed tower card
+	if card_data.get("name", "") == "Combo Meal":
+		_apply_combo_meal(card_data)
+		return
 	match card_data.card_type:
 		1:  # Tower card — place on first available lane
 			_place_tower_from_card(card_data)
@@ -268,6 +272,44 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 			print("[Main] Applying effect: %s" % card_data.name)
 		_:
 			print("[Main] Unknown card type for: %s" % card_data.name)
+
+## --- Combo Meal: replay last placed tower ---
+func _apply_combo_meal(card_data: Dictionary) -> void:
+	var pool := CardPool
+	if not pool or not pool.has_method("get_last_tower_card"):
+		print("[Main] No CardPool for Combo Meal.")
+		return
+
+	var last_tower = pool.get_last_tower_card()
+	if not last_tower or last_tower.is_empty():
+		print("[Main] Combo Meal: no previous tower to replay.")
+		return
+
+	var tower_scene_path = last_tower.get("tower_scene", "")
+	if not tower_scene_path or tower_scene_path.is_empty():
+		print("[Main] Combo Meal: last tower has no tower_scene.")
+		return
+
+	var tower_scene = load(tower_scene_path)
+	if not tower_scene:
+		print("[Main] Combo Meal: failed to load scene: %s" % tower_scene_path)
+		return
+
+	var lane_manager := get_tree().get_root().get_node_or_null("LaneManager")
+	var lane_index = 0
+	if lane_manager and lane_manager.has_method("lane_count") and lane_manager.lane_count > 0:
+		lane_index = randi() % lane_manager.lane_count
+
+	var max_x = 1400.0
+	var at_x = randf() * max_x * 0.8 + max_x * 0.1
+
+	var tower = TowerManager.place_tower(tower_scene, lane_index, at_x)
+	if tower:
+		print("[Main] Combo Meal! Replayed '%s' on lane %d." % [
+			last_tower.get("name", "Unknown"), lane_index
+		])
+	else:
+		print("[Main] Combo Meal: failed to place tower.")
 
 ## --- Tower placement from card ---
 func _place_tower_from_card(card_data: Dictionary) -> void:

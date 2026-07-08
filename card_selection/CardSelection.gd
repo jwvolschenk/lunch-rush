@@ -17,6 +17,7 @@ var _hovered_card: int = -1
 @onready var _panel: PanelContainer = $Panel
 @onready var _overlay: ColorRect = $overlay_bg
 @onready var _confirm_label: Label = $Panel/Confirm
+@onready var _continue_button: Button = $Panel/ContinueButton
 @onready var _cards: Array = [
 	$Panel/Card1,
 	$Panel/Card2,
@@ -56,6 +57,7 @@ func show_cards(card_list: Array) -> void:
 	_selected = -1
 	_hovered_card = -1
 	_confirm_label.text = "Click a card to select it"
+	_continue_button.disabled = true
 	for i in range(min(card_list.size(), 3)):
 		var card = card_list[i]
 		_card_icons[i].color = card.get("icon_color", Color.WHITE)
@@ -147,9 +149,15 @@ func _on_card_selected(index: int) -> void:
 		else:
 			_cards[i].modulate = Color(0.5, 0.5, 0.5, 1.0)
 	_confirm_label.text = "Selected: %s — Click to continue" % card.get("name", "Unknown")
+	_continue_button.disabled = false
 	
 	# Emit selection signal
 	card_selected.emit(card)
+
+## Called when player clicks the Continue button.
+func _on_continue_clicked() -> void:
+	hide_cards()
+	continue_requested.emit()
 
 ## Called when player clicks the overlay to dismiss and continue.
 func _on_overlay_clicked() -> void:

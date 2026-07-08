@@ -166,6 +166,21 @@ theme_override_font_sizes/normal_font_size = 14
 text = "Click a card to select it"
 horizontal_alignment = 1
 
+[node name="ContinueButton" parent=Entry 3 type="Button" id=22]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+custom_minimum_size = Vector2( 0, 50 )
+theme_override_font_sizes/normal_font_size = 18
+theme_override_styles/normal = sub_resource("StyleBoxFlat"_id"card_style")
+theme_override_styles/h_hovered = sub_resource("StyleBoxFlat"_id"card_style")
+theme_override_styles/pressed = sub_resource("StyleBoxFlat"_id"card_style")
+text = "Continue"
+disabled = true
+
 [connection signal="pressed" from="Entry 6" to="Entry 1"]
 method = "_on_card1_clicked"
 target = "Entry 1"
@@ -200,4 +215,8 @@ target = "Entry 1"
 
 [connection signal="mouse_exited" from="Entry 16" to="Entry 1"]
 method = "_on_card3_exited"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 22" to="Entry 1"]
+method = "_on_continue_clicked"
 target = "Entry 1"

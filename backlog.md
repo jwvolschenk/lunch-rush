@@ -62,3 +62,13 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
 - [ ] Implement game-over / restart flow: health reaches 0 → show summary overlay (score, waves survived, gold earned) → offer restart button
 - [ ] Add placeholder art: colored rectangles for towers (yellow), enemies (green/red), lanes (grey), UI panels (dark with borders)
+# --- Cycle 7 reflect additions ---
+
+# Phase: bridge infrastructure to gameplay — add what's missing between the scaffolding and the backlog items
+
+## Theme: TowerManager, projectiles, and visual polish
+
+- [ ] Implement TowerManager autoload: manages tower placement on lanes (click-to-place), tracks all placed towers, removes towers when tower cards are played, emits tower_placed/tower_removed signals
+- [ ] Implement Projectile base class (Projectile.tscn + Projectile.gd): configurable damage, speed, and splash radius; moves toward target; deals damage on collision and self-destructs
+
+DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base class (tower attacks)

@@ -155,6 +155,17 @@ text = "Card description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
+[node name="Confirm" parent=Entry 3 type="Label" id=21]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 14
+text = "Click a card to select it"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Entry 6" to="Entry 1"]
 method = "_on_card1_clicked"
 target = "Entry 1"
@@ -165,4 +176,28 @@ target = "Entry 1"
 
 [connection signal="pressed" from="Entry 16" to="Entry 1"]
 method = "_on_card3_clicked"
+target = "Entry 1"
+
+[connection signal="mouse_entered" from="Entry 6" to="Entry 1"]
+method = "_on_card1_entered"
+target = "Entry 1"
+
+[connection signal="mouse_exited" from="Entry 6" to="Entry 1"]
+method = "_on_card1_exited"
+target = "Entry 1"
+
+[connection signal="mouse_entered" from="Entry 11" to="Entry 1"]
+method = "_on_card2_entered"
+target = "Entry 1"
+
+[connection signal="mouse_exited" from="Entry 11" to="Entry 1"]
+method = "_on_card2_exited"
+target = "Entry 1"
+
+[connection signal="mouse_entered" from="Entry 16" to="Entry 1"]
+method = "_on_card3_entered"
+target = "Entry 1"
+
+[connection signal="mouse_exited" from="Entry 16" to="Entry 1"]
+method = "_on_card3_exited"
 target = "Entry 1"

@@ -90,6 +90,8 @@ var wave_enemy_hp: float = 1.0
 var wave_enemy_speed: float = 60.0
 var wave_gold_reward: int = 25
 
+## Pending cards generated for card selection between waves
+var pending_cards: Array[Dictionary] = []
 ## --- Room modifier application ---
 
 func _apply_room_modifier(room: Resource) -> void:

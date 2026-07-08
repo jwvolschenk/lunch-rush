@@ -97,6 +97,6 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Fix EmergencyRationCard health cap: the card currently caps at 20 HP (`min(new_health, 20)`) but GameState health can start at 30. Fix to use `GameState.max_health` or a configurable cap (e.g., `min(new_health, 30)` or `game_state.max_health`).
 
-- [ ] Add player-driven craving system: enemies should have their craving type displayed as a visible icon (not just a colored dot), and the card selection UI should show which food type each pending card's projectile will use, so the player can strategically match cravings.
+- [x] Add player-driven craving system: enemies should have their craving type displayed as a visible icon (not just a colored dot), and the card selection UI should show which food type each pending card's projectile will use, so the player can strategically match cravings.
 
 - [ ] Add new wave configs for waves 16-20: currently only 15 wave .tres files exist. Add configs for waves 16-20 with increasingly difficult enemy mixes to give the game more depth and a longer single run.

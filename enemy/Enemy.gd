@@ -72,6 +72,9 @@ var _craving_indicator: ColorRect = null
 ## Letter label for the craving indicator
 var _craving_label: Label = null
 
+## Outer ring for the craving indicator
+var _craving_ring: ColorRect = null
+
 ## --- Craving / debuff state ---
 
 ## Remaining duration of the slow debuff
@@ -279,29 +282,41 @@ func get_enemy_stats() -> Dictionary:
 ## --- Craving indicator ---
 
 func _build_craving_indicator() -> void:
-	# Small colored circle above the enemy
+	# Colored ring (border) around the indicator
+	_craving_ring = ColorRect.new()
+	_craving_ring.anchor_left = 0.5
+	_craving_ring.anchor_top = 0.5
+	_craving_ring.anchor_right = 0.5
+	_craving_ring.anchor_bottom = 0.5
+	_craving_ring.position = Vector2(0, -40)
+	_craving_ring.size = Vector2(32, 32)
+	_craving_ring.color = Color(0.3, 0.3, 0.3, 0.7)
+	_craving_ring.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_craving_ring)
+
+	# Inner filled circle showing the craving color
 	_craving_indicator = ColorRect.new()
 	_craving_indicator.anchor_left = 0.5
 	_craving_indicator.anchor_top = 0.5
 	_craving_indicator.anchor_right = 0.5
 	_craving_indicator.anchor_bottom = 0.5
 	_craving_indicator.position = Vector2(0, -40)
-	_craving_indicator.size = Vector2(24, 24)
+	_craving_indicator.size = Vector2(22, 22)
 	_craving_indicator.color = Color(0.5, 0.5, 0.5, 0.9)
 	_craving_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_craving_indicator)
 
-	# Letter label showing the craving type
+	# Unicode symbol label showing the craving type icon
 	_craving_label = Label.new()
 	_craving_label.anchor_left = 0.5
 	_craving_label.anchor_top = 0.5
 	_craving_label.anchor_right = 0.5
 	_craving_label.anchor_bottom = 0.5
 	_craving_label.position = Vector2(0, -40)
-	_craving_label.size = Vector2(24, 24)
+	_craving_label.size = Vector2(22, 22)
 	_craving_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_craving_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_craving_label.font_size = 14
+	_craving_label.font_size = 16
 	_craving_label.add_theme_color_override(
 		"font_color", Color(1.0, 1.0, 1.0, 1.0)
 	)
@@ -319,23 +334,29 @@ func _update_craving_indicator() -> void:
 		CravingType.PIZZA: Color(0.8, 0.2, 0.85, 0.9),
 	}
 
+	# Unicode symbols for each craving type — visible icons, not just letters
+	var symbols: Dictionary = {
+		CravingType.GREASE: "🍧",
+		CravingType.SOUP: "🍲",
+		CravingType.SPICE: "🌶️",
+		CravingType.PIZZA: "🍕",
+	}
+
 	# Use the enemy's own color as a fallback
 	var fallback_color := Color(0.6, 0.6, 0.6, 0.9)
-	var label_text := "?"
+	var fallback_symbol := "?"
 
 	if craving in colors:
 		_craving_indicator.color = colors[craving]
-		match craving:
-			CravingType.GREASE:
-				label_text = "G"
-			CravingType.SOUP:
-				label_text = "S"
-			CravingType.SPICE:
-				label_text = "X"
-			CravingType.PIZZA:
-				label_text = "P"
+		_craving_ring.color = colors[craving]
+		_craving_ring.size = Vector2(32, 32)
+		_craving_indicator.size = Vector2(22, 22)
+		if craving in symbols:
+			_craving_label.text = symbols[craving]
+		else:
+			_craving_label.text = fallback_symbol
 	else:
 		_craving_indicator.color = fallback_color
-		label_text = "?"
-
-	_craving_label.text = label_text
+		if _craving_ring:
+			_craving_ring.color = fallback_color
+		_craving_label.text = fallback_symbol

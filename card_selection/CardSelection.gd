@@ -8,7 +8,7 @@ signal continue_requested
 signal card_selected(card_data: Dictionary)
 
 ## Card data structure:
-## { name: String, description: String, cost: int, card_type: int, icon_color: Color }
+## { name: String, description: String, cost: int, card_type: int, icon_color: Color, food_type: int }
 
 var cards: Array = []
 var _selected: int = -1
@@ -48,6 +48,9 @@ var _hovered_card: int = -1
 	$Panel/Card3/Card3Desc,
 ]
 
+## Runtime labels for food type indicator on each card
+var _card_food_labels: Array[Label] = []
+
 ## Default modulate values for each card (non-hovered state)
 var _default_modulates: Array[Color] = []
 
@@ -58,6 +61,12 @@ func show_cards(card_list: Array) -> void:
 	_hovered_card = -1
 	_confirm_label.text = "Click a card to select it"
 	_continue_button.disabled = true
+	# Clear any leftover food type labels from previous call
+	for lbl in _card_food_labels:
+		if is_instance_valid(lbl) and lbl.get_parent():
+			lbl.get_parent().remove_child(lbl)
+			lbl.queue_free()
+	_card_food_labels.clear()
 	for i in range(min(card_list.size(), 3)):
 		var card = card_list[i]
 		_card_icons[i].color = card.get("icon_color", Color.WHITE)
@@ -68,6 +77,8 @@ func show_cards(card_list: Array) -> void:
 		# Store default modulate (white = no tint)
 		_default_modulates.append(Color.WHITE)
 		_cards[i].modulate = Color.WHITE
+		# Display food type indicator below cost
+		_show_food_type(i, card)
 	# Hide any excess card slots
 	for i in range(card_list.size(), 3):
 		if i < _cards.size():
@@ -82,6 +93,45 @@ func hide_cards() -> void:
 	_selected = -1
 	_hovered_card = -1
 	_confirm_label.text = ""
+
+## Display the food type indicator on a card slot.
+func _show_food_type(index: int, card: Dictionary) -> void:
+	var food_type = card.get("food_type", CravingType.NONE)
+	# Create a label for the food type
+	var food_label = Label.new()
+	food_label.add_theme_font_size_override("font_size", 11)
+	food_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 0.9))
+	food_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	food_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	if food_type == CravingType.NONE or food_type < 0:
+		food_label.text = ""
+		food_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 0.0))
+	else:
+		var food_colors: Dictionary = {
+			CravingType.GREASE: Color(0.95, 0.85, 0.1, 0.9),
+			CravingType.SOUP:   Color(0.2, 0.5, 0.95, 0.9),
+			CravingType.SPICE:  Color(0.95, 0.15, 0.15, 0.9),
+			CravingType.PIZZA:  Color(0.8, 0.2, 0.85, 0.9),
+		}
+		var food_names: Dictionary = {
+			CravingType.GREASE: "GREASE",
+			CravingType.SOUP:   "SOUP",
+			CravingType.SPICE:  "SPICE",
+			CravingType.PIZZA:  "PIZZA",
+		}
+		var name = "—"
+		if food_type in food_names:
+			name = food_names[food_type]
+		if food_type in food_colors:
+			food_label.add_theme_color_override("font_color", food_colors[food_type])
+		food_label.text = name
+
+	food_label.size = Vector2i(180, 16)
+	food_label.position = Vector2i(0, 100)
+	food_label.custom_minimum_size = Vector2(180, 16)
+	_cards[index].add_child(food_label)
+	_card_food_labels.append(food_label)
 
 ## Called when mouse enters a card slot.
 func _on_card1_entered() -> void:

@@ -103,6 +103,33 @@ layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Health Remaining: 0"
 horizontal_alignment = 1
+[node name="HighScorePanel" parent=Entry 3 type="PanelContainer" id=12]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 30
+theme_override_constants/contents_margin_top = 15
+theme_override_constants/contents_margin_right = 30
+theme_override_constants/contents_margin_bottom = 15
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")
+visible = false
+
+[node name="HighScoreLabel" parent=Entry 12 type="Label" id=13]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 20
+text = "High Score: ---"
+horizontal_alignment = 1
+
+[node name="NewHighScoreLabel" parent=Entry 12 type="Label" id=14]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 24
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_color = Color( 0.95, 0.75, 0.1, 1 )
+
 
 [node name="RestartBtn" parent=Entry 3 type="Button" id=10]
 layout_mode = 1

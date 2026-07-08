@@ -140,7 +140,8 @@ func _on_state_changed(new_state: int) -> void:
 					GameState.score,
 					GameState.waves_completed,
 					GameState.gold,
-					GameState.health
+					GameState.health,
+					SaveLoad.get_high_score()
 				)
 
 ## --- Room choices ---

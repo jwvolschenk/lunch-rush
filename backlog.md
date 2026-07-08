@@ -79,4 +79,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Theme: cycle 44 — missing entry point and reward feedback
 - [x] Add main menu screen — title screen with instructions and high score display; set as main_scene in project.godot instead of Main.tscn
-- [ ] Add high score display to game-over overlay — show persistent high score from SaveLoad and "New High Score!" indicator when player beats it
+- [x] Add high score display to game-over overlay — show persistent high score from SaveLoad and "New High Score!" indicator when player beats it

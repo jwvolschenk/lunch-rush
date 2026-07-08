@@ -93,7 +93,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Add tower attack SFX: have each tower's projectile play its own SFX on fire via SoundManager. Wire up `SoundManager.play_sfx("tower_fire_<type>")` in each projectile's `_process` or `fire()` method. Use existing sfx files or add new ones for tower types.
 
-- [ ] Add wave completion SFX: when a wave completes, play a satisfying SFX via SoundManager and briefly flash the HUD with a "Wave Complete!" notification that fades out.
+- [x] Add wave completion SFX: when a wave completes, play a satisfying SFX via SoundManager and briefly flash the HUD with a "Wave Complete!" notification that fades out.
 
 - [ ] Fix EmergencyRationCard health cap: the card currently caps at 20 HP (`min(new_health, 20)`) but GameState health can start at 30. Fix to use `GameState.max_health` or a configurable cap (e.g., `min(new_health, 30)` or `game_state.max_health`).
 

@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 	if _progress_update_timer >= _progress_update_interval:
 		_progress_update_timer = 0.0
 		_update_wave_progress()
+	_update_wave_complete(delta)
 
 func _update_wave_progress() -> void:
 	if not _enemy_count_label or not _next_spawn_label:
@@ -87,5 +88,42 @@ func show_wave_countdown(text: String) -> void:
 	_wave_countdown_label.visible = true
 
 func hide_wave_countdown() -> void:
-	if _wave_countdown_label:
+	if not _wave_countdown_label:
 		_wave_countdown_label.visible = false
+
+## --- Wave complete notification ---
+
+var _wave_complete_timer: float = 0.0
+var _wave_complete_duration: float = 2.0
+var _wave_complete_fade_out: float = 0.8
+var _wave_complete_visible: bool = false
+
+func show_wave_complete() -> void:
+	if not _wave_complete_label:
+		return
+	_wave_complete_label.visible = true
+	_wave_complete_label.modulate = Color(1, 1, 0.6, 1)
+	_wave_complete_label.scale = Vector2(1.0, 1.0)
+	_wave_complete_timer = _wave_complete_duration + _wave_complete_fade_out
+	_wave_complete_visible = true
+
+func hide_wave_complete() -> void:
+	if not _wave_complete_label:
+		return
+	_wave_complete_label.visible = false
+	_wave_complete_visible = false
+
+func _update_wave_complete(delta: float) -> void:
+	if not _wave_complete_visible or not _wave_complete_label:
+		return
+	_wave_complete_timer -= delta
+	if _wave_complete_timer <= _wave_complete_fade_out:
+		# Fade out phase
+		var t = _wave_complete_timer / _wave_complete_fade_out
+		_wave_complete_label.modulate = Color(1, 1, 0.6, t)
+		var scale = 1.0 + (1.0 - t) * 0.15
+		_wave_complete_label.scale = Vector2(scale, scale)
+		if _wave_complete_timer <= 0:
+			_wave_complete_label.visible = false
+			_wave_complete_visible = false
+			_wave_complete_timer = 0.0

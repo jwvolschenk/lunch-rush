@@ -352,6 +352,12 @@ func _on_wave_complete() -> void:
 	# Emit signal
 	wave_complete.emit(_current_wave_index)
 	
+	# Play wave complete SFX and show HUD notification
+	if SoundManager:
+		SoundManager.play_sfx("wave_complete")
+	if HUD and HUD.has_method("show_wave_complete"):
+		HUD.show_wave_complete()
+	
 	# Advance to card selection
 	advance_to_card_selection()
 

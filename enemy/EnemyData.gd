@@ -21,15 +21,9 @@ extends Resource
 ## Score awarded to the player on death
 @export var score_reward: int = 10
 
-## Craving food type: greed/soup/spice
+## Craving food type: grease/soup/spice
 ## Matching craving applies slow debuff; wrong food applies enrage
-@export var craving: CravingType = CravingType.GREASE
-
-enum CravingType {
-	GREASE,
-	SOUP,
-	SPICE,
-}
+@export var craving: int = 0
 
 ## Color used for the enemy's sprite (visual feedback)
 @export var tint_color: Color = Color(0.4, 0.8, 0.4, 1.0)

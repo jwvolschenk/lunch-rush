@@ -102,7 +102,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Theme: genuinely missing systems from GOAL.md scope — enemy variety, rooms, card pool, extra towers, combo mechanic
 
-- [ ] Implement EnemyData data model (EnemyData.gd): scriptable resource for enemy stats (hp, speed, reward, craving, sprite), enables spawning multiple enemy types without code changes
+- [x] Implement EnemyData data model (EnemyData.gd): scriptable resource for enemy stats (hp, speed, reward, craving, sprite), enables spawning multiple enemy types without code changes
 - [ ] Implement Room/level selection system: between waves, present 2-3 room choices (pantry, freezer, lava kitchen, VIP table) with unique visual theme and minor gameplay modifier
 - [ ] Implement CardPool data model (CardPool.gd): defines available cards for the current run, handles card generation pool, rarity weights, and card selection from pool for card selection UI
 - [ ] Implement Pizza Trebuchet concrete tower scene (PizzaTrebuchet.tscn + PizzaTrebuchet.gd): extends Tower, range=300 damage=8 cooldown=3.0 projectile_scene=fire_pie, slow fire rate with splash damage, orange ColorRect sprite

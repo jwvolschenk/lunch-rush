@@ -69,7 +69,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Dishwasher tower — referenced in CardPool.gd line 77 but no Dishwasher.tscn scene exists. Implement as fast melee tower (range=80, dmg=12, cooldown=0.8s), high risk/reward short-range attacker.
 
-- [ ] Enemy variety: Ogre Brute — add OgreBrute.gd/.tscn as a high-HP tank enemy (200 HP, slow speed, high gold reward). Adds enemy diversity beyond Hungry Goblin.
+- [x] Enemy variety: Ogre Brute — add OgreBrute.gd/.tscn as a high-HP tank enemy (200 HP, slow speed, high gold reward). Adds enemy diversity beyond Hungry Goblin.
 
 - [ ] Enemy variety: Ghost Chef — add GhostChef.gd/.tscn as a floating enemy that partially phases through towers (50% dodge chance for 2s, medium HP 80, medium speed).
 

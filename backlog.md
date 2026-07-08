@@ -60,7 +60,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [x] Implement craving mechanic: each enemy has a random craving (food type enum), feeding matching food applies slow debuff, wrong food applies enrage buff
 - [x] Implement gold economy: gold per kill, gold display on HUD, tower costs deducted on placement, gold_changed signal drives UI updates
 - [x] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
-- [ ] Implement game-over / restart flow: health reaches 0 → show summary overlay (score, waves survived, gold earned) → offer restart button
+- [x] Implement game-over / restart flow: health reaches 0 → show summary overlay (score, waves survived, gold earned) → offer restart button
 - [ ] Add placeholder art: colored rectangles for towers (yellow), enemies (green/red), lanes (grey), UI panels (dark with borders)
 # --- Cycle 7 reflect additions ---
 

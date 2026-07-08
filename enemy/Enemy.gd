@@ -64,6 +64,14 @@ var hp_bar: ColorRect
 
 var _is_dying: bool = false
 
+## --- Craving indicator ---
+
+## The craving indicator node (ColorRect + Label above the enemy)
+var _craving_indicator: ColorRect = null
+
+## Letter label for the craving indicator
+var _craving_label: Label = null
+
 ## --- Craving / debuff state ---
 
 ## Remaining duration of the slow debuff
@@ -127,6 +135,7 @@ func _update_hp_bar_color() -> void:
 
 func _ready() -> void:
 	_build_hp_bar()
+	_build_craving_indicator()
 	_on_ready_setup()
 	_setup_death_cleanup()
 	_assign_random_craving()
@@ -167,6 +176,7 @@ func _assign_random_craving() -> void:
 	# Pick a random non-NONE craving type: GREASE=1, SOUP=2, SPICE=3, PIZZA=4
 	var types = [CravingType.GREASE, CravingType.SOUP, CravingType.SPICE, CravingType.PIZZA]
 	craving = types[randi() % types.size()]
+	_update_craving_indicator()
 
 ## --- HP bar ---
 
@@ -243,3 +253,67 @@ func get_enemy_stats() -> Dictionary:
 		"gold_reward": gold_reward,
 		"score_reward": score_reward
 	}
+
+## --- Craving indicator ---
+
+func _build_craving_indicator() -> void:
+	# Small colored circle above the enemy
+	_craving_indicator = ColorRect.new()
+	_craving_indicator.anchor_left = 0.5
+	_craving_indicator.anchor_top = 0.5
+	_craving_indicator.anchor_right = 0.5
+	_craving_indicator.anchor_bottom = 0.5
+	_craving_indicator.position = Vector2(0, -40)
+	_craving_indicator.size = Vector2(24, 24)
+	_craving_indicator.color = Color(0.5, 0.5, 0.5, 0.9)
+	_craving_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_craving_indicator)
+
+	# Letter label showing the craving type
+	_craving_label = Label.new()
+	_craving_label.anchor_left = 0.5
+	_craving_label.anchor_top = 0.5
+	_craving_label.anchor_right = 0.5
+	_craving_label.anchor_bottom = 0.5
+	_craving_label.position = Vector2(0, -40)
+	_craving_label.size = Vector2(24, 24)
+	_craving_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_craving_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_craving_label.font_size = 14
+	_craving_label.add_theme_color_override(
+		"font_color", Color(1.0, 1.0, 1.0, 1.0)
+	)
+	_craving_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_craving_indicator.add_child(_craving_label)
+
+func _update_craving_indicator() -> void:
+	if not _craving_indicator or not _craving_label:
+		return
+
+	var colors: Dictionary = {
+		CravingType.GREASE: Color(0.95, 0.85, 0.1, 0.9),
+		CravingType.SOUP: Color(0.2, 0.5, 0.95, 0.9),
+		CravingType.SPICE: Color(0.95, 0.15, 0.15, 0.9),
+		CravingType.PIZZA: Color(0.8, 0.2, 0.85, 0.9),
+	}
+
+	# Use the enemy's own color as a fallback
+	var fallback_color := Color(0.6, 0.6, 0.6, 0.9)
+	var label_text := "?"
+
+	if craving in colors:
+		_craving_indicator.color = colors[craving]
+		match craving:
+			CravingType.GREASE:
+				label_text = "G"
+			CravingType.SOUP:
+				label_text = "S"
+			CravingType.SPICE:
+				label_text = "X"
+			CravingType.PIZZA:
+				label_text = "P"
+	else:
+		_craving_indicator.color = fallback_color
+		label_text = "?"
+
+	_craving_label.text = label_text

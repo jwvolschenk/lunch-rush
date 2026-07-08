@@ -127,6 +127,8 @@ func _on_state_changed(new_state: int) -> void:
 				card_selection.hide_cards()
 			if room_selector:
 				room_selector.hide_rooms()
+			if hud:
+				hud.show_hand()
 		GameState.GameState.WAVE_COMPLETE:
 			print("[Main] State: WAVE_COMPLETE")
 			# Show card selection first (3 card choices for the player)
@@ -155,6 +157,8 @@ func _on_state_changed(new_state: int) -> void:
 					_pending_unlocks
 				)
 				_pending_unlocks = {}
+			if hud:
+				hud.hide_hand()
 		GameState.GameState.VICTORY:
 			print("[Main] State: VICTORY — All waves completed!")
 			if card_selection:
@@ -169,6 +173,8 @@ func _on_state_changed(new_state: int) -> void:
 					GameState.health,
 					SaveLoad.get_high_score()
 				)
+			if hud:
+				hud.hide_hand()
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:

@@ -6,6 +6,17 @@ var _progress_update_timer: float = 0.0
 var _progress_update_interval: float = 0.25
 var _wave_progress_value: float = 0.0
 
+## --- Hand display ---
+var _hand_enabled: bool = false
+var _hand_update_timer: float = 0.0
+var _hand_update_interval: float = 0.3
+
+var _hand_panel: Control = null
+var _card_slots: Array[PanelContainer] = []
+var _card_icons: Array[ColorRect] = []
+var _card_names: Array[Label] = []
+var _card_costs: Array[Label] = []
+
 ## --- Damage flash ---
 var _damage_flash_overlay: ColorRect = null
 var _damage_flash_timer: float = 0.0
@@ -20,6 +31,19 @@ var _damage_flash_timer: float = 0.0
 @onready var _wave_progress_panel: Container = $Panel/WaveProgressPanel
 @onready var _wave_progress_title: Label = $Panel/WaveProgressPanel/WaveProgressTitle
 @onready var _wave_progress_bar: ProgressBar = $Panel/WaveProgressPanel/WaveProgressBar
+@onready var _hand_panel_node: Control = $HandPanel
+@onready var _card1: PanelContainer = $HandPanel/Card1
+@onready var _card1_icon: ColorRect = $HandPanel/Card1/Card1Icon
+@onready var _card1_name: Label = $HandPanel/Card1/Card1Name
+@onready var _card1_cost: Label = $HandPanel/Card1/Card1Cost
+@onready var _card2: PanelContainer = $HandPanel/Card2
+@onready var _card2_icon: ColorRect = $HandPanel/Card2/Card2Icon
+@onready var _card2_name: Label = $HandPanel/Card2/Card2Name
+@onready var _card2_cost: Label = $HandPanel/Card2/Card2Cost
+@onready var _card3: PanelContainer = $HandPanel/Card3
+@onready var _card3_icon: ColorRect = $HandPanel/Card3/Card3Icon
+@onready var _card3_name: Label = $HandPanel/Card3/Card3Name
+@onready var _card3_cost: Label = $HandPanel/Card3/Card3Cost
 
 func _ready() -> void:
 	_wave_progress_panel.visible = false
@@ -30,6 +54,15 @@ func _ready() -> void:
 	GameState.health_changed.connect(_on_health_changed)
 	GameState.damage_flashed.connect(_on_damage_flashed)
 	_update_labels()
+	# Hand display initialization
+	_hand_panel = _hand_panel_node
+	if _hand_panel:
+		_card_slots = [_card1, _card2, _card3]
+		_card_icons = [_card1_icon, _card2_icon, _card3_icon]
+		_card_names = [_card1_name, _card2_name, _card3_name]
+		_card_costs = [_card1_cost, _card2_cost, _card3_cost]
+		DeckManager.hand_changed.connect(_on_hand_changed)
+		show_hand()
 
 func _process(delta: float) -> void:
 	if GameState.state != GameState.GameState.PLAYING:
@@ -177,3 +210,38 @@ func _setup_damage_flash() -> void:
 
 func _on_damage_flashed() -> void:
 	_damage_flash_timer = 0.05
+
+## --- Hand display ---
+
+func show_hand() -> void:
+	_hand_enabled = true
+	_hand_panel.visible = true
+	_update_hand_display()
+
+func hide_hand() -> void:
+	_hand_enabled = false
+	_hand_panel.visible = false
+
+func _update_hand_display() -> void:
+	if not _hand_enabled or not _hand_panel:
+		return
+	var hand = DeckManager.get_hand()
+	var count = min(hand.size(), 3)
+	for i in range(count):
+		if i < _card_slots.size():
+			_card_slots[i].visible = true
+			_update_card_slot(i, hand[i])
+	for i in range(count, _card_slots.size()):
+		_card_slots[i].visible = false
+
+func _update_card_slot(index: int, card: Dictionary) -> void:
+	if index >= _card_icons.size():
+		return
+	_card_icons[index].color = card.get("icon_color", Color.WHITE)
+	_card_names[index].text = card.get("name", "Unknown")
+	var cost = card.get("cost", 0)
+	_card_costs[index].text = "$%d" % cost
+
+func _on_hand_changed() -> void:
+	if _hand_enabled:
+		_update_hand_display()

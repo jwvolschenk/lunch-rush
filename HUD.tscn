@@ -10,6 +10,14 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.3, 0.3, 0.35, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hand_panel"]
+bg_color = Color(0.05, 0.05, 0.07, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.35, 0.4, 0.6)
+
 [node name="HUD" parent="" instance=ExtResource("1_hudscript") id=1]
 visible = true
 
@@ -22,7 +30,89 @@ edge_bottom = 0.08
 layout_mode = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_hud_panel")
 
-[node name="GoldLabel" parent=HUD/Panel 3]
+[node name="HandPanel" parent=HUD 3]
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -590.0
+offset_top = -120.0
+offset_right = 590.0
+offset_bottom = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hand_panel")
+
+[node name="Card1" parent=HUD/HandPanel 4]
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 60.0
+offset_top = 8.0
+offset_right = 400.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hand_panel")
+
+[node name="Card1Icon" parent=HUD/HandPanel/Card1 5]
+color = Color(0.8, 0.8, 0.2, 1)
+
+[node name="Card1Name" parent=HUD/HandPanel/Card1 6]
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="Card1Cost" parent=HUD/HandPanel/Card1 7]
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="Card2" parent=HUD/HandPanel 8]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 430.0
+offset_top = 8.0
+offset_right = 770.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hand_panel")
+
+[node name="Card2Icon" parent=HUD/HandPanel/Card2 9]
+color = Color(0.8, 0.8, 0.2, 1)
+
+[node name="Card2Name" parent=HUD/HandPanel/Card2 10]
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="Card2Cost" parent=HUD/HandPanel/Card2 11]
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="Card3" parent=HUD/HandPanel 12]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 800.0
+offset_top = 8.0
+offset_right = 1140.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hand_panel")
+
+[node name="Card3Icon" parent=HUD/HandPanel/Card3 13]
+color = Color(0.8, 0.8, 0.2, 1)
+
+[node name="Card3Name" parent=HUD/HandPanel/Card3 14]
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="Card3Cost" parent=HUD/HandPanel/Card3 15]
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="GoldLabel" parent=HUD/Panel 16]
 layout_mode = 1
 anchor_left = 0.02
 anchor_top = 0.2

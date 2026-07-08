@@ -106,7 +106,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Card system: dead code and disconnected hand
 - [x] Remove dead Card.apply_effect / from_dict methods (CardPool uses dictionary dispatch, never calls them)
-- [ ] Wire DeckManager hand into HUD or card selection UI (hand exists but has no visual representation)
+- [x] Wire DeckManager hand into HUD or card selection UI (hand exists but has no visual representation)
 
 ## Polish: audio assets
 - [ ] Add placeholder audio assets (SFX for tower fire, wave complete, enemy death, card pick)

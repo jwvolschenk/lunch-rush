@@ -286,3 +286,11 @@ Archived 11 completed items, then reflected: 10 new task(s) added. DONE: 10 task
 ## Cycle 59  2026-07-08T23:27:13Z  outcome:passed sha:28a5b01d18
 
 Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 330 lines changed.
+
+## Cycle 60  2026-07-08T23:35:11Z  outcome:passed sha:0af06d0da9
+
+Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 105 lines changed.
+
+## Cycle 61  2026-07-09T???:???Z  outcome:pending
+
+Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). Hand display wired into HUD — added HandPanel with 3 card slots to HUD.tscn, connected DeckManager.hand_changed signal in HUD.gd, and state-based show/hide in main.gd.

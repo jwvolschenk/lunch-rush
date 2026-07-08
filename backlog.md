@@ -30,7 +30,7 @@
 
 ## Theme: core gameplay loop — make a minimally playable demo
 
-- [ ] Implement GameState autoload (score, wave, health, gold) with clear signals for UI updates
+- [x] Implement GameState autoload (score, wave, health, gold) with clear signals for UI updates
 - [ ] Implement Lane system with 2 lanes: enemies spawn right, walk left; lane rendering and spawn point config
 - [ ] Implement Enemy base scene (ColorRect sprite) with HP bar, lane movement, and kitchen-reach detection
 - [ ] Implement Tower base scene + Tower.gd with range circle, targeting, damage, cooldown, and fire animation

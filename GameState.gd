@@ -139,9 +139,11 @@ func start_run() -> void:
 
 func add_score(amount: int) -> void:
 	score += amount
+	score_changed.emit(score)
 
 func add_gold(amount: int) -> void:
 	gold += amount
+	gold_changed.emit(gold)
 
 func spend_gold(amount: int) -> bool:
 	if gold >= amount:
@@ -150,4 +152,19 @@ func spend_gold(amount: int) -> bool:
 	return false
 
 func take_damage(amount: int) -> void:
+	var old_health = health
 	health -= amount
+	if health != old_health:
+		health_changed.emit(health)
+	if health <= 0:
+		health_depleted.emit()
+
+func start_wave(wave_index: int) -> void:
+	wave_started.emit(wave_index)
+	wave = wave_index + 1
+	wave_changed.emit(wave)
+	waves_played += 1
+
+func complete_wave() -> void:
+	wave_completed.emit(wave)
+	waves_completed += 1

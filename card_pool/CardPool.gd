@@ -93,6 +93,15 @@ enum CardCategory {
 		"tower_scene": "res://tower/Dishwasher.tscn",
 	},
 	{
+		"name": "Pizza Delivery",
+		"description": "Delivers pizzas to hungry enemies. Feeding cravings slows or distracts them. Crowd control tower.",
+		"cost": 35,
+		"card_type": CardCategory.TOWER,
+		"icon_color": Color(0.2, 0.7, 0.9, 1),
+		"rarity": "uncommon",
+		"tower_scene": "res://tower/PizzaDelivery.tscn",
+	},
+	{
 		"name": "Customer Control",
 		"description": "Slows all enemies to 40% speed for 3 seconds.",
 		"cost": 15,

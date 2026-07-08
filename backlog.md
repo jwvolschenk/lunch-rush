@@ -78,7 +78,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: cycle 41 — polish and bugfixes toward a genuinely playable game
 
 - [x] fix Health Inspector card — add tower_scene reference so it can be selected and placed
-- [ ] add Pizza Delivery tower card to card_pool so it can appear in card choices
+- [x] add Pizza Delivery tower card to card_pool so it can appear in card choices
 - [ ] fix VendingMachine description — either implement gold generation or update card pool description to match actual behavior
 - [ ] diversify starter deck — reduce Goblin Fry Cook copies, add more variety for early-game strategy
 - [ ] fix WaveConfigLoader._generate_dynamic_wave to use varied enemy types instead of all Hungry Goblins

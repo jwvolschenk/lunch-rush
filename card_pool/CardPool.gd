@@ -82,6 +82,14 @@ enum CardCategory {
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/Dishwasher.tscn",
 	},
+	{
+		"name": "Customer Control",
+		"description": "Slows all enemies to 40% speed for 3 seconds.",
+		"cost": 15,
+		"card_type": CardCategory.STATUS_EFFECT,
+		"icon_color": Color(0.3, 0.6, 1.0, 1),
+		"rarity": "uncommon",
+	},
 ]
 
 ## Cards that have been placed this run (to avoid duplicate tower types)

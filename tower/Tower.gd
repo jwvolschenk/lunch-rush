@@ -146,6 +146,8 @@ func _fire() -> void:
 	projectile.damage = damage
 	projectile.food_type = food_type
 	projectile.sfx_name = sfx_name
+	if not sfx_name.is_empty():
+		SoundManager.play_sfx(sfx_name)
 	get_tree().root.add_child(projectile)
 	
 	tower_fired.emit(self, projectile, _target)

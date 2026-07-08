@@ -49,7 +49,6 @@ signal projectile_destroyed(projectile: Node2D)
 
 func _ready() -> void:
 	_build_visual()
-	_fire_sfx()
 
 ## Play the tower-specific fire SFX for this projectile.
 func _fire_sfx() -> void:

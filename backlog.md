@@ -142,7 +142,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Audio: play background music at game start — GameState.start_run() should call SoundManager.play_music("background")
 
-- [ ] Audio: wire tower fire SFX in Tower._fire() — sfx_name is set per-tower but never played from Tower base
+- [x] Audio: wire tower fire SFX in Tower._fire() — sfx_name is set per-tower but never played from Tower base
 
 - [ ] Fix: GoblinFryCook missing food_type (defaults to 0 = no craving effect on grease projectiles)
 

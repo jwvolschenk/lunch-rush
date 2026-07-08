@@ -130,7 +130,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Theme: quality-of-life systems and missing GOAL.md towers
 
-- [ ] Implement SoundManager autoload: audio bus management, play_sfx(sound, bus) and play_music(track, loop) methods, volume controls for sfx/music buses, empty placeholder sounds for all attack/effects
+- [x] Implement SoundManager autoload: audio bus management, play_sfx(sound, bus) and play_music(track, loop) methods, volume controls for sfx/music buses, empty placeholder sounds for all attack/effects
 - [ ] Implement SaveLoad system (SaveLoad.gd): high score persistence via FileAccess, save run stats (score, waves, gold) on game-over, load best run on menu start, JSON serialization
 - [ ] Implement Health Inspector concrete tower (HealthInspector.tscn + HealthInspector.gd): extends Tower, scares enemies backward on hit (pushback effect), cooldown=4.0, range=250, blue/white sprite, referenced in GOAL.md
 - [ ] Implement Enchanted Vending Machine tower (VendingMachine.tscn + VendingMachine.gd): extends Tower, periodically spawns random food projectiles that auto-target nearest enemy, cooldown=2.5, range=200, purple/magenta sprite, referenced in GOAL.md

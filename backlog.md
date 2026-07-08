@@ -113,7 +113,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Implement WaveManager autoload: loads WaveConfig waves, spawns enemies via LaneManager at configured intervals, tracks active enemy count, emits wave_complete when all enemies cleared, bridges GameState from WAVE_COMPLETE to card selection
 - [x] Implement Goblin Fry Cook concrete tower (GoblinFryCook.tscn + GoblinFryCook.gd): extends Tower, range=150 damage=3 cooldown=1.5, uses grease projectile scene, yellow ColorRect sprite, placed via TowerManager
-- [ ] Implement grease projectile (grease_projectile.tscn): yellow/green ColorRect projectile (16x16), speed=400px/s, splash_radius=50 for area damage, used by Goblin Fry Cook
+- [x] Implement grease projectile (grease_projectile.tscn): yellow/green ColorRect projectile (16x16), speed=400px/s, splash_radius=50 for area damage, used by Goblin Fry Cook
 - [ ] Implement Gold HUD display: Label-based HUD panel with score/wave/health/gold values, connects to GameState signals for reactive updates, dark panel with bordered styling, positioned at top of screen
 - [ ] Implement game-over overlay scene (GameOverOverlay.tscn + GameOverOverlay.gd): full-screen panel showing score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game on confirm
 

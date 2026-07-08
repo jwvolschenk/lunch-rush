@@ -117,7 +117,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Gameplay mechanic: HealthInspector pushback on hit
 
-- [ ] Add Health Inspector pushback effect on hit — currently Health Inspector's projectile just deals 1 damage; add pushback=200 to its projectile so enemies are pushed backward 200px toward spawn on hit (pushback already exists in Enemy.gd as apply_pushback() but nothing triggers it)
+- [x] Add Health Inspector pushback effect on hit — currently Health Inspector's projectile just deals 1 damage; add pushback=200 to its projectile so enemies are pushed backward 200px toward spawn on hit (pushback already exists in Enemy.gd as apply_pushback() but nothing triggers it)
 
 ## UI polish: wave countdown timing fix
 

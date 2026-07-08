@@ -1,13 +1,13 @@
 extends "res://projectile/Projectile.gd"
 ## Health Inspector projectile — fired by HealthInspector tower.
-## White/blue ColorRect with pushback effect (pushback=80px).
+## White/blue ColorRect with pushback effect (pushback=200px).
 ## Scares enemies backward toward spawn on hit.
 
 func _on_ready_setup() -> void:
 	speed = 450.0
 	damage = 1.0
 	splash_radius = 0.0
-	pushback = 80.0
+	pushback = 200.0
 	food_type = 0  # none (not food-based)
 	sfx_name = "splash"
 

@@ -109,7 +109,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Missing tower: PizzaTrebuchet projectile
 
-- [ ] Add fire_pie.tscn / FirePieProjectile.gd scene for PizzaTrebuchet tower — PizzaTrebuchet.gd references "res://projectile/fire_pie.tscn" but fire_pie.tscn exists as a scene without a corresponding .gd script; add FirePieProjectile.gd extending Projectile with splash_radius=80, speed=300, damage=8, SPICE food type, red-orange sprite, and splash radius visual
+- [x] Add fire_pie.tscn / FirePieProjectile.gd scene for PizzaTrebuchet tower — PizzaTrebuchet.gd references "res://projectile/fire_pie.tscn" but fire_pie.tscn exists as a scene without a corresponding .gd script; add FirePieProjectile.gd extending Projectile with splash_radius=80, speed=300, damage=8, SPICE food type, red-orange sprite, and splash radius visual
 
 ## Gameplay mechanic: SpicySauceCannon burn DoT
 

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://game_over/GameOverOverlay.tscn" id="7_gameover"]
 [ext_resource type="PackedScene" path="res://CameraController.tscn" id="8_cam"]
 [ext_resource type="PackedScene" path="res://unlocks/UnlocksOverlay.tscn" id="9_unlocks"]
+[ext_resource type="PackedScene" path="res://victory/VictoryOverlay.tscn" id="10_victory"]
 [ext_resource type="Script" path="res://LaneManager.gd" id="13_lanemgr"]
 [ext_resource type="Script" path="res://TowerManager.gd" id="10_towermgr"]
 [ext_resource type="Script" path="res://wave/WaveManager.gd" id="11_wavemgr"]
@@ -89,9 +90,13 @@ visible = false
 
 [node name="RoomSelector" parent=Main instance=ExtResource("6_room") id=5]
 visible = false
-
 [node name="GameOverOverlay" parent=Main instance=ExtResource("7_gameover") id=6]
 visible = false
+
+
+[node name="VictoryOverlay" parent=Main instance=ExtResource("10_victory") id=11]
+visible = false
+
 
 [node name="CameraController" parent=Main instance=ExtResource("8_cam") id=8]
 visible = true

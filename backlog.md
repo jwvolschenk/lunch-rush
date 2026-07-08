@@ -96,7 +96,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Make Tower._process virtual / document super._process requirement for child tower scripts
 
 ## Core gameplay: wave end condition
-- [ ] Add wave 20 victory condition (game over screen with victory message instead of endless waves)
+- [x] Add wave 20 victory condition (game over screen with victory message instead of endless waves)
 
 ## Core gameplay: Tower._fire projectile parent
 - [ ] Fix Tower._fire: get_parent() is TowerManager, not a Lane — projectiles spawn in wrong node tree

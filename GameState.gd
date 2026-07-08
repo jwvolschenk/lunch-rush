@@ -52,6 +52,9 @@ var health: int = 20:
 signal health_changed(new_health: int)
 signal health_depleted()
 
+## Emitted when the player wins by completing all waves.
+signal victory(wave_count: int, score: int, gold_earned: int)
+
 ## --- Gold (currency for towers/cards) ---
 var gold: int = 100:
 	set(v):
@@ -66,6 +69,7 @@ enum GameState {
 	WAVE_COMPLETE,
 	GAME_OVER,
 	ROOM_SELECTING,
+	VICTORY,
 }
 
 var state: GameState = GameState.PLAYING:
@@ -220,3 +224,8 @@ signal damage_flashed()
 
 func trigger_damage_flash() -> void:
 	damage_flashed.emit()
+
+## Transition to VICTORY state and emit victory signal.
+func trigger_victory() -> void:
+	state = GameState.VICTORY
+	victory.emit(wave, score, gold)

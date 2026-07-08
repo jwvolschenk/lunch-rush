@@ -18,6 +18,9 @@ var room_selector: RoomSelector
 
 ## --- Game-over overlay ---
 var game_over_overlay: GameOverOverlay
+
+## --- Victory overlay ---
+var victory_overlay: Control
 ## --- Unlock display ---
 var unlocks_overlay: Control
 
@@ -40,6 +43,13 @@ func _ready() -> void:
 	if game_over_overlay:
 		game_over_overlay.restart_requested.connect(_on_restart)
 		game_over_overlay.quit_requested.connect(_on_quit)
+
+# Reference the victory overlay
+	victory_overlay = $VictoryOverlay
+	if victory_overlay:
+		GameState.victory.connect(_on_victory)
+		victory_overlay.restart_requested.connect(_on_restart)
+		victory_overlay.quit_requested.connect(_on_quit)
 	
 	# Reference the HUD
 	hud = $HUD
@@ -145,6 +155,20 @@ func _on_state_changed(new_state: int) -> void:
 					_pending_unlocks
 				)
 				_pending_unlocks = {}
+		GameState.GameState.VICTORY:
+			print("[Main] State: VICTORY — All waves completed!")
+			if card_selection:
+				card_selection.hide_cards()
+			if room_selector:
+				room_selector.hide_rooms()
+			if victory_overlay:
+				victory_overlay.show_victory(
+					GameState.score,
+					GameState.wave,
+					GameState.gold,
+					GameState.health,
+					SaveLoad.get_high_score()
+				)
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:
@@ -437,6 +461,9 @@ func _on_game_over() -> void:
 	_pending_unlocks = SaveLoad.check_unlocks(GameState.waves_completed)
 	WaveManager.reset()
 	GameState.state = GameState.GameState.GAME_OVER
+
+func _on_victory(wave_count: int, score: int, gold_earned: int) -> void:
+	print("[Main] Victory callback! Waves: %d, Score: %d, Gold: %d" % [wave_count, score, gold_earned])
 
 func _on_wave_started(wave_config: WaveConfig, wave_index: int) -> void:
 	print("[Main] Wave %d started: %s" % [wave_index + 1, wave_config.description])

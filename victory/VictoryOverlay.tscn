@@ -1,0 +1,181 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StyleBoxFlat"_id"panel_style"]
+bg_color = Color( 0.05, 0.08, 0.03, 0.95 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.6, 0.5, 0.1, 1 )
+
+[sub_resource type="StyleBoxFlat"_id"button_style"]
+bg_color = Color( 0.15, 0.2, 0.05, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.6, 0.5, 0.1, 1 )
+cornerRadius = 6
+
+[sub_resource type="ColorRect"_id"overlay_bg"]
+color = Color( 0, 0, 0, 0.7 )
+
+[sub_resource type="FontVariation"_id"title_font"]
+font = null
+size = 48
+
+[sub_resource type="FontVariation"_id"stat_font"]
+font = null
+size = 22
+
+[sub_resource type="FontVariation"_id"button_font"]
+font = null
+size = 18
+
+[node name="VictoryOverlay" type="Control" id=1]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+
+[node name="overlay_bg" parent=Entry 1 type="ColorRect" id=2]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+color = sub_resource("ColorRect"_id"overlay_bg")
+visible = false
+
+[node name="Panel" parent=Entry 1 type="PanelContainer" id=3]
+layout_mode = 1
+anchor_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 60
+theme_override_constants/contents_margin_top = 100
+theme_override_constants/contents_margin_right = 60
+theme_override_constants/contents_margin_bottom = 100
+visible = false
+
+[node name="TitleLabel" parent=Entry 3 type="Label" id=4]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 48
+text = "VICTORY!"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color( 0.95, 0.75, 0.1, 1 )
+
+[node name="StatsPanel" parent=Entry 3 type="PanelContainer" id=5]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 30
+theme_override_constants/contents_margin_top = 30
+theme_override_constants/contents_margin_right = 30
+theme_override_constants/contents_margin_bottom = 30
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")
+
+[node name="ScoreLabel" parent=Entry 5 type="Label" id=6]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="WaveLabel" parent=Entry 5 type="Label" id=7]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "Waves Survived: 0"
+horizontal_alignment = 1
+
+[node name="GoldLabel" parent=Entry 5 type="Label" id=8]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "Gold Earned: 0"
+horizontal_alignment = 1
+
+[node name="HealthLabel" parent=Entry 5 type="Label" id=9]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "Health Remaining: 0"
+horizontal_alignment = 1
+
+[node name="HighScorePanel" parent=Entry 3 type="PanelContainer" id=12]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 30
+theme_override_constants/contents_margin_top = 15
+theme_override_constants/contents_margin_right = 30
+theme_override_constants/contents_margin_bottom = 15
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")
+visible = false
+
+[node name="HighScoreLabel" parent=Entry 12 type="Label" id=13]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 20
+text = "High Score: ---"
+horizontal_alignment = 1
+
+[node name="NewHighScoreLabel" parent=Entry 12 type="Label" id=14]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 24
+text = ""
+horizontal_alignment = 1
+theme_override_colors/font_color = Color( 0.95, 0.75, 0.1, 1 )
+
+[node name="RestartBtn" parent=Entry 3 type="Button" id=10]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+custom_minimum_size = Vector2( 200, 60 )
+theme_override_font_sizes/normal_font_size = 18
+text = "Play Again"
+alignment = 1
+theme_override_styles/normal = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/hive = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/focus = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_hover = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_pressed = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_colors/font_color = Color( 0.95, 0.95, 0.95, 1 )
+theme_override_colors/font_color_hover = Color( 1, 1, 1, 1 )
+theme_override_colors/font_color_pressed = Color( 0.85, 0.85, 0.85, 1 )
+
+[node name="QuitBtn" parent=Entry 3 type="Button" id=11]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+custom_minimum_size = Vector2( 200, 60 )
+theme_override_font_sizes/normal_font_size = 16
+text = "Quit to Menu"
+alignment = 1
+theme_override_styles/normal = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/hive = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/focus = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_hover = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_pressed = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+theme_override_colors/font_color_hover = Color( 0.8, 0.8, 0.8, 1 )
+theme_override_colors/font_color_pressed = Color( 0.45, 0.45, 0.45, 1 )
+
+[connection signal="pressed" from="Entry 10" to="Entry 1"]
+method = "_on_restart_pressed"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 11" to="Entry 1"]
+method = "_on_quit_pressed"
+target = "Entry 1"

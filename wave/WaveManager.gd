@@ -73,6 +73,9 @@ signal enemy_died(enemy: Node2D, lane_index: int)
 ## Emitted when all waves are completed (endless mode reached max)
 signal all_waves_complete()
 
+## Emitted when the player completes all waves (victory)
+signal victory(wave_count: int, score: int, gold_earned: int)
+
 ## --- Wave state ---
 
 ## Returns the wave currently being played, or null if no wave is active.
@@ -334,6 +337,18 @@ func _on_wave_complete() -> void:
 	if not _spawn_queue.is_empty():
 		return
 	
+	# Check for victory: completed the final wave
+	var is_final_wave = max_waves > 0 and _current_wave_index >= max_waves - 1
+	if is_final_wave:
+		print("[WaveManager] All %d waves complete! VICTORY!" % max_waves)
+		var score = GameState.score
+		var gold = GameState.gold
+		SaveLoad.save_run(score, max_waves, gold)
+		var unlocks = SaveLoad.check_unlocks(max_waves)
+		GameState.trigger_victory()
+		victory.emit(max_waves, score, gold)
+		return
+	
 	# Emit LaneManager wave_complete signal so Main knows to show card UI
 	LaneManager.wave_complete.emit()
 	
@@ -385,8 +400,7 @@ func start_next_wave() -> void:
 	
 	# If we've gone past predefined waves and hitting max, end the run
 	if max_waves > 0 and _next_wave_index >= max_waves:
-		print("[WaveManager] All %d waves complete! Game over." % max_waves)
-		GameState.state = GameState.GameState.GAME_OVER
+		print("[WaveManager] All %d waves complete. Game over." % max_waves)
 		return
 	
 	# Check if we need to generate a new dynamic wave

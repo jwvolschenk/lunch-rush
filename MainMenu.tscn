@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat"_id"panel_style"]
+bg_color = Color( 0.06, 0.06, 0.06, 0.95 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat"_id"button_style"]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.4, 0.4, 0.4, 1 )
+cornerRadius = 6
+
+[sub_resource type="ColorRect"_id"bg_color_rect"]
+color = Color( 0.08, 0.06, 0.1, 1 )
+
+[node name="MainMenu" type="Control" id=1]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+script = ExtResource("1_menu")
+
+[node name="bg" parent="MainMenu" type="ColorRect" id=2]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+color = sub_resource("ColorRect"_id"bg_color_rect")
+
+[node name="VBox" parent="MainMenu" type="VBoxContainer" id=3]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 120
+theme_override_constants/contents_margin_top = 100
+theme_override_constants/contents_margin_right = 120
+theme_override_constants/contents_margin_bottom = 100
+theme_override_constants/separation = 40
+
+[node name="Title" parent=Entry 3 type="Label" id=4]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 56
+text = "Lunch Rush: Dungeon Deli"
+horizontal_alignment = 1
+theme_override_font_colors/font_color = Color( 0.95, 0.7, 0.2, 1 )
+
+[node name="Subtitle" parent=Entry 3 type="Label" id=5]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "A roguelite deck-builder tower defense game"
+horizontal_alignment = 1
+theme_override_font_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+
+[node name="HighScore" parent=Entry 3 type="Label" id=6]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 20
+text = "High Score: No runs yet — be the first!"
+horizontal_alignment = 1
+theme_override_font_colors/font_color = Color( 0.85, 0.7, 0.3, 1 )
+
+[node name="InstructionsPanel" parent=Entry 3 type="PanelContainer" id=7]
+layout_mode = 1
+anchor_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 30
+theme_override_constants/contents_margin_top = 20
+theme_override_constants/contents_margin_right = 30
+theme_override_constants/contents_margin_bottom = 20
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")
+
+[node name="Instructions" parent=Entry 7 type="Label" id=8]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 18
+text = "Defend your kitchen from waves of hungry monsters!\n\n- Each wave, pick a recipe card to place towers\n- Towers automatically attack enemies in their lanes\n- Choose rooms between waves for bonuses and challenges\n- Match enemy cravings to slow them down — feeding the wrong craving enrages them!\n- Survive as many waves as possible to set a new high score"
+horizontal_alignment = 1
+theme_override_font_colors/font_color = Color( 0.75, 0.75, 0.75, 1 )
+
+[node name="PlayButton" parent=Entry 3 type="Button" id=9]
+layout_mode = 1
+custom_minimum_size = Vector2( 240, 70 )
+theme_override_font_sizes/normal_font_size = 28
+text = "Play"
+alignment = 1
+theme_override_font_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_font_colors/font_color_hover = Color( 1, 0.95, 0.8, 1 )
+theme_override_styles/normal = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/hive = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/focus = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_hover = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_styles/h_pressed = sub_resource("StyleBoxFlat"_id"button_style")
+theme_override_colors/font_color_pressed = Color( 0.8, 0.8, 0.8, 1 )

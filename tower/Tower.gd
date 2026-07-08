@@ -146,7 +146,7 @@ func _fire() -> void:
 	projectile.damage = damage
 	projectile.food_type = food_type
 	projectile.sfx_name = sfx_name
-	add_sibling(projectile)
+	get_parent().add_child(projectile)
 	
 	tower_fired.emit(self, projectile, _target)
 	_fire_timer = cooldown

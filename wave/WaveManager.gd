@@ -87,7 +87,14 @@ func _ready() -> void:
 	# Initialize WaveConfigLoader with editor-configured waves
 	if waves.size() > 0:
 		WaveConfigLoader.initialize(waves)
-	_generate_default_waves()
+	else:
+		# No editor waves — load from WaveConfigLoader (res://waves/*.tres files)
+		if WaveConfigLoader.loaded_wave_count > 0:
+			waves = WaveConfigLoader._loaded_waves.duplicate()
+			WaveConfigLoader.initialize(waves)
+			print("[WaveManager] Loaded %d waves from resource files." % waves.size())
+		else:
+			_generate_default_waves()
 	# Listen for LaneManager's wave_complete signal (all lanes cleared)
 	LaneManager.wave_complete.connect(_on_wave_complete)
 	print("[WaveManager] Initialized with %d waves." % waves.size())

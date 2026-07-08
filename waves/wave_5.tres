@@ -1,0 +1,30 @@
+[gd_resource type = "Resource" load_steps = 5 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
+ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
+ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
+ext_resource[4] = "res://enemy/EnemyData_OgreBrute.tres"
+
+[resource]
+enemies = [
+{
+"count": 5,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 4,
+"enemy_data": ExtResource( 2 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 3 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 4 )
+}
+]
+hp_scale = 1.4
+speed_scale = 1.2
+spawn_interval = 0.9
+description = "Wave 5 — The ultimate lunch rush: all enemy types converge"

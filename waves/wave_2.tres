@@ -1,0 +1,20 @@
+[gd_resource type = "Resource" load_steps = 3 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
+ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
+
+[resource]
+enemies = [
+{
+"count": 4,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 2 )
+}
+]
+hp_scale = 1.1
+speed_scale = 1.05
+spawn_interval = 1.4
+description = "Wave 2 — Slime Runners join the rush"

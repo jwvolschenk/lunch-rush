@@ -1,0 +1,11 @@
+[gd_resource type = "Resource" load_steps = 1 format = 3]
+
+[resource]
+name = "Ghost Chef"
+max_hp = 80.0
+speed = 90.0
+gold_reward = 25
+score_reward = 25
+craving = 0
+tint_color = Color( 0.5, 0.5, 1.0, 1 )
+custom_scene = "res://enemy/GhostChef.tscn"

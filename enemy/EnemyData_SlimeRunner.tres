@@ -1,0 +1,11 @@
+[gd_resource type = "Resource" load_steps = 1 format = 3]
+
+[resource]
+name = "Slime Runner"
+max_hp = 30.0
+speed = 150.0
+gold_reward = 5
+score_reward = 5
+craving = 0
+tint_color = Color( 0.2, 0.8, 0.4, 1 )
+custom_scene = "res://enemy/SlimeRunner.tscn"

@@ -1,0 +1,15 @@
+[gd_resource type = "Resource" load_steps = 2 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
+
+[resource]
+enemies = [
+{
+"count": 5,
+"enemy_data": ExtResource( 1 )
+}
+]
+hp_scale = 1.0
+speed_scale = 1.0
+spawn_interval = 1.5
+description = "Wave 1 — Hungry Goblins arrive at the deli"

@@ -1,0 +1,11 @@
+[gd_resource type = "Resource" load_steps = 1 format = 3]
+
+[resource]
+name = "Hungry Goblin"
+max_hp = 40.0
+speed = 60.0
+gold_reward = 10
+score_reward = 10
+craving = 0
+tint_color = Color( 0.4, 0.8, 0.4, 1 )
+custom_scene = "res://enemy/HungryGoblin.tscn"

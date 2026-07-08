@@ -3,6 +3,7 @@
 ext_resource[1] = "res://enemy/EnemyData_GhostChef.tres"
 ext_resource[2] = "res://enemy/EnemyData_OgreBrute.tres"
 ext_resource[3] = "res://enemy/EnemyData_SlimeRunner.tres"
+ext_resource[4] = "res://enemy/EnemyData_PizzaDelivery.tres"
 
 [resource]
 enemies = [
@@ -17,9 +18,13 @@ enemies = [
 {
 "count": 6,
 "enemy_data": ExtResource( 3 )
+},
+{
+"count": 2,
+"enemy_data": ExtResource( 4 )
 }
 ]
 hp_scale = 2.1
 speed_scale = 1.5
 spawn_interval = 0.5
-description = "Wave 14 — The ghost kitchen sends its entire staff against you"
+description = "Wave 14 — The ghost kitchen sends its entire staff, plus a pizza delivery"

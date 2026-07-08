@@ -4,6 +4,7 @@ ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
 ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
 ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
 ext_resource[4] = "res://enemy/EnemyData_OgreBrute.tres"
+ext_resource[5] = "res://enemy/EnemyData_PizzaDelivery.tres"
 
 [resource]
 enemies = [
@@ -22,9 +23,13 @@ enemies = [
 {
 "count": 3,
 "enemy_data": ExtResource( 4 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 5 )
 }
 ]
 hp_scale = 1.8
 speed_scale = 1.35
 spawn_interval = 0.7
-description = "Wave 10 — All-out assault: every enemy type floods the deli"
+description = "Wave 10 — All-out assault: every enemy type floods the deli, including pizza delivery"

@@ -4,6 +4,7 @@ ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
 ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
 ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
 ext_resource[4] = "res://enemy/EnemyData_OgreBrute.tres"
+ext_resource[5] = "res://enemy/EnemyData_PizzaDelivery.tres"
 
 [resource]
 enemies = [
@@ -22,9 +23,13 @@ enemies = [
 {
 "count": 5,
 "enemy_data": ExtResource( 4 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 5 )
 }
 ]
 hp_scale = 2.3
 speed_scale = 1.55
 spawn_interval = 0.4
-description = "Wave 15 — THE FINAL RUSH: every monster in the dungeon storms the deli at once"
+description = "Wave 15 — THE FINAL RUSH: every monster in the dungeon storms the deli, including pizza delivery"

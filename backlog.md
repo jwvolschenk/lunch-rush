@@ -113,7 +113,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Gameplay mechanic: SpicySauceCannon burn DoT
 
-- [ ] Add burn damage-over-time to SpicySauceCannon — modify Projectile._apply_craving_effect() to also apply a burn DoT (1 damage/sec for 3 seconds) when hitting with SPICE food type; add _burn_timer and _burn_damage fields to Enemy.gd; display a small flame icon on burning enemies
+- [x] Add burn damage-over-time to SpicySauceCannon — modify Projectile._apply_craving_effect() to also apply a burn DoT (1 damage/sec for 3 seconds) when hitting with SPICE food type; add _burn_timer and _burn_damage fields to Enemy.gd; display a small flame icon on burning enemies
 
 ## Gameplay mechanic: HealthInspector pushback on hit
 

@@ -109,19 +109,84 @@ func apply_enrage(factor: float, duration: float) -> void:
 	_enrage_factor = max(_enrage_factor, factor)
 	_enrage_timer = duration
 	_update_hp_bar_color()
+## --- Burn damage-over-time ---
 
-## Reset all debuffs and buffs. Called on death or manual reset.
+## Remaining duration of the burn DoT in seconds
+var _burn_timer: float = 0.0
+
+## Damage dealt per tick (once per second)
+var _burn_damage: float = 0.0
+
+## Accumulator for per-tick timing
+var _burn_tick_timer: float = 0.0
+
+## Flame icon node displayed when burning
+var _burn_icon: Control = null
+
+## Apply burn damage-over-time to this enemy.
+## damage_per_tick: damage dealt once per second
+## duration: how long the burn lasts in seconds
+func apply_burn(damage_per_tick: float, duration: float) -> void:
+	_burn_timer = duration
+	_burn_damage = damage_per_tick
+	_burn_tick_timer = 0.0
+	_spawn_burn_icon()
+	print("[Enemy] Applied burn: %d dmg/sec for %.1fs" % [damage_per_tick, duration])
+
+## Clear the burn DoT effect
+func _clear_burn() -> void:
+	if _burn_timer > 0 and _burn_icon:
+		_burn_icon.visible = false
+	_burn_timer = 0.0
+	_burn_damage = 0.0
+	_burn_tick_timer = 0.0
+
+## Spawn a small flame icon on the enemy
+func _spawn_burn_icon() -> void:
+	if not _burn_icon:
+		_burn_icon = ColorRect.new()
+		_burn_icon.anchor_left = 0.5
+		_burn_icon.anchor_top = 0.5
+		_burn_icon.anchor_right = 0.5
+		_burn_icon.anchor_bottom = 0.5
+		_burn_icon.position = Vector2(0, -55)
+		_burn_icon.size = Vector2(24, 24)
+		_burn_icon.color = Color(1.0, 0.4, 0.05, 0.6)
+		_burn_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(_burn_icon)
+
+		var flame_label := Label.new()
+		flame_label.anchor_left = 0.5
+		flame_label.anchor_top = 0.5
+		flame_label.anchor_right = 0.5
+		flame_label.anchor_bottom = 0.5
+		flame_label.position = Vector2(0, -55)
+		flame_label.size = Vector2(24, 24)
+		flame_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		flame_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		flame_label.font_size = 16
+		flame_label.add_theme_color_override(
+			"font_color", Color(1.0, 0.6, 0.1, 1.0)
+		)
+		flame_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_burn_icon.add_child(flame_label)
+
+	_burn_icon.visible = true
+
+## Push this enemy backward (toward spawn) by the given distance.
+func apply_pushback(distance: float) -> void:
+	position.x += distance
+	print("[Enemy] Pushed back %dpx" % distance)
+
+## Reset all debuffs, buffs, and DoT. Called on death or manual reset.
 func clear_debuffs() -> void:
+	_clear_burn()
 	_slow_timer = 0.0
 	_slow_factor = 1.0
 	_enrage_timer = 0.0
 	_enrage_factor = 1.0
 	_update_hp_bar_color()
 
-## Push this enemy backward (toward spawn) by the given distance.
-func apply_pushback(distance: float) -> void:
-	position.x += distance
-	print("[Enemy] Pushed back %dpx" % distance)
 
 ## Update the HP bar color based on active debuff/buff state
 func _update_hp_bar_color() -> void:
@@ -133,15 +198,6 @@ func _update_hp_bar_color() -> void:
 		hp_bar.color = Color(0.9, 0.2, 0.2, 1.0)  # red = enraged
 	else:
 		hp_bar.color = Color(0.2, 0.8, 0.2, 1.0)  # green = normal
-
-## --- Lifecycle ---
-
-func _ready() -> void:
-	_build_hp_bar()
-	_build_craving_indicator()
-	_on_ready_setup()
-	_setup_death_cleanup()
-	_assign_random_craving()
 
 func _process(delta: float) -> void:
 	if _is_dying or not is_alive:
@@ -161,6 +217,17 @@ func _process(delta: float) -> void:
 			_enrage_timer = 0.0
 			_enrage_factor = 1.0
 			_update_hp_bar_color()
+	# Burn DoT tick
+	if _burn_timer > 0:
+		_burn_tick_timer += delta
+		if _burn_tick_timer >= 1.0:
+			_burn_tick_timer -= 1.0
+			current_hp = max(current_hp - _burn_damage, 0.0)
+			print("[Enemy] Burn tick: -%d HP" % int(_burn_damage))
+		_burn_timer -= delta
+		if _burn_timer <= 0:
+			_clear_burn()
+
 
 	# Move toward the kitchen (left) using effective speed
 	position.x -= effective_speed * delta

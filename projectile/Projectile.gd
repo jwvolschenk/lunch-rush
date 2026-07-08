@@ -163,6 +163,11 @@ func _apply_craving_effect(enemy: Node2D) -> void:
 		enemy.apply_enrage(1.2, 3.0)
 		print("[Projectile] Hit enemy with wrong craving — enrage!")
 
+	## SPICE food type also applies burn damage-over-time (1 dmg/sec for 3 sec)
+	if food_type == CravingType.SPICE and enemy.has_method("apply_burn"):
+		enemy.apply_burn(1.0, 3.0)
+		print("[Projectile] Hit enemy with spicy sauce — burn DoT!")
+
 ## --- Destruction ---
 
 ## Destroy this projectile and clean up

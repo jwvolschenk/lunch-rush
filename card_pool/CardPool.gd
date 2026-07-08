@@ -59,7 +59,7 @@ enum CardCategory {
 	},
 	{
 		"name": "Health Inspector",
-		"description": "Temparily scares enemies backward on all lanes.",
+		"description": "Temporarily scares enemies backward on all lanes.",
 		"cost": 40,
 		"card_type": CardCategory.SPECIAL,
 		"icon_color": Color(0.8, 0.8, 0.1, 1),

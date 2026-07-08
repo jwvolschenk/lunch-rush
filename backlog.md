@@ -85,5 +85,5 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Add wave progress indicator — display remaining enemies count and time-to-next-wave HUD element so player knows wave progression
 - [x] Add enemy death visual feedback — spawn gold/score popup labels above dead enemies that float upward and fade out
 - [x] Add start-of-wave countdown timer — brief "Wave incoming in 3...2...1..." overlay before enemies start spawning
-- [ ] Fix CardPool.gd typo — line 65 "Temparily" → "Temporarily" in Health Inspector description
+- [x] Fix CardPool.gd typo — line 65 "Temparily" → "Temporarily" in Health Inspector description
 - [ ] Add wave-complete "Continue" button — visible button in card selection overlay that lets player dismiss the overlay and proceed to next wave

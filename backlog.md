@@ -81,7 +81,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Add EnemyData resources for SlimeRunner, GhostChef, and OgreBrute (EnemyData_HungryGoblin.tres and EnemyData_PizzaDelivery.tres already exist)
 - [x] Add Pizza Delivery tower scene: GOAL.md lists it as a core tower but only PizzaTrebuchet exists — create PizzaDelivery.tscn + PizzaDelivery.gd
 - [x] Add 10 more waves (wave_6 through wave_15) to WaveConfig resources with varied enemy compositions (Ogre Brute + Slime Runner, Ghost Chef waves, mixed waves)
-- [ ] Add health cap in EmergencyRationCard: clamp healed HP to GameState.max_hp (20) to prevent HP overflow
+- [x] Add health cap in EmergencyRationCard: clamp healed HP to GameState.max_hp (20) to prevent HP overflow
 - [ ] Add visible craving indicator on enemies: show a small food icon above enemies so player can target with matching food towers
 - [ ] Add a "Cheat Code" card (e.g., "Health Inspector" as a one-time boss-killer) — GOAL.md references it but it's not in the starter deck
 - [ ] Fix KitchenUpgradeCard timer leak: if played twice within 10s, the old timer's _on_buff_end fires after the new buff ends, resetting tower stats prematurely

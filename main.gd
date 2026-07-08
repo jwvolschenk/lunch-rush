@@ -9,6 +9,9 @@ var lane_manager: LaneManager
 ## --- Card selection ---
 var card_selection: CardSelection
 
+## --- Room selection ---
+var room_selector: RoomSelector
+
 ## --- Lifecycle ---
 func _ready() -> void:
 	# Reference the autoload
@@ -16,6 +19,11 @@ func _ready() -> void:
 	
 	# Reference the card selection UI
 	card_selection = $CardSelection
+	
+	# Reference the room selector
+	room_selector = $RoomSelector
+	if room_selector:
+		room_selector.room_selected.connect(_on_room_selected)
 	
 	# Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
@@ -37,19 +45,59 @@ func _on_state_changed(new_state: int) -> void:
 	match GameState.state:
 		GameState.GameState.PLAYING:
 			print("[Main] State: PLAYING")
-			# Hide card selection when returning to PLAYING
 			if card_selection:
 				card_selection.hide_cards()
 		GameState.GameState.WAVE_COMPLETE:
 			print("[Main] State: WAVE_COMPLETE")
-			# Show card selection with starter cards
-			if card_selection:
-				var starter_cards = _get_starter_cards()
-				card_selection.show_cards(starter_cards)
+			# Show room selection first; cards appear after room is picked
+			if room_selector:
+				var rooms = _get_room_choices()
+				room_selector.show_rooms(rooms)
 		GameState.GameState.GAME_OVER:
 			print("[Main] State: GAME_OVER")
 			if card_selection:
 				card_selection.hide_cards()
+
+## --- Room choices ---
+func _get_room_choices() -> Array:
+	return [
+		{
+			"room_name": "Pantry",
+			"description": "Standard pantry. Balanced room with no modifiers.",
+			"room_type": 0,
+			"bg_color": Color(0.1, 0.1, 0.1, 1),
+			"accent_color": Color(0.6, 0.6, 0.3, 1),
+			"border_color": Color(0.3, 0.3, 0.3, 1),
+			"enemy_hp_modifier": 1.0,
+			"enemy_speed_modifier": 1.0,
+			"enemy_count_modifier": 0,
+			"gold_bonus": 0,
+		},
+		{
+			"room_name": "Freezer",
+			"description": "Enemies move slower but have more HP. Gold bonus.",
+			"room_type": 1,
+			"bg_color": Color(0.1, 0.15, 0.25, 1),
+			"accent_color": Color(0.3, 0.7, 0.9, 1),
+			"border_color": Color(0.2, 0.3, 0.5, 1),
+			"enemy_hp_modifier": 1.2,
+			"enemy_speed_modifier": 0.75,
+			"enemy_count_modifier": 0,
+			"gold_bonus": 20,
+		},
+		{
+			"room_name": "Lava Kitchen",
+			"description": "Enemies are tougher and faster. Higher gold reward.",
+			"room_type": 2,
+			"bg_color": Color(0.25, 0.05, 0.05, 1),
+			"accent_color": Color(0.9, 0.3, 0.1, 1),
+			"border_color": Color(0.5, 0.1, 0.05, 1),
+			"enemy_hp_modifier": 1.5,
+			"enemy_speed_modifier": 1.2,
+			"enemy_count_modifier": 1,
+			"gold_bonus": 50,
+		},
+	]
 
 ## --- Starter card definitions ---
 func _get_starter_cards() -> Array:
@@ -95,6 +143,19 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 			print("[Main] Applying effect: %s" % card_data.name)
 		_:
 			print("[Main] Unknown card type for: %s" % card_data.name)
+
+## --- Room selection callback ---
+func _on_room_selected(room_data: Resource) -> void:
+	print("[Main] Room selected: %s" % room_data.room_name)
+	GameState.current_room = room_data
+	# Transition to WAVE_COMPLETE_SHOW_CARDS to trigger card display
+	_show_card_selection()
+
+## --- Card selection display ---
+func _show_card_selection() -> void:
+	if card_selection:
+		var starter_cards = _get_starter_cards()
+		card_selection.show_cards(starter_cards)
 
 ## --- Callbacks ---
 func _on_game_over() -> void:

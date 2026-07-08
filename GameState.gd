@@ -51,11 +51,37 @@ var state: GameState = GameState.PLAYING:
 
 signal state_changed(new_state: int)
 
+## --- Room selection (between waves) ---
+signal room_selected(room_data: Resource)
+
+## Current room modifier applied to the next wave
+var _current_room: Resource = null
+var current_room: Resource:
+	set(v):
+		_current_room = v
+		if v:
+			_apply_room_modifier(v)
+	_room_changed.emit(v)
+	get:
+		return _current_room
+
+signal _room_changed(room_data: Resource)
+
 ## --- Wave configuration (set by WaveManager between waves) ---
 var wave_enemy_count: int = 0
 var wave_enemy_hp: float = 1.0
 var wave_enemy_speed: float = 60.0
 var wave_gold_reward: int = 25
+
+## --- Room modifier application ---
+
+func _apply_room_modifier(room: Resource) -> void:
+	if not room:
+		return
+	wave_enemy_count += room.get("enemy_count_modifier", 0)
+	wave_enemy_hp *= room.get("enemy_hp_modifier", 1.0)
+	wave_enemy_speed *= room.get("enemy_speed_modifier", 1.0)
+	wave_gold_reward = int(wave_gold_reward * (1.0 + room.get("gold_bonus", 0) * 0.01))
 
 ## --- Methods ---
 

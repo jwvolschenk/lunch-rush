@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StyleBoxFlat"_id"room_style"]
+bg_color = Color( 0.12, 0.12, 0.12, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.35, 0.35, 0.35, 1 )
+cornerRadius = 6
+
+[sub_resource type="StyleBoxFlat"_id"panel_style"]
+bg_color = Color( 0.06, 0.06, 0.06, 0.95 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="Theme"_id"room_theme"]
+fonts/normal_font_size = 16
+colors/font_color = Color( 0.95, 0.95, 0.95, 1 )
+
+[sub_resource type="ColorRect"_id"overlay_bg"]
+color = Color( 0, 0, 0, 0.55 )
+
+[node name="RoomSelector" type="Control" id=1]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+
+[node name="overlay_bg" parent=Entry 1 type="ColorRect" id=2]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+color = sub_resource("ColorRect"_id"overlay_bg")
+visible = false
+
+[node name="Panel" parent=Entry 1 type="PanelContainer" id=3]
+layout_mode = 1
+anchor_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 40
+theme_override_constants/contents_margin_top = 80
+theme_override_constants/contents_margin_right = 40
+theme_override_constants/contents_margin_bottom = 80
+visible = false
+
+[node name="Title" parent=Entry 3 type="Label" id=4]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 28
+text = "Choose a Room"
+horizontal_alignment = 1
+
+[node name="HBox" parent=Entry 3 type="HBoxContainer" id=5]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+alignment = 1
+custom_constants/separation = 20
+theme_override_constant s/hseparation = 20
+
+[node name="Room1" parent=Entry 5 type="PanelContainer" id=6]
+custom_size_flags_min_height = 280
+custom_size_flags_min_width = 220
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"room_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"room_style")
+
+[node name="RoomName" parent=Entry 6 type="Label" id=7]
+text = "Room Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="RoomDesc" parent=Entry 6 type="Label" id=8]
+text = "Room description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[node name="Modifier" parent=Entry 6 type="Label" id=9]
+text = "No modifiers"
+theme_override_font_sizes/normal_font_size = 12
+horizontal_alignment = 1
+
+[node name="RoomAccent" parent=Entry 6 type="ColorRect" id=10]
+custom_size_flags_min_height = 8
+custom_size_flags_min_width = 200
+color = Color( 0.8, 0.6, 0.2, 1 )
+
+[node name="Room2" parent=Entry 5 type="PanelContainer" id=11]
+custom_size_flags_min_height = 280
+custom_size_flags_min_width = 220
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"room_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"room_style")
+
+[node name="RoomName" parent=Entry 11 type="Label" id=12]
+text = "Room Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="RoomDesc" parent=Entry 11 type="Label" id=13]
+text = "Room description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[node name="Modifier" parent=Entry 11 type="Label" id=14]
+text = "No modifiers"
+theme_override_font_sizes/normal_font_size = 12
+horizontal_alignment = 1
+
+[node name="RoomAccent" parent=Entry 11 type="ColorRect" id=15]
+custom_size_flags_min_height = 8
+custom_size_flags_min_width = 200
+color = Color( 0.2, 0.6, 0.9, 1 )
+
+[node name="Room3" parent=Entry 5 type="PanelContainer" id=16]
+custom_size_flags_min_height = 280
+custom_size_flags_min_width = 220
+theme_override_font_sizes/normal_font_size = 14
+theme = sub_resource("Theme"_id"room_theme")
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"room_style")
+
+[node name="RoomName" parent=Entry 16 type="Label" id=17]
+text = "Room Name"
+theme_override_font_sizes/normal_font_size = 18
+horizontal_alignment = 1
+
+[node name="RoomDesc" parent=Entry 16 type="Label" id=18]
+text = "Room description goes here."
+theme_override_font_sizes/normal_font_size = 13
+horizontal_alignment = 1
+
+[node name="Modifier" parent=Entry 16 type="Label" id=19]
+text = "No modifiers"
+theme_override_font_sizes/normal_font_size = 12
+horizontal_alignment = 1
+
+[node name="RoomAccent" parent=Entry 16 type="ColorRect" id=20]
+custom_size_flags_min_height = 8
+custom_size_flags_min_width = 200
+color = Color( 0.9, 0.2, 0.2, 1 )
+
+[connection signal="pressed" from="Entry 6" to="Entry 1"]
+method = "_on_room1_clicked"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 11" to="Entry 1"]
+method = "_on_room2_clicked"
+target = "Entry 1"
+
+[connection signal="pressed" from="Entry 16" to="Entry 1"]
+method = "_on_room3_clicked"
+target = "Entry 1"

@@ -107,6 +107,11 @@ func clear_debuffs() -> void:
 	_enrage_factor = 1.0
 	_update_hp_bar_color()
 
+## Push this enemy backward (toward spawn) by the given distance.
+func apply_pushback(distance: float) -> void:
+	position.x += distance
+	print("[Enemy] Pushed back %dpx" % distance)
+
 ## Update the HP bar color based on active debuff/buff state
 func _update_hp_bar_color() -> void:
 	if not hp_bar:

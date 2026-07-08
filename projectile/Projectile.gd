@@ -21,6 +21,10 @@ extends Node2D
 ## 0=none, 1=grease, 2=soup, 3=spice (matches CravingType enum).
 var food_type: int = 0
 
+## Pushback distance in pixels (0 = no pushback).
+## When > 0, pushes the enemy backward (toward spawn) on hit.
+var pushback: float = 0.0
+
 ## --- Internal state ---
 
 ## The target enemy (set by the firing tower)
@@ -98,6 +102,10 @@ func _hit() -> void:
 		if target.has_method("take_damage"):
 			target.take_damage(damage)
 		
+		## Apply pushback effect to primary target
+		if pushback > 0 and target.has_method("apply_pushback"):
+			target.apply_pushback(pushback)
+		
 		## Apply craving effect to primary target
 		_apply_craving_effect(target)
 		
@@ -107,6 +115,8 @@ func _hit() -> void:
 			for enemy in splash_enemies:
 				if enemy != target and enemy.has_method("take_damage"):
 					enemy.take_damage(damage)
+					if pushback > 0 and enemy.has_method("apply_pushback"):
+						enemy.apply_pushback(pushback)
 					_apply_craving_effect(enemy)
 		
 		projectile_hit.emit(self, target, splash_enemies)

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://health_inspector_proj"]
+
+[node name="HealthInspectorProjectile" type="Node2D" id=1]
+script = ExtResource("1_proj_script")
+
+[node name="Visual" type="ColorRect" parent=. id=2]
+size = Vector2(20, 20)
+offset_left = -10
+offset_top = -10
+offset_right = 10
+offset_bottom = 10
+color = Color(0.3, 0.5, 0.95, 1)
+
+[ext_resource type="Script" path="res://projectile/HealthInspectorProjectile.gd" id="1_proj_script"]

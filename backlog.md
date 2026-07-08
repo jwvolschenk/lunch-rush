@@ -112,7 +112,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Add placeholder audio assets (SFX for tower fire, wave complete, enemy death, card pick)
 - [x] Fix SoundManager.sfx_paths to use existing files or add placeholder audio
 ## Core gameplay: EnemyData preload path
-- [ ] Fix WaveManager._generate_default_waves: preload("res://enemy/EnemyData.gd") should be "res://enemy/EnemyData_HungryGoblin.tres"
+- [x] Fix WaveManager._generate_default_waves: preload("res://enemy/EnemyData.gd") should be "res://enemy/EnemyData_HungryGoblin.tres"
 
 ## Critical: missing project config and scene hierarchy
 

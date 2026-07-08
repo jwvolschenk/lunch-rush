@@ -122,7 +122,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: bridge infrastructure to playable game
 
 - [x] Implement WaveConfig resource (WaveConfig.gd): scriptable resource defining a single wave (enemy type references, counts, HP/speed base values, spawn interval); used by WaveManager to instantiate waves without hardcoded data
-- [ ] Implement tower placement preview UI: visual ghost/outline of tower following cursor on lane hover, snap-to-lane guide line, confirm with click (or keyboard shortcut), cancel with right-click/escape, integrates with TowerManager place_tower
+- [x] Implement tower placement preview UI: visual ghost/outline of tower following cursor on lane hover, snap-to-lane guide line, confirm with click (or keyboard shortcut), cancel with right-click/escape, integrates with TowerManager place_tower
 - [ ] Implement grease projectile scene (grease_projectile.tscn): yellow/green ColorRect projectile (16x16) with grease attack visual, used by Goblin Fry Cook Tower, speed=400px/s
 - [ ] Implement WaveConfigLoader singleton: loads wave configurations from WaveConfig resources or external files, provides get_wave(index) API for WaveManager, supports dynamic wave loading for room-modified waves
 

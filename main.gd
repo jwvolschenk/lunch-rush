@@ -74,6 +74,10 @@ func _ready() -> void:
 	# Connect WaveManager to LaneManager for enemy death tracking
 	LaneManager.enemy_died.connect(WaveManager._on_enemy_died)
 	
+	# Connect tower placement preview signal
+	InputManager.tower_placement_requested.connect(_on_tower_placement_requested)
+	InputManager.tower_placement_cancelled.connect(_on_tower_placement_cancelled)
+	
 	# Start the run
 	GameState.start_run()
 	_start_first_wave()
@@ -414,6 +418,19 @@ func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 		gold = enemy.gold_reward
 	GameState.add_gold(gold)
 	GameState.add_score(10)
+
+## --- Tower placement preview ---
+
+func _on_tower_placement_requested(lane_index: int, position_x: float, tower_scene: PackedScene) -> void:
+	print("[Main] Placing tower from preview: lane=%d, x=%.0f" % [lane_index, position_x])
+	var tower = TowerManager.place_tower(tower_scene, lane_index, position_x)
+	if tower:
+		print("[Main] Tower placed on lane %d." % lane_index)
+	else:
+		print("[Main] Failed to place tower via preview.")
+
+func _on_tower_placement_cancelled() -> void:
+	print("[Main] Tower placement cancelled.")
 
 ## --- Restart / Quit ---
 func _on_restart() -> void:

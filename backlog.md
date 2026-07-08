@@ -82,4 +82,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] fix VendingMachine description — either implement gold generation or update card pool description to match actual behavior
 - [x] diversify starter deck — reduce Goblin Fry Cook copies, add more variety for early-game strategy
 - [x] fix WaveConfigLoader._generate_dynamic_wave to use varied enemy types instead of all Hungry Goblins
-- [ ] fix GameState.start_run state leak — remove WAVE_COMPLETE intermediate state to avoid signal flicker
+- [x] fix GameState.start_run state leak — remove WAVE_COMPLETE intermediate state to avoid signal flicker

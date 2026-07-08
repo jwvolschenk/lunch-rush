@@ -130,7 +130,6 @@ func start_run() -> void:
 	DeckManager.reset()
 	
 	# Start the first wave
-	GameState.state = GameState.WAVE_COMPLETE
 	var room = RoomData.new()
 	room.room_name = "Pantry"
 	room.enemy_hp_modifier = 1.0

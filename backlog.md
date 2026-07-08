@@ -50,7 +50,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 ## Theme: core gameplay entities — enemies, towers, wave management
 
 - [x] Implement Enemy base class (Enemy.tscn + Enemy.gd) with HP bar, lane movement toward kitchen, and death signal
-- [ ] Implement Hungry Goblin concrete enemy: 40 HP, 60px/s speed, ColorRect sprite with green fill
+- [x] Implement Hungry Goblin concrete enemy: 40 HP, 60px/s speed, ColorRect sprite with green fill
 - [ ] Implement Tower base class (Tower.tscn + Tower.gd) with range circle, targeting nearest enemy, damage, cooldown, and fire animation
 - [ ] Implement Goblin Fry Cook concrete tower: 3-lane-tile range, grease projectile with 3 damage area splash, 1.5s cooldown, yellow ColorRect sprite
 - [ ] Implement WaveManager autoload: spawns escalating waves (count, HP, speed scaling), tracks wave state, emits wave_complete signal

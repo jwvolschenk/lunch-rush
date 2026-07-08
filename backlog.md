@@ -109,6 +109,14 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [ ] Implement Soup Spill concrete tower scene (SoupSpill.tscn + SoupSpill.gd): extends Tower, creates slowing puddle on hit, damage=2 slow_factor=0.5 slow_duration=5s, blue ColorRect sprite with puddle visual
 - [ ] Implement Combo Meal card (ComboMealCard.gd): card_type for replay last tower card used, stores last_placed_tower reference, applies effect by re-calling tower placement with same stats
 
+## Theme: cycle 10 — bridge the gap between infrastructure and playable gameplay
+
+- [ ] Implement WaveManager autoload: loads WaveConfig waves, spawns enemies via LaneManager at configured intervals, tracks active enemy count, emits wave_complete when all enemies cleared, bridges GameState from WAVE_COMPLETE to card selection
+- [ ] Implement Goblin Fry Cook concrete tower (GoblinFryCook.tscn + GoblinFryCook.gd): extends Tower, range=150 damage=3 cooldown=1.5, uses grease projectile scene, yellow ColorRect sprite, placed via TowerManager
+- [ ] Implement grease projectile (grease_projectile.tscn): yellow/green ColorRect projectile (16x16), speed=400px/s, splash_radius=50 for area damage, used by Goblin Fry Cook
+- [ ] Implement Gold HUD display: Label-based HUD panel with score/wave/health/gold values, connects to GameState signals for reactive updates, dark panel with bordered styling, positioned at top of screen
+- [ ] Implement game-over overlay scene (GameOverOverlay.tscn + GameOverOverlay.gd): full-screen panel showing score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game on confirm
+
 # --- Cycle 3 reflect additions ---
 
 ## Theme: bridge infrastructure to playable game

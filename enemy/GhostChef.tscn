@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://enemy/GhostChef.gd" id="1_ghost"]
+
+[node name="GhostChef" type="Node2D" id=1]
+script = ExtResource("1_ghost")
+
+[node name="Sprite" type="ColorRect" id=2]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+position = Vector2(-25, -25)
+size = Vector2(50, 50)
+color = Color(0.6, 0.5, 0.8, 0.7)

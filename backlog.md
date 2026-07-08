@@ -71,7 +71,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Enemy variety: Ogre Brute — add OgreBrute.gd/.tscn as a high-HP tank enemy (200 HP, slow speed, high gold reward). Adds enemy diversity beyond Hungry Goblin.
 
-- [ ] Enemy variety: Ghost Chef — add GhostChef.gd/.tscn as a floating enemy that partially phases through towers (50% dodge chance for 2s, medium HP 80, medium speed).
+- [x] Enemy variety: Ghost Chef — add GhostChef.gd/.tscn as a floating enemy that partially phases through towers (50% dodge chance for 2s, medium HP 80, medium speed).
 
 - [ ] Enemy variety: Slime Runner — add SlimeRunner.gd/.tscn as a fast low-HP enemy (30 HP, 150 speed, low gold). Creates speed-vs-tower tradeoff for players.
 

@@ -1,0 +1,35 @@
+[gd_resource type = "Resource" load_steps = 5 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
+ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
+ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
+ext_resource[4] = "res://enemy/EnemyData_OgreBrute.tres"
+ext_resource[5] = "res://enemy/EnemyData_PizzaDelivery.tres"
+
+[resource]
+enemies = [
+{
+"count": 20,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 15,
+"enemy_data": ExtResource( 2 )
+},
+{
+"count": 12,
+"enemy_data": ExtResource( 3 )
+},
+{
+"count": 10,
+"enemy_data": ExtResource( 4 )
+},
+{
+"count": 8,
+"enemy_data": ExtResource( 5 )
+}
+]
+hp_scale = 3.5
+speed_scale = 1.8
+spawn_interval = 0.15
+description = "Wave 20 — FINAL WAVE: the entire dungeon storms the deli in an all-out assault. Survive to claim victory!"

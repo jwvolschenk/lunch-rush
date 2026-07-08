@@ -99,4 +99,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Add player-driven craving system: enemies should have their craving type displayed as a visible icon (not just a colored dot), and the card selection UI should show which food type each pending card's projectile will use, so the player can strategically match cravings.
 
-- [ ] Add new wave configs for waves 16-20: currently only 15 wave .tres files exist. Add configs for waves 16-20 with increasingly difficult enemy mixes to give the game more depth and a longer single run.
+- [x] Add new wave configs for waves 16-20: currently only 15 wave .tres files exist. Add configs for waves 16-20 with increasingly difficult enemy mixes to give the game more depth and a longer single run.

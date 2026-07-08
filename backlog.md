@@ -68,3 +68,20 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 # --- Cycle 33 reflect additions ---
 
 ## Theme: fix unreachable room selector, hook save system, and add missing enemy
+
+# --- Cycle 36 reflect additions ---
+
+## Theme: core gameplay polish — make the game actually fun and complete
+
+## Theme: missing GOAL.md content — towers, waves, and visual polish
+
+- [x] Wire room selector flow: RoomSelector emits room_selected signal but nothing in Main.tscn calls _on_room_selected() — add the signal connection and show_rooms() call between card selection and wave start
+- [ ] Fix room modifier application: GameState._apply_room_modifier() modifies wave_enemy_count/hp/speed/gold_reward on the GameState object but WaveManager.start_wave() only reads from WaveConfig — pass room modifier from GameState.current_room into WaveManager.start_wave()
+- [ ] Clamp EmergencyRationCard heal to max_hp: game_state.health += heal_amount can exceed 20 (max health), breaking the game's HP cap
+- [ ] Add EnemyData resources for SlimeRunner, GhostChef, and OgreBrute (EnemyData_HungryGoblin.tres and EnemyData_PizzaDelivery.tres already exist)
+- [ ] Add Pizza Delivery tower scene: GOAL.md lists it as a core tower but only PizzaTrebuchet exists — create PizzaDelivery.tscn + PizzaDelivery.gd
+- [ ] Add 10 more waves (wave_6 through wave_15) to WaveConfig resources with varied enemy compositions (Ogre Brute + Slime Runner, Ghost Chef waves, mixed waves)
+- [ ] Add health cap in EmergencyRationCard: clamp healed HP to GameState.max_hp (20) to prevent HP overflow
+- [ ] Add visible craving indicator on enemies: show a small food icon above enemies so player can target with matching food towers
+- [ ] Add a "Cheat Code" card (e.g., "Health Inspector" as a one-time boss-killer) — GOAL.md references it but it's not in the starter deck
+- [ ] Fix KitchenUpgradeCard timer leak: if played twice within 10s, the old timer's _on_buff_end fires after the new buff ends, resetting tower stats prematurely

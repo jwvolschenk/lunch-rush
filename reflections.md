@@ -178,3 +178,11 @@ Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 82 lines
 ## Cycle 35  2026-07-08T19:58:18Z  outcome:passed sha:77866d2142
 
 Executed 2 backlog task(s); 2 completed (no gate; agent self-verified). 158 lines changed.
+
+## Cycle 36  2026-07-08T19:58:18Z  outcome:pending
+
+Reflect phase: project has extensive infrastructure (114 files, 100+ systems) but has 4 categories of work remaining: (1) broken room selector flow and room modifiers not reaching WaveManager, (2) missing GOAL.md content (Pizza Delivery tower, more waves, Starter deck), (3) bugs (EmergencyRationCard HP overflow, KitchenUpgradeCard timer leak), and (4) gameplay polish (visible craving indicators, health cap). Added 10 tasks targeting these gaps.
+
+## Cycle 36  2026-07-08T20:02:25Z  outcome:passed sha:4e0d97fb9b
+
+Archived 5 completed items, then reflected: 10 new task(s) added. DONE: 10 tasks added — room selector flow + modifier application, EmergencyRationCard HP overflow + health cap, EnemyData resources for 3 enemies, Pizza Delivery tower, 10 more waves, visible craving

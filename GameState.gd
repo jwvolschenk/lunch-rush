@@ -154,7 +154,7 @@ func start_run() -> void:
 	gold = 100
 	waves_completed = 0
 	waves_played = 0
-	state = GameState.PLAYING
+	_reset_room_modifiers()
 	
 	# Apply meta-progression starting gold bonus
 	var bonus = SaveLoad.get_unlocked_gold_bonus()
@@ -165,15 +165,11 @@ func start_run() -> void:
 	# Initialize the deck for this run
 	DeckManager.reset()
 	
-	# Start the first wave
-	var room = RoomData.new()
-	room.room_name = "Pantry"
-	room.enemy_hp_modifier = 1.0
-	room.enemy_speed_modifier = 1.0
-	room.enemy_count_modifier = 0
-	room.gold_bonus = 0
-	current_room = room
-	GameState.state = GameState.PLAYING
+	# Reset room — the room selector will set it for the first wave
+	_current_room = null
+	
+	# Go to room selector so the player picks a room before the first wave
+	state = GameState.ROOM_SELECTING
 
 func add_score(amount: int) -> void:
 	score += amount

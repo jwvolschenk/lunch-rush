@@ -102,7 +102,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Fix Tower._fire: get_parent() is TowerManager, not a Lane — projectiles spawn in wrong node tree
 
 ## Core gameplay: first room selector
-- [ ] Ensure first wave triggers room selector (start_run sets Pantry directly, bypasses room selector)
+- [x] Ensure first wave triggers room selector (start_run sets Pantry directly, bypasses room selector)
 
 ## Card system: dead code and disconnected hand
 - [ ] Remove dead Card.apply_effect / from_dict methods (CardPool uses dictionary dispatch, never calls them)

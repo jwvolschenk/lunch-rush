@@ -402,10 +402,23 @@ func _apply_status_effect(card_data: Dictionary) -> void:
 ## --- Room selection callback ---
 func _on_room_selected(room_data: Resource) -> void:
 	print("[Main] Room selected: %s" % room_data.room_name)
+	
+	# First wave: apply room and start wave 0 directly
+	if GameState.wave == 0:
+		GameState.current_room = room_data
+		WaveManager.start_wave(0)
+		_next_wave_ready = true
+		GameState.state = GameState.PLAYING
+		if room_selector:
+			room_selector.hide_rooms()
+		print("[Main] Wave 1 started after room selection.")
+		return
+	
+	# Subsequent waves: show card selection first, then room selector
 	GameState.current_room = room_data
-	# Start the next wave after room is selected
-	WaveManager.start_next_wave()
-	GameState.state = GameState.GameState.PLAYING
+	WaveManager.on_room_selected()
+	GameState.state = GameState.WAVE_COMPLETE
+	_show_card_selection()
 	if room_selector:
 		room_selector.hide_rooms()
 

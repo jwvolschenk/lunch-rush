@@ -6,10 +6,20 @@ Run a magical dungeon deli while waves of hungry monsters storm your kitchen. Se
 
 ## Quickstart
 
-1. Open `lunch_rush/` as a Godot 4 project (File > Open > select the folder).
+1. Open this folder in Godot 4 (File > Open > select the project root).
 2. Press **F5** to play.
-3. Towers are placed along lanes to attack incoming enemies.
-4. After each wave, pick a new room to advance.
+3. Click on lanes to place towers that attack incoming enemies.
+4. After each wave, select a new card to strengthen your deck.
+5. Survive as many waves as you can — if health hits zero, it's game over.
+
+### Project structure
+
+- `GameState.gd` — autoload managing score, waves, health, gold
+- `LaneManager.gd` / `lane/Lane.*` — lane system with enemy spawn points
+- `tower/Tower.*` + `TowerManager.gd` — tower placement and lifecycle
+- `enemy/Enemy.*` + `HungryGoblin.*` — enemy base class and first enemy type
+- `projectile/Projectile.*` — reusable projectile with damage/splash
+- `Main.tscn` / `main.gd` — root scene and game loop
 
 ## Controls
 
@@ -26,4 +36,4 @@ Run a magical dungeon deli while waves of hungry monsters storm your kitchen. Se
 
 ## Building
 
-Requires Godot 4.x. Open the `lunch_rush/` folder in the Godot editor and run the project.
+Requires Godot 4.x. Open this project folder in the Godot editor and run the project.

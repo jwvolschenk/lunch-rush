@@ -72,3 +72,28 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [ ] Implement Projectile base class (Projectile.tscn + Projectile.gd): configurable damage, speed, and splash radius; moves toward target; deals damage on collision and self-destructs
 
 DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base class (tower attacks)
+
+# --- Cycle 8 reflect additions ---
+
+## Theme: wiring infrastructure into playable game — scene hierarchy, input, wave data, cards
+
+- [ ] Implement WaveManager autoload with wave config data model: defines wave composition (enemy types, counts, HP/speed scaling), spawn timing, emits wave_started/wave_complete signals, integrates with GameState state machine
+- [ ] Implement Card data model (Card.gd): properties for name, description, cost, card_type enum, apply effect method; serves as data source for card selection UI and deck system
+- [ ] Implement input system (InputManager.gd): mouse click detection on lanes for tower placement, keyboard shortcuts for card selection (1/2/3 keys, space to confirm), cursor state management for placement preview
+- [ ] Implement Main.tscn scene hierarchy: add HUD panel (score, wave, health, gold display), add lane container, add card selection overlay panel, add game-over overlay panel, wire all nodes together
+- [ ] Implement Gold HUD display: Label-based HUD with score/wave/health/gold values, updates bound to GameState signals, dark panel with border styling for readability
+- [ ] Implement Goblin Fry Cook concrete tower scene: extends Tower, sets range=200 damage=3 cooldown=1.5 projectile_scene=grease projectile, yellow ColorRect sprite with grease attack visual
+
+DONE: 6 tasks — WaveManager with wave data, card data model, input system, Main.tscn wiring, gold HUD, Goblin Fry Cook tower
+
+# --- Cycle 9 reflect additions ---
+
+## Theme: card selection, wave flow, game-over, and craving mechanic
+
+- [ ] Implement card selection UI: 3-card overlay panel that appears in WAVE_COMPLETE state, each card shows icon/name/description/cost, click to select, auto-advance back to PLAYING
+- [ ] Implement wave-complete flow: WaveManager detects all enemies dead → emits signal → GameState transitions to WAVE_COMPLETE → card UI appears → on card selected → GameState transitions to PLAYING and starts next wave
+- [ ] Implement player deck system: DeckManager autoload managing draw/discard pools, starting deck of 5 cards, draw-on-wave-complete, discard played cards, deck exhaustion handling
+- [ ] Implement game-over overlay: full-screen panel with score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game state on confirm
+- [ ] Implement craving mechanic: each enemy has a random craving_food enum (grease/soup/spice), matching craving applies 30% slow debuff for 5s, wrong food applies 20% enrage (speed+20%) for 3s
+
+DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, game-over overlay, craving mechanic

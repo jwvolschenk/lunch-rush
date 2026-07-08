@@ -1,8 +1,6 @@
 # Goal
 
-Build a roguelite deckbuilder tower defence game in Godot
-
-Lunch Rush: Dungeon Deli
+Build rogulite deck builder tower defence game for godot: Lunch Rush: Dungeon Deli
 
 Theme: Fantasy restaurant tower defence.
 

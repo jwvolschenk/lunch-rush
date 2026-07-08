@@ -3,9 +3,13 @@
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://card_selection/CardSelection.tscn" id="2_card"]
 [ext_resource type="PackedScene" path="res://rooms/RoomSelector.tscn" id="3_room"]
+[ext_resource type="PackedScene" path="res://game_over/GameOverOverlay.tscn" id="4_gameover"]
 
 [node name="CardSelection" parent=Main instance=ExtResource("2_card") id=4]
 visible = false
 
 [node name="RoomSelector" parent=Main instance=ExtResource("3_room") id=5]
+visible = false
+
+[node name="GameOverOverlay" parent=Main instance=ExtResource("4_gameover") id=6]
 visible = false

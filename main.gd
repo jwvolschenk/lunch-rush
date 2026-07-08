@@ -12,6 +12,9 @@ var card_selection: CardSelection
 ## --- Room selection ---
 var room_selector: RoomSelector
 
+## --- Game-over overlay ---
+var game_over_overlay: GameOverOverlay
+
 ## --- Wave management ---
 var _next_wave_ready: bool = false
 
@@ -27,6 +30,12 @@ func _ready() -> void:
 	room_selector = $RoomSelector
 	if room_selector:
 		room_selector.room_selected.connect(_on_room_selected)
+	
+	# Reference the game-over overlay
+	game_over_overlay = $GameOverOverlay
+	if game_over_overlay:
+		game_over_overlay.restart_requested.connect(_on_restart)
+		game_over_overlay.quit_requested.connect(_on_quit)
 	
 	# Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
@@ -81,6 +90,13 @@ func _on_state_changed(new_state: int) -> void:
 				card_selection.hide_cards()
 			if room_selector:
 				room_selector.hide_rooms()
+			if game_over_overlay:
+				game_over_overlay.show_game_over(
+					GameState.score,
+					GameState.waves_completed,
+					GameState.gold,
+					GameState.health
+				)
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:
@@ -252,3 +268,17 @@ func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 	print("[Main] Enemy died on lane %d." % lane_index)
 	GameState.add_gold(10)
 	GameState.add_score(10)
+
+## --- Restart / Quit ---
+func _on_restart() -> void:
+	print("[Main] Restarting run...")
+	if game_over_overlay:
+		game_over_overlay.hide_game_over()
+	GameState.start_run()
+	_start_first_wave()
+
+func _on_quit() -> void:
+	print("[Main] Quitting to menu...")
+	if game_over_overlay:
+		game_over_overlay.hide_game_over()
+	get_tree().change_scene_to_file("res://main.tscn")

@@ -40,7 +40,7 @@ func apply_effect(tower_manager, game_state) -> bool:
 
 	var old_health = game_state.health
 	var new_health = old_health + heal_amount
-	game_state.health = min(new_health, 20)
+	game_state.health = min(new_health, game_state.max_health)
 	print("[EmergencyRationCard] Healed kitchen for %d HP. Health: %d -> %d." % [heal_amount, old_health, game_state.health])
 	return true
 

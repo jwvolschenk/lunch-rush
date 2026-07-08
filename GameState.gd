@@ -36,6 +36,8 @@ var waves_played: int = 0:
 		waves_played = v
 
 ## --- Health (player lives) ---
+var max_health: int = 20
+
 var health: int = 20:
 	set(v):
 		health = v
@@ -132,6 +134,7 @@ func _apply_room_modifier(room: Resource) -> void:
 func start_run() -> void:
 	score = 0
 	wave = 0
+	max_health = 20
 	health = 20
 	gold = 100
 	waves_completed = 0

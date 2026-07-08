@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://projectile/Projectile.gd" id="1_proj"]
+
+[sub_resource type="ColorRect"_id2]
+color = Color(1, 0.8, 0, 1)
+
+[sub_resource type="Rectangle2D"_id3]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D"_id4]
+radius = 8.0
+
+[node name="Projectile" type="Node2D" id=1]
+script = ExtResource("1_proj")
+
+[node name="Sprite" type="ColorRect" id=5]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+custom_sizes = Vector2(16, 16)
+color = Color(1, 0.8, 0, 1)
+
+[node name="CollisionShape" type="CollisionShape2D" id=6]
+shape = SubResource(4)

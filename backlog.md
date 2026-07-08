@@ -73,7 +73,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Enemy variety: Ghost Chef — add GhostChef.gd/.tscn as a floating enemy that partially phases through towers (50% dodge chance for 2s, medium HP 80, medium speed).
 
-- [ ] Enemy variety: Slime Runner — add SlimeRunner.gd/.tscn as a fast low-HP enemy (30 HP, 150 speed, low gold). Creates speed-vs-tower tradeoff for players.
+- [x] Enemy variety: Slime Runner — add SlimeRunner.gd/.tscn as a fast low-HP enemy (30 HP, 150 speed, low gold). Creates speed-vs-tower tradeoff for players.
 
 - [ ] Food buff cards: "Kitchen Upgrade" — add a new STATUS_EFFECT card type that buffs all placed towers (e.g., +50% attack speed for 10s or +25% damage for 15s). Extends card variety beyond tower cards.
 

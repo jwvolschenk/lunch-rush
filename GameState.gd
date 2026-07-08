@@ -93,6 +93,18 @@ var wave_gold_reward: int = 25
 
 ## Pending cards generated for card selection between waves
 var pending_cards: Array[Dictionary] = []
+
+## Holds a reference to a card that must stay alive until its timer fires.
+## Prevents the caller from freeing KitchenUpgradeCard before the timer callback.
+var _pending_card: Node2D = null
+
+## Store a reference to a card that must stay alive until its timer fires.
+func set_pending_card(card: Node2D) -> void:
+	_pending_card = card
+
+## Clear the pending card reference.
+func clear_pending_card() -> void:
+	_pending_card = null
 ## --- Room modifier application ---
 
 func _apply_room_modifier(room: Resource) -> void:

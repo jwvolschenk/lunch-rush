@@ -360,7 +360,12 @@ func _apply_status_effect(card_data: Dictionary) -> void:
 			if card.has_method("apply_effect"):
 				var success = card.apply_effect(null, GameState)
 				print("[Main] Status effect '%s' applied: %s" % [card_data.name, "success" if success else "failed"])
-				card.free()
+				## KitchenUpgradeCard manages its own lifecycle (free()s itself when timer fires).
+				## Other cards without timers are freed automatically when this function returns.
+				if card.get_script().get_basename() == "KitchenUpgradeCard":
+					GameState.set_pending_card(card)
+				else:
+					card.free()
 				return
 			else:
 				print("[Main] Card script '%s' has no apply_effect method." % card_script_path)

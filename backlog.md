@@ -87,7 +87,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Implement meta-progression: add a persistent unlock system between runs (store unlocked tower variants, card variants, starting gold bonus in SaveLoad.json). After game-over, show "Unlocks" panel with earned perks. Unlock new towers at wave milestones (e.g., unlock Pizza Trebuchet at wave 3, Soup Spill at wave 5).
 
-- [ ] Fix KitchenUpgradeCard timer leak: replace `get_tree().create_timer()` with a proper `Timer` node child. The current approach creates an auto-deleting SceneTreeTimer that can fire after the card's reference is cleared, causing null crashes when the timer's timeout fires on a freed object.
+- [x] Fix KitchenUpgradeCard timer leak: replace `get_tree().create_timer()` with a proper `Timer` node child. The current approach creates an auto-deleting SceneTreeTimer that can fire after the card's reference is cleared, causing null crashes when the timer's timeout fires on a freed object.
 
 - [ ] Add PizzaDelivery enemy to waves 10-15: currently PizzaDelivery.tres exists in enemy/ but is not referenced in any wave config. Add it to waves 10, 13, 14, 15 as a late-game threat (fast, moderate HP, moderate gold).
 

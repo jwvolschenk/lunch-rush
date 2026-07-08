@@ -1,4 +1,4 @@
-extends Resource
+extends Node2D
 ## KitchenUpgradeCard — a STATUS_EFFECT card that buffs all placed towers.
 ##
 ## card_type: STATUS_EFFECT (value 1)
@@ -39,12 +39,16 @@ enum CardType {
 ## Buffed towers tracking
 var _buffed_towers: Array[Node2D] = []
 var _original_stats: Dictionary = {}
+
+## The Timer node — created in apply_effect and added as a child.
 var _buff_timer: Timer = null
 
 ## Apply the kitchen upgrade effect: buff all placed towers.
 ## tower_manager: unused but required by signature.
 ## game_state: GameState reference, used to deduct gold cost.
 ## Returns true if effect applied.
+## NOTE: The caller must NOT free this card until the buff timer
+## fires. The card adds itself to the tree and frees itself in _on_buff_end.
 func apply_effect(tower_manager, game_state) -> bool:
 	# Deduct gold cost from GameState
 	if game_state and game_state.has_method("deduct_gold"):
@@ -77,21 +81,31 @@ func apply_effect(tower_manager, game_state) -> bool:
 
 	print("[KitchenUpgradeCard] Buffed %d towers for %.0fs." % [all_towers.size(), buff_duration])
 
-	# Cancel any previous buff timer (avoids timer leak when card is played twice)
-	if _buff_timer and is_instance_valid(_buff_timer):
-		_buff_timer.disconnect("timeout", _on_buff_end)
-		_buff_timer.queue_free()
-	_buff_timer = null
+	# Add self to root so the card and its Timer child stay alive
+	# until the timer fires (prevents null crash on timer timeout).
+	if get_parent() == null:
+		get_tree().root.add_child(self)
 
-	# Schedule buff expiry
-	var tree = get_tree()
-	if tree:
-		_buff_timer = tree.create_timer(buff_duration)
-		_buff_timer.connect("timeout", _on_buff_end)
+	# Cancel any previous buff timer (avoids timer leak when card is played twice).
+	if _buff_timer and is_instance_valid(_buff_timer):
+		_buff_timer.timeout.disconnect(_on_buff_end)
+		_buff_timer.queue_free()
+		_buff_timer = null
+
+	# Create proper Timer node child (not get_tree().create_timer()).
+	_buff_timer = Timer.new()
+	_buff_timer.name = "BuffTimer"
+	_buff_timer.one_shot = true
+	_buff_timer.wait_time = buff_duration
+	add_child(_buff_timer)
+	_buff_timer.timeout.connect(_on_buff_end)
+	_buff_timer.start()
 
 	return true
 
 ## Restore original tower stats after the buff duration expires.
+## This callback is invoked by the Timer node child, which keeps
+## this card alive for the full duration (no freed-object crash).
 func _on_buff_end() -> void:
 	for tower in _buffed_towers:
 		if tower and tower.is_alive and tower.get_instance_id() in _original_stats:
@@ -103,6 +117,9 @@ func _on_buff_end() -> void:
 
 	_buffed_towers.clear()
 	_original_stats.clear()
+
+	## Clean up: this card frees itself after the timer fires.
+	queue_free()
 
 ## Get card data as a dictionary for the card selection UI.
 func to_dict() -> Dictionary:

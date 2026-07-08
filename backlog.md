@@ -84,4 +84,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Add health cap in EmergencyRationCard: clamp healed HP to GameState.max_hp (20) to prevent HP overflow
 - [x] Add visible craving indicator on enemies: show a small food icon above enemies so player can target with matching food towers
 - [x] Add a "Cheat Code" card (e.g., "Health Inspector" as a one-time boss-killer) — GOAL.md references it but it's not in the starter deck
-- [ ] Fix KitchenUpgradeCard timer leak: if played twice within 10s, the old timer's _on_buff_end fires after the new buff ends, resetting tower stats prematurely
+- [x] Fix KitchenUpgradeCard timer leak: if played twice within 10s, the old timer's _on_buff_end fires after the new buff ends, resetting tower stats prematurely

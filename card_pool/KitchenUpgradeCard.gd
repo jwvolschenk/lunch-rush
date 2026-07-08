@@ -39,6 +39,7 @@ enum CardType {
 ## Buffed towers tracking
 var _buffed_towers: Array[Node2D] = []
 var _original_stats: Dictionary = {}
+var _buff_timer: Timer = null
 
 ## Apply the kitchen upgrade effect: buff all placed towers.
 ## tower_manager: unused but required by signature.
@@ -76,11 +77,17 @@ func apply_effect(tower_manager, game_state) -> bool:
 
 	print("[KitchenUpgradeCard] Buffed %d towers for %.0fs." % [all_towers.size(), buff_duration])
 
+	# Cancel any previous buff timer (avoids timer leak when card is played twice)
+	if _buff_timer and is_instance_valid(_buff_timer):
+		_buff_timer.disconnect("timeout", _on_buff_end)
+		_buff_timer.queue_free()
+	_buff_timer = null
+
 	# Schedule buff expiry
 	var tree = get_tree()
 	if tree:
-		var timer = tree.create_timer(buff_duration)
-		timer.connect("timeout", _on_buff_end)
+		_buff_timer = tree.create_timer(buff_duration)
+		_buff_timer.connect("timeout", _on_buff_end)
 
 	return true
 

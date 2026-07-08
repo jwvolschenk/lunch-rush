@@ -78,7 +78,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Wire room selector flow: RoomSelector emits room_selected signal but nothing in Main.tscn calls _on_room_selected() — add the signal connection and show_rooms() call between card selection and wave start
 - [x] Fix room modifier application: GameState._apply_room_modifier() modifies wave_enemy_count/hp/speed/gold_reward on the GameState object but WaveManager.start_wave() only reads from WaveConfig — pass room modifier from GameState.current_room into WaveManager.start_wave()
 - [x] Clamp EmergencyRationCard heal to max_hp: game_state.health += heal_amount can exceed 20 (max health), breaking the game's HP cap
-- [ ] Add EnemyData resources for SlimeRunner, GhostChef, and OgreBrute (EnemyData_HungryGoblin.tres and EnemyData_PizzaDelivery.tres already exist)
+- [x] Add EnemyData resources for SlimeRunner, GhostChef, and OgreBrute (EnemyData_HungryGoblin.tres and EnemyData_PizzaDelivery.tres already exist)
 - [ ] Add Pizza Delivery tower scene: GOAL.md lists it as a core tower but only PizzaTrebuchet exists — create PizzaDelivery.tscn + PizzaDelivery.gd
 - [ ] Add 10 more waves (wave_6 through wave_15) to WaveConfig resources with varied enemy compositions (Ogre Brute + Slime Runner, Ghost Chef waves, mixed waves)
 - [ ] Add health cap in EmergencyRationCard: clamp healed HP to GameState.max_hp (20) to prevent HP overflow

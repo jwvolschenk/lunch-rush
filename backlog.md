@@ -56,7 +56,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [x] Implement WaveManager autoload: spawns escalating waves (count, HP, speed scaling), tracks wave state, emits wave_complete signal
 - [x] Implement wave complete flow: LaneManager detects all enemies cleared → emits signal → GameState transitions to WAVE_COMPLETE → Main shows card selection prompt
 - [x] Implement card selection UI: 3-card choice panel overlay, each card shows name/preview, click-to-select, then transitions back to PLAYING
-- [ ] Implement player deck system: starts with 5 starter cards, draw pool, discard pile, draw-from-deck each turn
+- [x] Implement player deck system: starts with 5 starter cards, draw pool, discard pile, draw-from-deck each turn
 - [ ] Implement craving mechanic: each enemy has a random craving (food type enum), feeding matching food applies slow debuff, wrong food applies enrage buff
 - [x] Implement gold economy: gold per kill, gold display on HUD, tower costs deducted on placement, gold_changed signal drives UI updates
 - [x] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
@@ -92,7 +92,7 @@ DONE: 6 tasks — WaveManager with wave data, card data model, input system, Mai
 
 - [ ] Implement card selection UI: 3-card overlay panel that appears in WAVE_COMPLETE state, each card shows icon/name/description/cost, click to select, auto-advance back to PLAYING
 - [ ] Implement wave-complete flow: WaveManager detects all enemies dead → emits signal → GameState transitions to WAVE_COMPLETE → card UI appears → on card selected → GameState transitions to PLAYING and starts next wave
-- [ ] Implement player deck system: DeckManager autoload managing draw/discard pools, starting deck of 5 cards, draw-on-wave-complete, discard played cards, deck exhaustion handling
+- [x] Implement player deck system: DeckManager autoload managing draw/discard pools, starting deck of 5 cards, draw-on-wave-complete, discard played cards, deck exhaustion handling
 - [ ] Implement game-over overlay: full-screen panel with score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game state on confirm
 - [ ] Implement craving mechanic: each enemy has a random craving_food enum (grease/soup/spice), matching craving applies 30% slow debuff for 5s, wrong food applies 20% enrage (speed+20%) for 3s
 

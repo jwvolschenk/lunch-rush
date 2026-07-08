@@ -144,7 +144,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Audio: wire tower fire SFX in Tower._fire() — sfx_name is set per-tower but never played from Tower base
 
-- [ ] Fix: GoblinFryCook missing food_type (defaults to 0 = no craving effect on grease projectiles)
+- [x] Fix: GoblinFryCook missing food_type (defaults to 0 = no craving effect on grease projectiles)
 
 - [ ] Fix: undeclared `_pending_unlocks` variable in main.gd (used at lines 157, 159, 480 without `var` declaration)
 

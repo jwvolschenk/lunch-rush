@@ -1,6 +1,6 @@
 extends Node
 ## GameState — autoload singleton managing score, wave, health, and gold.
-## All mutations emit signals so UI can listen and update reactively.
+## All mutations emit signals so UI can update reactively.
 
 ## --- Score ---
 var score: int = 0:
@@ -17,6 +17,23 @@ var wave: int = 0:
 		wave_changed.emit(wave)
 
 signal wave_changed(new_wave: int)
+
+## --- Wave progression ---
+## Emitted when a new wave starts (before enemies spawn).
+signal wave_started(wave_index: int)
+
+## Emitted when a wave completes (all enemies defeated).
+signal wave_completed(wave_index: int)
+
+## The number of waves completed in the current run.
+var waves_completed: int = 0:
+	set(v):
+		waves_completed = v
+
+## The total waves played (including current)
+var waves_played: int = 0:
+	set(v):
+		waves_played = v
 
 ## --- Health (player lives) ---
 var health: int = 20:
@@ -61,7 +78,7 @@ var current_room: Resource:
 		_current_room = v
 		if v:
 			_apply_room_modifier(v)
-	_room_changed.emit(v)
+		_room_changed.emit(v)
 	get:
 		return _current_room
 
@@ -78,10 +95,22 @@ var wave_gold_reward: int = 25
 func _apply_room_modifier(room: Resource) -> void:
 	if not room:
 		return
-	wave_enemy_count += room.get("enemy_count_modifier", 0)
-	wave_enemy_hp *= room.get("enemy_hp_modifier", 1.0)
-	wave_enemy_speed *= room.get("enemy_speed_modifier", 1.0)
-	wave_gold_reward = int(wave_gold_reward * (1.0 + room.get("gold_bonus", 0) * 0.01))
+	var enemy_count_mod: int = 0
+	var enemy_hp_mod: float = 1.0
+	var enemy_speed_mod: float = 1.0
+	var gold_bonus: float = 0.0
+	if "enemy_count_modifier" in room:
+		enemy_count_mod = room.enemy_count_modifier
+	if "enemy_hp_modifier" in room:
+		enemy_hp_mod = room.enemy_hp_modifier
+	if "enemy_speed_modifier" in room:
+		enemy_speed_mod = room.enemy_speed_modifier
+	if "gold_bonus" in room:
+		gold_bonus = room.gold_bonus
+	wave_enemy_count += enemy_count_mod
+	wave_enemy_hp *= enemy_hp_mod
+	wave_enemy_speed *= enemy_speed_mod
+	wave_gold_reward = int(wave_gold_reward * (1.0 + gold_bonus * 0.01))
 
 ## --- Methods ---
 
@@ -90,7 +119,20 @@ func start_run() -> void:
 	wave = 0
 	health = 20
 	gold = 100
+	waves_completed = 0
+	waves_played = 0
 	state = GameState.PLAYING
+	
+	# Start the first wave
+	GameState.state = GameState.WAVE_COMPLETE
+	var room = RoomData.new()
+	room.room_name = "Pantry"
+	room.enemy_hp_modifier = 1.0
+	room.enemy_speed_modifier = 1.0
+	room.enemy_count_modifier = 0
+	room.gold_bonus = 0
+	current_room = room
+	GameState.state = GameState.PLAYING
 
 func add_score(amount: int) -> void:
 	score += amount

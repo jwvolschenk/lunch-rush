@@ -12,6 +12,9 @@ var card_selection: CardSelection
 ## --- Room selection ---
 var room_selector: RoomSelector
 
+## --- Wave management ---
+var _next_wave_ready: bool = false
+
 ## --- Lifecycle ---
 func _ready() -> void:
 	# Reference the autoload
@@ -29,6 +32,12 @@ func _ready() -> void:
 	GameState.state_changed.connect(_on_state_changed)
 	GameState.health_depleted.connect(_on_game_over)
 	
+	# Connect wave signals
+	WaveManager.wave_started.connect(_on_wave_started)
+	WaveManager.wave_complete.connect(_on_wave_complete)
+	WaveManager.enemy_spawned.connect(_on_enemy_spawned)
+	WaveManager.enemy_died.connect(_on_enemy_died)
+	
 	# Connect card selection signal
 	card_selection.card_selected.connect(_on_card_selected)
 	
@@ -36,9 +45,21 @@ func _ready() -> void:
 	LaneManager.enemy_reached_kitchen.connect(_on_enemy_reached_kitchen)
 	LaneManager.enemy_died.connect(_on_enemy_died)
 	
+	# Connect WaveManager to LaneManager for enemy death tracking
+	LaneManager.enemy_died.connect(WaveManager._on_enemy_died)
+	
 	# Start the run
 	GameState.start_run()
+	_start_first_wave()
 	print("[Main] Game started.")
+
+## --- Wave progression ---
+
+## Start the very first wave after the run begins.
+func _start_first_wave() -> void:
+	WaveManager.start_wave(0)
+	_next_wave_ready = true
+	print("[Main] Wave 1 started.")
 
 ## --- State management ---
 func _on_state_changed(new_state: int) -> void:
@@ -131,8 +152,11 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	GameState.gold -= card_data.cost
 	# Apply the card effect (place tower or apply buff)
 	_apply_card_effect(card_data)
-	# Transition back to PLAYING
-	GameState.state = GameState.GameState.PLAYING
+	# Notify WaveManager to start the next wave
+	WaveManager.on_card_selected()
+	# Transition back to PLAYING (will be done by WaveManager.start_wave)
+	if not WaveManager.is_wave_active:
+		GameState.state = GameState.GameState.PLAYING
 
 ## --- Apply a card effect ---
 func _apply_card_effect(card_data: Dictionary) -> void:
@@ -148,6 +172,8 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 func _on_room_selected(room_data: Resource) -> void:
 	print("[Main] Room selected: %s" % room_data.room_name)
 	GameState.current_room = room_data
+	# Notify WaveManager that the room is selected (prepares for next wave)
+	WaveManager.on_room_selected()
 	# Transition to WAVE_COMPLETE_SHOW_CARDS to trigger card display
 	_show_card_selection()
 
@@ -160,7 +186,20 @@ func _show_card_selection() -> void:
 ## --- Callbacks ---
 func _on_game_over() -> void:
 	print("[Main] Game over! Health depleted.")
+	WaveManager.reset()
 	GameState.state = GameState.GameState.GAME_OVER
+
+func _on_wave_started(wave_config: WaveConfig, wave_index: int) -> void:
+	print("[Main] Wave %d started: %s" % [wave_index + 1, wave_config.description])
+
+func _on_wave_complete(wave_index: int) -> void:
+	print("[Main] Wave %d complete! Awarded %d gold." % [
+		wave_index + 1, GameState.wave_gold_reward
+	])
+	GameState.waves_completed += 1
+
+func _on_enemy_spawned(enemy: Node2D, lane_index: int) -> void:
+	pass
 
 func _on_enemy_reached_kitchen(enemy: Node2D, lane_index: int) -> void:
 	print("[Main] Enemy reached kitchen on lane %d." % lane_index)

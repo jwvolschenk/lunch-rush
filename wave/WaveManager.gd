@@ -2,34 +2,53 @@ extends Node
 ## WaveManager — autoload singleton that orchestrates wave flow.
 ##
 ## Responsibilities:
-##   1. Load WaveConfig waves (from a resource array or inline config).
+##   1. Generate escalating waves with increasing difficulty.
 ##   2. Spawn enemies via LaneManager at configured intervals.
 ##   3. Track active enemy count per wave.
 ##   4. Emit wave_complete when all enemies in the wave are cleared.
-##   5. Bridge GameState from WAVE_COMPLETE to card selection state.
-##
-## Usage:
-##   WaveManager.start_wave(wave_config)  — begin a new wave
-##   WaveManager.spawn_next()             — spawn one enemy from the queue
-##   WaveManager._on_enemy_died()         — internal: decrement active count
-##   WaveManager.advance_to_card_selection() — transition to card UI
+##   5. Auto-progression: after card selection, start the next wave.
 
 ## --- Wave config ---
 
 ## Array of WaveConfig resources defining all waves in a run.
 @export var waves: Array[WaveConfig] = []
 
+## Maximum number of waves in a run (0 = infinite/escalating)
+@export var max_waves: int = 20
+
+## Base HP growth per wave (10% per wave)
+@export var hp_growth: float = 0.10
+
+## Base speed growth per wave (5% per wave)
+@export var speed_growth: float = 0.05
+
+## Base enemy count growth per wave (+2 enemies per wave)
+@export var count_growth: int = 2
+
+## Base spawn interval reduction per wave (0.1s less per wave)
+@export var spawn_interval_reduction: float = 0.1
+
 ## Index of the currently playing wave
 var _current_wave_index: int = -1
 var _current_wave_config: WaveConfig = null
 
-## Enemy spawn queue: list of { enemy_scene, lane_index }
+## Enemy spawn queue: list of { enemy_scene, lane_index, hp, speed }
 var _spawn_queue: Array = []
 var _spawn_timer: float = 0.0
 var _spawned_count: int = 0
 
 ## Active enemy tracking
 var _active_enemies: int = 0
+
+## Whether a wave is currently active
+var is_wave_active: bool:
+	get: return _current_wave_index >= 0
+
+## The next wave index to play after the current one completes
+var _next_wave_index: int = 0
+
+## Whether a wave-start has been requested (awaiting card selection)
+var _wave_start_requested: bool = false
 
 ## --- Signals ---
 
@@ -44,6 +63,9 @@ signal enemy_spawned(enemy: Node2D, lane_index: int)
 
 ## Emitted when an enemy dies. Args: (enemy: Node2D, lane_index: int)
 signal enemy_died(enemy: Node2D, lane_index: int)
+
+## Emitted when all waves are completed (endless mode reached max)
+signal all_waves_complete()
 
 ## --- Wave state ---
 
@@ -62,19 +84,91 @@ var active_enemy_count: int:
 ## --- Lifecycle ---
 
 func _ready() -> void:
+	_generate_default_waves()
 	print("[WaveManager] Initialized with %d waves." % waves.size())
+
+func _process(delta: float) -> void:
+	# During an active wave, spawn enemies at the configured interval
+	if _current_wave_index < 0:
+		return
+	
+	if _spawn_queue.is_empty():
+		return
+	
+	_spawn_timer += delta
+	if _spawn_timer >= _current_wave_config.spawn_interval:
+		_spawn_timer = 0.0
+		spawn_next()
+
+## --- Wave generation ---
+
+## Generate default waves with escalating difficulty if none provided.
+func _generate_default_waves() -> void:
+	if waves.size() > 0:
+		return
+	
+	waves = []
+	
+	# Define the base enemy pool for waves
+	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
+	
+	for i in range(max_waves):
+		var wave := WaveConfig.new()
+		
+		# Escalating difficulty
+		var hp_scale = 1.0 + (i * hp_growth)
+		var speed_scale = 1.0 + (i * speed_growth)
+		var enemy_count = 3 + (i * 2) + count_growth
+		var spawn_interval = max(0.3, 2.0 - (i * spawn_interval_reduction))
+		
+		wave.hp_scale = hp_scale
+		wave.speed_scale = speed_scale
+		wave.spawn_interval = spawn_interval
+		wave.enemies = [
+			{ "enemy_data": goblin_data, "count": enemy_count }
+		]
+		wave.description = "Wave %d — %d Hungry Goblins" % [i + 1, enemy_count]
+		
+		waves.append(wave)
+	
+	print("[WaveManager] Generated %d default waves." % waves.size())
+
+## Get a dynamically generated WaveConfig for waves beyond the predefined ones.
+## Used for endless play past max_waves.
+func _get_escalated_wave(wave_index: int) -> WaveConfig:
+	var wave := WaveConfig.new()
+	
+	var hp_scale = 1.0 + (wave_index * hp_growth)
+	var speed_scale = 1.0 + (wave_index * speed_growth)
+	var enemy_count = 3 + (wave_index * 2) + count_growth
+	var spawn_interval = max(0.3, 2.0 - (wave_index * spawn_interval_reduction))
+	
+	wave.hp_scale = hp_scale
+	wave.speed_scale = speed_scale
+	wave.spawn_interval = spawn_interval
+	
+	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
+	wave.enemies = [
+		{ "enemy_data": goblin_data, "count": enemy_count }
+	]
+	wave.description = "Wave %d — Escalating threat" % (wave_index + 1)
+	
+	return wave
 
 ## --- Wave management ---
 
 ## Start a wave by index. Loads the config and prepares the spawn queue.
 ## Call this when GameState enters PLAYING state.
 func start_wave(wave_index: int) -> void:
-	if wave_index < 0 or wave_index >= waves.size():
-		push_warning("[WaveManager] Invalid wave index: %d" % wave_index)
+	if wave_index < 0:
+		push_warning("[WaveManager] Cannot start wave with negative index.")
 		return
 	
-	_current_wave_index = wave_index
-	_current_wave_config = waves[wave_index]
+	# If we have predefined waves, use them; otherwise generate dynamically
+	if wave_index < waves.size():
+		_current_wave_config = waves[wave_index]
+	else:
+		_current_wave_config = _get_escalated_wave(wave_index)
 	
 	# Apply room modifiers first (modifies hp_scale/speed_scale in place)
 	var room = GameState.current_room
@@ -89,40 +183,60 @@ func start_wave(wave_index: int) -> void:
 	# Count active enemies from current game state
 	_active_enemies = _current_wave_config.get_total_enemies()
 	
-	# Track wave gold reward
-	GameState.wave_gold_reward = 25
+	# Track wave gold reward (increases with wave number)
+	GameState.wave_gold_reward = 25 + (wave_index * 5)
+	
+	_current_wave_index = wave_index
+	_wave_start_requested = false
 	
 	wave_started.emit(_current_wave_config, _current_wave_index)
-	print("[WaveManager] Started wave %d: %d enemies." % [
-		_current_wave_index + 1, _current_wave_config.get_total_enemies()
+	GameState.wave = wave_index + 1
+	print("[WaveManager] Started wave %d (%d enemies, HP x%.1f, speed x%.1f)." % [
+		_current_wave_index + 1,
+		_current_wave_config.get_total_enemies(),
+		_current_wave_config.hp_scale,
+		_current_wave_config.speed_scale
 	])
 
 ## Build the spawn queue from the current wave config.
-## Returns array of { enemy_data, lane_index } entries.
+## Returns array of { enemy_scene, lane_index, hp, speed } entries.
 func _build_spawn_queue() -> Array:
 	var queue: Array = []
+	
+	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
+	var default_scene = "res://enemy/HungryGoblin.tscn"
 	
 	for entry in _current_wave_config.enemies:
 		var enemy_data: Resource = entry.get("enemy_data", null)
 		var count: int = entry.get("count", 0)
 		
 		if not enemy_data:
-			continue
+			enemy_data = goblin_data
 		
 		# Load the enemy scene (custom_scene or default)
-		var scene_path: String = enemy_data.get("custom_scene", "")
+		var scene_path: String = ""
+		if enemy_data:
+			if "custom_scene" in enemy_data and enemy_data.custom_scene != "":
+				scene_path = enemy_data.custom_scene
 		if not scene_path:
-			scene_path = "res://enemy/HungryGoblin.tscn"
+			scene_path = default_scene
 		var enemy_scene: PackedScene = load(scene_path)
 		
+		var base_hp: float = 40.0
+		var base_speed: float = 60.0
+		if enemy_data:
+			if "max_hp" in enemy_data:
+				base_hp = enemy_data.max_hp
+			if "speed" in enemy_data:
+				base_speed = enemy_data.speed
+		
 		for i in range(count):
-			# Assign to a random lane
 			var lane_index: int = randi() % LaneManager.lane_count
 			queue.append({
 				"enemy_scene": enemy_scene,
 				"lane_index": lane_index,
-				"hp": enemy_data.get("max_hp", 40.0) * _current_wave_config.hp_scale,
-				"speed": enemy_data.get("speed", 60.0) * _current_wave_config.speed_scale,
+				"hp": base_hp * _current_wave_config.hp_scale,
+				"speed": base_speed * _current_wave_config.speed_scale,
 			})
 	
 	# Shuffle the queue for randomness
@@ -156,7 +270,7 @@ func _apply_modifiers(wave: WaveConfig, modifier: Resource) -> WaveConfig:
 	return wave
 
 ## Spawn the next enemy from the queue.
-## Call this each tick via _process.
+## Called automatically by _process each frame.
 func spawn_next() -> bool:
 	if _spawn_queue.is_empty():
 		return false
@@ -182,8 +296,8 @@ func spawn_next() -> bool:
 				enemy.speed = next.speed
 				
 				enemy_spawned.emit(enemy, next.lane_index)
-				print("[WaveManager] Spawned enemy #%d (lane %d)." % [
-					_spawned_count, next.lane_index
+				print("[WaveManager] Spawned enemy #%d (lane %d, HP: %.0f)." % [
+					_spawned_count, next.lane_index, next.hp
 				])
 				return true
 	
@@ -204,7 +318,10 @@ func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 ## Called when all enemies in a wave are defeated.
 ## Transitions GameState to WAVE_COMPLETE and shows card selection.
 func _on_wave_complete() -> void:
-	print("[WaveManager] Wave %d complete!" % (_current_wave_index + 1))
+	print("[WaveManager] Wave %d complete! (%d enemies defeated)" % [
+		_current_wave_index + 1,
+		_spawned_count
+	])
 	
 	# Award gold reward
 	GameState.add_gold(GameState.wave_gold_reward)
@@ -212,12 +329,13 @@ func _on_wave_complete() -> void:
 	# Emit signal
 	wave_complete.emit(_current_wave_index)
 	
-	# Transition to card selection
+	# Advance to card selection
 	advance_to_card_selection()
 
 ## Advance GameState to WAVE_COMPLETE and prepare card selection UI.
 func advance_to_card_selection() -> void:
 	GameState.state = GameState.GameState.WAVE_COMPLETE
+	_wave_start_requested = false
 	
 	# Generate card choices
 	var card_pool := CardPool
@@ -225,11 +343,50 @@ func advance_to_card_selection() -> void:
 	
 	# Pass card data to the card selection UI via GameState
 	if cards.size() > 0:
-		# Store card data on GameState for Main to pick up
 		GameState.set("pending_cards", cards)
+
+## Called after card selection to start the next wave.
+## This is the auto-progression hook that bridges card selection → next wave.
+func start_next_wave() -> void:
+	if not _wave_start_requested:
+		return
+	
+	_next_wave_index += 1
+	
+	# Check if we've exceeded max waves
+	if max_waves > 0 and _next_wave_index >= waves.size():
+		# Generate an escalated wave beyond predefined waves
+		print("[WaveManager] All predefined waves complete. Continuing with escalating waves.")
+	
+	# If we've gone past predefined waves and hitting max, end the run
+	if max_waves > 0 and _next_wave_index >= max_waves:
+		print("[WaveManager] All %d waves complete! Game over." % max_waves)
+		GameState.state = GameState.GameState.GAME_OVER
+		return
+	
+	# Check if we need to generate a new dynamic wave
+	if _next_wave_index >= waves.size():
+		var dynamic_wave = _get_escalated_wave(_next_wave_index)
+		waves.append(dynamic_wave)
+	
+	start_wave(_next_wave_index)
+	_wave_start_requested = false
+
+## Called when a room is selected to prepare for the next wave.
+## Stores the request so start_next_wave() knows to proceed.
+func on_room_selected() -> void:
+	_wave_start_requested = true
+	print("[WaveManager] Room selected. Awaiting card selection to start next wave.")
+
+## Called when a card is selected to trigger next wave start.
+func on_card_selected() -> void:
+	if _wave_start_requested:
+		start_next_wave()
 
 ## Check if the current wave is fully spawned (no more enemies to spawn).
 func is_spawning_done() -> bool:
+	if not _current_wave_config:
+		return true
 	return _spawn_queue.is_empty() && _spawned_count >= _current_wave_config.get_total_enemies()
 
 ## Check if the current wave is complete (all enemies defeated).
@@ -252,3 +409,5 @@ func reset() -> void:
 	_spawn_timer = 0.0
 	_spawned_count = 0
 	_active_enemies = 0
+	_next_wave_index = 0
+	_wave_start_requested = false

@@ -18,7 +18,7 @@
 - [x] Implement an Enemy base class (Enemy.tscn + Enemy.gd) with HP, speed, and lane-based movement
 - [x] Implement one concrete tower: "Goblin Fry Cook" — short-range grease attack with area damage
 - [x] Implement one concrete enemy: "Hungry Goblin" with basic AI (walk toward kitchen)
-- [ ] Implement a wave system: spawn waves of enemies with increasing difficulty between waves
+- [x] Implement a wave system: spawn waves of enemies with increasing difficulty between waves
 - [ ] Implement the card/recipe UI: after each wave, present 3 card choices to the player
 - [ ] Implement the craving system: enemies have food preferences that slow them when fed correctly
 - [ ] Add a simple card deck system: player starts with a deck, draws cards, plays cards to place towers

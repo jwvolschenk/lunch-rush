@@ -1,0 +1,20 @@
+[gd_resource type = "Resource" load_steps = 3 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_SlimeRunner.tres"
+ext_resource[2] = "res://enemy/EnemyData_OgreBrute.tres"
+
+[resource]
+enemies = [
+{
+"count": 8,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 3,
+"enemy_data": ExtResource( 2 )
+}
+]
+hp_scale = 1.8
+speed_scale = 1.4
+spawn_interval = 0.6
+description = "Wave 11 — Slime Runner swarm overwhelms with speed, ogres crash through"

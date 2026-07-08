@@ -1,0 +1,20 @@
+[gd_resource type = "Resource" load_steps = 3 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_GhostChef.tres"
+ext_resource[2] = "res://enemy/EnemyData_HungryGoblin.tres"
+
+[resource]
+enemies = [
+{
+"count": 7,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 5,
+"enemy_data": ExtResource( 2 )
+}
+]
+hp_scale = 1.9
+speed_scale = 1.4
+spawn_interval = 0.7
+description = "Wave 12 — Ghost Chefs phase through towers, goblins pour in behind"

@@ -1,0 +1,15 @@
+[gd_resource type = "Resource" load_steps = 2 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_GhostChef.tres"
+
+[resource]
+enemies = [
+{
+"count": 8,
+"enemy_data": ExtResource( 1 )
+}
+]
+hp_scale = 1.5
+speed_scale = 1.3
+spawn_interval = 0.8
+description = "Wave 7 — A phalanx of Ghost Chefs materializes in the kitchen"

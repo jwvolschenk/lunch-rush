@@ -1,0 +1,30 @@
+[gd_resource type = "Resource" load_steps = 5 format = 3]
+
+ext_resource[1] = "res://enemy/EnemyData_OgreBrute.tres"
+ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
+ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
+ext_resource[4] = "res://enemy/EnemyData_HungryGoblin.tres"
+
+[resource]
+enemies = [
+{
+"count": 4,
+"enemy_data": ExtResource( 1 )
+},
+{
+"count": 6,
+"enemy_data": ExtResource( 2 )
+},
+{
+"count": 5,
+"enemy_data": ExtResource( 3 )
+},
+{
+"count": 6,
+"enemy_data": ExtResource( 4 )
+}
+]
+hp_scale = 2.0
+speed_scale = 1.45
+spawn_interval = 0.6
+description = "Wave 13 — Heavy ogre line, fast slime flanks, ghost chef support"

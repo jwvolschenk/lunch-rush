@@ -114,15 +114,11 @@ func _process(delta: float) -> void:
 	if _countdown_active:
 		_countdown_timer -= delta
 		if HUD and HUD.has_method("show_wave_countdown"):
-			var phase = 3
-			if _countdown_timer > 2.0:
-				phase = 3
-			elif _countdown_timer > 1.0:
-				phase = 2
-			elif _countdown_timer > 0.0:
-				phase = 1
-			else:
+			var phase := ceili(_countdown_timer)
+			if phase < 1:
 				phase = 0
+			elif phase > 3:
+				phase = 3
 			
 			if phase > 0:
 				HUD.show_wave_countdown("%d" % phase)

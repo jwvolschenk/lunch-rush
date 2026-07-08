@@ -48,14 +48,11 @@ signal tower_target_lost(tower: Node2D)
 
 func _ready() -> void:
 	_on_ready_setup()
+	_build_visual()
 
-func _process(delta: float) -> void:
-	if not is_alive:
-		return
-	
-	_fire_timer -= delta
-	if _fire_timer <= 0:
-		_try_fire()
+## Override in child scenes to customize visual appearance
+func _build_visual() -> void:
+	pass
 
 ## Override in child scenes to customize initial stats
 func _on_ready_setup() -> void:
@@ -155,3 +152,12 @@ func remove() -> void:
 	is_alive = false
 	stop_targeting()
 	queue_free()
+
+## Called from _process each frame
+func _process(delta: float) -> void:
+	if not is_alive:
+		return
+	
+	_fire_timer -= delta
+	if _fire_timer <= 0:
+		_try_fire()

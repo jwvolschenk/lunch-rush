@@ -36,6 +36,10 @@ signal projectile_destroyed(projectile: Node2D)
 ## --- Lifecycle ---
 
 func _ready() -> void:
+	_build_visual()
+
+## Override in child scenes to customize visual appearance
+func _build_visual() -> void:
 	pass
 
 func _process(delta: float) -> void:

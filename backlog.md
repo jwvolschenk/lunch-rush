@@ -16,8 +16,8 @@
 - [x] Implement a Lane system: 2-3 lanes with enemies spawning from the right and moving left toward the kitchen
 - [x] Implement a Tower base class (Tower.tscn + Tower.gd) with placement, attack range, damage, and fire rate
 - [x] Implement an Enemy base class (Enemy.tscn + Enemy.gd) with HP, speed, and lane-based movement
-- [ ] Implement one concrete tower: "Goblin Fry Cook" — short-range grease attack with area damage
-- [ ] Implement one concrete enemy: "Hungry Goblin" with basic AI (walk toward kitchen)
+- [x] Implement one concrete tower: "Goblin Fry Cook" — short-range grease attack with area damage
+- [x] Implement one concrete enemy: "Hungry Goblin" with basic AI (walk toward kitchen)
 - [ ] Implement a wave system: spawn waves of enemies with increasing difficulty between waves
 - [ ] Implement the card/recipe UI: after each wave, present 3 card choices to the player
 - [ ] Implement the craving system: enemies have food preferences that slow them when fed correctly

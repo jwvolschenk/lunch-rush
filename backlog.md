@@ -92,7 +92,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Critical: missing project config and scene hierarchy
 
 - [x] Add project.godot file — Godot cannot load this project without a valid project.godot with autoloads (GameState, LaneManager, WaveManager, TowerManager, DeckManager, SaveLoad, SoundManager) and physics/rendering settings
-- [ ] Create Main.tscn scene hierarchy — Main.tscn exists but only has 27 lines; needs root Node2D with LaneManager (with 3-4 Lane children + dividers), TowerManager child, WaveManager child, HUD.tscn, CardSelection.tscn, RoomSelector.tscn, GameOverOverlay.tscn, CameraController.tscn, and InputManager child wired up as a proper scene tree
+- [x] Create Main.tscn scene hierarchy — Main.tscn exists but only has 27 lines; needs root Node2D with LaneManager (with 3-4 Lane children + dividers), TowerManager child, WaveManager child, HUD.tscn, CardSelection.tscn, RoomSelector.tscn, GameOverOverlay.tscn, CameraController.tscn, and InputManager child wired up as a proper scene tree
 
 ## Critical: runtime bugs
 

@@ -108,6 +108,15 @@ enum CardCategory {
 		"rarity": "uncommon",
 		"card_script": "res://card_pool/KitchenUpgradeCard.gd",
 	},
+	{
+		"name": "Emergency Ration",
+		"description": "Heal the kitchen for 10 HP.",
+		"cost": 15,
+		"card_type": CardCategory.STATUS_EFFECT,
+		"icon_color": Color(0.4, 0.9, 0.5, 1),
+		"rarity": "uncommon",
+		"card_script": "res://card_pool/EmergencyRationCard.gd",
+	},
 ]
 
 ## Cards that have been placed this run (to avoid duplicate tower types)

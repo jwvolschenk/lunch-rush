@@ -77,6 +77,6 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Food buff cards: "Kitchen Upgrade" — add a new STATUS_EFFECT card type that buffs all placed towers (e.g., +50% attack speed for 10s or +25% damage for 15s). Extends card variety beyond tower cards.
 
-- [ ] Food buff cards: "Emergency Ration" — add a new STATUS_EFFECT card that heals the kitchen for 10 HP. Adds strategic decision between offense and survival.
+- [x] Food buff cards: "Emergency Ration" — add a new STATUS_EFFECT card that heals the kitchen for 10 HP. Adds strategic decision between offense and survival.
 
 - [ ] WaveConfig data files: Add 5 hand-crafted WaveConfig resources with escalating difficulty (waves 1-5) including varied enemy compositions to replace pure random escalation.

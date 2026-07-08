@@ -99,7 +99,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Add wave 20 victory condition (game over screen with victory message instead of endless waves)
 
 ## Core gameplay: Tower._fire projectile parent
-- [ ] Fix Tower._fire: get_parent() is TowerManager, not a Lane — projectiles spawn in wrong node tree
+- [x] Fix Tower._fire: get_parent() is TowerManager, not a Lane — projectiles spawn in wrong node tree
 
 ## Core gameplay: first room selector
 - [ ] Ensure first wave triggers room selector (start_run sets Pantry directly, bypasses room selector)

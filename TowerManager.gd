@@ -85,6 +85,7 @@ func place_tower(tower_scene: PackedScene, lane_index: int, at_x: float) -> Node
 	towers_by_lane[lane_index].append(tower)
 	
 	tower_placed.emit(tower, lane_index)
+	SoundManager.play_sfx("tower_place")
 	print("[TowerManager] Tower placed on lane %d at x=%.0f." % [lane_index, clamped_x])
 	
 	return tower

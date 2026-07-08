@@ -157,3 +157,16 @@ Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 268 line
 ## Cycle 32  2026-07-08T19:40:18Z  outcome:passed sha:c9c678683b
 
 Executed 2 backlog task(s); 2 completed (no gate; agent self-verified). 246 lines changed.
+
+## Cycle 33  2026-07-08T19:40:18Z  outcome:pending
+
+Reflect phase: project has extensive infrastructure (94 files, 15+ systems) but the room selector is unreachable (ROOM_SELECTING state never triggered), SaveLoad is never hooked to game-over, and missing PizzaDelivery enemy from GOAL.md. Added 5 tasks targeting these gaps.
+
+
+## Cycle 33  2026-07-08T19:43:40Z  outcome:passed sha:d747f7359f
+
+Archived 8 completed items, then reflected: 5 new task(s) added. DONE: 5 tasks added — fix unreachable room selector flow, hook SaveLoad to game-over overlay, add PizzaDelivery enemy, add lane divider walls, add spawn point markers.
+
+## Cycle 34  2026-07-08T19:50:00Z  outcome:pending
+
+Task: Fix room selector flow. The room selector was never shown between waves because `WaveManager.on_card_selected()` auto-started the next wave whenever `GameState.current_room` was set (always true since `start_run()` sets a default Pantry room). Fix: removed the auto-start logic from `on_card_selected()`, and simplified `_on_card_selected()` in main.gd to always transition to ROOM_SELECTING and show the room selector.

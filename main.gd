@@ -250,13 +250,10 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	# Discard the played card from hand
 	DeckManager.discard_card(card_data)
 	# Signal WaveManager that a card was selected (primes next wave start)
-	var wave_started = WaveManager.on_card_selected()
-	# Transition back to PLAYING after card is selected
-	# Only if wave wasn't already started (room selector will handle it)
-	if not wave_started:
-		GameState.state = GameState.GameState.ROOM_SELECTING
-		# Show room selector overlay (player can still choose room)
-		_show_room_selector()
+	WaveManager.on_card_selected()
+	# Transition to room selector (the bridge between card selection and next wave)
+	GameState.state = GameState.GameState.ROOM_SELECTING
+	_show_room_selector()
 
 ## --- Continue handler (called after player clicks overlay to confirm) ---
 func _on_continue_requested() -> void:

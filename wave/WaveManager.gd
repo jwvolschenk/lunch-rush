@@ -362,9 +362,8 @@ func on_room_selected() -> void:
 ## Returns true if a wave was started immediately (room was already selected).
 func on_card_selected() -> bool:
 	_wave_start_requested = true
-	if GameState.current_room:
-		start_next_wave()
-		return true
+	# Always transition to ROOM_SELECTING — the room selector is the bridge
+	# between card selection and the next wave. Never auto-start here.
 	return false
 
 ## Check if the current wave is fully spawned (no more enemies to spawn).

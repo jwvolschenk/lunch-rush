@@ -64,3 +64,13 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 # --- Cycle 29 reflect additions ---
 
 ## Theme: fill the gap between GOAL.md scope and current implementation
+
+# --- Cycle 33 reflect additions ---
+
+## Theme: fix unreachable room selector, hook save system, and add missing enemy
+
+- [x] Fix room selector flow: wire ROOM_SELECTING state to show between card selection and next wave
+- [ ] Hook SaveLoad.save_run() into game_over overlay restart button
+- [ ] Add PizzaDelivery enemy type (GOAL.md spec) with fast speed and craving on pizza
+- [ ] Add lane divider walls (visual barrier between lanes that enemies cannot cross)
+- [ ] Add enemy spawn point markers on each lane (visual indicators for spawn positions)

@@ -237,6 +237,8 @@ func _build_spawn_queue() -> Array:
 				"lane_index": lane_index,
 				"hp": base_hp * _current_wave_config.hp_scale,
 				"speed": base_speed * _current_wave_config.speed_scale,
+				"gold_reward": enemy_data.gold_reward if enemy_data else 10,
+				"score_reward": enemy_data.score_reward if enemy_data else 10,
 			})
 	
 	# Shuffle the queue for randomness
@@ -294,6 +296,10 @@ func spawn_next() -> bool:
 				enemy.max_hp = next.hp
 				enemy.current_hp = next.hp
 				enemy.speed = next.speed
+				if "gold_reward" in next:
+					enemy.gold_reward = next.gold_reward
+				if "score_reward" in next:
+					enemy.score_reward = next.score_reward
 				
 				enemy_spawned.emit(enemy, next.lane_index)
 				print("[WaveManager] Spawned enemy #%d (lane %d, HP: %.0f)." % [

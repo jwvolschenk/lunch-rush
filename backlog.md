@@ -40,7 +40,7 @@
 - [x] Implement card selection UI: 3-card choice panel after each wave, click-to-continue
 - [x] Implement player deck: starts with 5 cards, draws from deck each turn, discard pile
 - [x] Implement craving mechanic: random enemy craving, feeding matching food applies slow debuff
-- [ ] Add gold economy: gold per kill, gold display on HUD, tower costs
+- [x] Add gold economy: gold per kill, gold display on HUD, tower costs
 - [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement
 
 DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves, cards, cravings, gold economy, camera
@@ -58,7 +58,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [ ] Implement card selection UI: 3-card choice panel overlay, each card shows name/preview, click-to-select, then transitions back to PLAYING
 - [ ] Implement player deck system: starts with 5 starter cards, draw pool, discard pile, draw-from-deck each turn
 - [ ] Implement craving mechanic: each enemy has a random craving (food type enum), feeding matching food applies slow debuff, wrong food applies enrage buff
-- [ ] Implement gold economy: gold per kill, gold display on HUD, tower costs deducted on placement, gold_changed signal drives UI updates
+- [x] Implement gold economy: gold per kill, gold display on HUD, tower costs deducted on placement, gold_changed signal drives UI updates
 - [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement, Camera2D node configured
 - [ ] Implement game-over / restart flow: health reaches 0 → show summary overlay (score, waves survived, gold earned) → offer restart button
 - [ ] Add placeholder art: colored rectangles for towers (yellow), enemies (green/red), lanes (grey), UI panels (dark with borders)
@@ -80,8 +80,8 @@ DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base clas
 - [ ] Implement WaveManager autoload with wave config data model: defines wave composition (enemy types, counts, HP/speed scaling), spawn timing, emits wave_started/wave_complete signals, integrates with GameState state machine
 - [ ] Implement Card data model (Card.gd): properties for name, description, cost, card_type enum, apply effect method; serves as data source for card selection UI and deck system
 - [ ] Implement input system (InputManager.gd): mouse click detection on lanes for tower placement, keyboard shortcuts for card selection (1/2/3 keys, space to confirm), cursor state management for placement preview
-- [ ] Implement Main.tscn scene hierarchy: add HUD panel (score, wave, health, gold display), add lane container, add card selection overlay panel, add game-over overlay panel, wire all nodes together
-- [ ] Implement Gold HUD display: Label-based HUD with score/wave/health/gold values, updates bound to GameState signals, dark panel with border styling for readability
+- [x] Implement Main.tscn scene hierarchy: add HUD panel (score, wave, health, gold display), add lane container, add card selection overlay panel, add game-over overlay panel, wire all nodes together
+- [x] Implement Gold HUD display: Label-based HUD with score/wave/health/gold values, updates bound to GameState signals, dark panel with border styling for readability
 - [ ] Implement Goblin Fry Cook concrete tower scene: extends Tower, sets range=200 damage=3 cooldown=1.5 projectile_scene=grease projectile, yellow ColorRect sprite with grease attack visual
 
 DONE: 6 tasks — WaveManager with wave data, card data model, input system, Main.tscn wiring, gold HUD, Goblin Fry Cook tower

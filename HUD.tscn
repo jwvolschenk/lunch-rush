@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_hudscript"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hud_panel"]
+
+[node name="HUD" parent="" instance=ExtResource("1_hudscript") id=1]
+visible = true
+
+[node name="Panel" parent=HUD 2]
+anchors_preset = 6
+edge_left = 0.0
+edge_top = 0.0
+edge_right = 1.0
+edge_bottom = 0.08
+layout_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hud_panel")
+
+[node name="GoldLabel" parent=HUD/Panel 3]
+layout_mode = 1
+anchor_left = 0.02
+anchor_top = 0.2
+anchor_right = 0.25
+anchor_bottom = 0.8
+theme_override_font_sizes/font_size = 18
+text = "Gold: 100"
+horizontal_alignment = 0
+
+[node name="ScoreLabel" parent=HUD/Panel 4]
+layout_mode = 1
+anchor_left = 0.28
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.8
+theme_override_font_sizes/font_size = 18
+text = "Score: 0"
+horizontal_alignment = 0
+
+[node name="WaveLabel" parent=HUD/Panel 5]
+layout_mode = 1
+anchor_left = 0.52
+anchor_top = 0.2
+anchor_right = 0.75
+anchor_bottom = 0.8
+theme_override_font_sizes/font_size = 18
+text = "Wave: 1"
+horizontal_alignment = 0
+
+[node name="HealthLabel" parent=HUD/Panel 6]
+layout_mode = 1
+anchor_left = 0.78
+anchor_top = 0.2
+anchor_right = 0.98
+anchor_bottom = 0.8
+theme_override_font_sizes/font_size = 18
+text = "Health: 20"
+horizontal_alignment = 0

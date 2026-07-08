@@ -5,6 +5,7 @@ extends Node2D
 
 ## --- Core system references ---
 var lane_manager: LaneManager
+var hud: Control
 
 ## --- Card selection ---
 var card_selection: CardSelection
@@ -36,6 +37,11 @@ func _ready() -> void:
 	if game_over_overlay:
 		game_over_overlay.restart_requested.connect(_on_restart)
 		game_over_overlay.quit_requested.connect(_on_quit)
+	
+	# Reference the HUD
+	hud = $HUD
+	if hud:
+		print("[Main] HUD loaded.")
 	
 	# Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
@@ -197,6 +203,15 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 
 ## --- Tower placement from card ---
 func _place_tower_from_card(card_data: Dictionary) -> void:
+	var cost = card_data.get("cost", 0)
+	if GameState.gold < cost:
+		print("[Main] Not enough gold to place tower '%s' (need %d, have %d)." % [card_data.name, cost, GameState.gold])
+		return
+	
+	if not GameState.spend_gold(cost):
+		print("[Main] Failed to spend gold for tower '%s'." % card_data.name)
+		return
+	
 	if not card_data.has("tower_scene"):
 		print("[Main] No tower_scene on card: %s" % card_data.name)
 		return
@@ -216,7 +231,7 @@ func _place_tower_from_card(card_data: Dictionary) -> void:
 	var tower = TowerManager.place_tower(tower_scene, lane_index, at_x)
 	
 	if tower:
-		print("[Main] Placed tower '%s' on lane %d." % [card_data.name, lane_index])
+		print("[Main] Placed tower '%s' on lane %d (cost: %d gold)." % [card_data.name, lane_index, cost])
 	else:
 		print("[Main] Failed to place tower '%s'." % card_data.name)
 
@@ -284,7 +299,10 @@ func _on_enemy_reached_kitchen(enemy: Node2D, lane_index: int) -> void:
 
 func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 	print("[Main] Enemy died on lane %d." % lane_index)
-	GameState.add_gold(10)
+	var gold = 10
+	if enemy and "gold_reward" in enemy:
+		gold = enemy.gold_reward
+	GameState.add_gold(gold)
 	GameState.add_score(10)
 
 ## --- Restart / Quit ---

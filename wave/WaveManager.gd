@@ -149,7 +149,7 @@ func _generate_default_waves() -> void:
 	waves = []
 	
 	# Define the base enemy pool for waves
-	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
+	var goblin_data: Resource = load("res://enemy/EnemyData.gd").new()
 	
 	for i in range(max_waves):
 		var wave := WaveConfig.new()
@@ -235,7 +235,7 @@ func start_wave(wave_index: int) -> void:
 func _build_spawn_queue() -> Array:
 	var queue: Array = []
 	
-	var goblin_data: Resource = preload("res://enemy/EnemyData.gd").new()
+	var goblin_data: Resource = load("res://enemy/EnemyData.gd").new()
 	var default_scene = "res://enemy/HungryGoblin.tscn"
 	
 	for entry in _current_wave_config.enemies:

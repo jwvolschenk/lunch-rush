@@ -89,6 +89,32 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Theme: critical fixes, quality-of-life, and gameplay polish
 
+## Critical: missing preload and broken resource paths
+- [x] Fix WaveManager.gd missing WaveConfig preload (get_wave returns WaveConfig type without preload)
+
+## Critical: Tower base class blocks child per-frame logic
+- [ ] Make Tower._process virtual / document super._process requirement for child tower scripts
+
+## Core gameplay: wave end condition
+- [ ] Add wave 20 victory condition (game over screen with victory message instead of endless waves)
+
+## Core gameplay: Tower._fire projectile parent
+- [ ] Fix Tower._fire: get_parent() is TowerManager, not a Lane — projectiles spawn in wrong node tree
+
+## Core gameplay: first room selector
+- [ ] Ensure first wave triggers room selector (start_run sets Pantry directly, bypasses room selector)
+
+## Card system: dead code and disconnected hand
+- [ ] Remove dead Card.apply_effect / from_dict methods (CardPool uses dictionary dispatch, never calls them)
+- [ ] Wire DeckManager hand into HUD or card selection UI (hand exists but has no visual representation)
+
+## Polish: audio assets
+- [ ] Add placeholder audio assets (SFX for tower fire, wave complete, enemy death, card pick)
+- [ ] Fix SoundManager.sfx_paths to use existing files or add placeholder audio
+
+## Core gameplay: EnemyData preload path
+- [ ] Fix WaveManager._generate_default_waves: preload("res://enemy/EnemyData.gd") should be "res://enemy/EnemyData_HungryGoblin.tres"
+
 ## Critical: missing project config and scene hierarchy
 
 

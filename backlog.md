@@ -25,3 +25,22 @@
 - [ ] Implement run progression: after a run ends (all health lost), show summary and offer restart
 - [ ] Replace README.md with Godot project README: how to open, controls, game overview
 - [ ] Add basic placeholder art (colored rectangles) for towers, enemies, lanes, and UI
+
+# --- Cycle 5 reflect additions ---
+
+## Theme: core gameplay loop — make a minimally playable demo
+
+- [ ] Implement GameState autoload (score, wave, health, gold) with clear signals for UI updates
+- [ ] Implement Lane system with 2 lanes: enemies spawn right, walk left; lane rendering and spawn point config
+- [ ] Implement Enemy base scene (ColorRect sprite) with HP bar, lane movement, and kitchen-reach detection
+- [ ] Implement Tower base scene + Tower.gd with range circle, targeting, damage, cooldown, and fire animation
+- [ ] Implement Goblin Fry Cook concrete tower: 3 tiles range, grease projectile with area splash, 1.5s cooldown
+- [ ] Implement Hungry Enemy concrete type: 40 HP, 60px/s speed, standard walk animation toward kitchen
+- [ ] Implement WaveManager autoload: spawns escalating waves (count, HP, speed), shows "Wave Complete" overlay
+- [ ] Implement card selection UI: 3-card choice panel after each wave, click-to-continue
+- [ ] Implement player deck: starts with 5 cards, draws from deck each turn, discard pile
+- [ ] Implement craving mechanic: random enemy craving, feeding matching food applies slow debuff
+- [ ] Add gold economy: gold per kill, gold display on HUD, tower costs
+- [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement
+
+DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves, cards, cravings, gold economy, camera

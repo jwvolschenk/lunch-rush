@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[node name="SpawnMarker" type="Node2D" id=3]
+
+[node name="SpawnBackground" parent="SpawnMarker" type="ColorRect" id=4]
+offset_left = -200.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+color = Color(0.95, 0.6, 0.15, 0.06)
+
+[node name="SpawnRing" parent="SpawnMarker" type="ColorRect" id=5]
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+color = Color(0.95, 0.6, 0.15, 1)

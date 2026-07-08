@@ -16,6 +16,9 @@ extends Node2D
 ## Distance from right edge where enemies spawn
 @export var spawn_offset: float = 100.0
 
+## Whether to show spawn point markers on this lane
+@export var show_spawn_marker: bool = true
+
 ## --- Computed properties ---
 ## Spawn point (right side of screen)
 var spawn_position: Vector2:
@@ -29,6 +32,9 @@ const KITCHEN_THRESHOLD: float = -50.0
 # Track enemies currently on this lane
 var enemies: Array[Node2D] = []
 
+# Spawn marker visual indicator
+var _spawn_marker: Node2D = null
+
 ## --- Signals ---
 ## Emitted when an enemy reaches the kitchen (left edge)
 signal enemy_reached_kitchen(enemy: Node2D)
@@ -38,6 +44,17 @@ signal enemy_died(enemy: Node2D)
 ## --- Lifecycle ---
 func _ready() -> void:
 	position.y = y
+	_setup_spawn_marker()
+
+## Set up the spawn point marker visual
+func _setup_spawn_marker() -> void:
+	if not show_spawn_marker:
+		return
+	var marker_scene := load("res://lane/SpawnMarker.tscn") as PackedScene
+	_spawn_marker = marker_scene.instantiate()
+	_spawn_marker.position = spawn_position
+	_spawn_marker.set_visible(true)
+	add_child(_spawn_marker)
 
 ## --- Enemy management ---
 

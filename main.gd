@@ -21,6 +21,7 @@ var game_over_overlay: GameOverOverlay
 
 ## --- Wave management ---
 var _next_wave_ready: bool = false
+var _pending_unlocks: Dictionary = {}
 
 ## --- Lifecycle ---
 func _ready() -> void:
@@ -141,8 +142,10 @@ func _on_state_changed(new_state: int) -> void:
 					GameState.waves_completed,
 					GameState.gold,
 					GameState.health,
-					SaveLoad.get_high_score()
+					SaveLoad.get_high_score(),
+					_pending_unlocks
 				)
+				_pending_unlocks = {}
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:
@@ -409,6 +412,9 @@ func _show_room_selector() -> void:
 ## --- Callbacks ---
 func _on_game_over() -> void:
 	print("[Main] Game over! Health depleted.")
+	# Save run and check unlocks
+	SaveLoad.save_run(GameState.score, GameState.waves_completed, GameState.gold)
+	_pending_unlocks = SaveLoad.check_unlocks(GameState.waves_completed)
 	WaveManager.reset()
 	GameState.state = GameState.GameState.GAME_OVER
 
@@ -454,10 +460,14 @@ func _on_tower_placement_cancelled() -> void:
 ## --- Restart / Quit ---
 func _on_restart() -> void:
 	print("[Main] Restarting run...")
-	SaveLoad.save_run(GameState.score, GameState.waves_completed, GameState.gold)
 	if game_over_overlay:
 		game_over_overlay.hide_game_over()
 	GameState.start_run()
+	# Apply meta-progression starting gold bonus
+	var gold_bonus = SaveLoad.get_unlocked_gold_bonus()
+	if gold_bonus > 0:
+		GameState.gold += gold_bonus
+		print("[Main] Starting gold bonus: +%d (total: %d)" % [gold_bonus, GameState.gold])
 	_start_first_wave()
 
 func _on_quit() -> void:

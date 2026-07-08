@@ -5,6 +5,8 @@ extends Resource
 ##
 ## Used by Main and WaveManager to populate the CardSelection UI
 ## after each wave completes.
+##
+## Meta-progression: filters towers/cards by SaveLoad unlocks.
 
 ## Available card type categories
 enum CardCategory {
@@ -152,6 +154,7 @@ var _last_tower_card: Dictionary = {}
 ## Get a pool of `count` cards for the current wave.
 ## Uses rarity-weighted random selection, skipping already-placed towers
 ## unless allow_duplicate_towers is true.
+## Also respects SaveLoad unlock restrictions.
 func get_card_pool(count: int = 3) -> Array[Dictionary]:
 	var available := _get_available_cards()
 	var selected: Array[Dictionary] = []
@@ -191,15 +194,22 @@ func reset() -> void:
 
 ## --- Internal helpers ---
 
-## Get cards that are available (not already placed as towers).
+## Get cards that are available (not already placed as towers, and not locked by meta-progression).
 func _get_available_cards() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
+	var unlocked_towers = SaveLoad.get_unlocked_towers()
+	var unlocked_cards = SaveLoad.get_unlocked_cards()
 	for card in all_cards:
 		if card.get("card_type") == CardCategory.TOWER:
 			var tower_name = card.get("name", "")
+			if not unlocked_towers.has(tower_name):
+				continue
 			if allow_duplicate_towers or not _placed_towers.has(tower_name):
 				result.append(card)
 		else:
+			var card_name = card.get("name", "")
+			if not unlocked_cards.has(card_name):
+				continue
 			result.append(card)
 	return result
 

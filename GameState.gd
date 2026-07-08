@@ -126,6 +126,12 @@ func start_run() -> void:
 	waves_played = 0
 	state = GameState.PLAYING
 	
+	# Apply meta-progression starting gold bonus
+	var bonus = SaveLoad.get_unlocked_gold_bonus()
+	if bonus > 0:
+		gold += bonus
+		print("[GameState] Starting gold bonus: +%d" % bonus)
+	
 	# Initialize the deck for this run
 	DeckManager.reset()
 	

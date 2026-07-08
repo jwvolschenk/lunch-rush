@@ -93,7 +93,7 @@ DONE: 6 tasks — WaveManager with wave data, card data model, input system, Mai
 - [x] Implement card selection UI: 3-card overlay panel that appears in WAVE_COMPLETE state, each card shows icon/name/description/cost, click to select, auto-advance back to PLAYING
 - [x] Implement wave-complete flow: WaveManager detects all enemies dead → emits signal → GameState transitions to WAVE_COMPLETE → card UI appears → on card selected → GameState transitions to PLAYING and starts next wave
 - [x] Implement player deck system: DeckManager autoload managing draw/discard pools, starting deck of 5 cards, draw-on-wave-complete, discard played cards, deck exhaustion handling
-- [ ] Implement game-over overlay: full-screen panel with score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game state on confirm
+- [x] Implement game-over overlay: full-screen panel with score/waves/gold stats, restart button, triggers when GameState.health_depleted fires, resets game state on confirm
 - [ ] Implement craving mechanic: each enemy has a random craving_food enum (grease/soup/spice), matching craving applies 30% slow debuff for 5s, wrong food applies 20% enrage (speed+20%) for 3s
 
 DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, game-over overlay, craving mechanic

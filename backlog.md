@@ -97,7 +97,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Critical: runtime bugs
 
 - [x] Fix Tower.gd _fire() using non-existent add_sibling() — Tower.gd line calls `add_sibling(projectile)` which does not exist in GDScript; replace with `add_child(projectile)` to fix tower attacks crashing at runtime
-- [ ] Fix GameState room modifier stacking — _apply_room_modifier() in GameState.gd accumulates modifiers permanently (+= on enemy_count, *= on enemy_hp/speed) with no reset; add _reset_room_modifiers() called between waves so each room choice starts from baseline
+- [x] Fix GameState room modifier stacking — _apply_room_modifier() in GameState.gd accumulates modifiers permanently (+= on enemy_count, *= on enemy_hp/speed) with no reset; add _reset_room_modifiers() called between waves so each room choice starts from baseline
 
 ## Core gameplay polish: wave progress bar
 

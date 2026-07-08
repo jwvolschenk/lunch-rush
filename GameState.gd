@@ -112,6 +112,7 @@ func clear_pending_card() -> void:
 func _apply_room_modifier(room: Resource) -> void:
 	if not room:
 		return
+	_reset_room_modifiers()
 	var enemy_count_mod: int = 0
 	var enemy_hp_mod: float = 1.0
 	var enemy_speed_mod: float = 1.0
@@ -128,6 +129,12 @@ func _apply_room_modifier(room: Resource) -> void:
 	wave_enemy_hp *= enemy_hp_mod
 	wave_enemy_speed *= enemy_speed_mod
 	wave_gold_reward = int(wave_gold_reward * (1.0 + gold_bonus * 0.01))
+
+func _reset_room_modifiers() -> void:
+	wave_enemy_count = 0
+	wave_enemy_hp = 1.0
+	wave_enemy_speed = 60.0
+	wave_gold_reward = 25
 
 ## --- Methods ---
 

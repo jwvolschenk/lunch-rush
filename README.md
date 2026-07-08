@@ -34,6 +34,10 @@ Run a magical dungeon deli while waves of hungry monsters storm your kitchen. Se
 - **Enemies**: Hungry monsters with cravings — feed them right to slow them, wrong to enrage them.
 - **Roguelite runs**: Each dinner service is a fresh run with permadeath.
 
+## Data Models
+
+- **EnemyData** (`enemy/EnemyData.gd`) — scriptable resource for enemy stats (HP, speed, gold/score rewards, craving type, tint color, custom scene path). Configure enemy types in the editor without code changes.
+
 ## Building
 
 Requires Godot 4.x. Open this project folder in the Godot editor and run the project.

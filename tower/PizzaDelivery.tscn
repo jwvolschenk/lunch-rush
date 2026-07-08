@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://pizza_delivery_tower"]
+
+[node name="PizzaDelivery" type="Node2D" id=1]
+script = ExtResource("1_tower_script")
+
+[node name="Visual" type="ColorRect" parent=. id=2]
+size = Vector2(40, 40)
+offset_left = -20
+offset_top = -20
+offset_right = 20
+offset_bottom = 20
+color = Color(0.2, 0.7, 0.9, 1)
+
+[ext_resource type="Script" path="res://tower/PizzaDelivery.gd" id="1_tower_script"]

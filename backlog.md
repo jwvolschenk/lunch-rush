@@ -78,7 +78,7 @@ DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base clas
 ## Theme: wiring infrastructure into playable game — scene hierarchy, input, wave data, cards
 
 - [x] Implement WaveManager autoload with wave config data model: defines wave composition (enemy types, counts, HP/speed scaling), spawn timing, emits wave_started/wave_complete signals, integrates with GameState state machine
-- [ ] Implement Card data model (Card.gd): properties for name, description, cost, card_type enum, apply effect method; serves as data source for card selection UI and deck system
+- [x] Implement Card data model (Card.gd): properties for name, description, cost, card_type enum, apply effect method; serves as data source for card selection UI and deck system
 - [ ] Implement input system (InputManager.gd): mouse click detection on lanes for tower placement, keyboard shortcuts for card selection (1/2/3 keys, space to confirm), cursor state management for placement preview
 - [x] Implement Main.tscn scene hierarchy: add HUD panel (score, wave, health, gold display), add lane container, add card selection overlay panel, add game-over overlay panel, wire all nodes together
 - [x] Implement Gold HUD display: Label-based HUD with score/wave/health/gold values, updates bound to GameState signals, dark panel with border styling for readability

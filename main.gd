@@ -18,10 +18,9 @@ var room_selector: RoomSelector
 
 ## --- Game-over overlay ---
 var game_over_overlay: GameOverOverlay
+## --- Unlock display ---
+var unlocks_overlay: Control
 
-## --- Wave management ---
-var _next_wave_ready: bool = false
-var _pending_unlocks: Dictionary = {}
 
 ## --- Lifecycle ---
 func _ready() -> void:
@@ -47,18 +46,18 @@ func _ready() -> void:
 	if hud:
 		print("[Main] HUD loaded.")
 	
-	# Reference the camera controller
+# Reference the camera controller
 	camera_controller = $CameraController
 	if camera_controller:
 		print("[Main] Camera controller loaded.")
 	
-	# Connect game state signals
-	GameState.state_changed.connect(_on_state_changed)
-	GameState.health_depleted.connect(_on_game_over)
+	# Reference the unlocks overlay
+	unlocks_overlay = $UnlocksOverlay
 	
-	# Connect wave signals
-	WaveManager.wave_started.connect(_on_wave_started)
-	WaveManager.wave_complete.connect(_on_wave_complete)
+# Connect game state signals
+	GameState.state_changed.connect(_on_state_changed)
+GameState.health_depleted.connect(_on_game_over)
+	WaveManager.wave_complete.connect(_on_wave_completed_check_unlocks)
 	WaveManager.enemy_spawned.connect(_on_enemy_spawned)
 	WaveManager.enemy_died.connect(_on_enemy_died)
 	
@@ -253,15 +252,15 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	CardPool.record_card_played(card_data)
 	# Discard the played card from hand
 	DeckManager.discard_card(card_data)
-	# Signal WaveManager that a card was selected (primes next wave start)
-	WaveManager.on_card_selected()
-	# Transition to room selector (the bridge between card selection and next wave)
+# Signal WaveManager that a card was selected (primes next wave start)
 	GameState.state = GameState.GameState.ROOM_SELECTING
+	_show_unlocks_overlay()
 	_show_room_selector()
 
 ## --- Continue handler (called after player clicks overlay to confirm) ---
 func _on_continue_requested() -> void:
 	GameState.state = GameState.GameState.ROOM_SELECTING
+	_show_unlocks_overlay()
 	_show_room_selector()
 
 ## --- Apply a card effect ---
@@ -413,6 +412,22 @@ func _show_room_selector() -> void:
 	if room_selector:
 		var rooms = _get_room_choices()
 		room_selector.show_rooms(rooms)
+## --- Unlock display between card selection and room selector ---
+func _check_unlocks() -> void:
+	GameState.check_unlocks_between_waves()
+
+func _show_unlocks_overlay() -> void:
+	if not unlocks_overlay:
+		return
+	var pending = GameState.pending_unlocks
+	if pending.size() == 0:
+		return
+	var has_towers = pending.get("new_towers", []).size() > 0
+	var has_cards = pending.get("new_cards", []).size() > 0
+	if not has_towers and not has_cards:
+		return
+	unlocks_overlay.show_unlocks(pending)
+
 
 ## --- Callbacks ---
 func _on_game_over() -> void:
@@ -426,6 +441,8 @@ func _on_game_over() -> void:
 func _on_wave_started(wave_config: WaveConfig, wave_index: int) -> void:
 	print("[Main] Wave %d started: %s" % [wave_index + 1, wave_config.description])
 
+func _on_wave_completed_check_unlocks(_wave_index: int) -> void:
+	_check_unlocks()
 func _on_wave_complete(wave_index: int) -> void:
 	print("[Main] Wave %d complete! Awarded %d gold." % [
 		wave_index + 1, GameState.wave_gold_reward

@@ -24,6 +24,10 @@ signal wave_started(wave_index: int)
 
 ## Emitted when a wave completes (all enemies defeated).
 signal wave_completed(wave_index: int)
+## Pending unlocks discovered between waves (filled by check_unlocks_between_waves).
+var _pending_unlocks: Dictionary = {}
+var pending_unlocks: Dictionary:
+	get: return _pending_unlocks.duplicate()
 
 ## The number of waves completed in the current run.
 var waves_completed: int = 0:
@@ -198,6 +202,17 @@ func start_wave(wave_index: int) -> void:
 func complete_wave() -> void:
 	wave_completed.emit(wave)
 	waves_completed += 1
+## Check for unlocks between waves. Called after each wave completes.
+## Only checks once per run (when _pending_unlocks is empty) to avoid
+## double-unlocking at game-over.
+func check_unlocks_between_waves() -> void:
+	if _pending_unlocks.size() > 0:
+		return  # Already checked this run
+	_pending_unlocks = SaveLoad.check_unlocks(waves_completed)
+	if _pending_unlocks.get("new_towers", []).size() > 0 or _pending_unlocks.get("new_cards", []).size() > 0:
+		print("[GameState] New unlocks: %s towers, %s cards" % [
+			_pending_unlocks.get("new_towers", []).size(),
+			_pending_unlocks.get("new_cards", []).size()])
 
 ## --- Damage flash ---
 

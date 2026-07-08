@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="StyleBoxFlat"_id"panel_style"]
+bg_color = Color( 0.06, 0.06, 0.06, 0.95 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+cornerRadius = 8
+
+[sub_resource type="StyleBoxFlat"_id"item_style"]
+bg_color = Color( 0.12, 0.12, 0.12, 0.8 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.25, 0.25, 0.25, 1 )
+cornerRadius = 6
+
+[sub_resource type="ColorRect"_id"overlay_bg"]
+color = Color( 0, 0, 0, 0.65 )
+
+[sub_resource type="ColorRect"_id"fade_top"]
+color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="FontVariation"_id"golden_font"]
+font = null
+size = 28
+
+[sub_resource type="FontVariation"_id"item_font"]
+font = null
+size = 14
+
+[ext_resource type="Script" path="res://unlocks/UnlocksOverlay.gd" id=1]
+
+[node name="UnlocksOverlay" type="Control" id=1]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+script = ExternalResource("res://unlocks/UnlocksOverlay.gd")
+
+[node name="overlay_bg" parent=Entry 1 type="ColorRect" id=2]
+layout_mode = 1
+anchors_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+color = sub_resource("ColorRect"_id"overlay_bg")
+visible = false
+
+[node name="fade_top" parent=Entry 1 type="ColorRect" id=3]
+layout_mode = 1
+anchors_preset = 6
+anchor_top = 0
+anchor_bottom = 0.25
+anchor_right = 1
+color = sub_resource("ColorRect"_id"fade_top")
+visible = false
+
+[node name="Panel" parent=Entry 1 type="PanelContainer" id=4]
+layout_mode = 1
+anchor_preset = 7
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+theme_override_constants/contents_margin_left = 60
+theme_override_constants/contents_margin_top = 60
+theme_override_constants/contents_margin_right = 60
+theme_override_constants/contents_margin_bottom = 60
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")
+visible = false
+
+[node name="Title" parent=Entry 4 type="Label" id=5]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 28
+theme_override_colors/font_color = Color( 0.95, 0.75, 0.1, 1 )
+text = "PERK UNLOCKED!"
+horizontal_alignment = 1
+custom_minimum_size = Vector2( 0, 28 )
+theme_override_font_resolutions/normal_font = 1
+
+[node name="ScrollContainer" parent=Entry 4 type="ScrollContainer" id=6]
+layout_mode = 1
+anchor_preset = 15
+anchor_right = 1
+anchor_bottom = 1
+grow_vertical = 2
+grow_horizontal = 2
+
+[node name="VBoxContainer" parent=Entry 6 type="VBoxContainer" id=7]
+layout_mode = 1
+theme_override_constants/separation = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+theme_override_styles/contents = sub_resource("StyleBoxFlat"_id"panel_style")

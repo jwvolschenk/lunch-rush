@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" path="res://rooms/RoomSelector.tscn" id="6_room"]
 [ext_resource type="PackedScene" path="res://game_over/GameOverOverlay.tscn" id="7_gameover"]
 [ext_resource type="PackedScene" path="res://CameraController.tscn" id="8_cam"]
-[ext_resource type="Script" path="res://LaneManager.gd" id="9_lanemgr"]
+[ext_resource type="PackedScene" path="res://unlocks/UnlocksOverlay.tscn" id="9_unlocks"]
+[ext_resource type="Script" path="res://LaneManager.gd" id="13_lanemgr"]
 [ext_resource type="Script" path="res://TowerManager.gd" id="10_towermgr"]
 [ext_resource type="Script" path="res://wave/WaveManager.gd" id="11_wavemgr"]
 [ext_resource type="Script" path="res://InputManager.gd" id="12_inputmgr"]
@@ -17,7 +18,7 @@
 script = ExtResource("1_main")
 
 [node name="LaneManager" type="Node" id=13 parent=Main]
-script = ExtResource("9_lanemgr")
+script = ExtResource("13_lanemgr")
 
 [node name="TowerManager" type="Node" id=14 parent=Main]
 script = ExtResource("10_towermgr")
@@ -82,6 +83,9 @@ visible = true
 
 [node name="CardSelection" parent=Main instance=ExtResource("5_card") id=4]
 visible = false
+[node name="UnlocksOverlay" parent=Main instance=ExtResource("9_unlocks") id=9]
+visible = false
+
 
 [node name="RoomSelector" parent=Main instance=ExtResource("6_room") id=5]
 visible = false

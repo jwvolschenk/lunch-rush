@@ -124,5 +124,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Fix wave countdown countdown phase logic — WaveManager._process() phase calculation uses > 2.0/ > 1.0 checks which are wrong for a 3-second countdown (should show 3, 2, 1 then hide); fix to use >= comparisons: > 2.0=3, > 1.0=2, > 0.0=1, else=0 then hide
 
 ## Meta-progression: unlock display between waves
-
-- [ ] Show new unlocks before room selector — after card selection, if new towers/cards were unlocked during the run, show a brief "New Unlocks" overlay between card selection and room selection; list new towers in a scrollable panel with "PERK UNLOCKED" header and fade out after 2 seconds
+- [x] Show new unlocks before room selector — after card selection, if new towers/cards were unlocked during the run, show a brief "New Unlocks" overlay between card selection and room selection; list new towers in a scrollable panel with "PERK UNLOCKED" header and fade out after 2 seconds

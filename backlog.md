@@ -52,7 +52,7 @@ DONE: 12 tasks — core gameplay loop: game state, lanes, towers, enemies, waves
 - [x] Implement Enemy base class (Enemy.tscn + Enemy.gd) with HP bar, lane movement toward kitchen, and death signal
 - [x] Implement Hungry Goblin concrete enemy: 40 HP, 60px/s speed, ColorRect sprite with green fill
 - [x] Implement Tower base class (Tower.tscn + Tower.gd) with range circle, targeting nearest enemy, damage, cooldown, and fire animation
-- [ ] Implement Goblin Fry Cook concrete tower: 3-lane-tile range, grease projectile with 3 damage area splash, 1.5s cooldown, yellow ColorRect sprite
+- [x] Implement Goblin Fry Cook concrete tower: 3-lane-tile range, grease projectile with 3 damage area splash, 1.5s cooldown, yellow ColorRect sprite
 - [ ] Implement WaveManager autoload: spawns escalating waves (count, HP, speed scaling), tracks wave state, emits wave_complete signal
 - [ ] Implement wave complete flow: LaneManager detects all enemies cleared → emits signal → GameState transitions to WAVE_COMPLETE → Main shows card selection prompt
 - [ ] Implement card selection UI: 3-card choice panel overlay, each card shows name/preview, click-to-select, then transitions back to PLAYING
@@ -82,7 +82,7 @@ DONE: 2 tasks — TowerManager (tower placement/lifecycle), Projectile base clas
 - [ ] Implement input system (InputManager.gd): mouse click detection on lanes for tower placement, keyboard shortcuts for card selection (1/2/3 keys, space to confirm), cursor state management for placement preview
 - [x] Implement Main.tscn scene hierarchy: add HUD panel (score, wave, health, gold display), add lane container, add card selection overlay panel, add game-over overlay panel, wire all nodes together
 - [x] Implement Gold HUD display: Label-based HUD with score/wave/health/gold values, updates bound to GameState signals, dark panel with border styling for readability
-- [ ] Implement Goblin Fry Cook concrete tower scene: extends Tower, sets range=200 damage=3 cooldown=1.5 projectile_scene=grease projectile, yellow ColorRect sprite with grease attack visual
+- [x] Implement Goblin Fry Cook concrete tower scene: extends Tower, sets range=200 damage=3 cooldown=1.5 projectile_scene=grease projectile, yellow ColorRect sprite with grease attack visual
 
 DONE: 6 tasks — WaveManager with wave data, card data model, input system, Main.tscn wiring, gold HUD, Goblin Fry Cook tower
 

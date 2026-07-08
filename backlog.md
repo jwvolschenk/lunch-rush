@@ -38,7 +38,7 @@
 - [x] Implement Hungry Enemy concrete type: 40 HP, 60px/s speed, standard walk animation toward kitchen
 - [x] Implement WaveManager autoload: spawns escalating waves (count, HP, speed), shows "Wave Complete" overlay
 - [x] Implement card selection UI: 3-card choice panel after each wave, click-to-continue
-- [ ] Implement player deck: starts with 5 cards, draws from deck each turn, discard pile
+- [x] Implement player deck: starts with 5 cards, draws from deck each turn, discard pile
 - [ ] Implement craving mechanic: random enemy craving, feeding matching food applies slow debuff
 - [ ] Add gold economy: gold per kill, gold display on HUD, tower costs
 - [ ] Build camera system: pan/zoom across lanes with smooth follow on enemy movement

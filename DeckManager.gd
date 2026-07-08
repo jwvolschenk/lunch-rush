@@ -5,8 +5,11 @@ extends Node
 ## move to a discard pile; when the draw pile empties it is shuffled
 ## back into the deck from the discard pile.
 
-## Number of cards to draw each wave
+## Number of cards to draw each wave (first wave draws 5)
 @export var cards_to_draw: int = 3
+
+## Number of cards in the initial hand
+const INITIAL_HAND_SIZE: int = 5
 
 ## The deck (draw pile) — cards available to draw
 var deck: Array[Dictionary] = []
@@ -30,8 +33,8 @@ func reset() -> void:
 	deck = _get_starter_deck()
 	hand.clear()
 	discard.clear()
-	# Draw initial hand of 3
-	draw(3)
+	# Draw initial hand of 5
+	draw(INITIAL_HAND_SIZE)
 	hand_changed.emit()
 	print("[DeckManager] Deck reset. Deck=%d, Hand=%d" % [deck.size(), hand.size()])
 
@@ -127,7 +130,8 @@ func find_card_in_hand(name: String) -> Dictionary:
 
 ## --- Internal ---
 
-## Get the starter deck: a set of tower cards the player begins with.
+## Get the starter deck: 5 cards drawn into hand at game start, rest stays in deck.
+## The deck pool contains duplicates of common towers for replayability.
 func _get_starter_deck() -> Array[Dictionary]:
 	return [
 		{
@@ -147,30 +151,6 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"tower_scene": "res://tower/GoblinFryCook.tscn",
 		},
 		{
-			"name": "Pizza Trebuchet",
-			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
-			"cost": 50,
-			"card_type": 1,
-			"icon_color": Color(0.9, 0.5, 0.2, 1),
-			"tower_scene": "res://tower/PizzaTrebuchet.tscn",
-		},
-		{
-			"name": "Soup Spill",
-			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
-			"cost": 35,
-			"card_type": 1,
-			"icon_color": Color(0.4, 0.7, 0.9, 1),
-			"tower_scene": "res://tower/SoupSpill.tscn",
-		},
-		{
-			"name": "Soup Spill",
-			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
-			"cost": 35,
-			"card_type": 1,
-			"icon_color": Color(0.4, 0.7, 0.9, 1),
-			"tower_scene": "res://tower/SoupSpill.tscn",
-		},
-		{
 			"name": "Goblin Fry Cook",
 			"description": "Fast short-range grease attack. Deals area splash damage.",
 			"cost": 25,
@@ -187,11 +167,34 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"tower_scene": "res://tower/PizzaTrebuchet.tscn",
 		},
 		{
+			"name": "Pizza Trebuchet",
+			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
+			"cost": 50,
+			"card_type": 1,
+			"icon_color": Color(0.9, 0.5, 0.2, 1),
+			"tower_scene": "res://tower/PizzaTrebuchet.tscn",
+		},
+		{
 			"name": "Soup Spill",
 			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
 			"cost": 35,
 			"card_type": 1,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
 			"tower_scene": "res://tower/SoupSpill.tscn",
+		},
+		{
+			"name": "Soup Spill",
+			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
+			"cost": 35,
+			"card_type": 1,
+			"icon_color": Color(0.4, 0.7, 0.9, 1),
+			"tower_scene": "res://tower/SoupSpill.tscn",
+		},
+		{
+			"name": "Combo Meal",
+			"description": "Replay the last tower card you placed. Free.",
+			"cost": 0,
+			"card_type": 2,
+			"icon_color": Color(0.6, 0.9, 0.4, 1),
 		},
 	]

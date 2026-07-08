@@ -123,6 +123,9 @@ func start_run() -> void:
 	waves_played = 0
 	state = GameState.PLAYING
 	
+	# Initialize the deck for this run
+	DeckManager.reset()
+	
 	# Start the first wave
 	GameState.state = GameState.WAVE_COMPLETE
 	var room = RoomData.new()

@@ -21,7 +21,7 @@
 - [x] Implement a wave system: spawn waves of enemies with increasing difficulty between waves
 - [x] Implement the card/recipe UI: after each wave, present 3 card choices to the player
 - [x] Implement the craving system: enemies have food preferences that slow them when fed correctly
-- [ ] Add a simple card deck system: player starts with a deck, draws cards, plays cards to place towers
+- [x] Add a simple card deck system: player starts with a deck, draws cards, plays cards to place towers
 - [ ] Implement run progression: after a run ends (all health lost), show summary and offer restart
 - [ ] Replace README.md with Godot project README: how to open, controls, game overview
 - [ ] Add basic placeholder art (colored rectangles) for towers, enemies, lanes, and UI

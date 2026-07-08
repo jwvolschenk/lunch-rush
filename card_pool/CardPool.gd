@@ -64,6 +64,7 @@ enum CardCategory {
 		"card_type": CardCategory.SPECIAL,
 		"icon_color": Color(0.8, 0.8, 0.1, 1),
 		"rarity": "rare",
+		"tower_scene": "res://tower/HealthInspector.tscn",
 	},
 	{
 		"name": "Combo Meal",

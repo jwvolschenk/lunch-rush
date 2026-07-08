@@ -74,3 +74,12 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: core gameplay polish — make the game actually fun and complete
 
 ## Theme: missing GOAL.md content — towers, waves, and visual polish
+
+## Theme: cycle 41 — polish and bugfixes toward a genuinely playable game
+
+- [x] fix Health Inspector card — add tower_scene reference so it can be selected and placed
+- [ ] add Pizza Delivery tower card to card_pool so it can appear in card choices
+- [ ] fix VendingMachine description — either implement gold generation or update card pool description to match actual behavior
+- [ ] diversify starter deck — reduce Goblin Fry Cook copies, add more variety for early-game strategy
+- [ ] fix WaveConfigLoader._generate_dynamic_wave to use varied enemy types instead of all Hungry Goblins
+- [ ] fix GameState.start_run state leak — remove WAVE_COMPLETE intermediate state to avoid signal flicker

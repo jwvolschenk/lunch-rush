@@ -99,6 +99,15 @@ enum CardCategory {
 		"icon_color": Color(0.3, 0.6, 1.0, 1),
 		"rarity": "uncommon",
 	},
+	{
+		"name": "Kitchen Upgrade",
+		"description": "All towers gain +50% attack speed and +25% damage for 10 seconds.",
+		"cost": 20,
+		"card_type": CardCategory.STATUS_EFFECT,
+		"icon_color": Color(1.0, 0.7, 0.2, 1),
+		"rarity": "uncommon",
+		"card_script": "res://card_pool/KitchenUpgradeCard.gd",
+	},
 ]
 
 ## Cards that have been placed this run (to avoid duplicate tower types)

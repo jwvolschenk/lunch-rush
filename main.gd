@@ -273,7 +273,7 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 		1:  # Tower card — place on first available lane
 			_place_tower_from_card(card_data)
 		2:  # Status effect card
-			print("[Main] Applying effect: %s" % card_data.name)
+			_apply_status_effect(card_data)
 		_:
 			print("[Main] Unknown card type for: %s" % card_data.name)
 
@@ -348,6 +348,27 @@ func _place_tower_from_card(card_data: Dictionary) -> void:
 		print("[Main] Placed tower '%s' on lane %d (cost: %d gold)." % [card_data.name, lane_index, cost])
 	else:
 		print("[Main] Failed to place tower '%s'." % card_data.name)
+
+## --- Apply a STATUS_EFFECT card ---
+func _apply_status_effect(card_data: Dictionary) -> void:
+	var card_script_path = card_data.get("card_script", "")
+	if card_script_path and not card_script_path.is_empty():
+		var card_script = load(card_script_path)
+		if card_script:
+			var card = card_script.new()
+			if card.has_method("apply_effect"):
+				var success = card.apply_effect(null, GameState)
+				print("[Main] Status effect '%s' applied: %s" % [card_data.name, "success" if success else "failed"])
+				card.free()
+				return
+			else:
+				print("[Main] Card script '%s' has no apply_effect method." % card_script_path)
+				return
+		else:
+			print("[Main] Failed to load card script: %s" % card_script_path)
+			return
+
+	print("[Main] Unknown status effect: %s" % card_data.name)
 
 ## --- Room selection callback ---
 func _on_room_selected(room_data: Resource) -> void:

@@ -101,7 +101,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Core gameplay polish: wave progress bar
 
-- [ ] Add wave progress bar to HUD — display remaining enemies in current wave as a filled bar under the enemy count label; fills from right to left as enemies are defeated; shows "Wave X/Y" title above it
+- [x] Add wave progress bar to HUD — display remaining enemies in current wave as a filled bar under the enemy count label; fills from right to left as enemies are defeated; shows "Wave X/Y" title above it
 
 ## Core gameplay polish: enemy death feedback
 

@@ -4,6 +4,7 @@ extends Control
 
 var _progress_update_timer: float = 0.0
 var _progress_update_interval: float = 0.25
+var _wave_progress_value: float = 0.0
 
 @onready var _gold_label: Label = $Panel/GoldLabel
 @onready var _score_label: Label = $Panel/ScoreLabel
@@ -12,8 +13,12 @@ var _progress_update_interval: float = 0.25
 @onready var _enemy_count_label: Label = $Panel/EnemyCountLabel
 @onready var _next_spawn_label: Label = $Panel/NextSpawnLabel
 @onready var _wave_countdown_label: Label = $WaveCountdownLabel
+@onready var _wave_progress_panel: Container = $Panel/WaveProgressPanel
+@onready var _wave_progress_title: Label = $Panel/WaveProgressPanel/WaveProgressTitle
+@onready var _wave_progress_bar: ProgressBar = $Panel/WaveProgressPanel/WaveProgressBar
 
 func _ready() -> void:
+	_wave_progress_panel.visible = false
 	GameState.gold_changed.connect(_on_gold_changed)
 	GameState.score_changed.connect(_on_score_changed)
 	GameState.wave_changed.connect(_on_wave_changed)
@@ -45,6 +50,20 @@ func _update_wave_progress() -> void:
 		_next_spawn_label.text = "Next: %.1fs" % time_remaining
 	else:
 		_next_spawn_label.text = "Next: done"
+	
+	_update_wave_progress_bar()
+
+func _update_wave_progress_bar() -> void:
+	var total = WaveManager.active_wave.get_total_enemies()
+	if total <= 0:
+		return
+	
+	var remaining = WaveManager.active_enemy_count + WaveManager.remaining_to_spawn()
+	var defeated = total - remaining
+	_wave_progress_value = float(defeated) / float(total)
+	_wave_progress_title.text = "Wave %d/%d" % [GameState.wave, WaveManager.max_waves]
+	_wave_progress_bar.value = _wave_progress_value
+	_wave_progress_panel.visible = true
 
 func _get_time_to_next_spawn() -> float:
 	if not WaveManager._current_wave_config or WaveManager._spawn_queue.is_empty():

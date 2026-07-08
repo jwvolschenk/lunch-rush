@@ -14,7 +14,7 @@
 - [x] Create a blank "Lunch Rush" project in Godot 4 with the main scene (Main.tscn) and a root script (main.gd)
 - [x] Implement a basic 2D game loop: a GameState.gd autoload (autoload singleton) managing game state (score, waves, player health)
 - [x] Implement a Lane system: 2-3 lanes with enemies spawning from the right and moving left toward the kitchen
-- [ ] Implement a Tower base class (Tower.tscn + Tower.gd) with placement, attack range, damage, and fire rate
+- [x] Implement a Tower base class (Tower.tscn + Tower.gd) with placement, attack range, damage, and fire rate
 - [ ] Implement an Enemy base class (Enemy.tscn + Enemy.gd) with HP, speed, and lane-based movement
 - [ ] Implement one concrete tower: "Goblin Fry Cook" — short-range grease attack with area damage
 - [ ] Implement one concrete enemy: "Hungry Goblin" with basic AI (walk toward kitchen)

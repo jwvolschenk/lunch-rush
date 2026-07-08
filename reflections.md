@@ -170,3 +170,7 @@ Archived 8 completed items, then reflected: 5 new task(s) added. DONE: 5 tasks a
 ## Cycle 34  2026-07-08T19:50:00Z  outcome:pending
 
 Task: Fix room selector flow. The room selector was never shown between waves because `WaveManager.on_card_selected()` auto-started the next wave whenever `GameState.current_room` was set (always true since `start_run()` sets a default Pantry room). Fix: removed the auto-start logic from `on_card_selected()`, and simplified `_on_card_selected()` in main.gd to always transition to ROOM_SELECTING and show the room selector.
+
+## Cycle 34  2026-07-08T19:52:16Z  outcome:passed sha:f76eefe1ce
+
+Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 82 lines changed.

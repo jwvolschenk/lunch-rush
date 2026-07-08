@@ -16,8 +16,14 @@ extends Node
 ## Vertical offset to center lanes on screen
 @export var center_offset: float = 0.0
 
+## Whether to show divider walls between lanes
+@export var show_lane_dividers: bool = true
+
 ## --- Lane instances ---
 var lanes: Array[Lane] = []
+
+## Divider wall nodes between lanes
+var _dividers: Array[Node2D] = []
 
 ## --- Signals ---
 ## Emitted when a new enemy spawns on any lane
@@ -34,6 +40,9 @@ signal wave_complete()
 func _ready() -> void:
 	_build_lanes()
 
+## Preload the lane divider scene
+const _LANE_DIVIDER_SCENE := preload("res://lane/LaneDivider.tscn")
+
 ## --- Lane management ---
 
 ## Create all lanes based on lane_count
@@ -42,6 +51,11 @@ func _build_lanes() -> void:
 	for lane in lanes:
 		lane.queue_free()
 	lanes.clear()
+	
+	# Remove existing dividers
+	for divider in _dividers:
+		divider.queue_free()
+	_dividers.clear()
 	
 	var total_height = (lane_count - 1) * lane_spacing
 	var start_y = 360.0 - total_height / 2.0 + center_offset
@@ -53,7 +67,24 @@ func _build_lanes() -> void:
 		add_child(lane)
 		lanes.append(lane)
 	
+	# Add divider walls between adjacent lanes
+	if show_lane_dividers and lane_count > 1:
+		_add_lane_dividers(start_y)
+	
 	print("[LaneManager] Built %d lanes." % lane_count)
+
+## Add visual divider walls between adjacent lanes
+func _add_lane_dividers(start_y: float) -> void:
+	for i in range(lane_count - 1):
+		var divider_scene := load("res://lane/LaneDivider.tscn") as PackedScene
+		var divider := divider_scene.instantiate() as Node2D
+		# Position between this lane and the next, centered horizontally
+		var divider_y = start_y + i * lane_spacing + lane_spacing / 2.0
+		divider.position = Vector2(0.0, divider_y)
+		# Place in front of lanes (add_child last = top of Z order)
+		add_child(divider)
+		_dividers.append(divider)
+	print("[LaneManager] Added %d lane dividers." % (lane_count - 1))
 
 ## Get a lane by index
 func get_lane(index: int) -> Lane:

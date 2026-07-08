@@ -8,6 +8,7 @@ func _on_ready_setup() -> void:
 	cooldown = 3.0
 	food_type = 3  # SPICE (fire pie = spicy)
 	projectile_scene = load("res://projectile/fire_pie.tscn")
+	sfx_name = "pie_launch"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

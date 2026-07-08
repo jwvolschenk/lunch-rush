@@ -4,11 +4,11 @@ extends "res://tower/Tower.gd"
 ## applies burn/dot damage to enemies.
 
 func _on_ready_setup() -> void:
-	range = 220.0
+	range = 180.0
 	damage = 4.0
-	cooldown = 2.5
-	food_type = 3  # SPICE
+	cooldown = 1.5
 	projectile_scene = load("res://projectile/spicy_sauce_projectile.tscn")
+	sfx_name = "splash"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

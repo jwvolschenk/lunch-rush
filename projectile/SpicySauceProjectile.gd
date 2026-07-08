@@ -6,6 +6,7 @@ func _on_ready_setup() -> void:
 	speed = 350.0
 	damage = 4.0
 	splash_radius = 0.0
+	sfx_name = "splash"
 
 ## Build the projectile visual: red-orange ColorRect
 func _build_visual() -> void:

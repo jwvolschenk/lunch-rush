@@ -8,6 +8,7 @@ func _on_ready_setup() -> void:
 	cooldown = 2.0
 	food_type = 2  # SOUP
 	projectile_scene = load("res://projectile/SoupProjectile.tscn")
+	sfx_name = "soup_splash"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

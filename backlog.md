@@ -91,7 +91,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Add PizzaDelivery enemy to waves 10-15: currently PizzaDelivery.tres exists in enemy/ but is not referenced in any wave config. Add it to waves 10, 13, 14, 15 as a late-game threat (fast, moderate HP, moderate gold).
 
-- [ ] Add tower attack SFX: have each tower's projectile play its own SFX on fire via SoundManager. Wire up `SoundManager.play_sfx("tower_fire_<type>")` in each projectile's `_process` or `fire()` method. Use existing sfx files or add new ones for tower types.
+- [x] Add tower attack SFX: have each tower's projectile play its own SFX on fire via SoundManager. Wire up `SoundManager.play_sfx("tower_fire_<type>")` in each projectile's `_process` or `fire()` method. Use existing sfx files or add new ones for tower types.
 
 - [ ] Add wave completion SFX: when a wave completes, play a satisfying SFX via SoundManager and briefly flash the HUD with a "Wave Complete!" notification that fades out.
 

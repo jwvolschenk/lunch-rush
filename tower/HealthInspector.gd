@@ -9,6 +9,7 @@ func _on_ready_setup() -> void:
 	cooldown = 4.0
 	food_type = 0  # none
 	projectile_scene = load("res://projectile/HealthInspectorProjectile.tscn")
+	sfx_name = "splash"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

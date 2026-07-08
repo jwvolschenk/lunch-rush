@@ -8,6 +8,7 @@ func _on_ready_setup() -> void:
 	damage = 5.0
 	cooldown = 2.5
 	projectile_scene = load("res://projectile/grease_projectile.tscn")
+	sfx_name = "grease_fire"
 
 ## Randomly pick a food type before the parent fires.
 ## Picks grease(1), soup(2), or spice(3) at random.

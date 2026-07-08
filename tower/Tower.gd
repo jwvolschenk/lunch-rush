@@ -24,6 +24,11 @@ extends Node2D
 ## 0=none, 1=grease, 2=soup, 3=spice (matches CravingType enum).
 var food_type: int = 0
 
+## SFX name to play when firing this tower's projectiles.
+## Maps to a key in SoundManager's loaded SFX dictionary.
+## Set by child tower subclasses in _on_ready_setup().
+var sfx_name: String = ""
+
 ## --- Internal state ---
 
 ## The lane this tower is placed on
@@ -140,6 +145,7 @@ func _fire() -> void:
 	projectile.target = _target
 	projectile.damage = damage
 	projectile.food_type = food_type
+	projectile.sfx_name = sfx_name
 	add_sibling(projectile)
 	
 	tower_fired.emit(self, projectile, _target)

@@ -10,6 +10,7 @@ func _on_ready_setup() -> void:
 	cooldown = 0.8
 	food_type = 2  # SOUP (pizza with soup sauce — the twist)
 	projectile_scene = load("res://projectile/fire_pie.tscn")
+	sfx_name = "pie_launch"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

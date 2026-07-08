@@ -6,6 +6,7 @@ func _on_ready_setup() -> void:
 	speed = 400.0
 	damage = 3.0
 	splash_radius = 50.0
+	sfx_name = "grease_fire"
 
 ## Build the projectile visual: yellow-green ColorRect
 func _build_visual() -> void:

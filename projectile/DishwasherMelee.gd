@@ -6,6 +6,7 @@ func _on_ready_setup() -> void:
 	speed = 800.0
 	damage = 12.0
 	splash_radius = 0.0
+	sfx_name = "splash"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

@@ -25,6 +25,10 @@ var food_type: int = 0
 ## When > 0, pushes the enemy backward (toward spawn) on hit.
 var pushback: float = 0.0
 
+## SFX name to play on fire. Set by the firing Tower before the projectile
+## is instantiated. Maps to a key in SoundManager's loaded SFX dictionary.
+var sfx_name: String = ""
+
 ## --- Internal state ---
 
 ## The target enemy (set by the firing tower)
@@ -45,6 +49,13 @@ signal projectile_destroyed(projectile: Node2D)
 
 func _ready() -> void:
 	_build_visual()
+	_fire_sfx()
+
+## Play the tower-specific fire SFX for this projectile.
+func _fire_sfx() -> void:
+	if sfx_name.is_empty():
+		return
+	SoundManager.play_sfx(sfx_name)
 
 ## Override in child scenes to customize visual appearance
 func _build_visual() -> void:

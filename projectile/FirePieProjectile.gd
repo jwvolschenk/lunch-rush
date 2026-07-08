@@ -6,6 +6,7 @@ func _on_ready_setup() -> void:
 	speed = 350.0
 	damage = 8.0
 	splash_radius = 75.0
+	sfx_name = "pie_launch"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

@@ -9,6 +9,7 @@ func _on_ready_setup() -> void:
 	cooldown = 0.8
 	food_type = 0  # no craving effect for this tower
 	projectile_scene = load("res://projectile/DishwasherMelee.tscn")
+	sfx_name = "splash"
 
 func _build_visual() -> void:
 	var sprite := ColorRect.new()

@@ -6,11 +6,11 @@ extends "res://tower/Tower.gd"
 
 ## Called by Tower._ready() before _build_visual() to customize stats
 func _on_ready_setup() -> void:
-	range = 150.0
+	range = 100.0
 	damage = 3.0
-	cooldown = 1.5
-	food_type = 1  # GREASE
+	cooldown = 0.5
 	projectile_scene = load("res://projectile/grease_projectile.tscn")
+	sfx_name = "grease_fire"
 
 ## Called by Tower._ready() after _on_ready_setup() to create visuals
 func _build_visual() -> void:

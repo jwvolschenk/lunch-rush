@@ -9,6 +9,7 @@ func _on_ready_setup() -> void:
 	splash_radius = 0.0
 	pushback = 80.0
 	food_type = 0  # none (not food-based)
+	sfx_name = "splash"
 
 ## Build the projectile visual: white/blue ColorRect
 func _build_visual() -> void:

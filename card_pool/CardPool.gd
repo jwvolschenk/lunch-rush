@@ -76,7 +76,7 @@ enum CardCategory {
 	},
 	{
 		"name": "Enchanted Vending Machine",
-		"description": "Passively generates gold over time.",
+		"description": "Randomly fires grease, soup, or spice projectiles at the nearest enemy.",
 		"cost": 60,
 		"card_type": CardCategory.TOWER,
 		"icon_color": Color(0.7, 0.4, 0.9, 1),

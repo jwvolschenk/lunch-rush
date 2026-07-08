@@ -1,0 +1,159 @@
+extends Node2D
+## Enemy — base class for all enemy types.
+## Enemies move left toward the kitchen along their lane.
+## When HP reaches zero, the death signal fires and the enemy self-removes.
+##
+## Child scenes (Hungry Goblin, etc.) should override _on_ready_setup()
+## to customize appearance and stats.
+
+## --- Configuration ---
+
+## Maximum HP
+@export var max_hp: float = 40.0
+
+## Movement speed toward the kitchen (pixels per second)
+@export var speed: float = 60.0
+
+## Gold reward on death
+@export var gold_reward: int = 10
+
+## Score reward on death
+@export var score_reward: int = 10
+
+## --- Internal state ---
+
+## Backing store for the current_hp property
+var _current_hp: float = 40.0
+
+## Current HP (decreases as the enemy takes damage)
+var current_hp: float:
+	get:
+		return _current_hp
+	set(v):
+		_current_hp = v
+		if hp_bar and max_hp > 0:
+			var ratio = clamp(_current_hp / max_hp, 0.0, 1.0)
+			hp_bar.size.x = 80.0 * ratio
+		if _current_hp <= 0:
+			_on_death()
+
+## The lane this enemy is currently on
+var lane: Lane = null
+
+## Whether the enemy is alive
+var is_alive: bool:
+	get:
+		return current_hp > 0
+
+## --- Signals ---
+
+## Emitted when this enemy dies (HP reaches zero)
+signal enemy_dead(enemy: Node2D)
+
+## --- Internal ---
+
+# Health bar background
+var hp_bar_bg: ColorRect
+
+# Health bar fill
+var hp_bar: ColorRect
+
+var _is_dying: bool = false
+
+## --- Lifecycle ---
+
+func _ready() -> void:
+	_build_hp_bar()
+	_on_ready_setup()
+	_setup_death_cleanup()
+
+func _process(delta: float) -> void:
+	if _is_dying or not is_alive:
+		return
+
+	# Move toward the kitchen (left)
+	position.x -= speed * delta
+
+	# Check if reached the kitchen threshold
+	if lane and position.x <= Lane.KITCHEN_THRESHOLD:
+		_on_reached_kitchen()
+
+## Override in child scenes to customize initial appearance and stats
+func _on_ready_setup() -> void:
+	pass
+
+## --- HP bar ---
+
+func _build_hp_bar() -> void:
+	# Background (dark red) — left-aligned, fixed width
+	hp_bar_bg = ColorRect.new()
+	hp_bar_bg.anchor_left = 0.5
+	hp_bar_bg.anchor_top = 0.0
+	hp_bar_bg.anchor_right = 0.5
+	hp_bar_bg.anchor_bottom = 0.0
+	hp_bar_bg.position = Vector2(-40, -30)
+	hp_bar_bg.size = Vector2(80, 8)
+	hp_bar_bg.color = Color(0.3, 0.05, 0.05, 0.9)
+	hp_bar_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(hp_bar_bg)
+
+	# Foreground (green, fills from left, shrinks as HP drops)
+	hp_bar = ColorRect.new()
+	hp_bar.anchor_left = 0.5
+	hp_bar.anchor_top = 0.0
+	hp_bar.anchor_right = 0.5
+	hp_bar.anchor_bottom = 0.0
+	hp_bar.position = Vector2(-40, -30)
+	hp_bar.size = Vector2(80, 8)
+	hp_bar.color = Color(0.2, 0.8, 0.2, 1.0)
+	hp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(hp_bar)
+
+## --- Damage ---
+
+## Apply damage to this enemy
+func take_damage(amount: float) -> void:
+	current_hp = max(current_hp - amount, 0.0)
+
+## Apply healing
+func heal(amount: float) -> void:
+	current_hp = min(current_hp + amount, max_hp)
+
+## --- Death handling ---
+
+func _on_death() -> void:
+	if _is_dying:
+		return
+	_is_dying = true
+
+	enemy_dead.emit(self)
+	print("[Enemy] Dead (HP: 0, gold: %d, score: %d)" % [gold_reward, score_reward])
+
+	queue_free()
+
+func _setup_death_cleanup() -> void:
+	# Remove from lane's enemy list when freed
+	connect("tree_exited", _on_tree_exited)
+
+func _on_tree_exited() -> void:
+	if lane and self in lane.enemies:
+		lane.enemies.erase(self)
+
+## --- Kitchen reached ---
+
+func _on_reached_kitchen() -> void:
+	print("[Enemy] Reached kitchen on lane.")
+	if lane:
+		lane.enemy_reached_kitchen.emit(self)
+	_on_death()
+
+## --- Serialization helpers ---
+
+## Get enemy stats as a dictionary (for wave config)
+func get_enemy_stats() -> Dictionary:
+	return {
+		"max_hp": max_hp,
+		"speed": speed,
+		"gold_reward": gold_reward,
+		"score_reward": score_reward
+	}

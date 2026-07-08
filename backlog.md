@@ -109,8 +109,8 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Wire DeckManager hand into HUD or card selection UI (hand exists but has no visual representation)
 
 ## Polish: audio assets
-- [ ] Add placeholder audio assets (SFX for tower fire, wave complete, enemy death, card pick)
-- [ ] Fix SoundManager.sfx_paths to use existing files or add placeholder audio
+- [x] Add placeholder audio assets (SFX for tower fire, wave complete, enemy death, card pick)
+- [x] Fix SoundManager.sfx_paths to use existing files or add placeholder audio
 
 ## Core gameplay: EnemyData preload path
 - [ ] Fix WaveManager._generate_default_waves: preload("res://enemy/EnemyData.gd") should be "res://enemy/EnemyData_HungryGoblin.tres"

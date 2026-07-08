@@ -27,6 +27,9 @@ signal enemy_reached_kitchen(enemy: Node2D, lane_index: int)
 ## Emitted when an enemy dies on any lane
 signal enemy_died(enemy: Node2D, lane_index: int)
 
+## Emitted when all lanes have no enemies (all enemies cleared)
+signal wave_complete()
+
 ## --- Lifecycle ---
 func _ready() -> void:
 	_build_lanes()

@@ -85,6 +85,8 @@ var active_enemy_count: int:
 
 func _ready() -> void:
 	_generate_default_waves()
+	# Listen for LaneManager's wave_complete signal (all lanes cleared)
+	LaneManager.wave_complete.connect(_on_wave_complete)
 	print("[WaveManager] Initialized with %d waves." % waves.size())
 
 func _process(delta: float) -> void:
@@ -324,6 +326,13 @@ func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 ## Called when all enemies in a wave are defeated.
 ## Transitions GameState to WAVE_COMPLETE and shows card selection.
 func _on_wave_complete() -> void:
+	# Verify the wave is truly complete: spawn queue must be empty
+	if not _spawn_queue.is_empty():
+		return
+	
+	# Emit LaneManager wave_complete signal so Main knows to show card UI
+	LaneManager.wave_complete.emit()
+	
 	print("[WaveManager] Wave %d complete! (%d enemies defeated)" % [
 		_current_wave_index + 1,
 		_spawned_count

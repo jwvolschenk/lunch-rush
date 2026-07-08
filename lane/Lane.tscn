@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://lane/Lane.gd" id="1_lane"]
 
 [node name="Lane" type="Node2D" id=1]
 script = ExtResource("1_lane")
+
+[node name="LaneBackground" type="ColorRect" id=2]
+offset_left = -640.0
+offset_top = -40.0
+offset_right = 640.0
+offset_bottom = 40.0
+color = Color(0.25, 0.25, 0.27, 0.6)

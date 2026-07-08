@@ -453,6 +453,7 @@ func _on_tower_placement_cancelled() -> void:
 ## --- Restart / Quit ---
 func _on_restart() -> void:
 	print("[Main] Restarting run...")
+	SaveLoad.save_run(GameState.score, GameState.waves_completed, GameState.gold)
 	if game_over_overlay:
 		game_over_overlay.hide_game_over()
 	GameState.start_run()

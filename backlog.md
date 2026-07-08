@@ -105,7 +105,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Implement EnemyData data model (EnemyData.gd): scriptable resource for enemy stats (hp, speed, reward, craving, sprite), enables spawning multiple enemy types without code changes
 - [x] Implement Room/level selection system: between waves, present 2-3 room choices (pantry, freezer, lava kitchen, VIP table) with unique visual theme and minor gameplay modifier
 - [x] Implement CardPool data model (CardPool.gd): defines available cards for the current run, handles card generation pool, rarity weights, and card selection from pool for card selection UI
-- [ ] Implement Pizza Trebuchet concrete tower scene (PizzaTrebuchet.tscn + PizzaTrebuchet.gd): extends Tower, range=300 damage=8 cooldown=3.0 projectile_scene=fire_pie, slow fire rate with splash damage, orange ColorRect sprite
+- [x] Implement Pizza Trebuchet concrete tower scene (PizzaTrebuchet.tscn + PizzaTrebuchet.gd): extends Tower, range=300 damage=8 cooldown=3.0 projectile_scene=fire_pie, slow fire rate with splash damage, orange ColorRect sprite
 - [ ] Implement Soup Spill concrete tower scene (SoupSpill.tscn + SoupSpill.gd): extends Tower, creates slowing puddle on hit, damage=2 slow_factor=0.5 slow_duration=5s, blue ColorRect sprite with puddle visual
 - [ ] Implement Combo Meal card (ComboMealCard.gd): card_type for replay last tower card used, stores last_placed_tower reference, applies effect by re-calling tower placement with same stats
 

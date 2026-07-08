@@ -78,3 +78,12 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: cycle 41 — polish and bugfixes toward a genuinely playable game
 
 ## Theme: cycle 44 — missing entry point and reward feedback
+
+## Theme: cycle 46 — core gameplay polish and UX fixes
+
+- [x] Wire main menu as project entry point — set Main.tscn as the initial scene in project.godot or create a bootstrap scene that shows MainMenu.tscn first, so the game has a proper title screen with play button and high score display
+- [ ] Add wave progress indicator — display remaining enemies count and time-to-next-wave HUD element so player knows wave progression
+- [ ] Add enemy death visual feedback — spawn gold/score popup labels above dead enemies that float upward and fade out
+- [ ] Add start-of-wave countdown timer — brief "Wave incoming in 3...2...1..." overlay before enemies start spawning
+- [ ] Fix CardPool.gd typo — line 65 "Temparily" → "Temporarily" in Health Inspector description
+- [ ] Add wave-complete "Continue" button — visible button in card selection overlay that lets player dismiss the overlay and proceed to next wave

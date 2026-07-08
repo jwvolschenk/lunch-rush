@@ -225,4 +225,12 @@ Archived 6 completed items, then reflected: 2 new task(s) added. DONE: 2 tasks a
 
 ## Cycle 45  2026-07-08T20:41:12Z  outcome:passed sha:275e9d9adf
 
-Executed 2 backlog task(s); 2 completed (no gate; agent self-verified). 212 lines changed.
+Executed 2 backlog task(s); 2 completed (no gate; agent self-verified). 212 lines changed. Agent summary: DONE: 2 tasks added — missing main menu screen (title/instructions/high score entry point) and high score display on game-over overlay (persistent score + "New High Score!" indicator)
+
+## Cycle 46  2026-07-08T???:???Z  outcome:pending
+
+Reflect phase: project has extensive infrastructure (127+ files, ~3500+ lines of GDScript, 8 tower types, 5 enemy types, 15 wave configs, card system, room selector, save/load, camera, sound) but the game lacks core UX polish: no title screen (game auto-starts), no wave progress indicator, no enemy death visual feedback, no wave countdown, one typo, and no continue button. Added 6 tasks targeting these UX gaps.
+
+## Cycle 46  2026-07-08T20:45:27Z  outcome:passed sha:ed73ad2d69
+
+Archived 2 completed items, then reflected: 6 new task(s) added. DONE: 6 tasks added — core gameplay UX: main menu entry point, wave progress indicator, enemy death feedback, wave countdown, CardPool typo fix, and continue button

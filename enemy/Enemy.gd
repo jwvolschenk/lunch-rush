@@ -75,6 +75,9 @@ var _craving_label: Label = null
 ## Outer ring for the craving indicator
 var _craving_ring: ColorRect = null
 
+## Timer for the craving ring pulse animation
+var _craving_pulse_timer: float = 0.0
+
 ## --- Craving / debuff state ---
 
 ## Remaining duration of the slow debuff
@@ -202,6 +205,16 @@ func _update_hp_bar_color() -> void:
 func _process(delta: float) -> void:
 	if _is_dying or not is_alive:
 		return
+
+	# Pulse the craving ring
+	if _craving_ring and is_alive:
+		_craving_pulse_timer += delta
+		var pulse = sin(_craving_pulse_timer * 3.0) * 0.5 + 0.5  # 0..1 oscillation
+		_craving_ring.color.a = 0.3 + pulse * 0.6  # alpha 0.3 -> 0.9
+		# Scale ring slightly for glow effect
+		var base_size = _craving_ring.size.x
+		var scale_factor = 1.0 + pulse * 0.15  # 1.0 -> 1.15
+		_craving_ring.size = Vector2(base_size * scale_factor, base_size * scale_factor)
 
 	# Countdown debuff timers
 	if _slow_timer > 0:
@@ -408,9 +421,10 @@ func _build_craving_indicator() -> void:
 	_craving_ring.anchor_right = 0.5
 	_craving_ring.anchor_bottom = 0.5
 	_craving_ring.position = Vector2(0, -40)
-	_craving_ring.size = Vector2(32, 32)
+	_craving_ring.size = Vector2(52, 52)
 	_craving_ring.color = Color(0.3, 0.3, 0.3, 0.7)
 	_craving_ring.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_craving_ring.z_index = -1
 	add_child(_craving_ring)
 
 	# Inner filled circle showing the craving color
@@ -468,8 +482,9 @@ func _update_craving_indicator() -> void:
 	if craving in colors:
 		_craving_indicator.color = colors[craving]
 		_craving_ring.color = colors[craving]
-		_craving_ring.size = Vector2(32, 32)
+		_craving_ring.size = Vector2(52, 52)
 		_craving_indicator.size = Vector2(22, 22)
+		_craving_pulse_timer = 0.0
 		if craving in symbols:
 			_craving_label.text = symbols[craving]
 		else:

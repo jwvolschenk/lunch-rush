@@ -223,7 +223,7 @@ func _generate_dynamic_wave(index: int) -> Resource:
 
 	# Hungry Goblin — available from wave 0
 	var goblin_data_path := "res://enemy/EnemyData_HungryGoblin.tres"
-	if ResourceLoader.exists(goblin_data_path):
+	if ResourceLoader.resource_exists(goblin_data_path):
 		available_enemies.append({
 			"path": goblin_data_path,
 			"min_wave": 0,
@@ -232,7 +232,7 @@ func _generate_dynamic_wave(index: int) -> Resource:
 
 	# Slime Runner — available from wave 3
 	var slime_data_path := "res://enemy/EnemyData_SlimeRunner.tres"
-	if ResourceLoader.exists(slime_data_path):
+	if ResourceLoader.resource_exists(slime_data_path):
 		available_enemies.append({
 			"path": slime_data_path,
 			"min_wave": 3,
@@ -241,7 +241,7 @@ func _generate_dynamic_wave(index: int) -> Resource:
 
 	# Ghost Chef — available from wave 5
 	var ghost_data_path := "res://enemy/EnemyData_GhostChef.tres"
-	if ResourceLoader.exists(ghost_data_path):
+	if ResourceLoader.resource_exists(ghost_data_path):
 		available_enemies.append({
 			"path": ghost_data_path,
 			"min_wave": 5,
@@ -250,7 +250,7 @@ func _generate_dynamic_wave(index: int) -> Resource:
 
 	# Ogre Brute — available from wave 7
 	var ogre_data_path := "res://enemy/EnemyData_OgreBrute.tres"
-	if ResourceLoader.exists(ogre_data_path):
+	if ResourceLoader.resource_exists(ogre_data_path):
 		available_enemies.append({
 			"path": ogre_data_path,
 			"min_wave": 7,
@@ -259,7 +259,7 @@ func _generate_dynamic_wave(index: int) -> Resource:
 
 	# Pizza Delivery — available from wave 10
 	var pizza_data_path := "res://enemy/EnemyData_PizzaDelivery.tres"
-	if ResourceLoader.exists(pizza_data_path):
+	if ResourceLoader.resource_exists(pizza_data_path):
 		available_enemies.append({
 			"path": pizza_data_path,
 			"min_wave": 10,
@@ -274,17 +274,17 @@ func _generate_dynamic_wave(index: int) -> Resource:
 			break
 
 	var primary_path: String = available_enemies[primary_idx]["path"]
-	var primary_data = load(primary_path) if ResourceLoader.exists(primary_path) else null
+	var primary_data = load(primary_path) if ResourceLoader.resource_exists(primary_path) else null
 
 	# Build enemy entries: primary type gets the bulk, introduce variety at higher waves
 	wave.enemies = []
 
-	if primary_data and ResourceLoader.exists(primary_path):
+	if primary_data and ResourceLoader.resource_exists(primary_path):
 		var primary_count = enemy_count
 		if index >= 3 and primary_idx + 1 < available_enemies.size():
 			# Introduce a secondary enemy type from later waves
 			var secondary_path = available_enemies[primary_idx + 1]["path"]
-			var secondary_data = load(secondary_path) if ResourceLoader.exists(secondary_path) else null
+			var secondary_data = load(secondary_path) if ResourceLoader.resource_exists(secondary_path) else null
 			if secondary_data:
 				var secondary_count = max(1, enemy_count / 3)
 				primary_count -= secondary_count

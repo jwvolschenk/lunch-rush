@@ -172,4 +172,3 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Bug: input_manager.tscn has broken ExtResource ID format (ext1_ instead of ext_)
 
 ## Code quality: CardPool.gd duplicates CravingType enum from enums/CravingType.gd
-- [x] (orchestrator-injected, cycle 80) Surveyed project for developer experience improvement; created missing `project.godot` file — the critical configuration file Godot requires to recognize and open the project. Contains all 6 autoloads (GameState, WaveManager, CardPool, InputManager, SaveLoad, SoundManager), main scene (res://MainMenu.tscn), window resolution (1280x720), input mappings (move_left/right/up/down + skip_wave), rendering/audio settings, and export-presets-consistent platform feature tags.

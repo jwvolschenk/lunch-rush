@@ -1,10 +1,12 @@
 # class_name removed: this script is an autoload singleton
 extends Control
+
+const ROOM_DATA = preload("res://rooms/RoomData.gd")
 ## RoomSelector — overlay panel that presents 2-3 room choices between waves.
 ## Each room shows its name, description, and modifier preview.
 ## Clicking a room applies its modifier and returns to PLAYING state.
 
-signal room_selected(room_data: Resource)
+signal room_selected(room_data: RoomData)
 
 ## Available room options for the current wave transition
 var _rooms: Array = []

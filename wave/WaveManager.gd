@@ -194,6 +194,10 @@ func start_wave(wave_index: int) -> void:
 	else:
 		_current_wave_config = WaveConfigLoader.get_wave(wave_index)
 	
+	# Capture wave base values before room modifiers are applied.
+	var base_gold_reward: float = 25 + (wave_index * 5)
+	GameState.capture_wave_base_values(_current_wave_config, int(base_gold_reward))
+	
 	# Apply room modifiers from current room (modifies the copied Resource)
 	var room = GameState.current_room
 	if room:

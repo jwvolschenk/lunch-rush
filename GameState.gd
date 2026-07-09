@@ -101,6 +101,12 @@ var wave_enemy_hp: float = 1.0
 var wave_enemy_speed: float = 60.0
 var wave_gold_reward: int = 25
 
+## Base wave values before room modifiers — used to reset modifiers to the correct baseline.
+var _wave_base_enemy_count: int = 0
+var _wave_base_enemy_hp: float = 1.0
+var _wave_base_enemy_speed: float = 60.0
+var _wave_base_gold_reward: int = 25
+
 ## Pending cards generated for card selection between waves
 var pending_cards: Array[Dictionary] = []
 
@@ -138,11 +144,19 @@ func _apply_room_modifier(room: Resource) -> void:
 	wave_enemy_speed *= enemy_speed_mod
 	wave_gold_reward = int(wave_gold_reward * (1.0 + gold_bonus * 0.01))
 
-func _reset_room_modifiers() -> void:
-	wave_enemy_count = 0
-	wave_enemy_hp = 1.0
-	wave_enemy_speed = 60.0
-	wave_gold_reward = 25
+## Capture the wave's base values before room modifiers are applied.
+## Called by WaveManager at the start of each wave, before applying room modifiers.
+func capture_wave_base_values(wave: Resource, base_gold_reward: int) -> void:
+	if not wave:
+		return
+	_wave_base_enemy_count = int(wave.get("enemy_count", 0))
+	_wave_base_enemy_hp = float(wave.get("hp_scale", 1.0))
+	_wave_base_enemy_speed = float(wave.get("speed_scale", 60.0))
+	_wave_base_gold_reward = base_gold_reward
+	wave_enemy_count = _wave_base_enemy_count
+	wave_enemy_hp = _wave_base_enemy_hp
+	wave_enemy_speed = _wave_base_enemy_speed
+	wave_gold_reward = _wave_base_gold_reward
 
 ## --- Methods ---
 

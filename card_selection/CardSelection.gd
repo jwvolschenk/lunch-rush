@@ -100,7 +100,7 @@ func hide_cards() -> void:
 
 ## Display the food type indicator on a card slot.
 func _show_food_type(index: int, card: Dictionary) -> void:
-	var food_type = CravingType.food_type_to_int(card.get("food_type", CravingType.NONE))
+	var food_type = CRAVING_TYPE.food_type_to_int(card.get("food_type", CRAVING_TYPE.NONE))
 	# Create a label for the food type
 	var food_label = Label.new()
 	food_label.add_theme_font_size_override("font_size", 11)

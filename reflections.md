@@ -4,10 +4,6 @@
 # records what was attempted and the verify outcome. Read at the
 # start of each fresh session so the agent doesn't repeat failures.
 
-## Cycle 73  2026-07-09T08:41:20Z  outcome:pending
-
-Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). 75 lines changed. Agent summary: Implemented enemy death visual feedback — white flash overlay on enemy body (0.15s fade) + screen shake via CameraController (8px intensity, 0.2s duration, decaying envelope).
-
 ## Cycle 73  2026-07-09T08:44:34Z  outcome:passed sha:pending
 
 Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). 7 lines changed. Agent summary: Enlarged craving indicator ring from 32 to 52px, added z_index=-1 to render ring behind inner circle, and added sinusoidal glow pulse animation (alpha oscillates 0.3→0.9, scale oscillates 1.0→1.15 at 3Hz) driven by _process.
@@ -63,3 +59,7 @@ Archived 0 completed items, then reflected: 2 ready task(s) after plan. Reflect:
 ## Cycle 90  2026-07-09T11:35:14Z  outcome:passed sha:15ae9b20cd
 
 Archived 2 completed items, then reflected: 3 ready task(s) after plan. Reflect: DONE: 3 candidates added — (1) starter deck card_type enum mismatch causing tower cards to be classified as STATUS_EFFEC. Plan: DONE: 3 backlog.md tasks added — first is fixing starter deck card_type in DeckManager.gd (tower cards incorrectly use `card_type: 1`/STATUS_EFFECT instead of `card_type: 0`/TOWER, breaking deck class
+
+## Cycle 94  2026-07-09T11:52:41Z  outcome:passed sha:07f22dcbab
+
+Archived 3 completed items. Reflect found no candidates, so the orchestrator seeded backlog-candidates.md for PLAN to decompose: - [ ] (orchestrator seed, cycle 94) Next improvement theme: dependency and tooling freshness — check for stale/vulnerable dependencies — survey the project vs. GOAL.md and queue concrete work. Plan: DONE: 3 backlog.md tasks added — first is updating project.godot engine version from 4.2 to 4.7

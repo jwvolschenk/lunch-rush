@@ -2,82 +2,83 @@
 
 [ext_resource type="Script" path="res://main_menu.gd" id="menu_script"]
 
-[node name="MainMenu" type="Control" id="1"]
-layout_mode = 1
-anchors_preset = 7
-anchor_right = 1
-anchor_bottom = 1
-grow_vertical = 2
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("menu_script")
 
-[node name="bg" parent=1 type="ColorRect" id="2"]
+[node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_right = 1
-anchor_bottom = 1
-grow_vertical = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.08, 0.06, 0.1, 1)
 
-[node name="VBox" parent=1 type="VBoxContainer" id="3"]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_right = 1
-anchor_bottom = 1
-grow_vertical = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_constants/contents_margin_left = 120
-theme_override_constants/contents_margin_top = 100
-theme_override_constants/contents_margin_right = 120
-theme_override_constants/contents_margin_bottom = 100
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 100
 theme_override_constants/separation = 40
 
-[node name="Title" parent=3 type="Label" id="4"]
-layout_mode = 1
-theme_override_font_sizes/normal_font_size = 56
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0.95, 0.7, 0.2, 1)
 text = "Lunch Rush: Dungeon Deli"
 horizontal_alignment = 1
-theme_override_font_colors/font_color = Color( 0.95, 0.7, 0.2, 1 )
 
-[node name="Subtitle" parent=3 type="Label" id="5"]
-layout_mode = 1
-theme_override_font_sizes/normal_font_size = 22
+[node name="Subtitle" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 text = "A roguelite deck-builder tower defense game"
 horizontal_alignment = 1
-theme_override_font_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
 
-[node name="HighScore" parent=3 type="Label" id="6"]
-layout_mode = 1
-theme_override_font_sizes/normal_font_size = 20
+[node name="HighScore" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.85, 0.7, 0.3, 1)
 text = "High Score: No runs yet - be the first!"
 horizontal_alignment = 1
-theme_override_font_colors/font_color = Color( 0.85, 0.7, 0.3, 1 )
 
-[node name="InstructionsPanel" parent=3 type="PanelContainer" id="7"]
-layout_mode = 1
-anchor_preset = 7
-anchor_right = 1
-anchor_bottom = 1
-grow_vertical = 2
-grow_horizontal = 2
-theme_override_constants/contents_margin_left = 30
-theme_override_constants/contents_margin_top = 20
-theme_override_constants/contents_margin_right = 30
-theme_override_constants/contents_margin_bottom = 20
+[node name="InstructionsPanel" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
 
-[node name="Instructions" parent=7 type="Label" id="8"]
-layout_mode = 1
-theme_override_font_sizes/normal_font_size = 18
-text = "Defend your kitchen from waves of hungry monsters!\n\n- Each wave, pick a recipe card to place towers\n- Towers automatically attack enemies in their lanes\n- Choose rooms between waves for bonuses and challenges\n- Match enemy cravings to slow them down - feeding the wrong craving enrages them!\n- Survive as many waves as possible to set a new high score"
+[node name="Instructions" type="Label" parent="VBox/InstructionsPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+text = "Defend your kitchen from waves of hungry monsters!
+
+- Each wave, pick a recipe card to place towers
+- Towers automatically attack enemies in their lanes
+- Choose rooms between waves for bonuses and challenges
+- Match enemy cravings to slow them down - feeding the wrong craving enrages them!
+- Survive as many waves as possible to set a new high score"
 horizontal_alignment = 1
-theme_override_font_colors/font_color = Color( 0.75, 0.75, 0.75, 1 )
 
-[node name="PlayButton" parent=3 type="Button" id="9"]
-layout_mode = 1
-custom_minimum_size = Vector2( 240, 70 )
-theme_override_font_sizes/normal_font_size = 28
+[node name="PlayButton" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 70)
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.95, 0.8, 1)
 text = "Play"
-alignment = 1
-theme_override_font_colors/font_color = Color( 1, 1, 1, 1 )
-theme_override_font_colors/font_color_hover = Color( 1, 0.95, 0.8, 1 )

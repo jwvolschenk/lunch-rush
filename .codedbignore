@@ -26,6 +26,7 @@ export/
 # Agent workflow docs (not game source — avoid false-positive search hits)
 SOLO_AGENT.md
 GOAL.md
+CODEDB.md
 directives.md
 backlog.md
 backlog-candidates.md

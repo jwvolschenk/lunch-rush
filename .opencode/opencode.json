@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "CODEDB.md",
+    "GODOT_MCP.md"
+  ],
+  "mcp": {
+    "codedb": {
+      "type": "local",
+      "command": [
+        "/home/jwvolschenk/.local/bin/codedb",
+        "mcp"
+      ]
+    },
+    "godot-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@coding-solo/godot-mcp"],
+      "env": {
+        "GODOT_PATH": "/usr/local/bin/godot"
+      }
+    }
+  }
+}

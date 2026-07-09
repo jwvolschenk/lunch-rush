@@ -49,6 +49,7 @@ Since your session is wiped each time, your only memory is these files:
 | `backlog-candidates.md` | planner inbox (coarse themes) | REFLECT + orchestrator seeds append here; PLAN consumes and clears |
 | `backlog.md` | executor queue (one-session tasks) | PLAN writes ready tasks; EXECUTE pulls the next `- [ ]` |
 | `skills/INDEX.md` | reusable snippets/tests the loop produced | consult before implementing |
+| `CODEDB.md` | codedb MCP navigation for *this* repo | auto-loaded every session — prefer codedb over grep; update as you learn |
 
 ## Directives (human steering)
 
@@ -61,6 +62,8 @@ Since your session is wiped each time, your only memory is these files:
 - When you complete it, edit the `status:` line to `done`.
 - The human uses these to steer you: "use JWT not sessions", "focus on tests next",
   "this bug is critical", etc.
+- A common directive: **review and improve `CODEDB.md`** with navigation patterns,
+  entry points, and lessons learned while working in this codebase.
 
 ## Rules (non-negotiable)
 

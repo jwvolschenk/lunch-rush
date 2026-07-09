@@ -1,15 +1,15 @@
 [gd_scene format=3]
 
-[node name="SpawnMarker" type="Node2D" id="3"]
+[node name="SpawnMarker" type="Node2D"]
 
-[node name="SpawnBackground" parent=1 type="ColorRect" id="4"]
+[node name="SpawnBackground" type="ColorRect" parent="."]
 offset_left = -200.0
 offset_top = -30.0
 offset_right = 100.0
 offset_bottom = 30.0
 color = Color(0.95, 0.6, 0.15, 0.06)
 
-[node name="SpawnRing" parent=1 type="ColorRect" id="5"]
+[node name="SpawnRing" type="ColorRect" parent="."]
 offset_left = -18.0
 offset_top = -18.0
 offset_right = 18.0

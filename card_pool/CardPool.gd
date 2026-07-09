@@ -1,5 +1,4 @@
-class_name CardPool
-extends Resource
+extends Node
 
 const CRAVING_TYPE = preload("res://enums/CravingType.gd")
 

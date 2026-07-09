@@ -26,9 +26,9 @@ func _ready() -> void:
 
 ## --- High Score ---
 func _update_high_score() -> void:
-	var high_score := SaveLoad.get_high_score()
-	var best_waves := SaveLoad.get_best_waves()
-	var best_gold := SaveLoad.get_best_gold()
+	var high_score: int = SaveLoad.get_high_score()
+	var best_waves: int = SaveLoad.get_best_waves()
+	var best_gold: int = SaveLoad.get_best_gold()
 	
 	if high_score > 0:
 		high_score_label.text = "High Score: %d  |  Best Waves: %d  |  Best Gold: %d" % [

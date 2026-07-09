@@ -144,14 +144,20 @@ func _apply_room_modifier(room: Resource) -> void:
 	wave_enemy_speed *= enemy_speed_mod
 	wave_gold_reward = int(wave_gold_reward * (1.0 + gold_bonus * 0.01))
 
+func _reset_room_modifiers() -> void:
+	wave_enemy_count = _wave_base_enemy_count
+	wave_enemy_hp = _wave_base_enemy_hp
+	wave_enemy_speed = _wave_base_enemy_speed
+	wave_gold_reward = _wave_base_gold_reward
+
 ## Capture the wave's base values before room modifiers are applied.
 ## Called by WaveManager at the start of each wave, before applying room modifiers.
 func capture_wave_base_values(wave: Resource, base_gold_reward: int) -> void:
 	if not wave:
 		return
-	_wave_base_enemy_count = int(wave.get("enemy_count", 0))
-	_wave_base_enemy_hp = float(wave.get("hp_scale", 1.0))
-	_wave_base_enemy_speed = float(wave.get("speed_scale", 60.0))
+	_wave_base_enemy_count = int(wave.get("enemy_count")) if "enemy_count" in wave else 0
+	_wave_base_enemy_hp = float(wave.get("hp_scale")) if "hp_scale" in wave else 1.0
+	_wave_base_enemy_speed = float(wave.get("speed_scale")) if "speed_scale" in wave else 60.0
 	_wave_base_gold_reward = base_gold_reward
 	wave_enemy_count = _wave_base_enemy_count
 	wave_enemy_hp = _wave_base_enemy_hp

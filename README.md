@@ -40,4 +40,10 @@ Run a magical dungeon deli while waves of hungry monsters storm your kitchen. Se
 
 ## Building
 
-Requires Godot 4.x. Open this project folder in the Godot editor and run the project.
+Requires Godot 4.7+. Open this project folder in the Godot editor and run the project.
+
+Verify the project compiles:
+
+```bash
+./scripts/check_godot.sh
+```

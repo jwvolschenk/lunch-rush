@@ -16,6 +16,9 @@ extends Node
 ## The default tower scene used when placing towers via card
 @export var default_tower_scene: PackedScene
 
+## Number of lanes — synced from LaneManager
+var lane_count: int = 0
+
 ## --- Tower registry ---
 
 ## All active towers across all lanes
@@ -42,6 +45,13 @@ signal all_towers_cleared
 
 func _ready() -> void:
 	print("[TowerManager] Initialized.")
+	_sync_lane_count()
+
+## Sync lane_count from the LaneManager autoload
+func _sync_lane_count() -> void:
+	var lm = get_node("/root/LaneManager")
+	if lm and lm.has_method("get_lane"):
+		lane_count = lm.lane_count
 
 ## --- Tower placement ---
 
@@ -63,7 +73,7 @@ func place_tower(tower_scene: PackedScene, lane_index: int, at_x: float) -> Node
 		return null
 	
 	# Clamp X to valid lane range
-	var clamped_x = clamp(at_x, 0.0, lane_manager.lane_spacing * (lane_manager.lane_count - 1) + 800.0)
+	var clamped_x = clamp(at_x, 0.0, lane_manager.lane_spacing * (lane_count - 1) + 800.0)
 	
 	var tower := tower_scene.instantiate()
 	tower.position.x = clamped_x
@@ -97,8 +107,9 @@ func place_tower_random(tower_scene: PackedScene) -> Node2D:
 		print("[TowerManager] No lanes available for placement.")
 		return null
 	
-	var lane_index = randi() % lane_manager.lane_count
-	var max_x = lane_manager.lane_spacing * lane_manager.lane_count
+	_sync_lane_count()
+	var lane_index = randi() % lane_count
+	var max_x = lane_manager.lane_spacing * lane_count
 	var at_x = randf() * max_x * 0.8 + max_x * 0.1  # 10%-90% of lane width
 	
 	return place_tower(tower_scene, lane_index, at_x)

@@ -168,7 +168,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## Theme: static analysis gaps — class_name on non-autoload scripts not resolving during --check-only
 
-- [ ] Critical: fix "class_name hides autoload" in CameraController.gd, CardSelection.gd, RoomSelector.gd, GameOverOverlay.gd (remove class_name from scripts that are autoloads, or remove autloads and keep class_name)
+- [x] Critical: fix "class_name hides autoload" in CameraController.gd, CardSelection.gd, RoomSelector.gd, GameOverOverlay.gd (already done in cycle 72 — class_name removed from all 4 autoload scripts)
 - [ ] Critical: fix WaveConfigLoader autoload not resolving during static analysis (autoload methods resolved as GDScriptNativeClass)
 - [ ] Critical: fix RoomData type not found in RoomSelector.gd (extends Resource, add preload in RoomSelector.gd)
 - [ ] Critical: fix "Only identifier can be assignment target" in GameOverOverlay.gd:65 (syntax error)

@@ -35,7 +35,7 @@ grow_vertical = 2
 grow_horizontal = 2
 theme_override_styles/normal = sub_resource("panel_style")
 
-[node name="overlay_bg" parent="MainMenu" type="ColorRect" id="2"]
+[node name="overlay_bg" parent="CardSelection" type="ColorRect" id="2"]
 layout_mode = 1
  anchors_preset = 7
 anchor_right = 1
@@ -43,7 +43,7 @@ anchor_bottom = 1
 color = sub_resource("overlay_bg")
 visible = false
 
-[node name="Panel" parent="MainMenu" type="PanelContainer" id="3"]
+[node name="Panel" parent="CardSelection" type="PanelContainer" id="3"]
 layout_mode = 1
 anchor_preset = 7
 anchor_right = 1
@@ -56,13 +56,13 @@ theme_override_constants/contents_margin_right = 40
 theme_override_constants/contents_margin_bottom = 60
 visible = false
 
-[node name="Title" parent="MainMenu" type="Label" id="4"]
+[node name="Title" parent="CardSelection" type="Label" id="4"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 28
 text = "Select a Card"
 horizontal_alignment = 1
 
-[node name="HBox" parent="MainMenu" type="HBoxContainer" id="5"]
+[node name="HBox" parent="CardSelection" type="HBoxContainer" id="5"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -73,7 +73,7 @@ alignment = 1
 custom_constants/separation = 20
 theme_override_constant s/hseparation = 20
 
-[node name="Card1" parent="MainMenu" type="PanelContainer" id="6"]
+[node name="Card1" parent="CardSelection" type="PanelContainer" id="6"]
 layout_mode = 1
 custom_size_flags_min_height = 300
 custom_size_flags_min_width = 200
@@ -81,81 +81,81 @@ theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("card_theme")
 theme_override_styles/contents = sub_resource("card_style")
 
-[node name="Card1Icon" parent="MainMenu" type="ColorRect" id="7"]
+[node name="Card1Icon" parent="CardSelection" type="ColorRect" id="7"]
 custom_size_flags_min_height = 80
 custom_size_flags_min_width = 160
 color = Color( 0.8, 0.8, 0.2, 1 )
 
-[node name="Card1Name" parent="MainMenu" type="Label" id="8"]
+[node name="Card1Name" parent="CardSelection" type="Label" id="8"]
 text = "Card Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="Card1Cost" parent="MainMenu" type="Label" id="9"]
+[node name="Card1Cost" parent="CardSelection" type="Label" id="9"]
 text = "Cost: 0"
 theme_override_font_sizes/normal_font_size = 14
 horizontal_alignment = 1
 
-[node name="Card1Desc" parent="MainMenu" type="Label" id="10"]
+[node name="Card1Desc" parent="CardSelection" type="Label" id="10"]
 text = "Card description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Card2" parent="MainMenu" type="PanelContainer" id="11"]
+[node name="Card2" parent="CardSelection" type="PanelContainer" id="11"]
 custom_size_flags_min_height = 300
 custom_size_flags_min_width = 200
 theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("card_theme")
 theme_override_styles/contents = sub_resource("card_style")
 
-[node name="Card2Icon" parent="MainMenu" type="ColorRect" id="12"]
+[node name="Card2Icon" parent="CardSelection" type="ColorRect" id="12"]
 custom_size_flags_min_height = 80
 custom_size_flags_min_width = 160
 color = Color( 0.2, 0.8, 0.2, 1 )
 
-[node name="Card2Name" parent="MainMenu" type="Label" id="13"]
+[node name="Card2Name" parent="CardSelection" type="Label" id="13"]
 text = "Card Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="Card2Cost" parent="MainMenu" type="Label" id="14"]
+[node name="Card2Cost" parent="CardSelection" type="Label" id="14"]
 text = "Cost: 0"
 theme_override_font_sizes/normal_font_size = 14
 horizontal_alignment = 1
 
-[node name="Card2Desc" parent="MainMenu" type="Label" id="15"]
+[node name="Card2Desc" parent="CardSelection" type="Label" id="15"]
 text = "Card description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Card3" parent="MainMenu" type="PanelContainer" id="16"]
+[node name="Card3" parent="CardSelection" type="PanelContainer" id="16"]
 custom_size_flags_min_height = 300
 custom_size_flags_min_width = 200
 theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("card_theme")
 theme_override_styles/contents = sub_resource("card_style")
 
-[node name="Card3Icon" parent="MainMenu" type="ColorRect" id="17"]
+[node name="Card3Icon" parent="CardSelection" type="ColorRect" id="17"]
 custom_size_flags_min_height = 80
 custom_size_flags_min_width = 160
 color = Color( 0.8, 0.2, 0.2, 1 )
 
-[node name="Card3Name" parent="MainMenu" type="Label" id="18"]
+[node name="Card3Name" parent="CardSelection" type="Label" id="18"]
 text = "Card Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="Card3Cost" parent="MainMenu" type="Label" id="19"]
+[node name="Card3Cost" parent="CardSelection" type="Label" id="19"]
 text = "Cost: 0"
 theme_override_font_sizes/normal_font_size = 14
 horizontal_alignment = 1
 
-[node name="Card3Desc" parent="MainMenu" type="Label" id="20"]
+[node name="Card3Desc" parent="CardSelection" type="Label" id="20"]
 text = "Card description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Confirm" parent="MainMenu" type="Label" id="21"]
+[node name="Confirm" parent="CardSelection" type="Label" id="21"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -166,7 +166,7 @@ theme_override_font_sizes/normal_font_size = 14
 text = "Click a card to select it"
 horizontal_alignment = 1
 
-[node name="ContinueButton" parent="MainMenu" type="Button" id="22"]
+[node name="ContinueButton" parent="CardSelection" type="Button" id="22"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1

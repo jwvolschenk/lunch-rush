@@ -40,7 +40,7 @@ anchor_bottom = 1
 grow_vertical = 2
 grow_horizontal = 2
 
-[node name="overlay_bg" parent="MainMenu" type="ColorRect" id="2"]
+[node name="overlay_bg" parent="GameOverOverlay" type="ColorRect" id="2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_right = 1
@@ -48,7 +48,7 @@ anchor_bottom = 1
 color = sub_resource("overlay_bg")
 visible = false
 
-[node name="Panel" parent="MainMenu" type="PanelContainer" id="3"]
+[node name="Panel" parent="GameOverOverlay" type="PanelContainer" id="3"]
 layout_mode = 1
 anchor_preset = 7
 anchor_right = 1
@@ -61,13 +61,13 @@ theme_override_constants/contents_margin_right = 60
 theme_override_constants/contents_margin_bottom = 100
 visible = false
 
-[node name="Title" parent="MainMenu" type="Label" id="4"]
+[node name="Title" parent="GameOverOverlay" type="Label" id="4"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 36
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="StatsPanel" parent="MainMenu" type="PanelContainer" id="5"]
+[node name="StatsPanel" parent="GameOverOverlay" type="PanelContainer" id="5"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -80,19 +80,19 @@ theme_override_constants/contents_margin_right = 30
 theme_override_constants/contents_margin_bottom = 30
 theme_override_styles/contents = sub_resource("panel_style")
 
-[node name="ScoreLabel" parent="MainMenu" type="Label" id="6"]
+[node name="ScoreLabel" parent="GameOverOverlay" type="Label" id="6"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Score: 0"
 horizontal_alignment = 1
 
-[node name="WaveLabel" parent="MainMenu" type="Label" id="7"]
+[node name="WaveLabel" parent="GameOverOverlay" type="Label" id="7"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Waves Survived: 0"
 horizontal_alignment = 1
 
-[node name="UnlocksPanel" parent="MainMenu" type="PanelContainer" id="15"]
+[node name="UnlocksPanel" parent="GameOverOverlay" type="PanelContainer" id="15"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -106,13 +106,13 @@ theme_override_constants/contents_margin_bottom = 15
 theme_override_styles/contents = sub_resource("panel_style")
 visible = false
 
-[node name="UnlocksTitle" parent="MainMenu" type="Label" id="16"]
+[node name="UnlocksTitle" parent="GameOverOverlay" type="Label" id="16"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Unlocks"
 horizontal_alignment = 1
 
-[node name="UnlocksScroll" parent="MainMenu" type="ScrollContainer" id="17"]
+[node name="UnlocksScroll" parent="GameOverOverlay" type="ScrollContainer" id="17"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1
@@ -120,7 +120,7 @@ anchor_bottom = 1
 grow_vertical = 2
 grow_horizontal = 2
 
-[node name="UnlocksVBox" parent="MainMenu" type="VBoxContainer" id="18"]
+[node name="UnlocksVBox" parent="GameOverOverlay" type="VBoxContainer" id="18"]
 layout_mode = 1
 theme_override_constants/separation = 6
 theme_override_constants/margin_left = 10
@@ -128,18 +128,18 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GoldLabel" parent="MainMenu" type="Label" id="8"]
+[node name="GoldLabel" parent="GameOverOverlay" type="Label" id="8"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Gold Earned: 0"
 horizontal_alignment = 1
 
-[node name="HealthLabel" parent="MainMenu" type="Label" id="9"]
+[node name="HealthLabel" parent="GameOverOverlay" type="Label" id="9"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Health Remaining: 0"
 horizontal_alignment = 1
-[node name="HighScorePanel" parent="MainMenu" type="PanelContainer" id="12"]
+[node name="HighScorePanel" parent="GameOverOverlay" type="PanelContainer" id="12"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -153,13 +153,13 @@ theme_override_constants/contents_margin_bottom = 15
 theme_override_styles/contents = sub_resource("panel_style")
 visible = false
 
-[node name="HighScoreLabel" parent="MainMenu" type="Label" id="13"]
+[node name="HighScoreLabel" parent="GameOverOverlay" type="Label" id="13"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 20
 text = "High Score: ---"
 horizontal_alignment = 1
 
-[node name="NewHighScoreLabel" parent="MainMenu" type="Label" id="14"]
+[node name="NewHighScoreLabel" parent="GameOverOverlay" type="Label" id="14"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 24
 text = ""
@@ -167,7 +167,7 @@ horizontal_alignment = 1
 theme_override_colors/font_color = Color( 0.95, 0.75, 0.1, 1 )
 
 
-[node name="RestartBtn" parent="MainMenu" type="Button" id="10"]
+[node name="RestartBtn" parent="GameOverOverlay" type="Button" id="10"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -187,7 +187,7 @@ theme_override_colors/font_color = Color( 0.95, 0.95, 0.95, 1 )
 theme_override_colors/font_color_hover = Color( 1, 1, 1, 1 )
 theme_override_colors/font_color_pressed = Color( 0.85, 0.85, 0.85, 1 )
 
-[node name="ContinueBtn" parent="MainMenu" type="Button" id="19"]
+[node name="ContinueBtn" parent="GameOverOverlay" type="Button" id="19"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -207,7 +207,7 @@ theme_override_colors/font_color = Color( 0.3, 0.8, 0.3, 1 )
 theme_override_colors/font_color_hover = Color( 0.5, 1, 0.5, 1 )
 theme_override_colors/font_color_pressed = Color( 0.2, 0.6, 0.2, 1 )
 
-[node name="QuitBtn" parent="MainMenu" type="Button" id="11"]
+[node name="QuitBtn" parent="GameOverOverlay" type="Button" id="11"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1

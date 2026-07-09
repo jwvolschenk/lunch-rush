@@ -3,7 +3,7 @@
 [node name="HealthInspectorProjectile" type="Node2D" id="1"]
 script = ExtResource("ext_1_proj_script")
 
-[node name="Visual" type="ColorRect" parent=. id="2"]
+[node name="Visual" type="ColorRect" parent="1" id="2"]
 size = Vector2(20, 20)
 offset_left = -10
 offset_top = -10

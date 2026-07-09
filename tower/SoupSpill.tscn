@@ -3,7 +3,7 @@
 [node name="SoupSpill" type="Node2D" id="1"]
 script = ExtResource("ext_1_soup_spill_script")
 
-[node name="Visual" type="ColorRect" parent=. id="2"]
+[node name="Visual" type="ColorRect" parent="1" id="2"]
 size = Vector2(40, 40)
 offset_left = -20
 offset_top = -20

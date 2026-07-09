@@ -32,7 +32,7 @@ anchor_bottom = 1
 grow_vertical = 2
 grow_horizontal = 2
 
-[node name="overlay_bg" parent="MainMenu" type="ColorRect" id="2"]
+[node name="overlay_bg" parent="RoomSelector" type="ColorRect" id="2"]
 layout_mode = 1
 anchors_preset = 7
 anchor_right = 1
@@ -40,7 +40,7 @@ anchor_bottom = 1
 color = sub_resource("overlay_bg")
 visible = false
 
-[node name="Panel" parent="MainMenu" type="PanelContainer" id="3"]
+[node name="Panel" parent="RoomSelector" type="PanelContainer" id="3"]
 layout_mode = 1
 anchor_preset = 7
 anchor_right = 1
@@ -53,13 +53,13 @@ theme_override_constants/contents_margin_right = 40
 theme_override_constants/contents_margin_bottom = 80
 visible = false
 
-[node name="Title" parent="MainMenu" type="Label" id="4"]
+[node name="Title" parent="RoomSelector" type="Label" id="4"]
 layout_mode = 1
 theme_override_font_sizes/normal_font_size = 28
 text = "Choose a Room"
 horizontal_alignment = 1
 
-[node name="HBox" parent="MainMenu" type="HBoxContainer" id="5"]
+[node name="HBox" parent="RoomSelector" type="HBoxContainer" id="5"]
 layout_mode = 1
 anchor_preset = 15
 anchor_right = 1
@@ -70,83 +70,83 @@ alignment = 1
 custom_constants/separation = 20
 theme_override_constant s/hseparation = 20
 
-[node name="Room1" parent="MainMenu" type="PanelContainer" id="6"]
+[node name="Room1" parent="RoomSelector" type="PanelContainer" id="6"]
 custom_size_flags_min_height = 280
 custom_size_flags_min_width = 220
 theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
-[node name="RoomName" parent="MainMenu" type="Label" id="7"]
+[node name="RoomName" parent="RoomSelector" type="Label" id="7"]
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="RoomDesc" parent="MainMenu" type="Label" id="8"]
+[node name="RoomDesc" parent="RoomSelector" type="Label" id="8"]
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Modifier" parent="MainMenu" type="Label" id="9"]
+[node name="Modifier" parent="RoomSelector" type="Label" id="9"]
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
-[node name="RoomAccent" parent="MainMenu" type="ColorRect" id="10"]
+[node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="10"]
 custom_size_flags_min_height = 8
 custom_size_flags_min_width = 200
 color = Color( 0.8, 0.6, 0.2, 1 )
 
-[node name="Room2" parent="MainMenu" type="PanelContainer" id="11"]
+[node name="Room2" parent="RoomSelector" type="PanelContainer" id="11"]
 custom_size_flags_min_height = 280
 custom_size_flags_min_width = 220
 theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
-[node name="RoomName" parent="MainMenu" type="Label" id="12"]
+[node name="RoomName" parent="RoomSelector" type="Label" id="12"]
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="RoomDesc" parent="MainMenu" type="Label" id="13"]
+[node name="RoomDesc" parent="RoomSelector" type="Label" id="13"]
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Modifier" parent="MainMenu" type="Label" id="14"]
+[node name="Modifier" parent="RoomSelector" type="Label" id="14"]
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
-[node name="RoomAccent" parent="MainMenu" type="ColorRect" id="15"]
+[node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="15"]
 custom_size_flags_min_height = 8
 custom_size_flags_min_width = 200
 color = Color( 0.2, 0.6, 0.9, 1 )
 
-[node name="Room3" parent="MainMenu" type="PanelContainer" id="16"]
+[node name="Room3" parent="RoomSelector" type="PanelContainer" id="16"]
 custom_size_flags_min_height = 280
 custom_size_flags_min_width = 220
 theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
-[node name="RoomName" parent="MainMenu" type="Label" id="17"]
+[node name="RoomName" parent="RoomSelector" type="Label" id="17"]
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
-[node name="RoomDesc" parent="MainMenu" type="Label" id="18"]
+[node name="RoomDesc" parent="RoomSelector" type="Label" id="18"]
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
-[node name="Modifier" parent="MainMenu" type="Label" id="19"]
+[node name="Modifier" parent="RoomSelector" type="Label" id="19"]
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
-[node name="RoomAccent" parent="MainMenu" type="ColorRect" id="20"]
+[node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="20"]
 custom_size_flags_min_height = 8
 custom_size_flags_min_width = 200
 color = Color( 0.9, 0.2, 0.2, 1 )

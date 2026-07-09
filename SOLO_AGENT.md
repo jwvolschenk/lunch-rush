@@ -39,7 +39,7 @@ Since your session is wiped each time, your only memory is these files:
 | `GOAL.md` | the overarching goal for the project | read every session — it drives all work |
 | `SOLO_AGENT.md` | this protocol | read first, every session |
 | `directives.md` | human guidance queued for you | read every session — pending directives are PRIORITY work |
-| `reflections.md` | what's been tried, what worked/failed | read second — avoid repeating failures |
+| `reflections.md` | recent failures + reflect insights (bounded) | read each session — avoid repeating mistakes |
 | `backlog.md` | the task list | REFLECT adds to it; EXECUTE pulls the next `- [ ]` task |
 | `skills/INDEX.md` | reusable snippets/tests the loop produced | consult before implementing |
 
@@ -76,7 +76,7 @@ Since your session is wiped each time, your only memory is these files:
 8. **Be honest.** If a task is blocked, invalid, or you can't complete it — say so
    clearly in your final message. Don't pretend success.
 9. **Reverts can happen.** If an orchestrator gate fails, your work may be reverted.
-   That's normal — read reflections.md to learn why.
+   That's normal — read reflections.md (recent memory only) to learn why.
 
 ## Stop signal
 

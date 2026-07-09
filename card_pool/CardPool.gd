@@ -2,6 +2,20 @@ class_name CardPool
 extends Resource
 
 const CRAVING_TYPE = preload("res://enums/CravingType.gd")
+
+## Convert food_type strings (e.g. "grease", "soup") to CravingType int values.
+static func food_type_to_int(food_type) -> int:
+	if food_type is int:
+		return food_type
+	if food_type is String:
+		match food_type:
+			"grease": return CRAVING_TYPE.GREASE
+			"soup": return CRAVING_TYPE.SOUP
+			"spice": return CRAVING_TYPE.SPICE
+			"pizza": return CRAVING_TYPE.PIZZA
+			"none", "": return CRAVING_TYPE.NONE
+	return CRAVING_TYPE.NONE
+
 ## CardPool — defines the available card pool for a run.
 ## Generates card choices dynamically based on game state,
 ## rarity weights, and room modifiers.
@@ -34,7 +48,7 @@ enum CardCategory {
 		"icon_color": Color(0.9, 0.8, 0.2, 1),
 		"rarity": "common",
 		"tower_scene": "res://tower/GoblinFryCook.tscn",
-		"food_type": "grease",
+		"food_type": CRAVING_TYPE.GREASE,
 	},
 	{
 		"name": "Pizza Trebuchet",
@@ -44,7 +58,7 @@ enum CardCategory {
 		"icon_color": Color(0.9, 0.5, 0.2, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/PizzaTrebuchet.tscn",
-		"food_type": "spice",
+		"food_type": CRAVING_TYPE.SPICE,
 	},
 	{
 		"name": "Spicy Sauce Cannon",
@@ -54,7 +68,7 @@ enum CardCategory {
 		"icon_color": Color(0.95, 0.35, 0.05, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/SpicySauceCannon.tscn",
-		"food_type": "spice",
+		"food_type": CRAVING_TYPE.SPICE,
 	},
 	{
 		"name": "Soup Spill",
@@ -64,7 +78,7 @@ enum CardCategory {
 		"icon_color": Color(0.4, 0.7, 0.9, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/SoupSpill.tscn",
-		"food_type": "soup",
+		"food_type": CRAVING_TYPE.SOUP,
 	},
 	{
 		"name": "Health Inspector",
@@ -74,7 +88,7 @@ enum CardCategory {
 		"icon_color": Color(0.8, 0.8, 0.1, 1),
 		"rarity": "rare",
 		"tower_scene": "res://tower/HealthInspector.tscn",
-		"food_type": "none",
+		"food_type": CRAVING_TYPE.NONE,
 	},
 	{
 		"name": "Combo Meal",
@@ -102,7 +116,7 @@ enum CardCategory {
 		"icon_color": Color(0.5, 0.5, 0.7, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/Dishwasher.tscn",
-		"food_type": "none",
+		"food_type": CRAVING_TYPE.NONE,
 	},
 	{
 		"name": "Pizza Delivery",
@@ -112,7 +126,7 @@ enum CardCategory {
 		"icon_color": Color(0.2, 0.7, 0.9, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/PizzaDelivery.tscn",
-		"food_type": "soup",
+		"food_type": CRAVING_TYPE.SOUP,
 	},
 	{
 		"name": "Customer Control",
@@ -274,7 +288,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.9, 0.8, 0.2, 1),
 			"rarity": "common",
-			"food_type": "grease",
+			"food_type": CRAVING_TYPE.GREASE,
 		},
 		{
 			"name": "Pizza Trebuchet",
@@ -283,7 +297,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.9, 0.5, 0.2, 1),
 			"rarity": "uncommon",
-			"food_type": "spice",
+			"food_type": CRAVING_TYPE.SPICE,
 		},
 		{
 			"name": "Soup Spill",
@@ -292,7 +306,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
 			"rarity": "uncommon",
-			"food_type": "soup",
+			"food_type": CRAVING_TYPE.SOUP,
 		},
 		{
 			"name": "Spicy Sauce Cannon",
@@ -301,7 +315,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.95, 0.35, 0.05, 1),
 			"rarity": "uncommon",
-			"food_type": "spice",
+			"food_type": CRAVING_TYPE.SPICE,
 		},
 	]
 	for starter in starters:

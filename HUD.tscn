@@ -18,7 +18,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.35, 0.35, 0.4, 0.6)
 
-[node name="HUD" parent="" instance=ExtResource("ext1_hudscript") id="1"]
+[node name="HUD" parent="" instance=ExtResource("ext_1_hudscript") id="1"]
 visible = true
 
 [node name="Panel" parent=HUD 2]

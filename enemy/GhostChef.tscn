@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemy/GhostChef.gd" id="ext_1_ghost"]
 
 [node name="GhostChef" type="Node2D" id="1"]
-script = ExtResource("ext1_ghost")
+script = ExtResource("ext_1_ghost")
 
 [node name="Sprite" type="ColorRect" id="2"]
 anchor_left = 0.5

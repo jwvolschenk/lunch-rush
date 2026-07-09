@@ -41,7 +41,7 @@ anchor_right = 1
 anchor_bottom = 1
 grow_vertical = 2
 grow_horizontal = 2
-script = ExternalResource("res://unlocks/UnlocksOverlay.gd")
+script = ExtResource("ext_1")
 
 [node name="overlay_bg" parent="MainMenu" type="ColorRect" id="2"]
 layout_mode = 1

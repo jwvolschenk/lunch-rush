@@ -12,7 +12,7 @@ size = Vector2(16, 16)
 radius = 8.0
 
 [node name="Projectile" type="Node2D" id="1"]
-script = ExtResource("ext1_proj")
+script = ExtResource("ext_1_proj")
 
 [node name="Sprite" type="ColorRect" id="5"]
 offset_left = -8.0

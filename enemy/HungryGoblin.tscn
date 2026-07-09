@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemy/HungryGoblin.gd" id="ext_1_goblin"]
 
 [node name="HungryGoblin" type="Node2D" id="1"]
-script = ExtResource("ext1_goblin")
+script = ExtResource("ext_1_goblin")
 
 [node name="Sprite" type="ColorRect" id="2"]
 anchor_left = 0.5

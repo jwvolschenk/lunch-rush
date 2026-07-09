@@ -1,101 +1,101 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://main.gd" id="ext1_main"]
-[ext_resource type="PackedScene" path="res://lane/Lane.tscn" id="ext2_lane"]
-[ext_resource type="PackedScene" path="res://lane/LaneDivider.tscn" id="ext3_divider"]
-[ext_resource type="PackedScene" path="res://HUD.tscn" id="ext4_hud"]
-[ext_resource type="PackedScene" path="res://card_selection/CardSelection.tscn" id="ext5_card"]
-[ext_resource type="PackedScene" path="res://rooms/RoomSelector.tscn" id="ext6_room"]
-[ext_resource type="PackedScene" path="res://game_over/GameOverOverlay.tscn" id="ext7_gameover"]
-[ext_resource type="PackedScene" path="res://CameraController.tscn" id="ext8_cam"]
-[ext_resource type="PackedScene" path="res://unlocks/UnlocksOverlay.tscn" id="ext9_unlocks"]
-[ext_resource type="PackedScene" path="res://victory/VictoryOverlay.tscn" id="ext10_victory"]
-[ext_resource type="Script" path="res://LaneManager.gd" id="ext11_lanemgr"]
-[ext_resource type="Script" path="res://TowerManager.gd" id="ext12_towermgr"]
-[ext_resource type="Script" path="res://wave/WaveManager.gd" id="ext13_wavemgr"]
-[ext_resource type="Script" path="res://InputManager.gd" id="ext14_inputmgr"]
+[ext_resource type="Script" path="res://main.gd" id="ext_1_main"]
+[ext_resource type="PackedScene" path="res://lane/Lane.tscn" id="ext_2_lane"]
+[ext_resource type="PackedScene" path="res://lane/LaneDivider.tscn" id="ext_3_divider"]
+[ext_resource type="PackedScene" path="res://HUD.tscn" id="ext_4_hud"]
+[ext_resource type="PackedScene" path="res://card_selection/CardSelection.tscn" id="ext_5_card"]
+[ext_resource type="PackedScene" path="res://rooms/RoomSelector.tscn" id="ext_6_room"]
+[ext_resource type="PackedScene" path="res://game_over/GameOverOverlay.tscn" id="ext_7_gameover"]
+[ext_resource type="PackedScene" path="res://CameraController.tscn" id="ext_8_cam"]
+[ext_resource type="PackedScene" path="res://unlocks/UnlocksOverlay.tscn" id="ext_9_unlocks"]
+[ext_resource type="PackedScene" path="res://victory/VictoryOverlay.tscn" id="ext_10_victory"]
+[ext_resource type="Script" path="res://LaneManager.gd" id="ext_11_lanemgr"]
+[ext_resource type="Script" path="res://TowerManager.gd" id="ext_12_towermgr"]
+[ext_resource type="Script" path="res://wave/WaveManager.gd" id="ext_13_wavemgr"]
+[ext_resource type="Script" path="res://InputManager.gd" id="ext_14_inputmgr"]
 
-[node name="Main" type="Node2D" id=1"]
-script = ExtResource("ext1_main")
+[node name="Main" type="Node2D" id="1"]
+script = ExtResource("ext_1_main")
 
-[node name="LaneManager" type="Node" id=2 parent=1"]
-script = ExtResource("ext11_lanemgr")
+[node name="LaneManager" type="Node" id="2" parent="1"]
+script = ExtResource("ext_11_lanemgr")
 
-[node name="TowerManager" type="Node" id=3 parent=1"]
-script = ExtResource("ext12_towermgr")
+[node name="TowerManager" type="Node" id="3" parent="1"]
+script = ExtResource("ext_12_towermgr")
 
-[node name="WaveManager" type="Node" id=4 parent=1"]
-script = ExtResource("ext13_wavemgr")
+[node name="WaveManager" type="Node" id="4" parent="1"]
+script = ExtResource("ext_13_wavemgr")
 
-[node name="InputManager" type="Node" id=5 parent=1"]
-script = ExtResource("ext14_inputmgr")
+[node name="InputManager" type="Node" id="5" parent="1"]
+script = ExtResource("ext_14_inputmgr")
 
-[node name="Lane0" type="Node2D" id=6 parent=1"]
-script = ExtResource("ext2_lane")
+[node name="Lane0" type="Node2D" id="6" parent="1"]
+script = ExtResource("ext_2_lane")
 offset_left = -640.0
 offset_top = -120.0
 offset_right = 640.0
 offset_bottom = 120.0
 
-[node name="Lane1" type="Node2D" id=7 parent=1"]
-script = ExtResource("ext2_lane")
+[node name="Lane1" type="Node2D" id="7" parent="1"]
+script = ExtResource("ext_2_lane")
 offset_left = -640.0
 offset_top = 40.0
 offset_right = 640.0
 offset_bottom = 280.0
 
-[node name="Lane2" type="Node2D" id=8 parent=1"]
-script = ExtResource("ext2_lane")
+[node name="Lane2" type="Node2D" id="8" parent="1"]
+script = ExtResource("ext_2_lane")
 offset_left = -640.0
 offset_top = 200.0
 offset_right = 640.0
 offset_bottom = 440.0
 
-[node name="Lane3" type="Node2D" id=9 parent=1"]
-script = ExtResource("ext2_lane")
+[node name="Lane3" type="Node2D" id="9" parent="1"]
+script = ExtResource("ext_2_lane")
 offset_left = -640.0
 offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 600.0
 
-[node name="Divider0" type="Node2D" id=10 parent=1"]
-script = ExtResource("ext3_divider")
+[node name="Divider0" type="Node2D" id="10" parent="1"]
+script = ExtResource("ext_3_divider")
 offset_left = -3.0
 offset_top = -20.0
 offset_right = 3.0
 offset_bottom = 20.0
 
-[node name="Divider1" type="Node2D" id=11 parent=1"]
-script = ExtResource("ext3_divider")
+[node name="Divider1" type="Node2D" id="11" parent="1"]
+script = ExtResource("ext_3_divider")
 offset_left = -3.0
 offset_top = 140.0
 offset_right = 3.0
 offset_bottom = 180.0
 
-[node name="Divider2" type="Node2D" id=12 parent=1"]
-script = ExtResource("ext3_divider")
+[node name="Divider2" type="Node2D" id="12" parent="1"]
+script = ExtResource("ext_3_divider")
 offset_left = -3.0
 offset_top = 300.0
 offset_right = 3.0
 offset_bottom = 340.0
 
-[node name="HUD" parent=1 instance=ExtResource("ext4_hud") id=13"]
+[node name="HUD" parent="1" instance=ExtResource("ext_4_hud") id="13"]
 visible = true
 
-[node name="CardSelection" parent=1 instance=ExtResource("ext5_card") id=14"]
+[node name="CardSelection" parent="1" instance=ExtResource("ext_5_card") id="14"]
 visible = false
 
-[node name="UnlocksOverlay" parent=1 instance=ExtResource("ext9_unlocks") id=15"]
+[node name="UnlocksOverlay" parent="1" instance=ExtResource("ext_9_unlocks") id="15"]
 visible = false
 
-[node name="RoomSelector" parent=1 instance=ExtResource("ext6_room") id=16"]
+[node name="RoomSelector" parent="1" instance=ExtResource("ext_6_room") id="16"]
 visible = false
 
-[node name="GameOverOverlay" parent=1 instance=ExtResource("ext7_gameover") id=17"]
+[node name="GameOverOverlay" parent="1" instance=ExtResource("ext_7_gameover") id="17"]
 visible = false
 
-[node name="VictoryOverlay" parent=1 instance=ExtResource("ext10_victory") id=18"]
+[node name="VictoryOverlay" parent="1" instance=ExtResource("ext_10_victory") id="18"]
 visible = false
 
-[node name="CameraController" parent=1 instance=ExtResource("ext8_cam") id=19"]
+[node name="CameraController" parent="1" instance=ExtResource("ext_8_cam") id="19"]
 visible = true

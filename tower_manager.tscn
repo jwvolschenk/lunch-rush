@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
 [node name="TowerManager" type="Node" id="1"]
-script = ExtResource("ext1_tower_mgr")
+script = ExtResource("ext_1_tower_mgr")
 
 [ext_resource type="Script" path="res://TowerManager.gd" id="ext_1_tower_mgr"]

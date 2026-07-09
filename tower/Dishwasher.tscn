@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dishwasher_tower"]
 
 [node name="Dishwasher" type="Node2D" id="1"]
-script = ExtResource("ext1_tower_script")
+script = ExtResource("ext_1_tower_script")
 
 [node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(40, 40)

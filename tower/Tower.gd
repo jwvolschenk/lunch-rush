@@ -4,6 +4,8 @@ extends Node2D
 ##
 ## Child scenes should override _on_ready_setup() to customize
 ## appearance, stats, and projectile type.
+## Override _tower_process() for per-frame logic that must
+## survive alongside the base fire-timer (no _process override needed).
 
 ## --- Configuration ---
 
@@ -59,6 +61,7 @@ signal tower_target_lost(tower: Node2D)
 func _ready() -> void:
 	_on_ready_setup()
 	_build_visual()
+	
 
 ## Override in child scenes to customize visual appearance
 func _build_visual() -> void:
@@ -66,6 +69,12 @@ func _build_visual() -> void:
 
 ## Override in child scenes to customize initial stats
 func _on_ready_setup() -> void:
+	pass
+
+## Override in child scenes for per-frame logic.
+## Called BEFORE the fire timer each frame while is_alive.
+## Child towers can override this without losing base fire-timer behavior.
+func _tower_process(_delta: float) -> void:
 	pass
 
 ## --- Tower state ---
@@ -170,12 +179,12 @@ func remove() -> void:
 	queue_free()
 
 ## Called every frame to drive the fire timer and attack loop.
-## Virtual — child towers that override _process MUST call
-## `.super()` to preserve the base fire-timer behavior.
+## Calls `_tower_process(delta)` first (virtual hook), then the fire timer.
 func _process(delta: float) -> void:
 	if not is_alive:
 		return
 	
+	_tower_process(delta)
 	_fire_timer -= delta
 	if _fire_timer <= 0:
 		_try_fire()

@@ -1,0 +1,40 @@
+# CodeDB ignore — keep game source indexed, exclude generated artifacts and agent workflow noise.
+# (codedb uses .codedbignore the same way as .gitignore: matched paths are skipped.)
+
+# Godot editor cache & generated metadata
+.godot/
+.import/
+*.import
+*.gd.uid
+*.godot~
+*.tmp
+
+# Binary assets (never index)
+audio/
+*.wav
+*.ogg
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.webp
+
+# Export / build artifacts
+export/
+
+# Agent workflow docs (not game source — avoid false-positive search hits)
+SOLO_AGENT.md
+GOAL.md
+directives.md
+backlog.md
+backlog-candidates.md
+backlog-history/
+reflections.md
+reflections-archive/
+skills/
+
+# VCS & tooling
+.git/
+.zcode/
+codedb.snapshot

@@ -197,3 +197,18 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Bug: starter deck card_type values use wrong enum constant
 
 ## --- Cycle 94 PLAN: dependency and tooling freshness ---
+
+## --- Cycle 98 PLAN: backlog candidates decomposed ---
+
+## Bug: starter deck card_type uses magic numbers instead of enum
+
+## Bug: _get_starter_cards() card_type literals (1, 1, 2) don't match _get_starter_deck() types (0, 0, 0, 0, 0, 2, 3) — inconsistent tower vs status classification
+
+## Design: room data hardcoded in _get_room_choices() doesn't match room_*.tres files — gameplay modifiers differ between code and resource files
+
+## Design: SoundManager has no pre-flight audio validation — missing audio files silently break SFX/music at runtime with no developer feedback
+
+- [x] (cycle 98) Fix magic number literals in main.gd._get_starter_cards() and DeckManager.gd._get_starter_deck(): replace hardcoded card_type integers (1, 2, 3) with CardType enum constants from preload("res://card_pool/Card.gd") — acceptance: all card_type values in both functions use CardType.TOWER, CardType.STATUS_EFFECT, or CardType.SPECIAL; game compiles with --check-only; no change to card behavior
+- [ ] (cycle 98) Consolidate _get_starter_cards() from main.gd into DeckManager.gd._get_starter_deck(): remove the duplicate starter card definition in main.gd, have main.gd call DeckManager.get_starter_cards() instead, and ensure the combined deck contains all 7 starter cards (5 tower + Combo Meal + Emergency Ration) — acceptance: _get_starter_cards() removed from main.gd, game still shows correct 3 starter cards at start, Godot --check-only passes
+- [ ] (cycle 98) Replace hardcoded room data in main.gd._get_room_choices() with loading from res://rooms/room_*.tres resource files: for each of the 5 rooms (Pantry, Freezer, Lava Kitchen, VIP Table, Cursed Buffet), load the corresponding .tres via load() and merge its RoomData fields — acceptance: no hardcoded enemy_hp_modifier/enemy_speed_modifier/gold_bonus values remain in _get_room_choices(); output RoomData matches the .tres file values exactly; game compiles clean
+- [ ] (cycle 98) Add pre-flight audio validation in SoundManager._ready(): after _load_folder() completes, enumerate all known audio file paths from game code (search for all load() calls referencing res://audio/ in .gd files), compare against loaded streams, push push_warning for each missing file, and log a summary count — acceptance: warnings appear at startup for any missing audio files; game still runs with no audio (graceful degradation); no crashes when audio folder is empty or missing

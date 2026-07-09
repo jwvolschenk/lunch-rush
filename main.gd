@@ -7,6 +7,7 @@ extends Node2D
 
 const ROOM_DATA_SCRIPT = preload("res://rooms/RoomData.gd")
 const CRAVING_TYPE = preload("res://enums/CravingType.gd")
+const CARD_TYPE = preload("res://card_pool/Card.gd")
 
 
 var lane_manager: LaneManager
@@ -267,21 +268,21 @@ func _get_starter_cards() -> Array:
 			"name": "Goblin Fry Cook",
 			"description": "Fast short-range grease attack. Deals area splash damage.",
 			"cost": 25,
-			"card_type": 1,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.9, 0.8, 0.2, 1),
 		},
 		{
 			"name": "Pizza Trebuchet",
 			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
 			"cost": 50,
-			"card_type": 1,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.9, 0.5, 0.2, 1),
 		},
 		{
 			"name": "Soup Spill",
 			"description": "Creates a slowing puddle that damages and slows enemies.",
 			"cost": 35,
-			"card_type": 2,
+			"card_type": CARD_TYPE.CardType.STATUS_EFFECT,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
 		},
 	]

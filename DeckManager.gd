@@ -10,6 +10,7 @@ extends Node
 
 ## Number of cards in the initial hand
 const INITIAL_HAND_SIZE: int = 5
+const CARD_TYPE = preload("res://card_pool/Card.gd")
 
 ## The deck (draw pile) — cards available to draw
 var deck: Array[Dictionary] = []
@@ -144,7 +145,7 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Goblin Fry Cook",
 			"description": "Fast short-range grease attack. Deals area splash damage.",
 			"cost": 25,
-			"card_type": 0,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.9, 0.8, 0.2, 1),
 			"tower_scene": "res://tower/GoblinFryCook.tscn",
 		},
@@ -152,7 +153,7 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Pizza Trebuchet",
 			"description": "Slow splash-damage tower. Launches pies at groups of enemies.",
 			"cost": 50,
-			"card_type": 0,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.9, 0.5, 0.2, 1),
 			"tower_scene": "res://tower/PizzaTrebuchet.tscn",
 		},
@@ -160,7 +161,7 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Soup Spill",
 			"description": "Creates a slowing puddle. Damages and slows enemies in the area.",
 			"cost": 35,
-			"card_type": 0,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
 			"tower_scene": "res://tower/SoupSpill.tscn",
 		},
@@ -168,7 +169,7 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Spicy Sauce Cannon",
 			"description": "Applies burn damage over time. Good vs armored enemies.",
 			"cost": 35,
-			"card_type": 0,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.9, 0.2, 0.2, 1),
 			"tower_scene": "res://tower/SpicySauceCannon.tscn",
 		},
@@ -176,7 +177,7 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Health Inspector",
 			"description": "Temporarily scares enemies backward. Great for buying time.",
 			"cost": 40,
-			"card_type": 0,
+			"card_type": CARD_TYPE.CardType.TOWER,
 			"icon_color": Color(0.2, 0.8, 0.5, 1),
 			"tower_scene": "res://tower/HealthInspector.tscn",
 		},
@@ -184,14 +185,14 @@ func _get_starter_deck() -> Array[Dictionary]:
 			"name": "Combo Meal",
 			"description": "Replay the last tower card you placed. Free.",
 			"cost": 0,
-			"card_type": 2,
+			"card_type": CARD_TYPE.CardType.SPECIAL,
 			"icon_color": Color(0.6, 0.9, 0.4, 1),
 		},
 		{
 			"name": "Emergency Ration",
 			"description": "Restore 15 HP to all lanes. Emergency healing.",
 			"cost": 15,
-			"card_type": 3,
+			"card_type": CARD_TYPE.CardType.SPECIAL,
 			"icon_color": Color(0.9, 0.4, 0.4, 1),
 		},
 	]

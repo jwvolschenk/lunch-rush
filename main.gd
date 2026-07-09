@@ -189,9 +189,9 @@ func _on_state_changed(new_state: int) -> void:
 
 ## --- Room choices ---
 func _get_room_choices() -> Array:
-	var rooms: Array[RoomData] = []
+	var rooms: Array = []
 	
-	var pantry: RoomData = ROOM_DATA_SCRIPT.new()
+	var pantry = ROOM_DATA_SCRIPT.new()
 	pantry.room_name = "Pantry"
 	pantry.description = "Standard pantry. Balanced room with no modifiers."
 	pantry.room_type = ROOM_DATA_SCRIPT.RoomType.PANTRY
@@ -204,7 +204,7 @@ func _get_room_choices() -> Array:
 	pantry.gold_bonus = 0
 	rooms.append(pantry)
 	
-	var freezer: RoomData = ROOM_DATA_SCRIPT.new()
+	var freezer = ROOM_DATA_SCRIPT.new()
 	freezer.room_name = "Freezer"
 	freezer.description = "Enemies move slower but have more HP. Gold bonus."
 	freezer.room_type = ROOM_DATA_SCRIPT.RoomType.FREEZER
@@ -217,7 +217,7 @@ func _get_room_choices() -> Array:
 	freezer.gold_bonus = 20
 	rooms.append(freezer)
 	
-	var lava: RoomData = ROOM_DATA_SCRIPT.new()
+	var lava = ROOM_DATA_SCRIPT.new()
 	lava.room_name = "Lava Kitchen"
 	lava.description = "Enemies are tougher and faster. Higher gold reward."
 	lava.room_type = ROOM_DATA_SCRIPT.RoomType.LAVA_KITCHEN
@@ -230,7 +230,7 @@ func _get_room_choices() -> Array:
 	lava.gold_bonus = 50
 	rooms.append(lava)
 	
-	var vip: RoomData = ROOM_DATA_SCRIPT.new()
+	var vip = ROOM_DATA_SCRIPT.new()
 	vip.room_name = "VIP Table"
 	vip.description = "Premium dining experience. Fast enemies but lots of gold."
 	vip.room_type = ROOM_DATA_SCRIPT.RoomType.VIP_TABLE
@@ -490,7 +490,7 @@ func _on_game_over() -> void:
 func _on_victory(wave_count: int, score: int, gold_earned: int) -> void:
 	print("[Main] Victory callback! Waves: %d, Score: %d, Gold: %d" % [wave_count, score, gold_earned])
 
-func _on_wave_started(wave_config: WaveConfig, wave_index: int) -> void:
+func _on_wave_started(wave_config: Resource, wave_index: int) -> void:
 	print("[Main] Wave %d started: %s" % [wave_index + 1, wave_config.description])
 
 func _on_wave_completed_check_unlocks(_wave_index: int) -> void:

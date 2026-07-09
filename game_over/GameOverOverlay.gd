@@ -1,4 +1,4 @@
-class_name GameOverOverlay
+# class_name removed: this script is an autoload singleton
 extends Control
 ## GameOverOverlay — full-screen panel showing run stats and offering restart.
 ## Displays score, waves survived, gold earned, and remaining health.
@@ -62,7 +62,7 @@ func _populate_unlocks_panel(unlocks: Dictionary) -> void:
 	# Section header
 	var section_label = Label.new()
 	section_label.text = "Perks Earned This Run"
-	section_label.theme_override_font_sizes/normal_font_size = 16
+	section_label.add_theme_font_size_override("normal_font_size", 16)
 	section_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_unlocks_vbox.add_child(section_label)
 
@@ -73,32 +73,32 @@ func _populate_unlocks_panel(unlocks: Dictionary) -> void:
 	if new_towers.size() > 0:
 		var tower_label = Label.new()
 		tower_label.text = "New Towers:"
-		tower_label.theme_override_font_sizes/normal_font_size = 14
-		tower_label.theme_override_colors/font_color = Color(1.0, 0.85, 0.2, 1)
+		tower_label.add_theme_font_size_override("normal_font_size", 14)
+		tower_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1))
 		_unlocks_vbox.add_child(tower_label)
 		for tower_name in new_towers:
 			var tower_item = Label.new()
 			tower_item.text = "  " + tower_name
-			tower_item.theme_override_font_sizes/normal_font_size = 13
+			tower_item.add_theme_font_size_override("normal_font_size", 13)
 			_unlocks_vbox.add_child(tower_item)
 
 	if new_cards.size() > 0:
 		var card_label = Label.new()
 		card_label.text = "New Cards:"
-		card_label.theme_override_font_sizes/normal_font_size = 14
-		card_label.theme_override_colors/font_color = Color(0.2, 1.0, 0.5, 1)
+		card_label.add_theme_font_size_override("normal_font_size", 14)
+		card_label.add_theme_color_override("font_color", Color(0.2, 1.0, 0.5, 1))
 		_unlocks_vbox.add_child(card_label)
 		for card_name in new_cards:
 			var card_item = Label.new()
 			card_item.text = "  " + card_name
-			card_item.theme_override_font_sizes/normal_font_size = 13
+			card_item.add_theme_font_size_override("normal_font_size", 13)
 			_unlocks_vbox.add_child(card_item)
 
 	if new_gold_bonus > 0:
 		var gold_label = Label.new()
 		gold_label.text = "Starting Gold Bonus: +%d" % new_gold_bonus
-		gold_label.theme_override_font_sizes/normal_font_size = 14
-		gold_label.theme_override_colors/font_color = Color(1.0, 0.9, 0.1, 1)
+		gold_label.add_theme_font_size_override("normal_font_size", 14)
+		gold_label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.1, 1))
 		_unlocks_vbox.add_child(gold_label)
 
 	_unlocks_panel.visible = true

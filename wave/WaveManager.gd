@@ -176,7 +176,7 @@ func _generate_default_waves() -> void:
 	print("[WaveManager] Generated %d default waves." % waves.size())
 	
 	# Sync generated waves back to ResourceLoader
-	ResourceLoader.reload_with(waves)
+	WaveConfigLoader.reload_with(waves)
 
 ## --- Wave management ---
 
@@ -191,12 +191,12 @@ func start_wave(wave_index: int) -> void:
 	if wave_index < waves.size():
 		_current_wave_config = waves[wave_index].duplicate(true)
 	else:
-		_current_wave_config = ResourceLoader.get_wave(wave_index)
+		_current_wave_config = WaveConfigLoader.get_wave(wave_index)
 	
 	# Apply room modifiers from current room (modifies the copied Resource)
 	var room = GameState.current_room
 	if room:
-		ResourceLoader.apply_room_modifiers(_current_wave_config, room)
+		WaveConfigLoader.apply_room_modifiers(_current_wave_config, room)
 	
 	# Then build spawn queue with modified scales
 	_spawn_queue = _build_spawn_queue()
@@ -405,7 +405,7 @@ func start_next_wave() -> void:
 	
 	# Check if we need to generate a new dynamic wave
 	if _next_wave_index >= waves.size():
-		var dynamic_wave = ResourceLoader.get_wave(_next_wave_index)
+		var dynamic_wave = WaveConfigLoader.get_wave(_next_wave_index)
 		waves.append(dynamic_wave)
 	
 	start_wave(_next_wave_index)

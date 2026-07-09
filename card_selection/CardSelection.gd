@@ -1,4 +1,4 @@
-class_name CardSelection
+# class_name removed: this script is an autoload singleton
 extends Control
 
 enum CravingType {

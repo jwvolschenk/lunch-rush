@@ -150,7 +150,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## --- Cycle 69 reflect additions ---
 
-- [ ] Critical: Open and compile in Godot 4.7 (directive d4)
+- [x] Critical: Open and compile in Godot 4.7 (directive d4)
 - [x] Critical: declare _next_wave_ready variable in main.gd
 - [x] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
 - [x] Critical: Tower._process — child classes override without calling super() (already done: no child class overrides _process, so no super() call needed)

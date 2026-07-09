@@ -1,10 +1,10 @@
-class_name RoomSelector
+# class_name removed: this script is an autoload singleton
 extends Control
 ## RoomSelector — overlay panel that presents 2-3 room choices between waves.
 ## Each room shows its name, description, and modifier preview.
 ## Clicking a room applies its modifier and returns to PLAYING state.
 
-signal room_selected(room_data: RoomData)
+signal room_selected(room_data: Resource)
 
 ## Available room options for the current wave transition
 var _rooms: Array = []
@@ -62,7 +62,7 @@ func hide_rooms() -> void:
 func _modifiers_text(index: int, text: String) -> void:
 	_room_modifiers[index].text = text
 
-func _format_modifier(room: RoomData) -> String:
+func _format_modifier(room: Resource) -> String:
 	var parts := []
 	if room.enemy_hp_modifier != 1.0:
 		var pct := int((room.enemy_hp_modifier - 1.0) * 100)

@@ -93,7 +93,10 @@ func reshuffle_deck() -> void:
 	# Shuffle: Fisher-Yates
 	for i in range(discard.size() - 1, 0, -1):
 		var j = randi() % (i + 1)
-		discard.swap(i, j)
+		# Manual swap (GDScript arrays have no swap method)
+		var temp = discard[i]
+		discard[i] = discard[j]
+		discard[j] = temp
 	deck = discard.duplicate()
 	discard.clear()
 	print("[DeckManager] Deck reshuffled from %d discard cards." % deck.size())
@@ -123,10 +126,11 @@ func has_cards_in_hand() -> bool:
 
 ## Get a card by name from the hand. Returns null if not found.
 func find_card_in_hand(name: String) -> Dictionary:
+	"""Returns a card dictionary, or empty dict if not found."""
 	for card in hand:
 		if card.get("name", "") == name:
 			return card
-	return null
+	return {}
 
 ## --- Internal ---
 

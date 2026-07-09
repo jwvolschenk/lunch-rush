@@ -1,3 +1,4 @@
+class_name CameraController
 extends Node2D
 ## CameraController — Camera2D system for the tower defence game.
 ##

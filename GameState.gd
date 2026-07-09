@@ -64,7 +64,7 @@ var gold: int = 100:
 signal gold_changed(new_gold: int)
 
 ## --- Game state machine ---
-enum GameState {
+enum GameMode {
 	PLAYING,
 	WAVE_COMPLETE,
 	GAME_OVER,
@@ -72,7 +72,7 @@ enum GameState {
 	VICTORY,
 }
 
-var state: GameState = GameState.PLAYING:
+var state: GameMode = GameMode.PLAYING:
 	set(v):
 		state = v
 		state_changed.emit(state)
@@ -226,5 +226,5 @@ func trigger_damage_flash() -> void:
 
 ## Transition to VICTORY state and emit victory signal.
 func trigger_victory() -> void:
-	state = GameState.VICTORY
+	state = GameMode.VICTORY
 	victory.emit(wave, score, gold)

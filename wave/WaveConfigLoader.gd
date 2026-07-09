@@ -2,28 +2,28 @@ extends Node
 ## WaveConfigLoader — singleton that loads wave configurations from resources or files.
 ##
 ## Responsibilities:
-##   1. Load WaveConfig resources from a directory (res://waves/).
+##   1. Load Resource resources from a directory (res://waves/).
 ##   2. Load wave data from external JSON files for non-Godot-editable waves.
 ##   3. Provide get_wave(index) API for WaveManager.
 ##   4. Support dynamic wave generation for room-modified waves and endless play.
 ##
 ## Usage:
-##   Put .tres WaveConfig resources in res://waves/ for auto-loading.
+##   Put .tres Resource resources in res://waves/ for auto-loading.
 ##   Put .json files in res://waves/ for procedural wave definitions.
 ##   WaveManager calls WaveConfigLoader.get_wave(wave_index) to fetch wave data.
 
 ## --- Configuration ---
 
-## Directory to scan for WaveConfig resources
+## Directory to scan for Resource resources
 const WAVE_RESOURCE_DIR := "res://waves/"
 
 ## Directory to scan for JSON wave definitions
 const WAVE_JSON_DIR := "res://waves/json/"
 
-## List of loaded WaveConfig resources (index = wave index)
-var _loaded_waves: Array[WaveConfig] = []
+## List of loaded Resource resources (index = wave index)
+var _loaded_waves: Array[Resource] = []
 
-## Map of JSON file names to their parsed WaveConfig
+## Map of JSON file names to their parsed Resource
 var _json_waves: Dictionary = {}
 
 ## Base escalation parameters used when no config file defines a wave
@@ -70,7 +70,7 @@ func _ready() -> void:
 
 ## Initialize with explicit wave list (called by WaveManager when it has its own @export waves).
 ## This allows WaveManager to pass in editor-configured waves instead of relying on file scan.
-func initialize(wave_resources: Array[WaveConfig], max_waves: int = 0) -> void:
+func initialize(wave_resources: Array[Resource], max_waves: int = 0) -> void:
 	_loaded_waves = wave_resources.duplicate()
 	_max_file_waves = wave_resources.size()
 	_initialized = true
@@ -84,12 +84,12 @@ func _load_all_waves() -> void:
 	_loaded_waves.clear()
 	_json_waves.clear()
 
-	# Load WaveConfig resource files from res://waves/
+	# Load Resource resource files from res://waves/
 	var resource_waves := _load_resource_waves()
 	for wave in resource_waves:
 		_loaded_waves.append(wave)
 
-	_loaded_waves.sort_by(_wave_sort_key)
+	_loaded_waves.sort_custom(func(a, b): return _wave_sort_key(a) < _wave_sort_key(b))
 	_max_file_waves = _loaded_waves.size()
 
 	# Load JSON wave definitions from res://waves/json/
@@ -103,10 +103,10 @@ func _load_all_waves() -> void:
 
 	waves_loaded.emit(_loaded_waves.size())
 
-## Load WaveConfig resources from the wave directory.
-## Scans for .tres files that extend WaveConfig.
-func _load_resource_waves() -> Array[WaveConfig]:
-	var waves: Array[WaveConfig] = []
+## Load Resource resources from the wave directory.
+## Scans for .tres files that extend Resource.
+func _load_resource_waves() -> Array[Resource]:
+	var waves: Array[Resource] = []
 	var dir := DirAccess.open(WAVE_RESOURCE_DIR)
 
 	if not dir:
@@ -119,10 +119,10 @@ func _load_resource_waves() -> Array[WaveConfig]:
 		if file_name.ends_with(".tres") or file_name.ends_with(".tscn"):
 			var full_path := WAVE_RESOURCE_DIR + file_name
 			var resource = load(full_path)
-			if resource and resource is WaveConfig:
+			if resource and resource is Resource:
 				waves.append(resource)
 			elif resource:
-				push_warning("[WaveConfigLoader] Skipping non-WaveConfig resource: %s" % full_path)
+				push_warning("[WaveConfigLoader] Skipping non-Resource resource: %s" % full_path)
 		file_name = dir.get_next()
 	dir.list_dir_end()
 
@@ -146,8 +146,8 @@ func _load_json_waves() -> void:
 		file_name = dir.get_next()
 	dir.list_dir_end()
 
-## Parse a single JSON file into a WaveConfig resource.
-func _parse_json_wave(file_path: String) -> WaveConfig:
+## Parse a single JSON file into a Resource resource.
+func _parse_json_wave(file_path: String) -> Resource:
 	var file := FileAccess.open(file_path, FileAccess.READ)
 	if not file:
 		push_warning("[WaveConfigLoader] Could not open JSON wave file: %s" % file_path)
@@ -161,7 +161,7 @@ func _parse_json_wave(file_path: String) -> WaveConfig:
 		push_warning("[WaveConfigLoader] Invalid JSON in %s" % file_path)
 		return null
 
-	var wave := WaveConfig.new()
+	var wave := Resource.new()
 
 	if "description" in json_result:
 		wave.description = json_result["description"]
@@ -188,12 +188,12 @@ func _parse_json_wave(file_path: String) -> WaveConfig:
 
 ## --- Wave API ---
 
-## Get the WaveConfig for a given wave index.
+## Get the Resource for a given wave index.
 ## Returns the loaded wave if available, or generates one procedurally.
 ##
 ## If the index is beyond loaded waves, room modifiers are applied
 ## to generate a modified wave on the fly.
-func get_wave(index: int) -> WaveConfig:
+func get_wave(index: int) -> Resource:
 	if not _initialized:
 		_load_all_waves()
 
@@ -204,10 +204,10 @@ func get_wave(index: int) -> WaveConfig:
 	# Generate dynamically for waves beyond the pre-loaded set
 	return _generate_dynamic_wave(index)
 
-## Generate a dynamic WaveConfig for waves beyond what is defined in files.
+## Generate a dynamic Resource for waves beyond what is defined in files.
 ## Applies room modifiers if the current room has them.
-func _generate_dynamic_wave(index: int) -> WaveConfig:
-	var wave := WaveConfig.new()
+func _generate_dynamic_wave(index: int) -> Resource:
+	var wave := Resource.new()
 
 	var hp_scale = 1.0 + (index * _hp_growth_rate)
 	var speed_scale = 1.0 + (index * _speed_growth_rate)
@@ -273,7 +273,7 @@ func _generate_dynamic_wave(index: int) -> WaveConfig:
 			primary_idx = i
 			break
 
-	var primary_path := available_enemies[primary_idx]["path"]
+	var primary_path: String = available_enemies[primary_idx]["path"]
 	var primary_data = load(primary_path) if ResourceLoader.exists(primary_path) else null
 
 	# Build enemy entries: primary type gets the bulk, introduce variety at higher waves
@@ -311,13 +311,13 @@ func _generate_dynamic_wave(index: int) -> WaveConfig:
 
 ## Apply room modifiers to a wave config.
 ## Modifies hp_scale and speed_scale in place, and adds extra enemies.
-func apply_room_modifiers(wave: WaveConfig, room: Resource) -> WaveConfig:
+func apply_room_modifiers(wave: Resource, room: Resource) -> Resource:
 	if not room:
 		return wave
 
-	var hp_mod := float(room.get("enemy_hp_modifier", 1.0))
-	var speed_mod := float(room.get("enemy_speed_modifier", 1.0))
-	var count_add := int(room.get("enemy_count_modifier", 0))
+	var hp_mod := float(room.get("enemy_hp_modifier") if room.get("enemy_hp_modifier") else 1.0)
+	var speed_mod := float(room.get("enemy_speed_modifier") if room.get("enemy_speed_modifier") else 1.0)
+	var count_add := int(room.get("enemy_count_modifier") if room.get("enemy_count_modifier") else 0)
 
 	wave.hp_scale *= hp_mod
 	wave.speed_scale *= speed_mod
@@ -334,7 +334,7 @@ func apply_room_modifiers(wave: WaveConfig, room: Resource) -> WaveConfig:
 
 ## Get a wave that is guaranteed to have room modifiers applied.
 ## Used by WaveManager when starting a wave after room selection.
-func get_wave_with_room_modifiers(index: int, room: Resource) -> WaveConfig:
+func get_wave_with_room_modifiers(index: int, room: Resource) -> Resource:
 	var wave = get_wave(index)
 	if room:
 		apply_room_modifiers(wave, room)
@@ -349,7 +349,7 @@ func reload_waves() -> void:
 
 ## Clear all loaded waves and reinitialize with a new set.
 ## Useful for run transitions between different wave pools.
-func reload_with(wave_resources: Array[WaveConfig]) -> void:
+func reload_with(wave_resources: Array[Resource]) -> void:
 	_loaded_waves = wave_resources.duplicate()
 	_max_file_waves = _loaded_waves.size()
 	waves_loaded.emit(_loaded_waves.size())
@@ -358,7 +358,7 @@ func reload_with(wave_resources: Array[WaveConfig]) -> void:
 ## --- Helpers ---
 
 ## Sort key for wave resources (by description or index).
-func _wave_sort_key(wave: WaveConfig) -> String:
+func _wave_sort_key(wave: Resource) -> String:
 	if wave.description:
 		return wave.description
 	return "Wave %d" % _loaded_waves.size()

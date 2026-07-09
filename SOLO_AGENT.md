@@ -66,8 +66,13 @@ Since your session is wiped each time, your only memory is these files:
 4. **Directives are priority.** Address pending directives before other backlog work.
 5. **Stay in scope.** EXECUTE does ONE task. Don't refactor unrelated code.
 6. **Never touch `main` / run git unless told.** The orchestrator manages git.
-7. **Verify your own work.** If there's no orchestrator gate, run the project's
-   build/test/lint yourself before stopping. Don't claim success you didn't check.
+7. **Leave it working — non-negotiable.** End every session with the project in
+   a known-good state: it must build/compile and its existing tests must pass.
+   Detect and run whatever build/test/lint tooling this project actually uses
+   (there may be no orchestrator verify gate — then you own this check). If you
+   can't get there, revert your own change rather than leave the tree broken,
+   and say so in your DONE: summary. The next cycle assumes it's starting from
+   a working system.
 8. **Be honest.** If a task is blocked, invalid, or you can't complete it — say so
    clearly in your final message. Don't pretend success.
 9. **Reverts can happen.** If an orchestrator gate fails, your work may be reverted.

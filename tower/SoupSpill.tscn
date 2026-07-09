@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://soup_spill_tower"]
 
-[node name="SoupSpill" type="Node2D" id=1]
-script = ExtResource("1_soup_spill_script")
+[node name="SoupSpill" type="Node2D" id="1"]
+script = ExtResource("ext1_soup_spill_script")
 
-[node name="Visual" type="ColorRect" parent=. id=2]
+[node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(40, 40)
 offset_left = -20
 offset_top = -20
@@ -11,4 +11,4 @@ offset_right = 20
 offset_bottom = 20
 color = Color(0.1, 0.4, 0.95, 1)
 
-[ext_resource type="Script" path="res://tower/SoupSpill.gd" id="1_soup_spill_script"]
+[ext_resource type="Script" path="res://tower/SoupSpill.gd" id="ext_1_soup_spill_script"]

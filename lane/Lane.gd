@@ -1,3 +1,4 @@
+class_name Lane
 extends Node2D
 ## Lane — a single lane for enemy movement.
 ## Each lane is a horizontal row with a spawn point on the right

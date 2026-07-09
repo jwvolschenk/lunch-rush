@@ -11,7 +11,7 @@ extends Node
 ## --- Wave config ---
 
 ## Array of WaveConfig resources defining all waves in a run.
-@export var waves: Array[WaveConfig] = []
+@export var waves: Array[Resource] = []
 
 ## Maximum number of waves in a run (0 = infinite/escalating)
 @export var max_waves: int = 20
@@ -30,7 +30,7 @@ extends Node
 
 ## Index of the currently playing wave
 var _current_wave_index: int = -1
-var _current_wave_config: WaveConfig = null
+var _current_wave_config: Resource = null
 
 ## Enemy spawn queue: list of { enemy_scene, lane_index, hp, speed }
 var _spawn_queue: Array = []
@@ -58,8 +58,8 @@ var _wave_start_requested: bool = false
 
 ## --- Signals ---
 
-## Emitted when a wave starts. Args: (wave_config: WaveConfig, wave_index: int)
-signal wave_started(wave_config: WaveConfig, wave_index: int)
+## Emitted when a wave starts. Args: (wave_config: Resource, wave_index: int)
+signal wave_started(wave_config: Resource, wave_index: int)
 
 ## Emitted when all enemies in a wave are defeated. Args: (wave_index: int)
 signal wave_complete(wave_index: int)
@@ -79,7 +79,7 @@ signal victory(wave_count: int, score: int, gold_earned: int)
 ## --- Wave state ---
 
 ## Returns the wave currently being played, or null if no wave is active.
-var active_wave: WaveConfig:
+var active_wave: Resource:
 	get: return _current_wave_config
 
 ## Returns the current wave index (0-based), or -1 if no wave active.
@@ -155,7 +155,7 @@ func _generate_default_waves() -> void:
 	var goblin_data: Resource = preload("res://enemy/EnemyData_HungryGoblin.tres")
 	
 	for i in range(max_waves):
-		var wave := WaveConfig.new()
+		var wave := Resource.new()
 		
 		# Escalating difficulty
 		var hp_scale = 1.0 + (i * hp_growth)
@@ -374,11 +374,11 @@ func _on_wave_complete() -> void:
 
 ## Advance GameState to WAVE_COMPLETE and prepare card selection UI.
 func advance_to_card_selection() -> void:
-	GameState.state = GameState.GameState.WAVE_COMPLETE
+	GameState.state = GameState.GameMode.WAVE_COMPLETE
 	_wave_start_requested = false
 	
 	# Generate card choices
-	var card_pool := CardPool
+	var card_pool: CardPool = preload("res://card_pool/CardPool.gd").new()
 	var cards := card_pool.get_card_pool(3)
 	
 	# Pass card data to the card selection UI via GameState

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://fire_pie_projectile"]
 
-[node name="FirePieProjectile" type="Node2D" id=1]
-script = ExtResource("1_proj_script")
+[node name="FirePieProjectile" type="Node2D" id="1"]
+script = ExtResource("ext1_proj_script")
 
-[node name="Visual" type="ColorRect" parent=. id=2]
+[node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(20, 20)
 offset_left = -10
 offset_top = -10
@@ -11,4 +11,4 @@ offset_right = 10
 offset_bottom = 10
 color = Color(0.95, 0.55, 0.1, 1)
 
-[ext_resource type="Script" path="res://projectile/FirePieProjectile.gd" id="1_proj_script"]
+[ext_resource type="Script" path="res://projectile/FirePieProjectile.gd" id="ext_1_proj_script"]

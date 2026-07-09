@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3]
 
-[ext_resource type="Script" path="res://lane/LaneDivider.gd" id=1_divider]
+[ext_resource type="Script" path="res://lane/LaneDivider.gd" id="div_1"]
 
-[node name="LaneDivider" type="Node2D" id=1]
-script = ExtResource("1_divider")
+[node name="LaneDivider" type="Node2D" id="1"]
+script = ExtResource("div_1")
 
-[node name="DividerWall" type="ColorRect" id=2]
+[node name="DividerWall" type="ColorRect" id="2"]
 offset_left = -3.0
 offset_top = -60.0
 offset_right = 3.0

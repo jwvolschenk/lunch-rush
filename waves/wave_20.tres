@@ -1,10 +1,10 @@
-[gd_resource type = "Resource" load_steps = 5 format = 3]
+[gd_resource type = "Resource" load_steps = 7 format = 3]
 
-ext_resource[1] = "res://enemy/EnemyData_HungryGoblin.tres"
-ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
-ext_resource[3] = "res://enemy/EnemyData_GhostChef.tres"
-ext_resource[4] = "res://enemy/EnemyData_OgreBrute.tres"
-ext_resource[5] = "res://enemy/EnemyData_PizzaDelivery.tres"
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_HungryGoblin.tres" id=1]
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_SlimeRunner.tres" id=2]
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_GhostChef.tres" id=3]
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_OgreBrute.tres" id=4]
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_PizzaDelivery.tres" id=5]
 
 [resource]
 enemies = [

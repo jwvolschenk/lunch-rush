@@ -141,9 +141,9 @@ func get_unlocked_cards() -> Array[String]:
 ## Returns a dictionary with keys: new_towers (Array), new_cards (Array), new_gold_bonus (int).
 ## Call this after game-over with the waves survived.
 func check_unlocks(waves_survived: int) -> Dictionary:
-	var result := {
-		"new_towers": Array[String](),
-		"new_cards": Array[String](),
+	var result: Dictionary = {
+		"new_towers": [],
+		"new_cards": [],
 		"new_gold_bonus": 0,
 	}
 
@@ -193,7 +193,7 @@ func _load_best_run() -> void:
 	file.close()
 	if json_string.is_empty():
 		return
-	var result := JSON.parse_string(json_string)
+	var result: Variant = JSON.parse_string(json_string)
 	if result != null and typeof(result) == TYPE_DICTIONARY:
 		if "version" in result and result["version"] == SAVE_VERSION:
 			_best_run = result
@@ -217,7 +217,7 @@ func _load_unlocks() -> void:
 	file.close()
 	if json_string.is_empty():
 		return
-	var result := JSON.parse_string(json_string)
+	var result: Variant = JSON.parse_string(json_string)
 	if result != null and typeof(result) == TYPE_DICTIONARY:
 		if "version" in result and result["version"] == UNLOCK_SAVE_VERSION:
 			if "unlocked_towers" in result:

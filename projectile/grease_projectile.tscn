@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://grease_projectile_scene"]
 
-[node name="GreaseProjectile" type="Node2D" id=1]
-script = ExtResource("1_proj_script")
+[node name="GreaseProjectile" type="Node2D" id="1"]
+script = ExtResource("ext1_proj_script")
 
-[node name="Visual" type="ColorRect" parent=. id=2]
+[node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(16, 16)
 offset_left = -8
 offset_top = -8
@@ -11,4 +11,4 @@ offset_right = 8
 offset_bottom = 8
 color = Color(0.9, 0.8, 0.15, 1)
 
-[ext_resource type="Script" path="res://projectile/GreaseProjectile.gd" id="1_proj_script"]
+[ext_resource type="Script" path="res://projectile/GreaseProjectile.gd" id="ext_1_proj_script"]

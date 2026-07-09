@@ -1,3 +1,4 @@
+class_name WaveConfig
 extends Resource
 ## WaveConfig — scriptable resource defining a single wave's composition.
 ##

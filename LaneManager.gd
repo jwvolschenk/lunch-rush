@@ -20,7 +20,7 @@ extends Node
 @export var show_lane_dividers: bool = true
 
 ## --- Lane instances ---
-var lanes: Array[Lane] = []
+var lanes: Array[Node2D] = []
 
 ## Divider wall nodes between lanes
 var _dividers: Array[Node2D] = []
@@ -62,7 +62,7 @@ func _build_lanes() -> void:
 	
 	for i in range(lane_count):
 		var lane_scene := load("res://lane/Lane.tscn") as PackedScene
-		var lane := lane_scene.instantiate() as Lane
+		var lane := lane_scene.instantiate() as Node2D
 		lane.y = start_y + i * lane_spacing
 		add_child(lane)
 		lanes.append(lane)
@@ -87,14 +87,14 @@ func _add_lane_dividers(start_y: float) -> void:
 	print("[LaneManager] Added %d lane dividers." % (lane_count - 1))
 
 ## Get a lane by index
-func get_lane(index: int) -> Lane:
-	if 0 <= index < lanes.size():
+func get_lane(index: int) -> Node2D:
+	if index >= 0 and index < lanes.size():
 		return lanes[index]
 	push_warning("LaneManager: lane index %d out of range [0..%d]" % [index, lanes.size()])
 	return null
 
 ## Get all lanes
-func get_all_lanes() -> Array[Lane]:
+func get_all_lanes() -> Array[Node2D]:
 	return lanes
 
 ## --- Enemy spawn helpers ---
@@ -104,7 +104,7 @@ func spawn_enemy_on_lane(enemy_scene: PackedScene, lane_index: int) -> Node2D:
 	var lane := get_lane(lane_index)
 	if not lane:
 		return null
-	var enemy := lane.spawn_enemy(enemy_scene)
+	var enemy: Node2D = lane.spawn_enemy(enemy_scene)
 	
 	# Connect lane signals
 	lane.enemy_reached_kitchen.connect(
@@ -141,7 +141,7 @@ func flush_lane(lane_index: int) -> int:
 	var lane := get_lane(lane_index)
 	if not lane:
 		return 0
-	var count := lane.get_enemy_count()
+	var count: int = lane.get_enemy_count()
 	for enemy in lane.get_enemies():
 		lane.remove_enemy(enemy)
 	return count

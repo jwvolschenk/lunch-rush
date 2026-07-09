@@ -1,3 +1,4 @@
+class_name CardSelection
 extends Control
 ## CardSelection — overlay panel for choosing a card between waves.
 ## Shows 3 card options with icon, name, cost, and description.

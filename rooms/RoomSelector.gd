@@ -1,3 +1,4 @@
+class_name RoomSelector
 extends Control
 ## RoomSelector — overlay panel that presents 2-3 room choices between waves.
 ## Each room shows its name, description, and modifier preview.

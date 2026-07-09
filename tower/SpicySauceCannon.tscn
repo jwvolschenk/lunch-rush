@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://spicy_sauce_cannon_tower"]
 
-[node name="SpicySauceCannon" type="Node2D" id=1]
-script = ExtResource("1_tower_script")
+[node name="SpicySauceCannon" type="Node2D" id="1"]
+script = ExtResource("ext1_tower_script")
 
-[node name="Visual" type="ColorRect" parent=. id=2]
+[node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(40, 40)
 offset_left = -20
 offset_top = -20
@@ -11,4 +11,4 @@ offset_right = 20
 offset_bottom = 20
 color = Color(0.95, 0.35, 0.05, 1)
 
-[ext_resource type="Script" path="res://tower/SpicySauceCannon.gd" id="1_tower_script"]
+[ext_resource type="Script" path="res://tower/SpicySauceCannon.gd" id="ext_1_tower_script"]

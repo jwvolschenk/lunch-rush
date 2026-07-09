@@ -44,6 +44,7 @@ var _damage_flash_timer: float = 0.0
 @onready var _card3_icon: ColorRect = $HandPanel/Card3/Card3Icon
 @onready var _card3_name: Label = $HandPanel/Card3/Card3Name
 @onready var _card3_cost: Label = $HandPanel/Card3/Card3Cost
+@onready var _wave_complete_label: Label = $WaveCompleteLabel
 
 func _ready() -> void:
 	_wave_progress_panel.visible = false
@@ -65,7 +66,7 @@ func _ready() -> void:
 		show_hand()
 
 func _process(delta: float) -> void:
-	if GameState.state != GameState.GameState.PLAYING:
+	if GameState.state != GameState.GameMode.PLAYING:
 		return
 	if _damage_flash_timer > 0:
 		_damage_flash_timer -= delta

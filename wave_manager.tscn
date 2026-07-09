@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
-[node name="WaveManager" type="Node" id=1]
-script = ExtResource("1_wave_mgr")
+[node name="WaveManager" type="Node" id="1"]
+script = ExtResource("ext1_wave_mgr")
 
-[ext_resource type="Script" path="res://wave/WaveManager.gd" id="1_wave_mgr"]
+[ext_resource type="Script" path="res://wave/WaveManager.gd" id="ext_1_wave_mgr"]

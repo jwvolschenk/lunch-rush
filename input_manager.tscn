@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
-[node name="InputManager" type="Node" id=1]
-script = ExtResource("1_input_mgr")
+[node name="InputManager" type="Node" id="1"]
+script = ExtResource("ext1_input_mgr")
 
-[ext_resource type="Script" path="res://InputManager.gd" id="1_input_mgr"]
+[ext_resource type="Script" path="res://InputManager.gd" id="ext1_input_mgr"]

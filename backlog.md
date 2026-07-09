@@ -133,3 +133,31 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## --- Cycle 63 reflect additions ---
 
 ## Theme: audio polish — wire up missing game sound effects
+
+## --- Cycle 67 reflect additions ---
+
+## Critical: missing variable and dead code
+
+## Critical: wave sorting bug (alphabetical instead of numeric)
+
+## Critical: Tower._process not called by subclasses (towers can't attack)
+
+## Critical: missing lane_count property in TowerManager
+
+## Core gameplay: Tower proactive re-targeting
+
+## Core gameplay: connect _on_wave_complete to WaveManager
+
+## --- Cycle 69 reflect additions ---
+
+- [ ] Critical: Open and compile in Godot 4.7 (directive d4)
+- [x] Critical: declare _next_wave_ready variable in main.gd
+- [ ] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
+- [ ] Critical: Tower._process — child classes override without calling super()
+- [ ] Critical: fix TowerManager missing lane_count property
+- [ ] Core gameplay: Tower proactive re-targeting (re-evaluate target each fire tick)
+- [ ] Core gameplay: connect _on_wave_complete signal to WaveManager.wave_complete
+- [ ] Core gameplay: enemy death visual feedback (hit flash + screen shake)
+- [ ] Core gameplay: craving indicator visibility (enlarged ring + glow pulse)
+- [ ] Core gameplay: continue button on main menu (from game over screen)
+- [ ] Core gameplay: victory overlay receives unlock data from GameState

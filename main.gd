@@ -4,6 +4,9 @@ extends Node2D
 ## the top-level game loop.
 
 ## --- Core system references ---
+
+const ROOM_DATA_SCRIPT = preload("res://rooms/ROOM_DATA_SCRIPT.gd")
+
 var lane_manager: LaneManager
 var hud: Control
 
@@ -26,6 +29,7 @@ var unlocks_overlay: Control
 
 ## --- Pending unlocks ---
 var _pending_unlocks: Dictionary = {}
+var _next_wave_ready: bool = true
 
 
 ## --- Lifecycle ---
@@ -69,7 +73,7 @@ func _ready() -> void:
 	
 # Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
-GameState.health_depleted.connect(_on_game_over)
+	GameState.health_depleted.connect(_on_game_over)
 	WaveManager.wave_complete.connect(_on_wave_completed_check_unlocks)
 	WaveManager.enemy_spawned.connect(_on_enemy_spawned)
 	WaveManager.enemy_died.connect(_on_enemy_died)
@@ -106,7 +110,7 @@ func _start_first_wave() -> void:
 
 ## --- Per-frame updates ---
 func _process(delta: float) -> void:
-	if camera_controller and GameState.state == GameState.GameState.PLAYING:
+	if camera_controller and GameState.state == GameState.GameMode.PLAYING:
 		_collect_all_enemies()
 
 var _all_enemies: Array[Node2D] = []
@@ -124,7 +128,7 @@ func _collect_all_enemies() -> void:
 ## --- State management ---
 func _on_state_changed(new_state: int) -> void:
 	match GameState.state:
-		GameState.GameState.PLAYING:
+		GameState.GameMode.PLAYING:
 			print("[Main] State: PLAYING")
 			if card_selection:
 				card_selection.hide_cards()
@@ -132,19 +136,19 @@ func _on_state_changed(new_state: int) -> void:
 				room_selector.hide_rooms()
 			if hud:
 				hud.show_hand()
-		GameState.GameState.WAVE_COMPLETE:
+		GameState.GameMode.WAVE_COMPLETE:
 			print("[Main] State: WAVE_COMPLETE")
 			# Show card selection first (3 card choices for the player)
 			if card_selection:
 				_show_card_selection()
 			if room_selector:
 				room_selector.hide_rooms()
-		GameState.GameState.ROOM_SELECTING:
+		GameState.GameMode.ROOM_SELECTING:
 			print("[Main] State: ROOM_SELECTING")
 			# Room selector is the active UI — don't hide it
 			if card_selection:
 				card_selection.hide_cards()
-		GameState.GameState.GAME_OVER:
+		GameState.GameMode.GAME_OVER:
 			print("[Main] State: GAME_OVER")
 			if card_selection:
 				card_selection.hide_cards()
@@ -162,7 +166,7 @@ func _on_state_changed(new_state: int) -> void:
 				_pending_unlocks = {}
 			if hud:
 				hud.hide_hand()
-		GameState.GameState.VICTORY:
+		GameState.GameMode.VICTORY:
 			print("[Main] State: VICTORY — All waves completed!")
 			if card_selection:
 				card_selection.hide_cards()
@@ -185,10 +189,10 @@ func _on_state_changed(new_state: int) -> void:
 func _get_room_choices() -> Array:
 	var rooms: Array[RoomData] = []
 	
-	var pantry := RoomData.new()
+	var pantry: RoomData = ROOM_DATA_SCRIPT.new()
 	pantry.room_name = "Pantry"
 	pantry.description = "Standard pantry. Balanced room with no modifiers."
-	pantry.room_type = RoomData.RoomType.PANTRY
+	pantry.room_type = ROOM_DATA_SCRIPT.RoomType.PANTRY
 	pantry.bg_color = Color(0.1, 0.1, 0.1, 1)
 	pantry.accent_color = Color(0.6, 0.6, 0.3, 1)
 	pantry.border_color = Color(0.3, 0.3, 0.3, 1)
@@ -198,10 +202,10 @@ func _get_room_choices() -> Array:
 	pantry.gold_bonus = 0
 	rooms.append(pantry)
 	
-	var freezer := RoomData.new()
+	var freezer: RoomData = ROOM_DATA_SCRIPT.new()
 	freezer.room_name = "Freezer"
 	freezer.description = "Enemies move slower but have more HP. Gold bonus."
-	freezer.room_type = RoomData.RoomType.FREEZER
+	freezer.room_type = ROOM_DATA_SCRIPT.RoomType.FREEZER
 	freezer.bg_color = Color(0.1, 0.15, 0.25, 1)
 	freezer.accent_color = Color(0.3, 0.7, 0.9, 1)
 	freezer.border_color = Color(0.2, 0.3, 0.5, 1)
@@ -211,10 +215,10 @@ func _get_room_choices() -> Array:
 	freezer.gold_bonus = 20
 	rooms.append(freezer)
 	
-	var lava := RoomData.new()
+	var lava: RoomData = ROOM_DATA_SCRIPT.new()
 	lava.room_name = "Lava Kitchen"
 	lava.description = "Enemies are tougher and faster. Higher gold reward."
-	lava.room_type = RoomData.RoomType.LAVA_KITCHEN
+	lava.room_type = ROOM_DATA_SCRIPT.RoomType.LAVA_KITCHEN
 	lava.bg_color = Color(0.25, 0.05, 0.05, 1)
 	lava.accent_color = Color(0.9, 0.3, 0.1, 1)
 	lava.border_color = Color(0.5, 0.1, 0.05, 1)
@@ -224,10 +228,10 @@ func _get_room_choices() -> Array:
 	lava.gold_bonus = 50
 	rooms.append(lava)
 	
-	var vip := RoomData.new()
+	var vip: RoomData = ROOM_DATA_SCRIPT.new()
 	vip.room_name = "VIP Table"
 	vip.description = "Premium dining experience. Fast enemies but lots of gold."
-	vip.room_type = RoomData.RoomType.VIP_TABLE
+	vip.room_type = ROOM_DATA_SCRIPT.RoomType.VIP_TABLE
 	vip.bg_color = Color(0.2, 0.15, 0.3, 1)
 	vip.accent_color = Color(0.8, 0.5, 0.9, 1)
 	vip.border_color = Color(0.4, 0.3, 0.6, 1)
@@ -237,10 +241,10 @@ func _get_room_choices() -> Array:
 	vip.gold_bonus = 100
 	rooms.append(vip)
 	
-	var cursed := RoomData.new()
+	var cursed := ROOM_DATA_SCRIPT.new()
 	cursed.room_name = "Cursed Buffet"
 	cursed.description = "A haunted feast. Enemies are wild but gold is plentiful."
-	cursed.room_type = RoomData.RoomType.CURSED_BUFFET
+	cursed.room_type = ROOM_DATA_SCRIPT.RoomType.CURSED_BUFFET
 	cursed.bg_color = Color(0.15, 0.05, 0.15, 1)
 	cursed.accent_color = Color(0.5, 0.2, 0.7, 1)
 	cursed.border_color = Color(0.3, 0.15, 0.35, 1)
@@ -288,13 +292,13 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	# Discard the played card from hand
 	DeckManager.discard_card(card_data)
 # Signal WaveManager that a card was selected (primes next wave start)
-	GameState.state = GameState.GameState.ROOM_SELECTING
+	GameState.state = GameState.GameMode.ROOM_SELECTING
 	_show_unlocks_overlay()
 	_show_room_selector()
 
 ## --- Continue handler (called after player clicks overlay to confirm) ---
 func _on_continue_requested() -> void:
-	GameState.state = GameState.GameState.ROOM_SELECTING
+	GameState.state = GameState.GameMode.ROOM_SELECTING
 	_show_unlocks_overlay()
 	_show_room_selector()
 
@@ -484,7 +488,7 @@ func _on_game_over() -> void:
 	SaveLoad.save_run(GameState.score, GameState.waves_completed, GameState.gold)
 	_pending_unlocks = SaveLoad.check_unlocks(GameState.waves_completed)
 	WaveManager.reset()
-	GameState.state = GameState.GameState.GAME_OVER
+	GameState.state = GameState.GameMode.GAME_OVER
 
 func _on_victory(wave_count: int, score: int, gold_earned: int) -> void:
 	print("[Main] Victory callback! Waves: %d, Score: %d, Gold: %d" % [wave_count, score, gold_earned])

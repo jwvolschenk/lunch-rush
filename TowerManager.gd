@@ -57,7 +57,7 @@ func place_tower(tower_scene: PackedScene, lane_index: int, at_x: float) -> Node
 		print("[TowerManager] Cannot place: LaneManager not found.")
 		return null
 	
-	var lane := lane_manager.get_lane(lane_index)
+	var lane: Node2D = lane_manager.get_lane(lane_index)
 	if not lane:
 		print("[TowerManager] Cannot place: invalid lane index %d." % lane_index)
 		return null
@@ -98,7 +98,7 @@ func place_tower_random(tower_scene: PackedScene) -> Node2D:
 		return null
 	
 	var lane_index = randi() % lane_manager.lane_count
-	var max_x = lane_manager.lane_spacing * lane_count
+	var max_x = lane_manager.lane_spacing * lane_manager.lane_count
 	var at_x = randf() * max_x * 0.8 + max_x * 0.1  # 10%-90% of lane width
 	
 	return place_tower(tower_scene, lane_index, at_x)

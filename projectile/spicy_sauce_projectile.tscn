@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://spicy_sauce_projectile"]
 
-[node name="SpicySauceProjectile" type="Node2D" id=1]
-script = ExtResource("1_proj_script")
+[node name="SpicySauceProjectile" type="Node2D" id="1"]
+script = ExtResource("ext1_proj_script")
 
-[node name="Visual" type="ColorRect" parent=. id=2]
+[node name="Visual" type="ColorRect" parent=. id="2"]
 size = Vector2(18, 18)
 offset_left = -9
 offset_top = -9
@@ -11,4 +11,4 @@ offset_right = 9
 offset_bottom = 9
 color = Color(1.0, 0.4, 0.05, 1)
 
-[ext_resource type="Script" path="res://projectile/SpicySauceProjectile.gd" id="1_proj_script"]
+[ext_resource type="Script" path="res://projectile/SpicySauceProjectile.gd" id="ext_1_proj_script"]

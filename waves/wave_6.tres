@@ -1,7 +1,7 @@
-[gd_resource type = "Resource" load_steps = 3 format = 3]
+[gd_resource type = "Resource" load_steps = 4 format = 3]
 
-ext_resource[1] = "res://enemy/EnemyData_OgreBrute.tres"
-ext_resource[2] = "res://enemy/EnemyData_SlimeRunner.tres"
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_OgreBrute.tres" id=1]
+[ext_resource type="PackedResource" path="res://enemy/EnemyData_SlimeRunner.tres" id=2]
 
 [resource]
 enemies = [

@@ -1,3 +1,4 @@
+class_name CardPool
 extends Resource
 ## CardPool — defines the available card pool for a run.
 ## Generates card choices dynamically based on game state,
@@ -31,7 +32,7 @@ enum CardCategory {
 		"icon_color": Color(0.9, 0.8, 0.2, 1),
 		"rarity": "common",
 		"tower_scene": "res://tower/GoblinFryCook.tscn",
-		"food_type": CravingType.GREASE,
+		"food_type": "grease",
 	},
 	{
 		"name": "Pizza Trebuchet",
@@ -41,7 +42,7 @@ enum CardCategory {
 		"icon_color": Color(0.9, 0.5, 0.2, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/PizzaTrebuchet.tscn",
-		"food_type": CravingType.SPICE,
+		"food_type": "spice",
 	},
 	{
 		"name": "Spicy Sauce Cannon",
@@ -51,7 +52,7 @@ enum CardCategory {
 		"icon_color": Color(0.95, 0.35, 0.05, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/SpicySauceCannon.tscn",
-		"food_type": CravingType.SPICE,
+		"food_type": "spice",
 	},
 	{
 		"name": "Soup Spill",
@@ -61,7 +62,7 @@ enum CardCategory {
 		"icon_color": Color(0.4, 0.7, 0.9, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/SoupSpill.tscn",
-		"food_type": CravingType.SOUP,
+		"food_type": "soup",
 	},
 	{
 		"name": "Health Inspector",
@@ -71,7 +72,7 @@ enum CardCategory {
 		"icon_color": Color(0.8, 0.8, 0.1, 1),
 		"rarity": "rare",
 		"tower_scene": "res://tower/HealthInspector.tscn",
-		"food_type": CravingType.NONE,
+		"food_type": "none",
 	},
 	{
 		"name": "Combo Meal",
@@ -99,7 +100,7 @@ enum CardCategory {
 		"icon_color": Color(0.5, 0.5, 0.7, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/Dishwasher.tscn",
-		"food_type": CravingType.NONE,
+		"food_type": "none",
 	},
 	{
 		"name": "Pizza Delivery",
@@ -109,7 +110,7 @@ enum CardCategory {
 		"icon_color": Color(0.2, 0.7, 0.9, 1),
 		"rarity": "uncommon",
 		"tower_scene": "res://tower/PizzaDelivery.tscn",
-		"food_type": CravingType.SOUP,
+		"food_type": "soup",
 	},
 	{
 		"name": "Customer Control",
@@ -224,7 +225,7 @@ func _get_available_cards() -> Array[Dictionary]:
 ## Pick a random card from the pool, weighted by rarity.
 func _pick_from_pool(pool: Array[Dictionary]) -> Dictionary:
 	if pool.is_empty():
-		return null
+		return {}
 
 	var total_weight := 0.0
 	var weighted_cards: Array = []
@@ -271,7 +272,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.9, 0.8, 0.2, 1),
 			"rarity": "common",
-			"food_type": CravingType.GREASE,
+			"food_type": "grease",
 		},
 		{
 			"name": "Pizza Trebuchet",
@@ -280,7 +281,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.9, 0.5, 0.2, 1),
 			"rarity": "uncommon",
-			"food_type": CravingType.SPICE,
+			"food_type": "spice",
 		},
 		{
 			"name": "Soup Spill",
@@ -289,7 +290,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.4, 0.7, 0.9, 1),
 			"rarity": "uncommon",
-			"food_type": CravingType.SOUP,
+			"food_type": "soup",
 		},
 		{
 			"name": "Spicy Sauce Cannon",
@@ -298,7 +299,7 @@ func _get_starter_card(already_selected: Array) -> Dictionary:
 			"card_type": CardCategory.TOWER,
 			"icon_color": Color(0.95, 0.35, 0.05, 1),
 			"rarity": "uncommon",
-			"food_type": CravingType.SPICE,
+			"food_type": "spice",
 		},
 	]
 	for starter in starters:

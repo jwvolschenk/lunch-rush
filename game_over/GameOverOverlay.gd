@@ -1,3 +1,4 @@
+class_name GameOverOverlay
 extends Control
 ## GameOverOverlay — full-screen panel showing run stats and offering restart.
 ## Displays score, waves survived, gold earned, and remaining health.

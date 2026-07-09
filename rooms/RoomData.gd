@@ -1,3 +1,4 @@
+class_name RoomData
 extends Resource
 ## RoomData — scriptable resource defining a room (level) type.
 ## Each room has a unique visual theme and a gameplay modifier.

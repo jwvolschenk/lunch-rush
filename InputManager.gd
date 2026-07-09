@@ -61,7 +61,7 @@ func _handle_placement_input(event: InputEvent) -> void:
 		_confirm_placement()
 		return
 	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed) \
-	or (event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed):
+	or (event is InputEventKey and event.keycode == 27 and event.pressed):
 		_cancel_placement()
 		return
 
@@ -125,13 +125,13 @@ func _cancel_placement() -> void:
 ## --- Card selection keyboard support ---
 func _handle_card_selection_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ONE:
+		if event.keycode == Key.KEY_1:
 			card_key_selected.emit(0)
-		elif event.keycode == KEY_TWO:
+		elif event.keycode == Key.KEY_2:
 			card_key_selected.emit(1)
-		elif event.keycode == KEY_THREE:
+		elif event.keycode == Key.KEY_3:
 			card_key_selected.emit(2)
-		elif event.keycode == KEY_SPACE:
+		elif event.keycode == 256:
 			card_confirm_requested.emit()
 
 ## --- Public API ---

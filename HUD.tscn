@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
-[ext_resource type="Script" path="res://HUD.gd" id="1_hudscript"]
+[ext_resource type="Script" path="res://HUD.gd" id="ext_1_hudscript"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_panel"]
 bg_color = Color(0.12, 0.12, 0.14, 1)
@@ -18,7 +18,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.35, 0.35, 0.4, 0.6)
 
-[node name="HUD" parent="" instance=ExtResource("1_hudscript") id=1]
+[node name="HUD" parent="" instance=ExtResource("ext1_hudscript") id="1"]
 visible = true
 
 [node name="Panel" parent=HUD 2]

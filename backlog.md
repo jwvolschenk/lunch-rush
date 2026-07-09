@@ -146,6 +146,6 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [x] Fix: GoblinFryCook missing food_type (defaults to 0 = no craving effect on grease projectiles)
 
-- [ ] Fix: undeclared `_pending_unlocks` variable in main.gd (used at lines 157, 159, 480 without `var` declaration)
+- [x] Fix: undeclared `_pending_unlocks` variable in main.gd (used at lines 157, 159, 480 without `var` declaration)
 
 - [ ] Feature: wire victory overlay unlock data — victory_overlay.show_victory() doesn't receive unlocks (6th param is always default)

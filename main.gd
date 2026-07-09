@@ -24,6 +24,9 @@ var victory_overlay: Control
 ## --- Unlock display ---
 var unlocks_overlay: Control
 
+## --- Pending unlocks ---
+var _pending_unlocks: Dictionary = {}
+
 
 ## --- Lifecycle ---
 func _ready() -> void:

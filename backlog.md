@@ -150,29 +150,9 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 ## --- Cycle 69 reflect additions ---
 
-- [x] Critical: Open and compile in Godot 4.7 (directive d4)
-- [x] Critical: declare _next_wave_ready variable in main.gd
-- [x] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
-- [x] Critical: Tower._process — child classes override without calling super() (already done: no child class overrides _process, so no super() call needed)
-- [x] Critical: fix TowerManager missing lane_count property
-- [x] Core gameplay: Tower proactive re-targeting (re-evaluate target each fire tick)
-- [x] Core gameplay: connect _on_wave_complete signal to WaveManager.wave_complete
-- [x] Core gameplay: enemy death visual feedback (hit flash + screen shake)
-- [x] Core gameplay: craving indicator visibility (enlarged ring + glow pulse)
-- [x] Core gameplay: continue button on main menu (from game over screen)
-- [x] Core gameplay: victory overlay receives unlock data from GameState
 
 ## --- Cycle 68 reflect additions ---
 
 ## Theme: compile fixes — get the project to open in Godot 4.7
 
 ## Theme: static analysis gaps — class_name on non-autoload scripts not resolving during --check-only
-
-- [x] Critical: fix "class_name hides autoload" in CameraController.gd, CardSelection.gd, RoomSelector.gd, GameOverOverlay.gd (already done in cycle 72 — class_name removed from all 4 autoload scripts)
-- [x] Critical: fix WaveConfigLoader autoload not resolving during static analysis (autoload methods resolved as GDScriptNativeClass) — fixed by correcting Godot 3→4 API: `ResourceLoader.exists()` → `ResourceLoader.resource_exists()`; `class_name` cannot be used on autoload scripts in Godot 4.x
-- [x] Critical: fix RoomData type not found in RoomSelector.gd (extends Resource, add preload in RoomSelector.gd)
-- [x] Critical: fix "Only identifier can be assignment target" in GameOverOverlay.gd:65 (syntax error) — already fixed in cycle 72: converted GDScript 3.x slash-operator theme overrides to GDScript 4.x add_theme_*_override calls
-- [x] Core gameplay: fix all remaining ext_resource ID mismatches across .tscn scene files
-- [x] Core gameplay: fix Scene parent references using IDs instead of names in packed scene format
-- [x] Core gameplay: ensure all scene files have consistent ext_resource format (quoted string IDs)
-- [x] Polish: add placeholder art to towers, enemies, and rooms for visual feedback during development

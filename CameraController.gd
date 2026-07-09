@@ -138,3 +138,26 @@ func reset_camera() -> void:
 	_camera.position = Vector2.ZERO
 	_zoom_target = zoom_default
 	zoom_changed.emit(zoom_default)
+
+## Shake the screen by a given intensity for a duration.
+func screen_shake(intensity: float, duration: float) -> void:
+	if not _camera:
+		return
+	var original = _camera.position
+	var steps = int(duration * 30.0)
+	if steps < 3:
+		steps = 3
+	var delta = duration / steps
+	var shake_count := 0
+	for i in range(steps):
+		var t = float(i) / steps
+		var envelope = 1.0 - t
+		var offset = Vector2(
+			(randf() * 2.0 - 1.0) * intensity * envelope,
+			(randf() * 2.0 - 1.0) * intensity * envelope
+		)
+		_camera.position = original + offset
+		shake_count += 1
+		if shake_count < steps:
+			await get_tree().create_timer(delta).timeout
+	_camera.position = original

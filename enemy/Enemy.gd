@@ -297,13 +297,58 @@ func _on_death() -> void:
 	SoundManager.play_sfx("enemy_death")
 	print("[Enemy] Dead (HP: 0, gold: %d, score: %d)" % [gold_reward, score_reward])
 
+	_flash_and_shake()
 	_spawn_death_labels()
 	_squish_and_die()
 
 func _squish_and_die() -> void:
+	var shake_timer := Timer.new()
+	shake_timer.wait_time = 0.01
+	shake_timer.one_shot = true
+	shake_timer.autoplay = false
+	shake_timer.connect("timeout", Callable(self, "_on_death_shake"))
+	add_child(shake_timer)
+	shake_timer.start()
+
 	var tween = create_tween()
 	tween.tween_property(self, "scale:y", 0.0, 0.3)
 	tween.tween_callback(Callable(self, "queue_free"))
+
+func _on_death_shake() -> void:
+	var camera = get_node_or_null("/root/CameraController")
+	if camera and camera.has_method("screen_shake"):
+		camera.call("screen_shake", 8.0, 0.2)
+
+## Flash the enemy bright white and trigger screen shake on death
+func _flash_and_shake() -> void:
+	# Flash the enemy's body bright
+	var flash_color = Color(1.0, 1.0, 1.0, 0.7)
+	var flash_sprite: Sprite2D = null
+	var flash_rect: ColorRect = null
+	# Find or create a flash overlay on the enemy
+	for child in get_children():
+		if child is ColorRect and child != hp_bar_bg and child != hp_bar:
+			flash_rect = child
+			break
+	if not flash_rect:
+		flash_rect = ColorRect.new()
+		flash_rect.anchor_left = 0.5
+		flash_rect.anchor_top = 0.5
+		flash_rect.anchor_right = 0.5
+		flash_rect.anchor_bottom = 0.5
+		flash_rect.size = Vector2(40, 50)
+		flash_rect.position = Vector2(-20, -25)
+		flash_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		flash_rect.z_index = 10
+		add_child(flash_rect)
+
+	flash_rect.visible = true
+	flash_rect.color = flash_color
+
+	# Flash tween: bright -> transparent
+	var flash_tween = create_tween()
+	flash_tween.tween_property(flash_rect, "color", Color(1.0, 1.0, 1.0, 0.0), 0.15)
+	flash_tween.tween_callback(func(): flash_rect.visible = false)
 
 func _spawn_death_labels() -> void:
 	# Parent the labels to whatever parent the enemy has (usually a Lane)

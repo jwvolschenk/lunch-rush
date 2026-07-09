@@ -16,13 +16,18 @@ The orchestrator (a separate process) drives this loop. It spawns a fresh sessio
 for each task or reflection. The loop is **backlog-first**:
 
     EXECUTE pending tasks → ... → when backlog is clear:
-      ARCHIVE done items → REFLECT to find new work → refill backlog → repeat
+      ARCHIVE done items → REFLECT (find candidates) → PLAN (decompose & order)
+      → refill backlog → repeat
 
 - **EXECUTE** (most cycles): the orchestrator picks the next `- [ ]` task from
   backlog.md and asks you to implement it. Churn through ALL pending tasks first.
 - **REFLECT** (only when backlog is empty): survey the project vs. the goal and
-  propose the next round of tasks to refill the backlog. The orchestrator archives
-  completed items into `backlog-history/` before calling you.
+  propose candidate work to refill the backlog. Candidates may be coarse themes.
+  The orchestrator archives completed items into `backlog-history/` before calling
+  you.
+- **PLAN** (immediately after REFLECT): decompose coarse items into small
+  one-session tasks, order them, and add acceptance criteria. The executor only
+  sees what PLAN leaves in backlog.md.
 - **VERIFY**: run by the ORCHESTRATOR *only if a verify command is configured*.
   Otherwise YOU own verification — run whatever build/test/lint/check this project
   uses before declaring a task complete.
@@ -40,7 +45,7 @@ Since your session is wiped each time, your only memory is these files:
 | `SOLO_AGENT.md` | this protocol | read first, every session |
 | `directives.md` | human guidance queued for you | read every session — pending directives are PRIORITY work |
 | `reflections.md` | recent failures + reflect insights (bounded) | read each session — avoid repeating mistakes |
-| `backlog.md` | the task list | REFLECT adds to it; EXECUTE pulls the next `- [ ]` task |
+| `backlog.md` | the task list | REFLECT adds candidates; PLAN decomposes/orders; EXECUTE pulls the next `- [ ]` |
 | `skills/INDEX.md` | reusable snippets/tests the loop produced | consult before implementing |
 
 ## Directives (human steering)

@@ -1,13 +1,7 @@
 class_name CardPool
 extends Resource
 
-enum CravingType {
-	NONE,
-	GREASE,
-	SOUP,
-	SPICE,
-	PIZZA,
-}
+const CRAVING_TYPE = preload("res://enums/CravingType.gd")
 ## CardPool — defines the available card pool for a run.
 ## Generates card choices dynamically based on game state,
 ## rarity weights, and room modifiers.

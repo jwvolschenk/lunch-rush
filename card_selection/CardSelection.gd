@@ -1,13 +1,20 @@
 # class_name removed: this script is an autoload singleton
 extends Control
 
-enum CravingType {
-	NONE,
-	GREASE,
-	SOUP,
-	SPICE,
-	PIZZA,
-}
+const CRAVING_TYPE = preload("res://enums/CravingType.gd")
+
+## Convert food_type strings (e.g. "grease", "soup") to CravingType int values.
+func food_type_to_int(food_type) -> int:
+	if typeof(food_type) == TYPE_INT:
+		return int(food_type)
+	if food_type is String:
+		match food_type:
+			"grease": return CRAVING_TYPE.GREASE
+			"soup": return CRAVING_TYPE.SOUP
+			"spice": return CRAVING_TYPE.SPICE
+			"pizza": return CRAVING_TYPE.PIZZA
+			"none", "": return CRAVING_TYPE.NONE
+	return CRAVING_TYPE.NONE
 ## CardSelection — overlay panel for choosing a card between waves.
 ## Shows 3 card options with icon, name, cost, and description.
 ## Clicking a card emits the selected signal and returns to PLAYING state.
@@ -105,7 +112,7 @@ func hide_cards() -> void:
 
 ## Display the food type indicator on a card slot.
 func _show_food_type(index: int, card: Dictionary) -> void:
-	var food_type = card.get("food_type", CravingType.NONE)
+	var food_type = food_type_to_int(card.get("food_type", CRAVING_TYPE.NONE))
 	# Create a label for the food type
 	var food_label = Label.new()
 	food_label.add_theme_font_size_override("font_size", 11)
@@ -113,21 +120,21 @@ func _show_food_type(index: int, card: Dictionary) -> void:
 	food_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	food_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	if food_type == CravingType.NONE or food_type < 0:
+	if food_type == CRAVING_TYPE.NONE or food_type < 0:
 		food_label.text = ""
 		food_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 0.0))
 	else:
 		var food_colors: Dictionary = {
-			CravingType.GREASE: Color(0.95, 0.85, 0.1, 0.9),
-			CravingType.SOUP:   Color(0.2, 0.5, 0.95, 0.9),
-			CravingType.SPICE:  Color(0.95, 0.15, 0.15, 0.9),
-			CravingType.PIZZA:  Color(0.8, 0.2, 0.85, 0.9),
+			CRAVING_TYPE.GREASE: Color(0.95, 0.85, 0.1, 0.9),
+			CRAVING_TYPE.SOUP:   Color(0.2, 0.5, 0.95, 0.9),
+			CRAVING_TYPE.SPICE:  Color(0.95, 0.15, 0.15, 0.9),
+			CRAVING_TYPE.PIZZA:  Color(0.8, 0.2, 0.85, 0.9),
 		}
 		var food_names: Dictionary = {
-			CravingType.GREASE: "GREASE",
-			CravingType.SOUP:   "SOUP",
-			CravingType.SPICE:  "SPICE",
-			CravingType.PIZZA:  "PIZZA",
+			CRAVING_TYPE.GREASE: "GREASE",
+			CRAVING_TYPE.SOUP:   "SOUP",
+			CRAVING_TYPE.SPICE:  "SPICE",
+			CRAVING_TYPE.PIZZA:  "PIZZA",
 		}
 		var name = "—"
 		if food_type in food_names:

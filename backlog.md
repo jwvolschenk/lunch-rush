@@ -172,3 +172,14 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Bug: input_manager.tscn has broken ExtResource ID format (ext1_ instead of ext_)
 
 ## Code quality: CardPool.gd duplicates CravingType enum from enums/CravingType.gd
+
+## --- Cycle 81 reflect additions ---
+
+## Theme: cycle 81 — code quality and gameplay mechanics improvements
+
+## Gameplay: craving food_type conversion — CardPool defines tower food_type as strings ("grease", "soup", "spice") but Projectile._apply_craving_effect compares food_type as int against CravingType enum values (GREASE=1, SOUP=2, SPICE=3, PIZZA=4). Need a food_type_to_int() helper that converts food_type strings/int to the matching CravingType enum value so the craving match/mismatch system actually works at runtime.
+
+## Code quality: remove duplicate CravingType enum — card_pool/CardPool.gd (line 4) and card_selection/CardSelection.gd (line 4) each define their own CravingType enum that duplicates enums/CravingType.gd. Replace both with a `const CRAVING_TYPE = preload("res://enums/CravingType.gd")` and reference via `CRAVING_TYPE.GREASE` etc., keeping a single source of truth.
+
+## Code quality: SaveLoad dictionary iteration — TOWER_UNLOCK_MILESTONES and CARD_UNLOCK_MILESTONES are plain dictionaries; GDScript dict iteration order is non-deterministic so tower/card unlock order varies between runs. Replace with sorted arrays or sorted iteration to ensure consistent, deterministic unlock progression.
+- [x] (orchestrator-injected, cycle 81) Reflect found no new work — survey the project for a code quality and tech debt — refactor a messy/overgrown area for clarity improvement, and implement one concrete, high-value change.

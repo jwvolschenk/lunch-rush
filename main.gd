@@ -174,8 +174,10 @@ func _on_state_changed(new_state: int) -> void:
 					GameState.wave,
 					GameState.gold,
 					GameState.health,
-					SaveLoad.get_high_score()
+					SaveLoad.get_high_score(),
+					_pending_unlocks
 				)
+				_pending_unlocks = {}
 			if hud:
 				hud.hide_hand()
 

@@ -103,7 +103,9 @@ func _find_new_target() -> Node2D:
 
 ## --- Collision ---
 
-## Deal damage when this projectile reaches its target
+## Deal damage when this projectile reaches its target.
+## Applies damage to the primary target, optional splash to nearby enemies,
+## craving-based debuffs/buffs, and any pushback effects.
 func _hit() -> void:
 	var splash_enemies: Array[Node2D] = []
 	
@@ -171,7 +173,8 @@ func _apply_craving_effect(enemy: Node2D) -> void:
 
 ## --- Destruction ---
 
-## Destroy this projectile and clean up
+## Destroy this projectile and clean up. Sets is_alive to false,
+## emits projectile_destroyed signal, and calls queue_free().
 func _destroy() -> void:
 	if not is_alive:
 		return

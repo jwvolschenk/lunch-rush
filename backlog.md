@@ -182,3 +182,19 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Code quality: remove duplicate CravingType enum — card_pool/CardPool.gd (line 4) and card_selection/CardSelection.gd (line 4) each define their own CravingType enum that duplicates enums/CravingType.gd. Replace both with a `const CRAVING_TYPE = preload("res://enums/CravingType.gd")` and reference via `CRAVING_TYPE.GREASE` etc., keeping a single source of truth.
 
 ## Code quality: SaveLoad dictionary iteration — TOWER_UNLOCK_MILESTONES and CARD_UNLOCK_MILESTONES are plain dictionaries; GDScript dict iteration order is non-deterministic so tower/card unlock order varies between runs. Replace with sorted arrays or sorted iteration to ensure consistent, deterministic unlock progression.
+
+## --- Cycle 83 reflect additions ---
+
+## Cycle 81 — decomposed into 3 concrete tasks below
+
+## --- Cycle 83 reflect additions ---
+
+## Documentation (orchestrator seed, cycle 83)
+
+- [x] (orchestrator seed, cycle 83) Survey the project for weakest docs/comments/onboarding and implement one concrete documentation improvement (e.g., add a project README with run instructions, or add doc-strings to key public APIs like Tower, Enemy, and Projectile)
+
+- [ ] Critical gameplay: fix craving food_type string-to-int mismatch — CardPool.gd stores food_type as strings ("grease", "soup", "spice", "none") and -1 for VendingMachine in all card dictionaries, but Tower.gd stores food_type as int and Projectile._apply_craving_effect compares food_type == CravingType.SPICE (int 3). String "spice" never equals int 3, so the craving system is completely broken at runtime. Fix: add a `food_type_to_int()` helper that converts string food_type values to CravingType enum values (NONE=0, GREASE=1, SOUP=2, SPICE=3, PIZZA=4), and apply it when CardPool builds card dictionaries
+
+- [ ] Critical gameplay: fix wave completion stuck when enemies killed before all spawned — WaveManager._on_wave_complete checks `if not _spawn_queue.is_empty(): return`. If player defeats all currently spawned enemies before the spawn queue empties, the wave never completes. Fix: track `_enemies_defeated_count` and change completion to `_enemies_defeated_count >= _spawned_count`
+
+- [ ] Code quality: Tower._process extensibility — Tower.gd defines `func _process(delta)` as the fire timer driver, but child towers cannot override it without losing base behavior. Fix: add `_tower_process(delta)` virtual hook — Tower._ready installs a _process that calls `_tower_process(delta)` first, then the fire timer (follows existing `_on_ready_setup` / `_build_visual` override pattern)

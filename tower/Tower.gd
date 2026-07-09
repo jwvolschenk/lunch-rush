@@ -72,7 +72,8 @@ func _on_ready_setup() -> void:
 
 var is_alive: bool = true
 
-## Check if an enemy is in range of this tower
+## Check if an enemy is within range of this tower (distance check).
+## Returns true if the enemy's global position is within `range` pixels.
 func is_in_range(enemy: Node2D) -> bool:
 	if not enemy:
 		return false
@@ -81,7 +82,8 @@ func is_in_range(enemy: Node2D) -> bool:
 	var distance = tower_pos.distance_to(enemy_pos)
 	return distance <= range
 
-## Find the nearest enemy in range, prioritizing enemies closest to the kitchen
+## Find the nearest enemy in range, prioritizing enemies closest to the kitchen.
+## Returns the enemy whose position.x is smallest among all in-range enemies.
 func find_target() -> Node2D:
 	if not lane:
 		return null
@@ -102,7 +104,8 @@ func find_target() -> Node2D:
 	
 	return best_target
 
-## Start targeting and begin firing
+## Start targeting and begin firing. Finds an initial target via find_target()
+## and sets is_attacking to true so _try_fire() is called each frame.
 func start_targeting() -> void:
 	_target = find_target()
 	if _target:

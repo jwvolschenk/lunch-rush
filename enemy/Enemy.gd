@@ -98,16 +98,16 @@ var effective_speed: float:
 		return speed * _slow_factor * _enrage_factor
 
 ## Apply a slow debuff to this enemy.
-## factor: multiplier to apply (e.g. 0.7 = 30% slow).
-## duration: how long the slow lasts in seconds.
+## Multiplies effective_speed by `factor` for `duration` seconds.
+## Multiple slows stack (takes the smallest factor).
 func apply_slow(factor: float, duration: float) -> void:
 	_slow_factor = min(_slow_factor, factor)
 	_slow_timer = duration
 	_update_hp_bar_color()
 
 ## Apply an enrage buff to this enemy.
-## factor: multiplier to apply (e.g. 1.2 = 20% faster).
-## duration: how long the enrage lasts in seconds.
+## Multiplies effective_speed by `factor` for `duration` seconds.
+## Multiple enrages stack (takes the largest factor).
 func apply_enrage(factor: float, duration: float) -> void:
 	_enrage_factor = max(_enrage_factor, factor)
 	_enrage_timer = duration
@@ -127,8 +127,8 @@ var _burn_tick_timer: float = 0.0
 var _burn_icon: Control = null
 
 ## Apply burn damage-over-time to this enemy.
-## damage_per_tick: damage dealt once per second
-## duration: how long the burn lasts in seconds
+## Deals `damage_per_tick` damage once per second for `duration` seconds.
+## Displays a flame icon while active.
 func apply_burn(damage_per_tick: float, duration: float) -> void:
 	_burn_timer = duration
 	_burn_damage = damage_per_tick
@@ -176,12 +176,14 @@ func _spawn_burn_icon() -> void:
 
 	_burn_icon.visible = true
 
-## Push this enemy backward (toward spawn) by the given distance.
+## Push this enemy backward (toward spawn) by the given distance in pixels.
+## Moves the enemy along its lane without triggering kitchen-reached logic.
 func apply_pushback(distance: float) -> void:
 	position.x += distance
 	print("[Enemy] Pushed back %dpx" % distance)
 
-## Reset all debuffs, buffs, and DoT. Called on death or manual reset.
+## Reset all debuffs, buffs, and DoT to their default values.
+## Called automatically on death and manually when debuffs expire.
 func clear_debuffs() -> void:
 	_clear_burn()
 	_slow_timer = 0.0
@@ -290,12 +292,13 @@ func _build_hp_bar() -> void:
 
 ## --- Damage ---
 
-## Apply damage to this enemy
+## Apply damage to this enemy. Reduces current_hp and triggers death if HP reaches zero.
+## Emits the enemy_dead signal when the enemy dies.
 func take_damage(amount: float) -> void:
 	current_hp = max(current_hp - amount, 0.0)
 	GameState.trigger_damage_flash()
 
-## Apply healing
+## Heal this enemy by `amount` (restores HP, capped at max_hp).
 func heal(amount: float) -> void:
 	current_hp = min(current_hp + amount, max_hp)
 

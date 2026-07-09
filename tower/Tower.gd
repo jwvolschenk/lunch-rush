@@ -116,23 +116,21 @@ func stop_targeting() -> void:
 		_target = null
 	is_attacking = false
 
-## Try to fire at the current target
+## Try to fire at the current target.
+## Proactively re-evaluates target each fire tick so towers always
+## switch to a better target (closer to kitchen) even if the old
+## target is still alive and in range.
 func _try_fire() -> void:
-	if not is_attacking or not _target or not _target.is_alive:
-		_target = find_target()
-		if not _target:
-			return
-		_fire_timer = cooldown
+	if not is_alive:
 		return
-	
-	if not is_in_range(_target):
-		_target = find_target()
-		if not _target:
-			return
-		_fire_timer = cooldown
+
+	# Proactive re-targeting: always pick the best available target
+	_target = find_target()
+	if not _target:
 		return
-	
+
 	_fire()
+	_fire_timer = cooldown
 
 ## Fire a projectile at the current target
 func _fire() -> void:

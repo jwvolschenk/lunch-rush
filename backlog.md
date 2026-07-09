@@ -155,7 +155,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
 - [x] Critical: Tower._process — child classes override without calling super() (already done: no child class overrides _process, so no super() call needed)
 - [x] Critical: fix TowerManager missing lane_count property
-- [ ] Core gameplay: Tower proactive re-targeting (re-evaluate target each fire tick)
+- [x] Core gameplay: Tower proactive re-targeting (re-evaluate target each fire tick)
 - [ ] Core gameplay: connect _on_wave_complete signal to WaveManager.wave_complete
 - [ ] Core gameplay: enemy death visual feedback (hit flash + screen shake)
 - [ ] Core gameplay: craving indicator visibility (enlarged ring + glow pulse)

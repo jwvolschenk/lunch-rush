@@ -1,5 +1,13 @@
 class_name CardSelection
 extends Control
+
+enum CravingType {
+	NONE,
+	GREASE,
+	SOUP,
+	SPICE,
+	PIZZA,
+}
 ## CardSelection — overlay panel for choosing a card between waves.
 ## Shows 3 card options with icon, name, cost, and description.
 ## Clicking a card emits the selected signal and returns to PLAYING state.

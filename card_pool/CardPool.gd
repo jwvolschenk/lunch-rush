@@ -1,5 +1,13 @@
 class_name CardPool
 extends Resource
+
+enum CravingType {
+	NONE,
+	GREASE,
+	SOUP,
+	SPICE,
+	PIZZA,
+}
 ## CardPool — defines the available card pool for a run.
 ## Generates card choices dynamically based on game state,
 ## rarity weights, and room modifiers.
@@ -150,13 +158,13 @@ enum CardCategory {
 ]
 
 ## Cards that have been placed this run (to avoid duplicate tower types)
-var _placed_towers: Array[String] = []
+static var _placed_towers: Array[String] = []
 
 ## The last tower card placed (for Combo Meal)
-var _last_tower_card: Dictionary = {}
+static var _last_tower_card: Dictionary = {}
 
 ## Whether to include placed towers again in the pool
-@export var allow_duplicate_towers: bool = true
+static var allow_duplicate_towers: bool = true
 
 ## --- Card generation ---
 
@@ -185,11 +193,11 @@ func get_card_pool(count: int = 3) -> Array[Dictionary]:
 	return selected
 
 ## Get the last placed tower card for Combo Meal replay.
-func get_last_tower_card() -> Dictionary:
+static func get_last_tower_card() -> Dictionary:
 	return _last_tower_card.duplicate()
 
 ## Mark a card as placed (used when the player selects a card).
-func record_card_played(card: Dictionary) -> void:
+static func record_card_played(card: Dictionary) -> void:
 	if card.get("card_type") == CardCategory.TOWER:
 		_last_tower_card = card.duplicate()
 		var tower_name = card.get("name", "")

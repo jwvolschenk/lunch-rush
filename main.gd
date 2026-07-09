@@ -6,21 +6,23 @@ extends Node2D
 ## --- Core system references ---
 
 const ROOM_DATA_SCRIPT = preload("res://rooms/RoomData.gd")
+const CRAVING_TYPE = preload("res://enums/CravingType.gd")
+
 
 var lane_manager: LaneManager
 var hud: Control
 
 ## --- Camera ---
-var camera_controller: CameraController
+var camera_controller: Node2D
 
 ## --- Card selection ---
-var card_selection: CardSelection
+var card_selection: Control
 
 ## --- Room selection ---
-var room_selector: RoomSelector
+var room_selector: Control
 
 ## --- Game-over overlay ---
-var game_over_overlay: GameOverOverlay
+var game_over_overlay: Control
 
 ## --- Victory overlay ---
 var victory_overlay: Control
@@ -288,7 +290,7 @@ func _on_card_selected(card_data: Dictionary) -> void:
 	# Apply the card effect (place tower or apply buff)
 	_apply_card_effect(card_data)
 	# Notify CardPool to record this card
-	CardPool.record_card_played(card_data)
+	preload("res://card_pool/CardPool.gd").record_card_played(card_data)
 	# Discard the played card from hand
 	DeckManager.discard_card(card_data)
 # Signal WaveManager that a card was selected (primes next wave start)
@@ -318,12 +320,7 @@ func _apply_card_effect(card_data: Dictionary) -> void:
 
 ## --- Combo Meal: replay last placed tower ---
 func _apply_combo_meal(card_data: Dictionary) -> void:
-	var pool := CardPool
-	if not pool or not pool.has_method("get_last_tower_card"):
-		print("[Main] No CardPool for Combo Meal.")
-		return
-
-	var last_tower = pool.get_last_tower_card()
+	var last_tower = preload("res://card_pool/CardPool.gd").get_last_tower_card()
 	if not last_tower or last_tower.is_empty():
 		print("[Main] Combo Meal: no previous tower to replay.")
 		return

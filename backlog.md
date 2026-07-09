@@ -197,9 +197,3 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Bug: starter deck card_type values use wrong enum constant
 
 ## --- Cycle 94 PLAN: dependency and tooling freshness ---
-
-- [x] (cycle 94) Update project.godot engine version — change `config/version="4.2.stable.stable"` to `"4.7.stable.stable"` to match the installed Godot 4.7, ensuring the project declares the correct engine version. Acceptance: project.godot reads back as 4.7 version string.
-
-- [x] (cycle 94) Fix export_presets.cfg — the `executable` paths in both Linux presets use `export/linux_x86/...` format which is wrong for Godot 4.x (should be relative: `linux_x86/debug/lunch-rush`). Remove the erroneous `export/` prefix, add missing Godot 4.x keys (`script_config`, `pck_include_embedded_pcks`, `architecture`, `bits` if absent). Acceptance: export preset executable paths follow Godot 4.x standard format.
-
-- [x] (cycle 94) Audit all .import files — run `godot --headless --quit` on the project (if available) to validate import hashes, or manually verify each .import file's `hash` field matches the current source file (check if any .import has stale `last_modified_time` vs source mtime). Acceptance: report any stale/broken .import files; if none found, confirm clean state.

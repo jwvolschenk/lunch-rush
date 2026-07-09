@@ -51,6 +51,7 @@ func _ready() -> void:
 	game_over_overlay = $GameOverOverlay
 	if game_over_overlay:
 		game_over_overlay.restart_requested.connect(_on_restart)
+		game_over_overlay.continue_requested.connect(_on_continue)
 		game_over_overlay.quit_requested.connect(_on_quit)
 
 # Reference the victory overlay
@@ -532,7 +533,7 @@ func _on_tower_placement_requested(lane_index: int, position_x: float, tower_sce
 func _on_tower_placement_cancelled() -> void:
 	print("[Main] Tower placement cancelled.")
 
-## --- Restart / Quit ---
+## --- Restart / Continue / Quit ---
 func _on_restart() -> void:
 	print("[Main] Restarting run...")
 	if game_over_overlay:
@@ -544,6 +545,14 @@ func _on_restart() -> void:
 		GameState.gold += gold_bonus
 		print("[Main] Starting gold bonus: +%d (total: %d)" % [gold_bonus, GameState.gold])
 	_start_first_wave()
+
+func _on_continue() -> void:
+	print("[Main] Continuing run...")
+	if game_over_overlay:
+		game_over_overlay.hide_game_over()
+	# Restore some health to keep going
+	GameState.health = min(GameState.health + 10, GameState.max_health)
+	GameState.state = GameState.GameMode.PLAYING
 
 func _on_quit() -> void:
 	print("[Main] Quitting to menu...")

@@ -6,6 +6,7 @@ extends Control
 ## Emits restart signal when the player confirms.
 
 signal restart_requested
+signal continue_requested
 signal quit_requested
 
 var _stats: Dictionary = {}
@@ -23,6 +24,7 @@ var _new_unlocks: Dictionary = {}
 @onready var _unlocks_panel: PanelContainer = $Panel/UnlocksPanel
 @onready var _unlocks_title: Label = $Panel/UnlocksPanel/UnlocksTitle
 @onready var _unlocks_vbox: VBoxContainer = $Panel/UnlocksPanel/UnlocksScroll/UnlocksVBox
+@onready var _continue_btn: Button = $Panel/ContinueBtn
 
 ## Show the game-over overlay with run statistics.
 ## If unlocks are available, shows the Unlocks panel with earned perks.
@@ -110,6 +112,9 @@ func hide_game_over() -> void:
 
 func _on_restart_pressed() -> void:
 	restart_requested.emit()
+
+func _on_continue_pressed() -> void:
+	continue_requested.emit()
 
 func _on_quit_pressed() -> void:
 	quit_requested.emit()

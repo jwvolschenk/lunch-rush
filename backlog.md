@@ -159,7 +159,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Core gameplay: connect _on_wave_complete signal to WaveManager.wave_complete
 - [x] Core gameplay: enemy death visual feedback (hit flash + screen shake)
 - [x] Core gameplay: craving indicator visibility (enlarged ring + glow pulse)
-- [ ] Core gameplay: continue button on main menu (from game over screen)
+- [x] Core gameplay: continue button on main menu (from game over screen)
 - [ ] Core gameplay: victory overlay receives unlock data from GameState
 
 ## --- Cycle 68 reflect additions ---

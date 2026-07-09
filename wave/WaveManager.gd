@@ -36,6 +36,7 @@ var _current_wave_config: Resource = null
 var _spawn_queue: Array = []
 var _spawn_timer: float = 0.0
 var _spawned_count: int = 0
+var _enemies_defeated_count: int = 0
 
 ## --- Wave countdown ---
 var _countdown_timer: float = 0.0
@@ -332,16 +333,17 @@ func _on_enemy_died(enemy: Node2D, lane_index: int) -> void:
 		return
 	
 	_active_enemies -= 1
+	_enemies_defeated_count += 1
 	enemy_died.emit(enemy, lane_index)
 	
-	if _active_enemies <= 0:
+	if _enemies_defeated_count >= _spawned_count:
 		_on_wave_complete()
 
 ## Called when all enemies in a wave are defeated.
 ## Transitions GameState to WAVE_COMPLETE and shows card selection.
 func _on_wave_complete() -> void:
-	# Verify the wave is truly complete: spawn queue must be empty
-	if not _spawn_queue.is_empty():
+	# Verify the wave is truly complete: all spawned enemies must be defeated
+	if _enemies_defeated_count < _spawned_count:
 		return
 	
 	# Check for victory: completed the final wave
@@ -457,6 +459,7 @@ func reset() -> void:
 	_spawn_queue = []
 	_spawn_timer = 0.0
 	_spawned_count = 0
+	_enemies_defeated_count = 0
 	_active_enemies = 0
 	_next_wave_index = 0
 	_wave_start_requested = false

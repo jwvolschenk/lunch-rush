@@ -160,7 +160,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Core gameplay: enemy death visual feedback (hit flash + screen shake)
 - [x] Core gameplay: craving indicator visibility (enlarged ring + glow pulse)
 - [x] Core gameplay: continue button on main menu (from game over screen)
-- [ ] Core gameplay: victory overlay receives unlock data from GameState
+- [x] Core gameplay: victory overlay receives unlock data from GameState
 
 ## --- Cycle 68 reflect additions ---
 

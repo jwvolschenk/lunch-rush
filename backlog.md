@@ -166,4 +166,3 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Tower: VendingMachine tower script incomplete — doesn't randomize food_type per shot as described in card pool
 
 ## Gameplay: craving matching broken — tower food_type strings (e.g. "grease") not converted to enum ints for projectile comparison
-- [x] (orchestrator-injected, cycle 77) Reflect found no new work — survey the project for a error handling and resilience — find a fragile path and make it fail gracefully improvement, and implement one concrete, high-value change.

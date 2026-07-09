@@ -76,6 +76,7 @@ func _ready() -> void:
 # Connect game state signals
 	GameState.state_changed.connect(_on_state_changed)
 	GameState.health_depleted.connect(_on_game_over)
+	WaveManager.wave_complete.connect(_on_wave_complete)
 	WaveManager.wave_complete.connect(_on_wave_completed_check_unlocks)
 	WaveManager.enemy_spawned.connect(_on_enemy_spawned)
 	WaveManager.enemy_died.connect(_on_enemy_died)

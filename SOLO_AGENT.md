@@ -50,6 +50,7 @@ Since your session is wiped each time, your only memory is these files:
 | `backlog.md` | executor queue (one-session tasks) | PLAN writes ready tasks; EXECUTE pulls the next `- [ ]` |
 | `skills/INDEX.md` | reusable snippets/tests the loop produced | consult before implementing |
 | `CODEDB.md` | codedb MCP navigation for *this* repo | auto-loaded every session — prefer codedb over grep; update as you learn |
+| `GODOT_MCP.md` | godot-mcp MCP tools for runtime debug/test | auto-loaded every session — use after compile check to catch runtime errors |
 
 ## Directives (human steering)
 
@@ -78,16 +79,43 @@ Since your session is wiped each time, your only memory is these files:
 5. **Stay in scope.** EXECUTE does ONE task. Don't refactor unrelated code.
 6. **Never touch `main` / run git unless told.** The orchestrator manages git.
 7. **Leave it working — non-negotiable.** End every session with the project in
-   a known-good state: it must build/compile and its existing tests must pass.
-   Detect and run whatever build/test/lint tooling this project actually uses
-   (there may be no orchestrator verify gate — then you own this check). If you
-   can't get there, revert your own change rather than leave the tree broken,
-   and say so in your DONE: summary. The next cycle assumes it's starting from
-   a working system.
+   a known-good state. Verification is **two steps** — both required before
+   declaring a task complete:
+   1. **Compile:** `./scripts/check_godot.sh` (or `godot --headless --check-only`)
+   2. **Runtime:** godot-mcp `run_project` → `get_debug_output` → fix any
+      `SCRIPT ERROR` / `ERROR` → re-run until clean → `stop_project`
+      See `GODOT_MCP.md` for the full workflow. Runtime catches autoload `_ready`
+      failures, missing resources, and signal wiring bugs that compile-only misses.
+   If godot-mcp is unavailable, run `./scripts/runtime_smoke_godot.sh` as a
+   fallback. If you can't get to a clean pass, revert your change rather than
+   leave the tree broken, and say so in your DONE: summary.
 8. **Be honest.** If a task is blocked, invalid, or you can't complete it — say so
    clearly in your final message. Don't pretend success.
 9. **Reverts can happen.** If an orchestrator gate fails, your work may be reverted.
    That's normal — read reflections.md (recent memory only) to learn why.
+
+## Verification (required before DONE:)
+
+No orchestrator verify gate — you own both steps every cycle:
+
+```bash
+# Step 1 — static compile/parse check
+./scripts/check_godot.sh
+```
+
+```
+# Step 2 — runtime smoke test via godot-mcp (see GODOT_MCP.md)
+run_project(projectPath="/home/jwvolschenk/repos/games/lunch-rush")
+get_debug_output()          # must show no SCRIPT ERROR / ERROR from your changes
+stop_project()
+```
+
+If `get_debug_output()` reports errors introduced or exposed by your work, fix them
+and repeat steps 1–2. Do not mark the backlog item done or emit `DONE:` until both
+pass. Use codedb to navigate from error messages to the failing code (see
+`GODOT_MCP.md` § "Combining godot-mcp + codedb").
+
+Fallback when godot-mcp is not connected: `./scripts/runtime_smoke_godot.sh`
 
 ## Stop signal
 

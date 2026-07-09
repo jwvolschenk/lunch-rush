@@ -7,6 +7,28 @@ debugs Godot from OpenCode. Paired with codedb for code navigation — use both.
 **Project path:** `/home/jwvolschenk/repos/games/lunch-rush`
 **Godot binary:** `/usr/local/bin/godot` (set via `GODOT_PATH`)
 
+## Verification gate (required every cycle)
+
+Agents must pass **both** checks before marking work done (`SOLO_AGENT.md` rule 7):
+
+| Step | Tool | What it catches |
+|---|---|---|
+| 1. Compile | `./scripts/check_godot.sh` | Parse errors, missing scripts, bad `project.godot` |
+| 2. Runtime | `run_project` + `get_debug_output` | Autoload `_ready` failures, missing resources, signal bugs |
+
+```
+./scripts/check_godot.sh
+run_project(projectPath="/home/jwvolschenk/repos/games/lunch-rush")
+get_debug_output()
+stop_project()
+```
+
+`get_debug_output()` must be free of `SCRIPT ERROR` and `ERROR` lines caused by
+the current codebase state. Warnings are acceptable unless they indicate a broken
+feature. Fix → re-run both steps until clean.
+
+Fallback (no MCP): `./scripts/runtime_smoke_godot.sh`
+
 ## Tool cheat sheet
 
 | Tool | When to use | Key params |

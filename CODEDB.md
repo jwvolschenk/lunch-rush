@@ -120,21 +120,33 @@ Do **not** re-declare `CravingType` in `CardPool.gd` or `CardSelection.gd`.
 
 ## Verification
 
-No orchestrator verify gate — agent owns checks:
+No orchestrator verify gate — agent owns a **two-step** check before `DONE:`:
+
+### Step 1 — Compile (static)
 
 ```bash
-# Preferred: compile/parse check (uses scripts/empty.tscn bootstrap; restores project.godot)
 ./scripts/check_godot.sh
-
-# Manual equivalent
-godot --headless --path . --check-only --quit
+# or: godot --headless --path . --check-only --quit
 ```
+
+Catches parse/compile errors. Uses `scripts/empty.tscn` bootstrap; restores `project.godot`.
+
+### Step 2 — Runtime (godot-mcp)
+
+See `GODOT_MCP.md`. Required after every change — catches errors compile-only misses:
+
+```
+run_project(projectPath="/home/jwvolschenk/repos/games/lunch-rush")
+get_debug_output()
+stop_project()
+```
+
+Fix any `SCRIPT ERROR` / `ERROR` in output, then re-run both steps. Fallback:
+`./scripts/runtime_smoke_godot.sh`
 
 **Opening in editor:** requires `project.godot` at repo root and **no** `.gdignore` in the root (that file tells Godot to ignore the folder). Use Godot 4.7+.
 
 `project.godot` must use Godot 4 `Object(InputEventKey,...)` input format — Godot 3 `InputActionEvent` syntax prevents the editor from loading the project. Scene files must use path-based `parent="."` / `parent="VBox"` node refs; numeric `parent=1` crashes Godot 4.7 headless.
-
-Backlog tasks often cite `--check-only` as acceptance criteria. Some runtime `SCRIPT ERROR` lines during autoload `_ready` are expected in headless check; the script only fails on parse/compile errors.
 
 ## Gotchas
 

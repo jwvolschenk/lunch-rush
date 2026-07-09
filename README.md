@@ -42,8 +42,11 @@ Run a magical dungeon deli while waves of hungry monsters storm your kitchen. Se
 
 Requires Godot 4.7+. Open this project folder in the Godot editor and run the project.
 
-Verify the project compiles:
+Verify the project compiles and starts without runtime errors:
 
 ```bash
-./scripts/check_godot.sh
+./scripts/verify_godot.sh          # compile + runtime smoke test
+./scripts/check_godot.sh           # compile only
 ```
+
+OpenCode agents: also run godot-mcp `run_project` → `get_debug_output` → `stop_project` per `GODOT_MCP.md`.

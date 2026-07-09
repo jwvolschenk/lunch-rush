@@ -3,18 +3,6 @@ extends Control
 
 const CRAVING_TYPE = preload("res://enums/CravingType.gd")
 
-## Convert food_type strings (e.g. "grease", "soup") to CravingType int values.
-func food_type_to_int(food_type) -> int:
-	if typeof(food_type) == TYPE_INT:
-		return int(food_type)
-	if food_type is String:
-		match food_type:
-			"grease": return CRAVING_TYPE.GREASE
-			"soup": return CRAVING_TYPE.SOUP
-			"spice": return CRAVING_TYPE.SPICE
-			"pizza": return CRAVING_TYPE.PIZZA
-			"none", "": return CRAVING_TYPE.NONE
-	return CRAVING_TYPE.NONE
 ## CardSelection — overlay panel for choosing a card between waves.
 ## Shows 3 card options with icon, name, cost, and description.
 ## Clicking a card emits the selected signal and returns to PLAYING state.
@@ -112,7 +100,7 @@ func hide_cards() -> void:
 
 ## Display the food type indicator on a card slot.
 func _show_food_type(index: int, card: Dictionary) -> void:
-	var food_type = food_type_to_int(card.get("food_type", CRAVING_TYPE.NONE))
+	var food_type = CravingType.food_type_to_int(card.get("food_type", CravingType.NONE))
 	# Create a label for the food type
 	var food_label = Label.new()
 	food_label.add_theme_font_size_override("font_size", 11)

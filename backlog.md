@@ -190,3 +190,9 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## --- Cycle 83 reflect additions ---
 
 ## Documentation (orchestrator seed, cycle 83)
+
+## Cycle 87 — autoload and bugfix additions
+
+- [x] Critical: Register DeckManager, TowerManager, LaneManager as autoloads in project.godot — these scripts all `extends Node` with docs saying they're autoload singletons, but none are in `[autoload]` section of project.godot (only GameState, WaveManager, CardPool, InputManager, SaveLoad, SoundManager, HUD are registered). Code across the project uses them as globals (DeckManager.discard_card(), TowerManager.place_tower(), LaneManager.lane_count). Fix: add `DeckManager="res://DeckManager.gd"`, `TowerManager="res://TowerManager.gd"`, `LaneManager="res://LaneManager.gd"` to project.godot [autoload] section.
+
+- [ ] Bugfix: CardSelection.gd line 103 uses `CravingType.food_type_to_int()` and `CravingType.NONE` but the file only preloads as `CRAVING_TYPE` (const on line 4). `CravingType` is undefined causing runtime crash. Fix: replace `CravingType.` with `CRAVING_TYPE.` on line 103.

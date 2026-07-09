@@ -3,19 +3,6 @@ extends Resource
 
 const CRAVING_TYPE = preload("res://enums/CravingType.gd")
 
-## Convert food_type strings (e.g. "grease", "soup") to CravingType int values.
-static func food_type_to_int(food_type) -> int:
-	if food_type is int:
-		return food_type
-	if food_type is String:
-		match food_type:
-			"grease": return CRAVING_TYPE.GREASE
-			"soup": return CRAVING_TYPE.SOUP
-			"spice": return CRAVING_TYPE.SPICE
-			"pizza": return CRAVING_TYPE.PIZZA
-			"none", "": return CRAVING_TYPE.NONE
-	return CRAVING_TYPE.NONE
-
 ## CardPool — defines the available card pool for a run.
 ## Generates card choices dynamically based on game state,
 ## rarity weights, and room modifiers.

@@ -188,6 +188,10 @@ func spend_gold(amount: int) -> bool:
 		return true
 	return false
 
+## Alias for deduct_gold — used by card scripts.
+func deduct_gold(amount: int) -> bool:
+	return spend_gold(amount)
+
 func take_damage(amount: int) -> void:
 	var old_health = health
 	health -= amount

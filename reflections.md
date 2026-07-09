@@ -4,14 +4,6 @@
 # records what was attempted and the verify outcome. Read at the
 # start of each fresh session so the agent doesn't repeat failures.
 
-## Cycle 71  2026-07-09T08:24:36Z  outcome:passed sha:a7fcb6dbaf
-
-Executed 3 backlog task(s); 2 completed (no gate; agent self-verified). 113 lines changed.
-
-## Cycle 72  2026-07-09T08:30:00Z  outcome:passed
-
-Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). 11 lines changed. Agent summary: DONE: Fixed 5 GDScript compilation errors to get project to compile in Godot 4.7 — removed class_name from autoload scripts (CameraController, CardSelection, RoomSelector, GameOverOverlay), fixed theme_override syntax errors in GameOverOverlay.gd (converted slash operator to add_theme_*_override calls), fixed WaveConfigLoader autoload references (was ResourceLoader), and removed RoomData type annotations that static analyzer couldn't resolve. Project now compiles cleanly (zero parse errors).
-
 ## Cycle 72  2026-07-09T08:35:32Z  outcome:passed sha:e3ca8cbe65
 
 Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 89 lines changed.
@@ -63,3 +55,11 @@ Archived 1 completed items. Reflect found no new work, so the orchestrator injec
 ## Cycle 83  2026-07-09T10:51:12Z  outcome:passed sha:e6fe038693
 
 Archived 1 completed items. Reflect found no new work, so the orchestrator seeded a coarse improvement theme for PLAN to decompose: - [ ] (orchestrator seed, cycle 83) Next improvement theme: documentation — improve docs, comments, or onboarding material where it's weakest — survey the project vs. GOAL.md and queue concrete work. Plan: DONE: 4 ready tasks — (1) documentation survey/improvement (orchestrator seed, cycle 83), (2) craving food_type string-to-int mismatch fix, (3) wave completion stuck fix, (4) Tower._process extensibil
+
+## Cycle 86  2026-07-09T11:21:24Z  outcome:passed sha:8af7e20c11
+
+Archived 3 completed items, then reflected: 0 ready task(s) after plan. Reflect: DONE: 4 candidates added — (1) HUD autoload not registered causing runtime crashes, (2) GameState.deduct_gold missing ca. Plan: DONE: 4 candidates decomposed and implemented — HUD autoload added, deduct_gold alias added, food_type_to_int centralized in CravingType.gd, unlock display verified correct (no bug). backlog-candidate
+
+## Cycle 87  2026-07-09T11:27:49Z  outcome:passed sha:8af7e20c11
+
+Archived 0 completed items, then reflected: 2 ready task(s) after plan. Reflect: DONE: 2 candidates added — (1) Critical: 3 missing autoloads in project.godot (DeckManager, TowerManager, LaneManager), . Plan: DONE: 2 backlog.md tasks added — first is critical autoload registration for DeckManager, TowerManager, LaneManager in project.godot.

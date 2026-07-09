@@ -256,6 +256,13 @@ func _build_spawn_queue() -> Array:
 		if not scene_path:
 			scene_path = default_scene
 		var enemy_scene: PackedScene = load(scene_path)
+		# Graceful fallback: if the scene is missing/corrupted, fall back to the default enemy scene
+		if not enemy_scene and scene_path != default_scene:
+			push_warning("[WaveManager] Failed to load enemy scene '%s', falling back to default (%s)." % [scene_path, default_scene])
+			enemy_scene = load(default_scene)
+		if not enemy_scene:
+			push_error("[WaveManager] Critical: could not load default enemy scene '%s'. Wave spawn queue will be empty." % default_scene)
+			return []
 		
 		var base_hp: float = 40.0
 		var base_speed: float = 60.0

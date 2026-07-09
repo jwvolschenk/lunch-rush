@@ -156,3 +156,14 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 ## Theme: compile fixes — get the project to open in Godot 4.7
 
 ## Theme: static analysis gaps — class_name on non-autoload scripts not resolving during --check-only
+
+## --- Cycle 77 reflect additions ---
+
+## Critical: PizzaDelivery enemy missing scene file (enemy/PizzaDelivery.tscn) — wave_10 references it, game crashes
+
+## Tower: Dishwasher tower script has no scene file and incomplete melee attack implementation
+
+## Tower: VendingMachine tower script incomplete — doesn't randomize food_type per shot as described in card pool
+
+## Gameplay: craving matching broken — tower food_type strings (e.g. "grease") not converted to enum ints for projectile comparison
+- [x] (orchestrator-injected, cycle 77) Reflect found no new work — survey the project for a error handling and resilience — find a fragile path and make it fail gracefully improvement, and implement one concrete, high-value change.

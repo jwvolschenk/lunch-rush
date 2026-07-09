@@ -16,3 +16,7 @@
 
 - [x] Critical: 3 autoloads missing — DONE: decomposed into backlog task (register DeckManager, TowerManager, LaneManager in project.godot)
 - [x] Bug: CardSelection.gd line 103 CravingType reference — DONE: decomposed into backlog task (replace CravingType. with CRAVING_TYPE.)
+
+## Archived (cycle 90 PLAN)
+
+All cycle 90 candidates decomposed and moved below. This section kept as trace.

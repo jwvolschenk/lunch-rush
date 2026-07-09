@@ -4,10 +4,6 @@
 # records what was attempted and the verify outcome. Read at the
 # start of each fresh session so the agent doesn't repeat failures.
 
-## Cycle 72  2026-07-09T08:35:32Z  outcome:passed sha:e3ca8cbe65
-
-Executed 3 backlog task(s); 3 completed (no gate; agent self-verified). 89 lines changed.
-
 ## Cycle 73  2026-07-09T08:41:20Z  outcome:pending
 
 Executed 1 backlog task(s); 1 completed (no gate; agent self-verified). 75 lines changed. Agent summary: Implemented enemy death visual feedback — white flash overlay on enemy body (0.15s fade) + screen shake via CameraController (8px intensity, 0.2s duration, decaying envelope).
@@ -63,3 +59,7 @@ Archived 3 completed items, then reflected: 0 ready task(s) after plan. Reflect:
 ## Cycle 87  2026-07-09T11:27:49Z  outcome:passed sha:8af7e20c11
 
 Archived 0 completed items, then reflected: 2 ready task(s) after plan. Reflect: DONE: 2 candidates added — (1) Critical: 3 missing autoloads in project.godot (DeckManager, TowerManager, LaneManager), . Plan: DONE: 2 backlog.md tasks added — first is critical autoload registration for DeckManager, TowerManager, LaneManager in project.godot.
+
+## Cycle 90  2026-07-09T11:35:14Z  outcome:passed sha:15ae9b20cd
+
+Archived 2 completed items, then reflected: 3 ready task(s) after plan. Reflect: DONE: 3 candidates added — (1) starter deck card_type enum mismatch causing tower cards to be classified as STATUS_EFFEC. Plan: DONE: 3 backlog.md tasks added — first is fixing starter deck card_type in DeckManager.gd (tower cards incorrectly use `card_type: 1`/STATUS_EFFECT instead of `card_type: 0`/TOWER, breaking deck class

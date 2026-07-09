@@ -171,7 +171,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Critical: fix "class_name hides autoload" in CameraController.gd, CardSelection.gd, RoomSelector.gd, GameOverOverlay.gd (already done in cycle 72 — class_name removed from all 4 autoload scripts)
 - [x] Critical: fix WaveConfigLoader autoload not resolving during static analysis (autoload methods resolved as GDScriptNativeClass) — fixed by correcting Godot 3→4 API: `ResourceLoader.exists()` → `ResourceLoader.resource_exists()`; `class_name` cannot be used on autoload scripts in Godot 4.x
 - [x] Critical: fix RoomData type not found in RoomSelector.gd (extends Resource, add preload in RoomSelector.gd)
-- [ ] Critical: fix "Only identifier can be assignment target" in GameOverOverlay.gd:65 (syntax error)
+- [x] Critical: fix "Only identifier can be assignment target" in GameOverOverlay.gd:65 (syntax error) — already fixed in cycle 72: converted GDScript 3.x slash-operator theme overrides to GDScript 4.x add_theme_*_override calls
 - [ ] Core gameplay: fix all remaining ext_resource ID mismatches across .tscn scene files
 - [ ] Core gameplay: fix Scene parent references using IDs instead of names in packed scene format
 - [ ] Core gameplay: ensure all scene files have consistent ext_resource format (quoted string IDs)

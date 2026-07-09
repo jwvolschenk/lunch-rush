@@ -39,6 +39,11 @@ var _selected: bool = false
 	$Panel/Room2/RoomAccent,
 	$Panel/Room3/RoomAccent,
 ]
+@onready var _room_previews: Array = [
+	$Panel/Room1/RoomPreview,
+	$Panel/Room2/RoomPreview,
+	$Panel/Room3/RoomPreview,
+]
 
 func show_rooms(room_list: Array) -> void:
 	_rooms = room_list
@@ -49,6 +54,7 @@ func show_rooms(room_list: Array) -> void:
 		_room_descs[i].text = room.description
 		_modifiers_text(i, _format_modifier(room))
 		_room_accents[i].color = room.accent_color
+		_room_previews[i].color = room.preview_color if room.has("preview_color") and room.preview_color else room.accent_color
 		_room_containers[i].visible = true
 	# Hide excess room slots
 	for i in range(room_list.size(), 3):

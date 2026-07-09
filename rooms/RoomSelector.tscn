@@ -9,6 +9,15 @@ border_width_bottom = 2
 border_color = Color( 0.35, 0.35, 0.35, 1 )
 cornerRadius = 6
 
+[sub_resource type="StyleBoxFlat" id="room_style_hover"]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.5, 0.5, 0.5, 1 )
+cornerRadius = 6
+
 [sub_resource type="StyleBoxFlat" id="panel_style"]
 bg_color = Color( 0.06, 0.06, 0.06, 0.95 )
 border_width_left = 2
@@ -20,6 +29,10 @@ border_color = Color( 0.2, 0.2, 0.2, 1 )
 [sub_resource type="Theme" id="room_theme"]
 fonts/normal_font_size = 16
 colors/font_color = Color( 0.95, 0.95, 0.95, 1 )
+
+[sub_resource type="Theme" id="hover_theme"]
+fonts/normal_font_size = 16
+colors/font_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="ColorRect" id="overlay_bg"]
 color = Color( 0, 0, 0, 0.55 )
@@ -77,23 +90,46 @@ theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
+[node name="RoomPreview" parent="RoomSelector" type="ColorRect" id="21"]
+parent="Room1"
+custom_size_flags_min_height = 100
+custom_size_flags_min_width = 180
+layout_mode = 1
+anchors_preset = 6
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+color = Color( 0.8, 0.6, 0.2, 1 )
+
 [node name="RoomName" parent="RoomSelector" type="Label" id="7"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.55
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
 [node name="RoomDesc" parent="RoomSelector" type="Label" id="8"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.65
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
 [node name="Modifier" parent="RoomSelector" type="Label" id="9"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.82
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
 [node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="10"]
-custom_size_flags_min_height = 8
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.9
+custom_size_flags_min_height = 4
 custom_size_flags_min_width = 200
 color = Color( 0.8, 0.6, 0.2, 1 )
 
@@ -104,23 +140,46 @@ theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
+[node name="RoomPreview" parent="RoomSelector" type="ColorRect" id="22"]
+parent="Room2"
+custom_size_flags_min_height = 100
+custom_size_flags_min_width = 180
+layout_mode = 1
+anchors_preset = 6
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+color = Color( 0.2, 0.6, 0.9, 1 )
+
 [node name="RoomName" parent="RoomSelector" type="Label" id="12"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.55
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
 [node name="RoomDesc" parent="RoomSelector" type="Label" id="13"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.65
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
 [node name="Modifier" parent="RoomSelector" type="Label" id="14"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.82
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
 [node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="15"]
-custom_size_flags_min_height = 8
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.9
+custom_size_flags_min_height = 4
 custom_size_flags_min_width = 200
 color = Color( 0.2, 0.6, 0.9, 1 )
 
@@ -131,23 +190,46 @@ theme_override_font_sizes/normal_font_size = 14
 theme = sub_resource("room_theme")
 theme_override_styles/contents = sub_resource("room_style")
 
+[node name="RoomPreview" parent="RoomSelector" type="ColorRect" id="23"]
+parent="Room3"
+custom_size_flags_min_height = 100
+custom_size_flags_min_width = 180
+layout_mode = 1
+anchors_preset = 6
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+color = Color( 0.9, 0.2, 0.2, 1 )
+
 [node name="RoomName" parent="RoomSelector" type="Label" id="17"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.55
 text = "Room Name"
 theme_override_font_sizes/normal_font_size = 18
 horizontal_alignment = 1
 
 [node name="RoomDesc" parent="RoomSelector" type="Label" id="18"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.65
 text = "Room description goes here."
 theme_override_font_sizes/normal_font_size = 13
 horizontal_alignment = 1
 
 [node name="Modifier" parent="RoomSelector" type="Label" id="19"]
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.82
 text = "No modifiers"
 theme_override_font_sizes/normal_font_size = 12
 horizontal_alignment = 1
 
 [node name="RoomAccent" parent="RoomSelector" type="ColorRect" id="20"]
-custom_size_flags_min_height = 8
+layout_mode = 1
+anchor_preset = 6
+anchor_top = 0.9
+custom_size_flags_min_height = 4
 custom_size_flags_min_width = 200
 color = Color( 0.9, 0.2, 0.2, 1 )
 

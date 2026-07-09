@@ -175,4 +175,4 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 - [x] Core gameplay: fix all remaining ext_resource ID mismatches across .tscn scene files
 - [x] Core gameplay: fix Scene parent references using IDs instead of names in packed scene format
 - [x] Core gameplay: ensure all scene files have consistent ext_resource format (quoted string IDs)
-- [ ] Polish: add placeholder art to towers, enemies, and rooms for visual feedback during development
+- [x] Polish: add placeholder art to towers, enemies, and rooms for visual feedback during development

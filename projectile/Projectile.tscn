@@ -2,25 +2,44 @@
 
 [ext_resource type="Script" path="res://projectile/Projectile.gd" id="ext_1_proj"]
 
+[sub_resource type="ColorRect" id=1]
+color = Color(0.8, 0.6, 0, 1)
+
 [sub_resource type="ColorRect" id=2]
 color = Color(1, 0.8, 0, 1)
 
-[sub_resource type="Rectangle2D" id=3]
+[sub_resource type="ColorRect" id=3]
+color = Color(1, 0.95, 0.3, 1)
+
+[sub_resource type="Rectangle2D" id=4]
 size = Vector2(16, 16)
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 8.0
 
-[node name="Projectile" type="Node2D" id="1"]
+[node name="Projectile" type="Node2D" id="6"]
 script = ExtResource("ext_1_proj")
 
-[node name="Sprite" type="ColorRect" id="5"]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-custom_sizes = Vector2(16, 16)
-color = Color(1, 0.8, 0, 1)
+[node name="Visual" type="ColorRect" id="7"]
+offset_left = -10
+offset_top = -10
+offset_right = 10
+offset_bottom = 10
+color = sub_resource("1")
 
-[node name="CollisionShape" type="CollisionShape2D" id="6"]
-shape = SubResource(4)
+[node name="Core" type="ColorRect" id="8"]
+offset_left = -6
+offset_top = -6
+offset_right = 6
+offset_bottom = 6
+color = sub_resource("2")
+
+[node name="Highlight" type="ColorRect" id="9"]
+offset_left = -3
+offset_top = -3
+offset_right = 3
+offset_bottom = 3
+color = sub_resource("3")
+
+[node name="CollisionShape" type="CollisionShape2D" id="10"]
+shape = SubResource(5)

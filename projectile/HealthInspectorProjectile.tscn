@@ -1,14 +1,39 @@
 [gd_scene format=3 uid="uid://health_inspector_proj"]
 
+[sub_resource type="ColorRect" id="1"]
+color = Color(0.2, 0.35, 0.7, 1)
+
+[sub_resource type="ColorRect" id="2"]
+color = Color(0.3, 0.5, 0.95, 1)
+
+[sub_resource type="ColorRect" id="3"]
+color = Color(0.5, 0.7, 1, 1)
+
 [node name="HealthInspectorProjectile" type="Node2D" id="1"]
 script = ExtResource("ext_1_proj_script")
 
-[node name="Visual" type="ColorRect" parent="1" id="2"]
-size = Vector2(20, 20)
-offset_left = -10
-offset_top = -10
-offset_right = 10
-offset_bottom = 10
-color = Color(0.3, 0.5, 0.95, 1)
+[node name="Visual" type="ColorRect" parent="1" id="4"]
+size = Vector2(22, 22)
+offset_left = -11
+offset_top = -11
+offset_right = 11
+offset_bottom = 11
+color = sub_resource("1")
+
+[node name="Core" type="ColorRect" parent="1" id="5"]
+size = Vector2(14, 14)
+offset_left = -7
+offset_top = -7
+offset_right = 7
+offset_bottom = 7
+color = sub_resource("2")
+
+[node name="Cross" type="ColorRect" parent="1" id="6"]
+size = Vector2(8, 8)
+offset_left = -4
+offset_top = -4
+offset_right = 4
+offset_bottom = 4
+color = sub_resource("3")
 
 [ext_resource type="Script" path="res://projectile/HealthInspectorProjectile.gd" id="ext_1_proj_script"]

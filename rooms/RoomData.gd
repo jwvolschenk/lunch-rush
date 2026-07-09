@@ -27,6 +27,10 @@ enum RoomType {
 @export var bg_color: Color = Color(0.1, 0.1, 0.1, 1.0)
 @export var accent_color: Color = Color(0.8, 0.6, 0.2, 1.0)
 @export var border_color: Color = Color(0.3, 0.3, 0.3, 1.0)
+@export var preview_color: Color = accent_color
+
+## Reference to this room's scene resource (for loading in RoomSelector)
+@export var room_scene: Resource = null
 
 ## Gameplay modifier for the next wave
 ## positive = harder, negative = easier

@@ -2,14 +2,51 @@
 
 [ext_resource type="Script" path="res://enemy/GhostChef.gd" id="ext_1_ghost"]
 
+[sub_resource type="ColorRect" id="1"]
+color = Color(0.4, 0.3, 0.6, 0.5)
+
+[sub_resource type="ColorRect" id="2"]
+color = Color(0.55, 0.4, 0.75, 0.6)
+
+[sub_resource type="ColorRect" id="3"]
+color = Color(0.7, 0.55, 0.9, 0.7)
+
 [node name="GhostChef" type="Node2D" id="1"]
 script = ExtResource("ext_1_ghost")
 
-[node name="Sprite" type="ColorRect" id="2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-position = Vector2(-25, -25)
-size = Vector2(50, 50)
-color = Color(0.6, 0.5, 0.8, 0.7)
+[node name="Body" type="ColorRect" id="4"]
+offset_left = -18
+offset_top = -18
+offset_right = 18
+offset_bottom = 18
+color = sub_resource("1")
+
+[node name="Head" type="ColorRect" id="5"]
+offset_left = -14
+offset_top = -14
+offset_right = 14
+offset_bottom = 14
+color = sub_resource("2")
+
+[node name="Hat" type="ColorRect" id="6"]
+offset_left = -10
+offset_top = -22
+offset_right = 10
+offset_bottom = -8
+color = sub_resource("3")
+
+[node name="EyeL" type="ColorRect" id="7"]
+size = Vector2(5, 5)
+offset_left = -4
+offset_top = -5
+offset_right = 5
+offset_bottom = 4
+color = Color(0.9, 0.8, 1, 1)
+
+[node name="EyeR" type="ColorRect" id="8"]
+size = Vector2(5, 5)
+offset_left = -4
+offset_top = 2
+offset_right = 5
+offset_bottom = 7
+color = Color(0.9, 0.8, 1, 1)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3]
+
+resource_name = "VIPTable"
+
+room_name = "VIP Table"
+description = "An elegant dining room for discriminating customers. Easy enemies, generous tips."
+room_type = 3
+bg_color = Color(0.12, 0.1, 0.08, 1)
+accent_color = Color(0.85, 0.65, 0.15, 1)
+border_color = Color(0.3, 0.25, 0.1, 1)
+enemy_hp_modifier = 0.7
+enemy_speed_modifier = 0.9
+enemy_count_modifier = -1
+gold_bonus = 20

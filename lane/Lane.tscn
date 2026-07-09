@@ -2,12 +2,25 @@
 
 [ext_resource type="Script" path="res://lane/Lane.gd" id="ext_1_lane"]
 
+[sub_resource type="ColorRect" id="1"]
+color = Color(0.2, 0.2, 0.22, 0.5)
+
+[sub_resource type="ColorRect" id="2"]
+color = Color(0.3, 0.3, 0.33, 0.4)
+
 [node name="Lane" type="Node2D" id="1"]
 script = ExtResource("ext_1_lane")
 
-[node name="LaneBackground" parent=1 type="ColorRect" id="2"]
+[node name="LaneBackground" parent=1 type="ColorRect" id="3"]
 offset_left = -640.0
 offset_top = -40.0
 offset_right = 640.0
 offset_bottom = 40.0
-color = Color(0.25, 0.25, 0.27, 0.6)
+color = sub_resource("1")
+
+[node name="LanePath" parent=1 type="ColorRect" id="4"]
+offset_left = -640.0
+offset_top = -20.0
+offset_right = 640.0
+offset_bottom = 20.0
+color = sub_resource("2")

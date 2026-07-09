@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3]
+
+resource_name = "Freezer"
+
+room_name = "Freezer"
+description = "A cold walk-in freezer. Enemies move slower but hit harder."
+room_type = 1
+bg_color = Color(0.08, 0.12, 0.18, 1)
+accent_color = Color(0.3, 0.6, 0.85, 1)
+border_color = Color(0.15, 0.25, 0.4, 1)
+enemy_hp_modifier = 1.3
+enemy_speed_modifier = 0.7
+enemy_count_modifier = 0
+gold_bonus = 5

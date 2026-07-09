@@ -1,14 +1,50 @@
 [gd_scene format=3 uid="uid://soup_spill_tower"]
 
+[sub_resource type="ColorRect" id="1"]
+color = Color(0.1, 0.2, 0.5, 1)
+
+[sub_resource type="ColorRect" id="2"]
+color = Color(0.15, 0.35, 0.7, 1)
+
+[sub_resource type="ColorRect" id="3"]
+color = Color(0.2, 0.5, 0.9, 1)
+
+[sub_resource type="ColorRect" id="4"]
+color = Color(0.5, 0.8, 1, 0.6)
+
 [node name="SoupSpill" type="Node2D" id="1"]
 script = ExtResource("ext_1_soup_spill_script")
 
-[node name="Visual" type="ColorRect" parent="1" id="2"]
-size = Vector2(40, 40)
-offset_left = -20
-offset_top = -20
-offset_right = 20
-offset_bottom = 20
-color = Color(0.1, 0.4, 0.95, 1)
+[node name="Base" parent="1" type="ColorRect" id="5"]
+size = Vector2(44, 44)
+offset_left = -22
+offset_top = -22
+offset_right = 22
+offset_bottom = 22
+color = sub_resource("1")
+
+[node name="Body" parent="1" type="ColorRect" id="6"]
+size = Vector2(34, 34)
+offset_left = -17
+offset_top = -17
+offset_right = 17
+offset_bottom = 17
+color = sub_resource("2")
+
+[node name="Top" parent="1" type="ColorRect" id="7"]
+size = Vector2(22, 22)
+offset_left = -11
+offset_top = -11
+offset_right = 11
+offset_bottom = 11
+color = sub_resource("3")
+
+[node name="Drop" parent="1" type="ColorRect" id="8"]
+size = Vector2(14, 14)
+offset_left = -7
+offset_top = -7
+offset_right = 7
+offset_bottom = 7
+color = sub_resource("4")
 
 [ext_resource type="Script" path="res://tower/SoupSpill.gd" id="ext_1_soup_spill_script"]

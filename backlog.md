@@ -152,7 +152,7 @@ DONE: 5 tasks — card selection UI, wave-complete flow, player deck system, gam
 
 - [ ] Critical: Open and compile in Godot 4.7 (directive d4)
 - [x] Critical: declare _next_wave_ready variable in main.gd
-- [ ] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
+- [x] Critical: fix WaveConfigLoader wave sort order (numeric not alphabetical)
 - [ ] Critical: Tower._process — child classes override without calling super()
 - [ ] Critical: fix TowerManager missing lane_count property
 - [ ] Core gameplay: Tower proactive re-targeting (re-evaluate target each fire tick)

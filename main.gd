@@ -5,7 +5,7 @@ extends Node2D
 
 ## --- Core system references ---
 
-const ROOM_DATA_SCRIPT = preload("res://rooms/ROOM_DATA_SCRIPT.gd")
+const ROOM_DATA_SCRIPT = preload("res://rooms/RoomData.gd")
 
 var lane_manager: LaneManager
 var hud: Control

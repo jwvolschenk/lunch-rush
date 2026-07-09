@@ -357,8 +357,16 @@ func reload_with(wave_resources: Array[Resource]) -> void:
 
 ## --- Helpers ---
 
-## Sort key for wave resources (by description or index).
-func _wave_sort_key(wave: Resource) -> String:
+## Sort key for wave resources (numeric wave number, not alphabetical).
+func _wave_sort_key(wave: Resource) -> int:
 	if wave.description:
-		return wave.description
-	return "Wave %d" % _loaded_waves.size()
+		var num_str := ""
+		for i in range(wave.description.length()):
+			var c = wave.description[i]
+			if c >= "0" and c <= "9":
+				num_str += c
+			elif num_str != "":
+				break
+		if num_str != "":
+			return int(num_str)
+	return 999999

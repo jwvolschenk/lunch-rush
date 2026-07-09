@@ -20,34 +20,34 @@ const SAVE_VERSION := 1
 const UNLOCK_PATH := "user://unlocks.json"
 const UNLOCK_SAVE_VERSION := 1
 
-const TOWER_UNLOCK_MILESTONES := {
-	"Pizza Trebuchet": 3,
-	"Soup Spill": 5,
-	"Spicy Sauce Cannon": 7,
-	"Health Inspector": 9,
-	"Enchanted Vending Machine": 12,
-	"Angry Dishwasher": 4,
-	"Pizza Delivery": 8,
-}
+const TOWER_UNLOCK_MILESTONES := [
+	{"name": "Angry Dishwasher", "wave": 4},
+	{"name": "Enchanted Vending Machine", "wave": 12},
+	{"name": "Health Inspector", "wave": 9},
+	{"name": "Pizza Delivery", "wave": 8},
+	{"name": "Pizza Trebuchet", "wave": 3},
+	{"name": "Soup Spill", "wave": 5},
+	{"name": "Spicy Sauce Cannon", "wave": 7},
+]
 
-const CARD_UNLOCK_MILESTONES := {
-	"Health Inspector": 9,
-	"Combo Meal": 3,
-	"Customer Control": 5,
-	"Kitchen Upgrade": 2,
-	"Emergency Ration": 4,
-	"Cheat Code": 10,
-}
+const CARD_UNLOCK_MILESTONES := [
+	{"name": "Cheat Code", "wave": 10},
+	{"name": "Combo Meal", "wave": 3},
+	{"name": "Customer Control", "wave": 5},
+	{"name": "Emergency Ration", "wave": 4},
+	{"name": "Health Inspector", "wave": 9},
+	{"name": "Kitchen Upgrade", "wave": 2},
+]
 
-const STARTING_GOLD_BONUS_MILESTONES := {
-	3: 5,
-	5: 10,
-	8: 20,
-	10: 30,
-	13: 50,
-	16: 75,
-	20: 100,
-}
+const STARTING_GOLD_BONUS_MILESTONES := [
+	{"wave": 3, "bonus": 5},
+	{"wave": 5, "bonus": 10},
+	{"wave": 8, "bonus": 20},
+	{"wave": 10, "bonus": 30},
+	{"wave": 13, "bonus": 50},
+	{"wave": 16, "bonus": 75},
+	{"wave": 20, "bonus": 100},
+]
 
 ## The last known best run data, loaded on _ready
 var _best_run: Dictionary = {}
@@ -148,8 +148,9 @@ func check_unlocks(waves_survived: int) -> Dictionary:
 	}
 
 	# Check tower unlocks
-	for tower_name in TOWER_UNLOCK_MILESTONES:
-		var required_wave = TOWER_UNLOCK_MILESTONES[tower_name]
+	for entry in TOWER_UNLOCK_MILESTONES:
+		var tower_name = entry["name"]
+		var required_wave = entry["wave"]
 		if waves_survived >= required_wave and not unlocked_towers.has(tower_name):
 			unlocked_towers.append(tower_name)
 			result.new_towers.append(tower_name)
@@ -157,18 +158,20 @@ func check_unlocks(waves_survived: int) -> Dictionary:
 			print("[SaveLoad] Unlocked tower: %s (wave %d+)" % [tower_name, required_wave])
 
 	# Check card unlocks
-	for card_name in CARD_UNLOCK_MILESTONES:
-		var required_wave = CARD_UNLOCK_MILESTONES[card_name]
+	for entry in CARD_UNLOCK_MILESTONES:
+		var card_name = entry["name"]
+		var required_wave = entry["wave"]
 		if waves_survived >= required_wave and not unlocked_cards.has(card_name):
 			unlocked_cards.append(card_name)
 			result.new_cards.append(card_name)
 			unlock_found.emit("card", card_name)
 			print("[SaveLoad] Unlocked card: %s (wave %d+)" % [card_name, required_wave])
 
-	# Check starting gold bonus milestones
-	for required_wave in STARTING_GOLD_BONUS_MILESTONES:
+	# Check starting gold bonus milestones (sorted by wave ascending)
+	for entry in STARTING_GOLD_BONUS_MILESTONES:
+		var required_wave = entry["wave"]
 		if waves_survived >= required_wave:
-			var bonus = STARTING_GOLD_BONUS_MILESTONES[required_wave]
+			var bonus = entry["bonus"]
 			if starting_gold_bonus < bonus:
 				result.new_gold_bonus = bonus
 				starting_gold_bonus = bonus
